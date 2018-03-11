@@ -1,4 +1,6 @@
 ﻿@using Quizzario.Views.Manage
+@using Quizzario.Infrastructure
+
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

@@ -8,9 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Quizzario.Data;
 using Quizzario.Models;
 using Quizzario.Services;
+using Quizzario.Infrastructure;
+using Quizzario.Infrastructure.Data;
 
 namespace Quizzario
 {
