@@ -109,10 +109,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="ApplicationUser.cs" />
-    <Compile Include="Migrations\00000000000000_CreateIdentitySchema.cs" />
-    <Compile Include="Migrations\00000000000000_CreateIdentitySchema.Designer.cs">
-      <DependentUpon>00000000000000_CreateIdentitySchema.cs</DependentUpon>
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\ApplicationRole.cs" />
+    <Compile Include="Migrations\20180325090749_CreateIdentitySchema.cs" />
+    <Compile Include="Migrations\20180325090749_CreateIdentitySchema.designer.cs">
+      <DependentUpon>20180325090749_CreateIdentitySchema.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,5 +122,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
