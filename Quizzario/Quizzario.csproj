@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Quizzario.BusinessLogic\Quizzario.BusinessLogic.csproj" />
-    <ProjectReference Include="..\Quizzario.Infrastructure\Quizzario.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

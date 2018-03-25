@@ -111,16 +111,26 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\ApplicationRole.cs" />
+    <Compile Include="Entities\AssignedUser.cs" />
+    <Compile Include="Entities\Quiz.cs" />
+    <Compile Include="Entities\QuizSettings.cs" />
+    <Compile Include="Entities\Score.cs" />
     <Compile Include="Migrations\20180325090749_CreateIdentitySchema.cs" />
     <Compile Include="Migrations\20180325090749_CreateIdentitySchema.designer.cs">
       <DependentUpon>20180325090749_CreateIdentitySchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180325092741_CreateQuizzarioModel.cs" />
+    <Compile Include="Migrations\20180325092741_CreateQuizzarioModel.designer.cs">
+      <DependentUpon>20180325092741_CreateQuizzarioModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
