@@ -1,7 +1,97 @@
-#-header h1 {
-	color: inherit;
-}
-
 .-fa-xl {
 	font-size: 150px;
+}
+
+.-sidemenu-label {
+	margin-left: 3px;
+}
+
+#-topmenu {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1031;
+}
+
+#-sidemenu {
+	width: 190px;
+	position: fixed;
+	top: 70px;
+	z-index: 1030;
+	height: 100%;
+	
+	box-shadow: -2px 0px 4px gray;
+}
+
+#-navigation {
+	padding: 0;
+	
+	/* Making menu scrollable in smaller viewports */
+	overflow: auto;
+	max-height: 100%;
+}
+
+#-sidemenu-collapse-button {
+	cursor: pointer;
+}
+
+.-sidemenu-collapsed {
+	width: 50px !important;
+}
+
+#-content {
+	padding-top: 70px;
+	padding-right: 0px;
+	padding-left: 190px;
+}
+
+.-content-sidemenu-collapsed {
+	padding-left: 50px !important;
+}
+
+#-footer {
+	/* Making footer appear in front of sidemenu */
+	position: relative;
+	z-index: 1031;
+}
+
+@media (min-width: 768px) {
+	#-sidemenu-collapse {
+		display: block;
+	}
+	
+	#-sidemenu {
+		align-items: flex-start;
+	}
+}
+
+@media (max-width: 767.98px) {
+	#-navigation {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		z-index: 1030;
+	}
+	
+	#-content {
+		padding-left: 0px !important;
+		padding-top: 54px;
+	}
+
+	#-topmenu {
+		position: static;
+	}
+	
+	#-sidemenu {
+		position: static;
+		width: 100%;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	
+	.-sidemenu-hr-wrapper {
+		display: none;
+	}
 }
