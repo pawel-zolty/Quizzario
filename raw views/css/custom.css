@@ -1,9 +1,17 @@
+/* Landing page */
 .-fa-xl {
 	font-size: 150px;
 }
 
-.-sidemenu-label {
-	margin-left: 3px;
+
+/* Basic layout */
+/** Navigation */
+#-navigation {
+	padding: 0;
+	
+	/* Making menu scrollable in smaller viewports */
+	overflow: auto;
+	max-height: 100%;
 }
 
 #-topmenu {
@@ -14,6 +22,37 @@
 	z-index: 1031;
 }
 
+@media (max-width: 767.98px) {
+	#-navigation {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		z-index: 1030;
+	}
+}
+/** Content */
+#-content-wrapper {
+	padding-top: 70px;
+	padding-right: 0px;
+}
+
+.-content-without-sidemenu {
+	padding-left: 0px;
+}
+
+.-content-with-sidemenu {
+	padding-left: 190px;
+}
+/** Footer */
+#-footer {
+	/* Making footer appear in front of sidemenu */
+	position: relative;
+	z-index: 1031;
+}
+
+
+/* Sidemenu */
 #-sidemenu {
 	width: 190px;
 	position: fixed;
@@ -24,12 +63,8 @@
 	box-shadow: -2px 0px 4px gray;
 }
 
-#-navigation {
-	padding: 0;
-	
-	/* Making menu scrollable in smaller viewports */
-	overflow: auto;
-	max-height: 100%;
+.-sidemenu-label {
+	margin-left: 3px;
 }
 
 #-sidemenu-collapse-button {
@@ -40,20 +75,8 @@
 	width: 50px !important;
 }
 
-#-content {
-	padding-top: 70px;
-	padding-right: 0px;
-	padding-left: 190px;
-}
-
 .-content-sidemenu-collapsed {
 	padding-left: 50px !important;
-}
-
-#-footer {
-	/* Making footer appear in front of sidemenu */
-	position: relative;
-	z-index: 1031;
 }
 
 @media (min-width: 768px) {
@@ -67,15 +90,7 @@
 }
 
 @media (max-width: 767.98px) {
-	#-navigation {
-		position: fixed;
-		top: 0px;
-		left: 0px;
-		right: 0px;
-		z-index: 1030;
-	}
-	
-	#-content {
+	#-content-wrapper {
 		padding-left: 0px !important;
 		padding-top: 54px;
 	}

@@ -8,6 +8,7 @@
 </head>
 <body>
 	<nav class="container-fluid" id="-navigation">
+		<!-- Topmenu begin -->
 		<div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
 			<a class="navbar-brand" href="#">Quizzario</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
@@ -30,42 +31,11 @@
 				</div>
 			</div>
 		</div>
-	 
-		<div class="navbar fixed-top navbar-dark bg-dark" id="-sidemenu">
-			<div class="collapse navbar-collapse -navigation-collapse" id="-sidemenu-collapse">
-				<ul class="nav navbar-nav flex-column">
-					<li class="nav-item"><a class="nav-link" href="#">
-						<i class="fas fa-fw fa-plus"></i>
-						<span class="-sidemenu-label">Create a quiz</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">
-						<i class="fas fa-fw fa-heart"></i>
-						<span class="-sidemenu-label">Favourite quiz</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">
-						<i class="fas fa-fw fa-file"></i>
-						<span class="-sidemenu-label">My quizes</span>
-					</a></li>
-					<li class="-sidemenu-hr-wrapper"><hr /></li>
-					<li class="nav-item"><a class="nav-link" href="#">
-						<i class="fas fa-fw fa-cog"></i>
-						<span class="-sidemenu-label">Profile settings</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">
-						<i class="fas fa-fw fa-sign-out-alt"></i>
-						<span class="-sidemenu-label">Logout</span>
-					</a></li>
-				</ul>
-				
-				<a class="navbar-text mt-2 text-white float-right" id="-sidemenu-collapse-button">
-					<i class="fas fa-fw fa-angle-double-left" id="-sidemenu-collapse-left"></i>
-					<i class="fas fa-fw fa-angle-double-right d-none" id="-sidemenu-collapse-right"></i>
-				</a>
-			</div>
-		</div>
+		<!-- Topmenu end -->
 	</nav>
    
-	<div class="container-fluid" id="-content">
+	<div class="container-fluid -content-without-sidemenu" id="-content-wrapper">
+		<!-- Content begin -->
 		<header class="bg-dark py-md-5">
 			<div class="container">
 				<div class="text-center py-5 my-md-5 text-light">
@@ -98,37 +68,16 @@
 				</div>
 			</div>
 		</section>
+		<!-- Content end -->
 	</div>
    
+	<!-- Footer begin -->
     <footer class="bg-primary text-white" id="-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 py-5 text-center">
-                        <a class="fb-ic">
-                            <i class="fab fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                        </a>
-                        <a class="tw-ic">
-                            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                        </a>
-                        <a class="gplus-ic">
-                            <i class="fab fa-google-plus fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                        </a>
-                        <a class="li-ic">
-                            <i class="fab fa-linkedin fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                        </a>
-                        <a class="ins-ic">
-                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                        </a>
-                        <a class="pin-ic">
-                            <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-                        </a>
-                    </div>
-            </div>
-        </div>
         <div class="py-3 text-center">
             © 2018 Copyright: ...
         </div>
     </footer>
+	<!-- Footer end -->
    
    
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
