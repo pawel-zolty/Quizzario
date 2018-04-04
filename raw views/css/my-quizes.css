@@ -1,0 +1,42 @@
+.-quizes-card {
+	border: 2px dashed #f2f2f2;
+	position: relative;
+	z-index: 1027;
+	left: 2px;
+	cursor: pointer;
+}
+
+.-quizes-card:hover {
+	border: 2px dashed #ebebeb;
+}
+
+.-quizes-card-active {
+	border: 2px dashed #ebebeb;
+	z-index: 1029;
+	border-right: 2px solid white !important;
+}
+
+#-quizes-right-panel {
+	border-left: 2px dashed #ebebeb;
+	padding-left: 15px;
+	padding-right: 15px;
+	
+	/* Making panel scrollable in smaller viewports */
+	overflow: auto;
+	max-height: 100%;
+}
+
+@media (min-width: 768px) {
+	#-quizes-right-panel {
+		position: fixed;
+		z-index: 1028;
+	}
+}
+
+.-quizes-fa-xl {
+	font-size: 200px;
+}
+
+.-quizes-card-img-wrapper {
+	max-width: 130px;
+}
