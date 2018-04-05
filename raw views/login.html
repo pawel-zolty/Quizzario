@@ -13,27 +13,38 @@
 	
 	<div class="container-fluid">
 		<div class="row justify-content-center mt-md-4">
-			<div class="col-md-4 bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px">
+			<div class="col-xl-4 col-lg-6 col-md-8 bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px">
 				<button class="btn btn-block btn-info py-md-2">Login with Facebook</button>
 				<button class="btn btn-block btn-danger py-md-2">Login with Google</button>
 				<hr>
-				<form>
+				<form novalidate class="needs-validation">
 					<div class="form-group">
 						<label for="-login-form-email">E-mail</label>
-						<input type="text" class="form-control is-valid" id="-login-form-email" placeholder="E-mail" value="example@gmail.com" required>
-						<div class="valid-feedback">
-							Looks good!
+						<input type="text" class="form-control" id="-login-form-email" placeholder="E-mail" required>
+						<div class="invalid-feedback">
+							Please provide a username.
 						</div>
 					</div>
-					
 					<div class="form-group">
 						<label for="-login-form-password">Password</label>
-						<input type="password" class="form-control is-invalid" id="-login-form-email" placeholder="Password" required>
+						<input type="password" class="form-control" id="-login-form-email" placeholder="Password" required>
 						<div class="invalid-feedback">
 							Please provide a password.
 						</div>
 					</div>
-					<button class="btn btn-success btn-block py-md-2" type="submit">Login</button>
+							
+					<button class="btn btn-success btn-block py-md-2 mb-2" type="submit">Login</button>
+					
+					<div class="form-group">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" value="" id="-login-form-remember-me">
+							<label class="form-check-label" for="-login-form-remember-me">
+								Remember me
+							</label>
+						</div>
+						
+						<a class="float-right" href="#">Forgot password?</a>	
+					</div>
 				</form>
 			</div>
 		</div>
@@ -49,6 +60,7 @@
 <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
  
 </body>
 </html>
