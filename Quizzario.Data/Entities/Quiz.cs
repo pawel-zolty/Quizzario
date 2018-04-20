@@ -14,12 +14,12 @@ namespace Quizzario.Data.Entities
     public class Quiz
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Title { get; set; }
         [ForeignKey("ApplicationUser")]
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         [ForeignKey("QuizSettings")]
-        public int QuizSettingsId { get; set; }
+        public string QuizSettingsId { get; set; }
         public QuizType? QuizType { get; set; }
         public string FilePath { get; set; }
 

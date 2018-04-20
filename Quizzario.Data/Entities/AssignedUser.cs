@@ -13,11 +13,11 @@ namespace Quizzario.Data.Entities
     public class AssignedUser
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [ForeignKey("Quiz")]
-        public int QuizId { get; set; }
+        public string QuizId { get; set; }
         [ForeignKey("ApplicationUser")]
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public AssignType? AssignType { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Quizzario.Infrastructure
 {
-    public class ApplicationRole : IdentityRole<int>
+    public class ApplicationRole : IdentityRole
     {
     }
 }

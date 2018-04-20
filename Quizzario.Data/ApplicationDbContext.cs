@@ -9,8 +9,7 @@ using Quizzario.Data.Entities;
 
 namespace Quizzario.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
-        ApplicationRole, int>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -25,7 +24,7 @@ namespace Quizzario.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<ApplicationUser>().ToTable("User");
+           // modelBuilder.Entity<ApplicationUser>().ToTable("User");
             modelBuilder.Entity<Quiz>().ToTable("Quiz");
             modelBuilder.Entity<AssignedUser>().ToTable("AssignedUser");
             modelBuilder.Entity<Score>().ToTable("Score");
