@@ -43,7 +43,7 @@ namespace Quizzario
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
             services.AddDbContext<ApplicationDbContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Quizzario")));
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Quizzario.Data")));
            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 

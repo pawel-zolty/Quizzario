@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace Quizzario.Migrations
+namespace Quizzario.Data.Migrations
 {
-    public partial class QuizzarioModels : Migration
+    public partial class QuizzarioDataEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

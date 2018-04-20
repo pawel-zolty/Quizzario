@@ -14,6 +14,8 @@
     <Compile Remove="Migrations\20180419201205_Quizzario.Models.Designer.cs" />
     <Compile Remove="Migrations\20180419201328_Quizzario.Models.cs" />
     <Compile Remove="Migrations\20180419201328_Quizzario.Models.Designer.cs" />
+    <Compile Remove="Migrations\20180420153554_Quizzario.Models.cs" />
+    <Compile Remove="Migrations\20180420153554_Quizzario.Models.Designer.cs" />
   </ItemGroup>
 
 
@@ -38,5 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

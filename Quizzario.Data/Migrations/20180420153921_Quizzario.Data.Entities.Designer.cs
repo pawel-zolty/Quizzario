@@ -9,12 +9,13 @@ using Quizzario.Data.Entities;
 using Quizzario.Infrastructure.Data;
 using System;
 
-namespace Quizzario.Migrations
+namespace Quizzario.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180420153921_Quizzario.Data.Entities")]
+    partial class QuizzarioDataEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
