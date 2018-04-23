@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Quizzario.Models;
 using Quizzario.Services;
 using Quizzario.Data;
 using Quizzario.Data.Entities;
+
 
 namespace Quizzario
 {
@@ -49,6 +49,9 @@ namespace Quizzario
             //factories
             services.AddScoped<Data.Abstracts.IQuizDTOFactory, Data.Factories.QuizDTOFactory>();
             services.AddScoped<Data.Abstracts.IApplicationUserDTOFactory, Data.Factories.ApplicationUserDTOFactory>();
+
+            //services
+            services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();
 
             //repos
             services.AddScoped<Data.Abstracts.IRepository<Data.Entities.Quiz>,
