@@ -5,6 +5,21 @@
     <UserSecretsId>aspnet-Quizzario-D6D93352-05F3-4F96-8013-B494C5F9CF79</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controllers - Copy\**" />
+    <Compile Remove="Models - Copy\**" />
+    <Compile Remove="Views - Copy\**" />
+    <Content Remove="Controllers - Copy\**" />
+    <Content Remove="Models - Copy\**" />
+    <Content Remove="Views - Copy\**" />
+    <EmbeddedResource Remove="Controllers - Copy\**" />
+    <EmbeddedResource Remove="Models - Copy\**" />
+    <EmbeddedResource Remove="Views - Copy\**" />
+    <None Remove="Controllers - Copy\**" />
+    <None Remove="Models - Copy\**" />
+    <None Remove="Views - Copy\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -20,6 +35,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Quizzario.BusinessLogic\Quizzario.BusinessLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>
