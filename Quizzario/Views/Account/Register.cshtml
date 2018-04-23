@@ -17,43 +17,35 @@
 <div class="container-fluid">
     <div class="row justify-content-center mt-md-4">
         <div class="col-xl-4 col-lg-6 col-md-8 bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px">
-            <button class="btn btn-block btn-info py-md-2">Login with Facebook</button>
-            <button class="btn btn-block btn-danger py-md-2">Login with Google</button>
+            <button class="btn btn-block btn-info py-md-2">Register with Facebook</button>
+            <button class="btn btn-block btn-danger py-md-2">Register with Google</button>
             <hr>
-            <form novalidate class="needs-validation">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="needs-validation" id="-register-form" method="post" novalidate>
                 <div class="form-group">
-                    <label for="-login-form-email">E-mail</label>
-                    <input type="text" class="form-control" id="-login-form-email" placeholder="E-mail" required>
+                    <label @*asp-for="Email"*@ for="-register-form-email">E-mail</label>
+                    <input @*asp-for="Email"*@ type="text" class="form-control" id="-register-form-email" placeholder="E-mail" required>
                     <div class="invalid-feedback">
                         Please provide a username.
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="-login-form-password">Password</label>
-                    <input type="password" class="form-control" id="-login-form-password" placeholder="Password" required>
+                    <label @*asp-for="Password"*@ for="-register-form-password">Password</label>
+                    <input @*asp-for="Password"*@ type="password" class="form-control" id="-register-form-password" placeholder="Password" required>
                     <div class="invalid-feedback">
                         Please provide a password.
                     </div>
                 </div>
-
-                <button class="btn btn-success btn-block py-md-2 mb-2" type="submit">Login</button>
-
                 <div class="form-group">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="-login-form-remember-me">
-                        <label class="form-check-label" for="-login-form-remember-me">
-                            Remember me
-                        </label>
+                    <label @*asp-for="ConfirmPassword"*@ for="-register-form-confirm-password">Confirm password</label>
+                    <input @*asp-for="ConfirmPassword"*@ type="password" class="form-control" id="-register-form-confirm-password" placeholder="Confirm password" required>
+                    <div class="invalid-feedback">
+                        Passwords must match.
                     </div>
-
-                    <a class="float-right" href="#">Forgot password?</a>
                 </div>
+
+                <button class="btn btn-success btn-block py-md-2 mb-2" type="submit">Register</button>
+
             </form>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-2 mt-md-4 -border-2px">
-        <div class="col-md-4 border border-light py-1 py-md-4 px-md-4 text-center">
-            <p class="mb-0 lead">Don't have an account? <a asp-area="" asp-controller="Account" asp-action="Register">Sign up!</a></p>
         </div>
     </div>
 </div>

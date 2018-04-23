@@ -35,6 +35,7 @@ $(function() {
 	}, false);
 })();
 
+// Register password form validation
 $(function() {
 	$('#-register-form-confirm-password').keyup(function() {
 		if ($('#-register-form-confirm-password').val() != $('#-register-form-password').val()) {

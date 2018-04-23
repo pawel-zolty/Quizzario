@@ -20,17 +20,17 @@
             <button class="btn btn-block btn-info py-md-2">Login with Facebook</button>
             <button class="btn btn-block btn-danger py-md-2">Login with Google</button>
             <hr>
-            <form novalidate class="needs-validation">
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="needs-validation" novalidate>
                 <div class="form-group">
-                    <label for="-login-form-email">E-mail</label>
-                    <input type="text" class="form-control" id="-login-form-email" placeholder="E-mail" required>
+                    <label @*asp-for="Email"*@ for="-login-form-email">E-mail</label>
+                    <input @*asp-for="Email"*@ type="text" class="form-control" id="-login-form-email" placeholder="E-mail" required>
                     <div class="invalid-feedback">
                         Please provide a username.
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="-login-form-password">Password</label>
-                    <input type="password" class="form-control" id="-login-form-password" placeholder="Password" required>
+                    <label @*asp-for="Password"*@ for="-login-form-password">Password</label>
+                    <input @*asp-for="Password"*@ type="password" class="form-control" id="-login-form-password" placeholder="Password" required>
                     <div class="invalid-feedback">
                         Please provide a password.
                     </div>
@@ -40,20 +40,20 @@
 
                 <div class="form-group">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="" id="-login-form-remember-me">
-                        <label class="form-check-label" for="-login-form-remember-me">
+                        <input @*asp-for="RememberMe"*@ class="form-check-input" type="checkbox" value="" id="-login-form-remember-me">
+                        <label @*asp-for="RememberMe"*@ class="form-check-label" for="-login-form-remember-me">
                             Remember me
                         </label>
                     </div>
 
-                    <a class="float-right" href="#">Forgot password?</a>
+                    @*<a class="float-right" href="#">Forgot password?</a>*@
                 </div>
             </form>
         </div>
     </div>
     <div class="row justify-content-center mt-2 mt-md-4 -border-2px">
         <div class="col-md-4 border border-light py-1 py-md-4 px-md-4 text-center">
-            <p class="mb-0 lead">Don't have an account? <a asp-area="" asp-controller="Account" asp-action="Register">Sign up!</a></p>
+            <p class="mb-0 lead">Don't have an account? <a asp-controller="Account" asp-action="Register">Sign up!</a></p>
         </div>
     </div>
 </div>
