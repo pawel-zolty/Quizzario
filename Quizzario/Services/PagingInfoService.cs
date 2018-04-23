@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Quizzario.Services
 {
-    public interface IPaginatedMetaService
+    public interface IPagingInfoService
     {
         PagingInfo GetMetaData(int collectionSize, int selectedPageNumber, int itemsPerPage);
     }
 
-    public class PagingInfoService
+    public class PagingInfoService : IPagingInfoService
     {        
         private const int NumberOfNodesInPaginatedList = 9;
         private List<Page> pages;

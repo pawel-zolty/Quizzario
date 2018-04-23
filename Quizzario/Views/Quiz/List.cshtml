@@ -1,5 +1,5 @@
 ﻿@model Quizzario.Models.QuizViewModels.QuizListViewModel
-
+@addTagHelper *, Quizzario.Extensions
 @{
     ViewData["Title"] = "List";
 }
@@ -12,6 +12,6 @@
 }
 
 <div class="pager">
-    TagHelper.Pagination(Model.PagingInfo, x => Url.Action("List", new { category = Model.CurrentCategory, page = x }))
-    <Pagination info="@Model.PagingInfo" route="/quizList"></Pagination>
+    <!--TagHelper.Pagination(Model.PagingInfo, x => Url.Action("List", new { category = Model.CurrentCategory, page = x }))-->
+    <pagination info="@Model.PagingInfo" route="/quizList">x</pagination>
 </div>

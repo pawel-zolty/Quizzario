@@ -65,7 +65,7 @@ namespace Quizzario
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddTransient<IPagingInfoService, PagingInfoService>();
             services.AddMvc();
         }
 
