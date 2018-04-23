@@ -13,6 +13,26 @@ $(function() {
 	$('.-quizes-card').click(function() {
 		$('.-quizes-card-active').toggleClass('-quizes-card-active');
 		$(this).toggleClass('-quizes-card-active');
+		
+		$('#-quizes-right-panel-title').html(
+			$(this).data('title')
+		);
+		$('#-quizes-right-panel-type').html(
+			$(this).data('type')
+		);
+		$('#-quizes-right-panel-date-created').html(
+			$(this).data('date-created')
+		);
+		$('#-quizes-right-panel-last-edited').html(
+			$(this).data('last-edited')
+		);
+		$('#-quizes-right-panel-description').html(
+			$(this).data('description')
+		);
+	});
+	
+	$(document).ready(function() {
+		$('.-quizes-card').first().click();
 	});
 });
 
