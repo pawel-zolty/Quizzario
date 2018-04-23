@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Quizzario.Infrastructure
+namespace Quizzario.Data.Entities
 {
     public class ApplicationRole : IdentityRole
     {

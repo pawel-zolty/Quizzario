@@ -1,5 +1,4 @@
-﻿using Quizzario.Infrastructure;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quizzario.Data.Entities

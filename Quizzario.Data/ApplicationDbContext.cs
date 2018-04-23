@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Quizzario.Data.Entities;
 //using Quizzario.Models;
 
-namespace Quizzario.Infrastructure.Data
+namespace Quizzario.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

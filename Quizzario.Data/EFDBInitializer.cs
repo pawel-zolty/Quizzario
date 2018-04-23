@@ -1,6 +1,4 @@
 ﻿using Quizzario.Data.Entities;
-using Quizzario.Infrastructure;
-using Quizzario.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

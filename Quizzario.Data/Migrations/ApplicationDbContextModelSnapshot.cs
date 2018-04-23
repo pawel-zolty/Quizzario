@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using Quizzario.Data;
 using Quizzario.Data.Entities;
-using Quizzario.Infrastructure.Data;
 using System;
 
 namespace Quizzario.Data.Migrations
@@ -129,6 +129,63 @@ namespace Quizzario.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Quizzario.Data.Entities.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Origin");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("Quizzario.Data.Entities.AssignedUser", b =>
                 {
                     b.Property<string>("Id")
@@ -208,63 +265,6 @@ namespace Quizzario.Data.Migrations
                     b.ToTable("Score");
                 });
 
-            modelBuilder.Entity("Quizzario.Infrastructure.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Origin");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -275,7 +275,7 @@ namespace Quizzario.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Quizzario.Infrastructure.ApplicationUser")
+                    b.HasOne("Quizzario.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -283,7 +283,7 @@ namespace Quizzario.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Quizzario.Infrastructure.ApplicationUser")
+                    b.HasOne("Quizzario.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -296,7 +296,7 @@ namespace Quizzario.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Quizzario.Infrastructure.ApplicationUser")
+                    b.HasOne("Quizzario.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -304,7 +304,7 @@ namespace Quizzario.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Quizzario.Infrastructure.ApplicationUser")
+                    b.HasOne("Quizzario.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -312,7 +312,7 @@ namespace Quizzario.Data.Migrations
 
             modelBuilder.Entity("Quizzario.Data.Entities.AssignedUser", b =>
                 {
-                    b.HasOne("Quizzario.Infrastructure.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Quizzario.Data.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany("AssignedUsers")
                         .HasForeignKey("ApplicationUserId");
 
@@ -323,7 +323,7 @@ namespace Quizzario.Data.Migrations
 
             modelBuilder.Entity("Quizzario.Data.Entities.Quiz", b =>
                 {
-                    b.HasOne("Quizzario.Infrastructure.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Quizzario.Data.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany("Quizes")
                         .HasForeignKey("ApplicationUserId");
 
@@ -342,7 +342,7 @@ namespace Quizzario.Data.Migrations
 
             modelBuilder.Entity("Quizzario.Data.Entities.Score", b =>
                 {
-                    b.HasOne("Quizzario.Infrastructure.ApplicationUser", "ApplicationUser")
+                    b.HasOne("Quizzario.Data.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany("Scores")
                         .HasForeignKey("ApplicationUserId");
 

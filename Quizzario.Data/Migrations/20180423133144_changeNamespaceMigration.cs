@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Quizzario.Data.Migrations
 {
-    public partial class QuizzarioDataEntities : Migration
+    public partial class changeNamespaceMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
