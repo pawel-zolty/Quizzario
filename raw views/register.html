@@ -1,0 +1,51 @@
+<!-- Stems from: basic-template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.flatly.min.css">
+	<!-- Additional stylesheets begin -->
+    <link rel="stylesheet" href="css/login.css">
+	<!-- Additional stylesheets end -->
+</head>
+<body>
+	
+	<div class="container-fluid">
+		<div class="row justify-content-center mt-md-4">
+			<div class="col-xl-4 col-lg-6 col-md-8 bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px">
+				<button class="btn btn-block btn-info py-md-2">Register with Facebook</button>
+				<button class="btn btn-block btn-danger py-md-2">Register with Google</button>
+				<hr>
+				<form novalidate class="needs-validation">
+					<div class="form-group">
+						<label for="-register-form-email">E-mail</label>
+						<input type="text" class="form-control" id="-register-form-email" placeholder="E-mail" required>
+						<div class="invalid-feedback">
+							Please provide a username.
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="-register-form-password">Password</label>
+						<input type="password" class="form-control" id="-register-form-email" placeholder="Password" required>
+						<div class="invalid-feedback">
+							Please provide a password.
+						</div>
+					</div>
+							
+					<button class="btn btn-success btn-block py-md-2 mb-2" type="submit">Register</button>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+   
+   
+   
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+ 
+</body>
+</html>
