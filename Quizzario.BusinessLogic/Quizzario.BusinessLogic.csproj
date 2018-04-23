@@ -96,9 +96,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IQuizService.cs" />
+    <Compile Include="Models\Quiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\QuizService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DTOs\Quizzario.DTOs.csproj">
+      <Project>{9626b2e8-416d-4744-b3a0-dec140cf4099}</Project>
+      <Name>Quizzario.DTOs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Quizzario.Data\Quizzario.Data.csproj">
       <Project>{a3979f69-5101-49dd-93a3-98ec44456496}</Project>
       <Name>Quizzario.Data</Name>
@@ -108,5 +115,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
