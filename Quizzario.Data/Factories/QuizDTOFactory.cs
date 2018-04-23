@@ -32,7 +32,35 @@ namespace Quizzario.Data.Factories
             foreach (var q in quizes)
             {
                 quizesDTO.Add(CreateQuiz(q));
-            }            
+            }
+            var x = new QuizDTO
+            {
+                Title = "Cos",
+                Id = "1",
+                FilePath = "xd"
+            };
+            var y = new QuizDTO
+            {
+                Title = "Cos",
+                Id = "1",
+                FilePath = "xd"
+            };
+            var z = new QuizDTO
+            {
+                Title = "Cos",
+                Id = "1",
+                FilePath = "xd"
+            };
+            var o = new QuizDTO
+            {
+                Title = "Cos",
+                Id = "1",
+                FilePath = "xd"
+            };
+            quizesDTO.Add(x);
+            quizesDTO.Add(y);
+            quizesDTO.Add(z);
+            quizesDTO.Add(o);
             return quizesDTO;
         }
 
