@@ -10,8 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quizzario.Models;
 using Quizzario.Services;
-using Quizzario.Infrastructure;
-using Quizzario.Infrastructure.Data;
+using Quizzario.Data;
+using Quizzario.Data.Entities;
 
 namespace Quizzario
 {
@@ -44,9 +44,17 @@ namespace Quizzario
             });
             services.AddDbContext<ApplicationDbContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Quizzario.Data")));
-           // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            //factories
+            services.AddScoped<Data.Abstracts.IQuizDTOFactory, Data.Factories.QuizDTOFactory>();
+            services.AddScoped<Data.Abstracts.IApplicationUserDTOFactory, Data.Factories.ApplicationUserDTOFactory>();
 
-
+            //repos
+            services.AddScoped<Data.Abstracts.IRepository<Data.Entities.Quiz>,
+                Data.Repositories.EFQuizRepository>();
+            services.AddScoped<Data.Abstracts.IRepository<Data.Entities.ApplicationUser>,
+                Data.Repositories.EFApplicationUserRepository>();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()

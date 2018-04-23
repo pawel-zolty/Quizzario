@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 using Quizzario.Models;
 using Quizzario.Models.AccountViewModels;
 using Quizzario.Services;
-using Quizzario.Infrastructure;
+using Quizzario.Data.Entities;
 
 namespace Quizzario.Controllers
 {
