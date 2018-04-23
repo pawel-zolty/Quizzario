@@ -34,3 +34,14 @@ $(function() {
 	});
 	}, false);
 })();
+
+$(function() {
+	$('#-register-form-confirm-password').keyup(function() {
+		if ($('#-register-form-confirm-password').val() != $('#-register-form-password').val()) {
+			$('#-register-form-confirm-password')[0].setCustomValidity('Passwords must match.');
+		}
+		else {
+			$('#-register-form-confirm-password')[0].setCustomValidity('');
+		}
+	});
+});

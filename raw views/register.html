@@ -17,7 +17,7 @@
 				<button class="btn btn-block btn-info py-md-2">Register with Facebook</button>
 				<button class="btn btn-block btn-danger py-md-2">Register with Google</button>
 				<hr>
-				<form novalidate class="needs-validation">
+				<form novalidate class="needs-validation" id="-register-form" action="#">
 					<div class="form-group">
 						<label for="-register-form-email">E-mail</label>
 						<input type="text" class="form-control" id="-register-form-email" placeholder="E-mail" required>
@@ -27,9 +27,16 @@
 					</div>
 					<div class="form-group">
 						<label for="-register-form-password">Password</label>
-						<input type="password" class="form-control" id="-register-form-email" placeholder="Password" required>
+						<input type="password" class="form-control" id="-register-form-password" placeholder="Password" required>
 						<div class="invalid-feedback">
 							Please provide a password.
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="-register-form-confirm-password">Confirm password</label>
+						<input type="password" class="form-control" id="-register-form-confirm-password" placeholder="Confirm password" required>
+						<div class="invalid-feedback">
+							Passwords must match.
 						</div>
 					</div>
 							
