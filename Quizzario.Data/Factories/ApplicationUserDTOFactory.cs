@@ -13,6 +13,11 @@ namespace Quizzario.Data.Factories
     {
         private IRepository<ApplicationUser> repository;
 
+        public ApplicationUserDTOFactory(IRepository<ApplicationUser> repository)
+        {
+            this.repository = repository;
+        }
+
         public ApplicationUserDTO Create(string id)
         {
             ApplicationUser user = repository.GetById(id);
@@ -20,7 +25,9 @@ namespace Quizzario.Data.Factories
         }
 
         private ApplicationUserDTO CreateUser(ApplicationUser user)
-        {            
+        {
+            if (user == null)
+                return null;
             string id = user.Id;
             string firstName = user.FirstName;
             string lastName = user.LastName;
