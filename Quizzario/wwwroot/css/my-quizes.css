@@ -3,25 +3,23 @@
 	z-index: 1027;
 	left: 2px;
 	cursor: pointer;
-	
 	/* For <md viewports */
 	border: 2px dashed #f2f2f2;
 }
 
-.-quizes-card:hover {
-	border-color: #ebebeb;
-	border-right-color: white;
-}
+	.-quizes-card:hover {
+		border-color: #e5e5e5;
+		border-right-color: white;
+	}
 
 .-quizes-card-active {
-	border: 2px dashed #ebebeb;
+	border: 2px dashed #e5e5e5;
 	z-index: 1029;
 }
 
 #-quizes-right-panel {
 	padding-left: 15px;
 	padding-right: 15px;
-	
 	/* Making panel scrollable in smaller viewports */
 	overflow: auto;
 	max-height: 100%;
@@ -29,22 +27,18 @@
 
 @media (min-width: 768px) {
 	#-quizes-right-panel {
-		border-left: 2px dashed #ebebeb;
-			
+		border-left: 2px dashed #e5e5e5;
 		position: fixed;
-		bottom: 0px;
-		top: 0px;
-		
+		bottom: 0;
+		top: 0;
 		/* So panel appears below topmenu */
 		margin-top: 85px;
-		
 		/* So panel appears under .-quizes-card-active (1029) and .fixed-top (1030) */
 		z-index: 1028;
 	}
-	
+
 	.-quizes-card {
-		border: 2px dashed #f2f2f2;
-		border-right: 2px solid white
+		border-right: 2px solid white;
 	}
 }
 

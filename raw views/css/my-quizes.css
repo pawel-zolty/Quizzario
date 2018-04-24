@@ -9,12 +9,12 @@
 }
 
 .-quizes-card:hover {
-	border-color: #ebebeb;
+	border-color: #e0e0e0;
 	border-right-color: white;
 }
 
 .-quizes-card-active {
-	border: 2px dashed #ebebeb;
+	border: 2px dashed #e0e0e0;
 	z-index: 1029;
 }
 
@@ -29,7 +29,7 @@
 
 @media (min-width: 768px) {
 	#-quizes-right-panel {
-		border-left: 2px dashed #ebebeb;
+		border-left: 2px dashed #e0e0e0;
 			
 		position: fixed;
 		bottom: 0px;
@@ -43,8 +43,7 @@
 	}
 	
 	.-quizes-card {
-		border: 2px dashed #f2f2f2;
-		border-right: 2px solid white
+		border-right: 2px solid white;
 	}
 }
 
