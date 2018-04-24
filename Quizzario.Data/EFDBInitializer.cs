@@ -18,13 +18,13 @@ namespace Quizzario.Data
                 return;   // DB has been seeded
             }
 
-           /* var users = new List<ApplicationUser>
+            var users = new List<ApplicationUser>
             {
-            new ApplicationUser{FirstName = "Paweł", LastName = "Kowal", Email="zolty13@vp.pl", },
-            new ApplicationUser{FirstName = "Michał", LastName = "Nowak", }
+            new ApplicationUser{Id = "1", FirstName = "Paweł", LastName = "Kowal", Email="zolty13@vp.pl", PasswordHash="12345"},
+            new ApplicationUser{Id = "2", FirstName = "Michał", LastName = "Nowak", }
             };
             users.ForEach(u => context.Users.Add(u));
-            context.SaveChanges();*/
+            context.SaveChanges();
 
             var quizes = new List<Quiz>
             {
