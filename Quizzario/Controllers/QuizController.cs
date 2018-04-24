@@ -6,13 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Quizzario.Services;
 using Quizzario.BusinessLogic.Abstract;
 using Quizzario.Models.QuizViewModels;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Quizzario.Models;
 
 namespace Quizzario.Controllers
 {
+    [Authorize]
     public class QuizController : Controller
     {
         public int PageSize = 2;
-        IQuizService quizService;
+        private IQuizService quizService;
 
         public QuizController(IQuizService quizService)
         {
@@ -21,12 +25,13 @@ namespace Quizzario.Controllers
 
         public ViewResult List(int p = 1)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             PagingInfoService pagingInfoService = new PagingInfoService();
-            var quizesCollection = quizService.GetAllQuizes();
+            var quizesCollection = quizService.GetAllUserQuizes(userId);
 
             QuizListViewModel model = new QuizListViewModel
             {
-                Quizes = quizesCollection.
+                Quizes = quizesCollection.                    
                     OrderBy(q => q.Title).
                     Skip((p - 1) * PageSize).
                     Take(PageSize),
