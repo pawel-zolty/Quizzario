@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.flatly.min.css">
 	<!-- Additional stylesheets begin -->
     <link rel="stylesheet" href="css/template.css">
-    <link rel="stylesheet" href="css/my-quizes.css">
+    <link rel="stylesheet" href="css/before-quiz.css">
 	<!-- Additional stylesheets end -->
 </head>
 <body>
@@ -76,30 +76,114 @@
 	<div class="container-fluid -content-with-sidemenu" id="-content-wrapper">
 		<!-- Content begin -->
 		<div class="row px-3 py-3 mx-0">
-			<div class='col-12'>
-				<h1 class="d-inline">Some exam title</h1> 
-				<p class="font-italic d-inline ml-1 ml-md-3">by <b>Mike</b></p>
-				
-				<div class="float-right">
-					<button class="btn btn-outline-primary my-1 mr-md-1">
-						<i class="fas fa-fw fa-share"></i>
-						<span class="ml-1">Share</span>
-					</button>
-					<button class="btn btn-outline-danger my-1 mr-md-3">
-						<i class="fas fa-fw fa-heart"></i>
-						<span class="ml-1">Favourite</span>
-					</button>
-					<button class="btn btn-success my-1 mr-md-1">
-						<i class="fas fa-fw fa-edit"></i>
-						<span class="ml-1">Edit</span>
-					</button>
-					<button class="btn btn-dark my-1 ">
-						<i class="fas fa-fw fa-trash"></i>
-						<span class="ml-1">Remove</span>
-					</button>
+			<div class="col-12">
+				<div class="row mb-1 mb-md-2">
+					<div class="col-12">
+						<h1 class="d-inline">Some exam title</h1> 
+						<p class="font-italic d-inline ml-1 ml-md-3">by <b>Mike</b></p>
+						
+						<div class="float-md-right">
+							<button class="btn btn-outline-primary my-1 mr-md-1">
+								<i class="fas fa-fw fa-share"></i>
+								<span class="ml-1">Share</span>
+							</button>
+							<button class="btn btn-outline-danger my-1 mr-md-3">
+								<i class="fas fa-fw fa-heart"></i>
+								<span class="ml-1">Favourite</span>
+							</button>
+							<button class="btn btn-success my-1 mr-md-1">
+								<i class="fas fa-fw fa-edit"></i>
+								<span class="ml-1">Edit</span>
+							</button>
+							<button class="btn btn-dark my-1 ">
+								<i class="fas fa-fw fa-trash"></i>
+								<span class="ml-1">Remove</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="text-center float-md-left" id="-before-quiz-left-panel">
+							<span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: </span>
+							<span>2</span>
+							<button class="btn btn-success my-1 btn-block">
+								<i class="fas fa-fw fa-play"></i>
+								<span class="ml-1">Let's begin</span>
+							</button>
+							<button class="btn btn-outline-primary my-1 btn-block">
+								<i class="fas fa-fw fa-left"></i>
+								<span class="ml-1">Back</span>
+							</button>
+						</div>
+						<div id="-before-quiz-right-panel">
+							<div class="row mb-1 mb-md-2">
+								<div class="col-12">
+									<span class="mr-3 mr-md-4">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Type: </span>
+										<span>Exam</span>
+									</span>
+									<span class="mr-3 mr-md-4">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
+										<span>2</span>
+									</span>
+									<span class="mr-3 mr-md-4">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
+										<span>5 minutes</span>
+									</span>
+								</div>
+							</div>
+							<div class="row mb-1 mb-md-2">
+								<div class="col-12 text-justify">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt sapien lacus, pretium maximus tellus suscipit eu. Nulla tortor nisl, lobortis nec faucibus ac, luctus id neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec dapibus dignissim turpis, at malesuada nunc pretium eu. Integer tempus, nunc a lacinia suscipit, libero risus condimentum ipsum, a ullamcorper nulla urna non dolor. In magna arcu, fringilla vel lacus at, dapibus finibus elit. Suspendisse ut ante a urna vehicula imperdiet. Fusce ut volutpat mi. Aenean diam orci, dignissim vitae risus ac, gravida tincidunt nisi. Morbi rhoncus nulla at bibendum condimentum. Aliquam vestibulum erat eget purus mollis pharetra. Mauris porttitor eros a arcu tempus egestas.
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<h5>Attempt history</h5>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
+										<span>1</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
+										<span>28</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
+										<span>28</span>
+									</p>
+								</div>
+								<div class="col-6">
+									<h5>Details</h5>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
+										<span>March 5, 2018</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Date created: </span>
+										<span>March 2, 2018</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Total number of questions: </span>
+										<span>40	</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Total number of attempts: </span>
+										<span>432</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Added to favourite: </span>
+										<span>23 times</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row
 		<!-- Content end -->
 	</div>
    
