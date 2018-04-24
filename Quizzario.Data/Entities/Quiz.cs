@@ -15,6 +15,7 @@ namespace Quizzario.Data.Entities
         [Key]
         public string Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
         [ForeignKey("QuizSettings")]

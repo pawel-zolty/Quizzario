@@ -293,7 +293,6 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="EFDBInitializer.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\AssignedUser.cs" />
     <Compile Include="Entities\Quiz.cs" />
     <Compile Include="Entities\QuizSettings.cs" />
@@ -302,9 +301,9 @@
     <Compile Include="Factories\ApplicationUserDTOFactory.cs" />
     <Compile Include="Factories\QuizDTOFactory.cs" />
     <Compile Include="Abstracts\IApplicationUserDTOFactory.cs" />
-    <Compile Include="Migrations\20180423133144_changeNamespaceMigration.cs" />
-    <Compile Include="Migrations\20180423133144_changeNamespaceMigration.designer.cs">
-      <DependentUpon>20180423133144_changeNamespaceMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20180424174644_Migration_AddDesccirptionToQuiz.cs" />
+    <Compile Include="Migrations\20180424174644_Migration_AddDesccirptionToQuiz.designer.cs">
+      <DependentUpon>20180424174644_Migration_AddDesccirptionToQuiz.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

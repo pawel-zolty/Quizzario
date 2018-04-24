@@ -213,6 +213,8 @@ namespace Quizzario.Data.Migrations
 
                     b.Property<string>("ApplicationUserId");
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("FilePath");
 
                     b.Property<string>("QuizSettingsId");

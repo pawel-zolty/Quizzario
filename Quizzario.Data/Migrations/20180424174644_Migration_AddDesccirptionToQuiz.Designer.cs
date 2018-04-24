@@ -12,8 +12,8 @@ using System;
 namespace Quizzario.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180423133144_changeNamespaceMigration")]
-    partial class changeNamespaceMigration
+    [Migration("20180424174644_Migration_AddDesccirptionToQuiz")]
+    partial class Migration_AddDesccirptionToQuiz
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -213,6 +213,8 @@ namespace Quizzario.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("FilePath");
 

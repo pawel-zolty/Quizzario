@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Quizzario.Data.Migrations
 {
-    public partial class changeNamespaceMigration : Migration
+    public partial class Migration_AddDesccirptionToQuiz : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,6 +183,7 @@ namespace Quizzario.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuizSettingsId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     QuizType = table.Column<int>(type: "int", nullable: true),
