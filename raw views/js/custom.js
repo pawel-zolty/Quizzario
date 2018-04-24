@@ -13,7 +13,9 @@ $(function() {
 	
 	// Quizes list on click
 	$('.-quizes-card').click(function() {
-		$('#-quizes-right-panel-content').fadeOut(50);
+		if($(this).hasClass('-quizes-card-active')) return;
+		
+		$('#-quizes-right-panel-content').stop().fadeOut(50);
 		
 		$('.-quizes-card-active').toggleClass('-quizes-card-active');
 		$(this).toggleClass('-quizes-card-active');
