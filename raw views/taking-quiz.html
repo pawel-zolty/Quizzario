@@ -6,47 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.flatly.min.css">
 	<!-- Additional stylesheets begin -->
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/taking-quiz.css">
 	<!-- Additional stylesheets end -->
 </head>
 <body>
 	
 	<div class="container-fluid">
-		<div class="row justify-content-center mt-md-4">
-			<div class="col-md-3 px-0">
-				<div class="bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px mr-md-2">
-					<button class="btn btn-success">1</button>
-					<button class="btn btn-success">2</button>
-					<button class="btn btn-success">3</button>
-					<button class="btn btn-success">4</button>
-					<button class="btn btn-success">5</button>
-					<button class="btn btn-success">6</button>
-					<button class="btn btn-success">7</button>
-					<button class="btn btn-success">8</button>
-					<button class="btn btn-success">9</button>
-					<button class="btn btn-dark">10</button>
-					<button class="btn btn-outline-primary">11</button>
-					<button class="btn btn-outline-primary">12</button>
-					<button class="btn btn-outline-primary">13</button>
-					<button class="btn btn-outline-primary">14</button>
+		<div class="row justify-content-center mt-2 mt-xl-4">
+			<div class="col-4 col-xl-2 px-2 px-xl-3">
+				<div class="py-2 py-md-4 px-2 px-md-4 bg-light border border-dark -border-2px" id="-taking-quiz-left-panel">
+					<div id="-taking-quiz-button-list">
+						<button class="btn btn-success">1</button>
+						<button class="btn btn-success">2</button>
+						<button class="btn btn-success">3</button>
+						<button class="btn btn-success">4</button>
+						<button class="btn btn-success">5</button>
+						<button class="btn btn-success">6</button>
+						<button class="btn btn-success">7</button>
+						<button class="btn btn-success">8</button>
+						<button class="btn btn-success">9</button>
+						<button class="btn btn-dark">10</button>
+						<button class="btn btn-outline-primary">11</button>
+						<button class="btn btn-outline-primary">12</button>
+						<button class="btn btn-outline-primary">13</button>
+						<button class="btn btn-outline-primary">14</button>
+					</div>
+					<button class="btn btn-block btn-success mt-3">Submit</button> 
 				</div>
 			</div>
-			<div class="col-md-6 bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px">
-				<h5>Question 10. <b>Dokąd nocą tupta jeż?</b></h3>
-				<form>
-					<div class="radio">
-						<label><input type="radio">abc</label>
+			<div class="col-8 col-xl-6 px-2 px-xl-3">
+				<div class="py-2 py-md-4 px-2 px-md-4 bg-light border border-dark -border-2px" id="-taking-quiz-right-panel">
+					<div class="row">
+						<div class="col-12">
+							<h5>Question 10. <b>Dokąd nocą tupta jeż?</b></h3>
+							<form>
+								<fieldset class="form-group">
+									<div class="form-check my-1 w-100">
+										<input class="form-check-input" type="radio" name="radio" value="a" id="radio1" checked>
+										<label class="form-check-label w-100" for="radio1">Do skutku</label>
+									</div>
+									<div class="form-check my-1 w-100">
+										<input class="form-check-input" type="radio" name="radio" value="b" id="radio2">
+										<label class="form-check-label w-100" for="radio2">Do celu</label>
+									</div>
+									<div class="form-check my-1 w-100">
+										<input class="form-check-input" type="radio" name="radio" value="c" id="radio3">
+										<label class="form-check-label w-100" for="radio3">Do Opola</label>
+									</div>
+								</fieldset>
+							</form>
+						</div>
 					</div>
-					<div class="radio">
-						<label><input type="radio">abc</label>
+					<div class="row">
+						<div class="col-12">
+							<div class="float-right">
+								<button class="btn btn-outline-primary py-md-2 mr-2">
+									<i class="fas fa-fw fa-arrow-left"></i>
+									<span class="ml-1">Previous</span>
+								</button>
+								<button class="btn btn-outline-primary py-md-2">
+									<i class="fas fa-fw fa-arrow-right"></i>
+									<span class="ml-1">Next</span>
+								</button>
+							</div>
+						</div>
 					</div>
-					<div class="radio">
-						<label><input type="radio">abc</label>
-					</div>
-				</form>
-				
-				<button class="btn btn-block btn-success py-md-2">Go to main quiz screen</button>
-				<button class="btn btn-block btn-outline-primary py-md-2">Go to main page</button>
+				</div>
 			</div>	
 		</div>
 	</div>
