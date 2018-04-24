@@ -34,7 +34,7 @@ namespace Quizzario.Extensions
         {
             var html =
 $@"<li class=""pagination-previous"">
-    <a href=""{Route}/{Info.PreviousPage.PageNumber}"" aria-label=""{PreviousPageText} page"">{PreviousPageText} <span class=""show-for-sr"">page</span></a>
+    <a href=""{Route}/Page{Info.PreviousPage.PageNumber}"" aria-label=""{PreviousPageText} page"">{PreviousPageText} <span class=""show-for-sr"">page</span></a>
 </li>";
 
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
@@ -44,7 +44,7 @@ $@"<li class=""pagination-previous"">
         {
             var html =
 $@"<li class=""pagination-next"">
-    <a href=""{Route}/{Info.NextPage.PageNumber}"" aria-label=""{NextPageText} page"">{NextPageText} <span class=""show-for-sr"">page</span></a>
+    <a href=""{Route}/Page{Info.NextPage.PageNumber}"" aria-label=""{NextPageText} page"">{NextPageText} <span class=""show-for-sr"">page</span></a>
 </li>";
 
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
@@ -61,7 +61,7 @@ $@"<li class=""pagination-next"">
                     output.Content.SetHtmlContent(output.Content.GetContent() + html);
                     continue;
                 }
-                html = $@"<li><a href=""{Route}/{infoPage.PageNumber}"" aria-label=""Page {infoPage.PageNumber}"">{infoPage.PageNumber}</a></li>";
+                html = $@"<li><a href=""{Route}/Page{infoPage.PageNumber}"" aria-label=""Page {infoPage.PageNumber}"">{infoPage.PageNumber}</a></li>";
                 output.Content.SetHtmlContent(output.Content.GetContent() + html);
             }
         }

@@ -90,6 +90,17 @@ namespace Quizzario
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "MyQuizList", 
+                    template: "Quiz/List",
+                    defaults: new { controller = "Quiz", action = "List", p = 1}
+                    );
+                routes.MapRoute(
+                    name: "MyQuizListPage", 
+                    template: "Quiz/List/Page{p}",
+                    defaults: new { controller = "Quiz", action = "List"  },
+                    constraints: new { p = @"\d+" }
+                    );
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

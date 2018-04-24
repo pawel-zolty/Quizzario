@@ -11,7 +11,7 @@ namespace Quizzario.Controllers
 {
     public class QuizController : Controller
     {
-        public int PageSize = 3;
+        public int PageSize = 2;
         IQuizService quizService;
 
         public QuizController(IQuizService quizService)
@@ -19,7 +19,7 @@ namespace Quizzario.Controllers
             this.quizService = quizService;
         }
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(int p = 1)
         {
             PagingInfoService pagingInfoService = new PagingInfoService();
             var quizesCollection = quizService.GetAllQuizes();
@@ -28,10 +28,10 @@ namespace Quizzario.Controllers
             {
                 Quizes = quizesCollection.
                     OrderBy(q => q.Title).
-                    Skip((page - 1) * PageSize).
+                    Skip((p - 1) * PageSize).
                     Take(PageSize),
                 PagingInfo = pagingInfoService.GetMetaData(quizesCollection.Count(),
-                page, PageSize)
+                p, PageSize)
             };
 
             return View(model);

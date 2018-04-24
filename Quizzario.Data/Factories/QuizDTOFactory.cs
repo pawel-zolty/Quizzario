@@ -35,25 +35,37 @@ namespace Quizzario.Data.Factories
             }
             var x = new QuizDTO
             {
-                Title = "Cos",
+                Title = "Cos1",
                 Id = "1",
                 FilePath = "xd"
             };
             var y = new QuizDTO
             {
-                Title = "Cos",
+                Title = "Cos2",
                 Id = "1",
                 FilePath = "xd"
             };
             var z = new QuizDTO
             {
-                Title = "Cos",
+                Title = "Cos3",
                 Id = "1",
                 FilePath = "xd"
             };
             var o = new QuizDTO
             {
-                Title = "Cos",
+                Title = "Cos4",
+                Id = "1",
+                FilePath = "xd"
+            };
+            var a = new QuizDTO
+            {
+                Title = "Cos5",
+                Id = "1",
+                FilePath = "xd"
+            };
+            var b = new QuizDTO
+            {
+                Title = "Cos6",
                 Id = "1",
                 FilePath = "xd"
             };
@@ -61,6 +73,8 @@ namespace Quizzario.Data.Factories
             quizesDTO.Add(y);
             quizesDTO.Add(z);
             quizesDTO.Add(o);
+            quizesDTO.Add(a);
+            quizesDTO.Add(b);
             return quizesDTO;
         }
 
