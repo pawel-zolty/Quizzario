@@ -15,10 +15,12 @@ namespace Quizzario.Data.DTOs
     {    
         public string Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public string ApplicationUserId { get; set; }        
         public string QuizSettingsId { get; set; }
         public QuizType? QuizType { get; set; }
         public string FilePath { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }

@@ -12,9 +12,10 @@ using System;
 namespace Quizzario.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180424215412_AddFieldsToQuiz")]
+    partial class AddFieldsToQuiz
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,9 +214,6 @@ namespace Quizzario.Data.Migrations
 
                     b.Property<string>("ApplicationUserId");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("Date");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("FilePath");
@@ -223,6 +221,9 @@ namespace Quizzario.Data.Migrations
                     b.Property<string>("QuizSettingsId");
 
                     b.Property<int?>("QuizType");
+
+                    b.Property<DateTime>("ReportDate")
+                        .HasColumnType("Date");
 
                     b.Property<string>("Title");
 

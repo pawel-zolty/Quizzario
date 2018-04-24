@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Quizzario.Data.Entities
 {
-
     public enum QuizType
     {
         Quiz, Exam, Test
@@ -22,6 +22,8 @@ namespace Quizzario.Data.Entities
         public string QuizSettingsId { get; set; }
         public QuizType? QuizType { get; set; }
         public string FilePath { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime CreationDate { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual ICollection<AssignedUser> AssignedUsers { get; set; }

@@ -4,6 +4,7 @@ using Quizzario.Data.DTOs;
 using Quizzario.Data.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Quizzario.Data.Factories
 {
@@ -85,9 +86,11 @@ namespace Quizzario.Data.Factories
                 return null;
             string id = quiz.Id;
             string title = quiz.Title;
+            string description = quiz.Description;
             string userId = quiz.ApplicationUserId;
             string filePath = quiz.FilePath;
-            
+            DateTime creationDate = quiz.CreationDate;
+
             ApplicationUserDTO user = userFactory.Create(userId);
             //if (user == null || title == null || filePath == null)
               //  return null;
@@ -96,11 +99,13 @@ namespace Quizzario.Data.Factories
             {
                 Id = id,
                 Title = title,
+                Description = description,
                 ApplicationUserId = "1",
                 QuizSettingsId = "1",
                 QuizType = type,
                 FilePath = filePath,
                 ApplicationUser = user,
+                CreationDate = creationDate
                 //AssignedUsers,
                 //Scores,
                 //QuizSettings = 
