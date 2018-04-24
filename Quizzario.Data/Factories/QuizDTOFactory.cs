@@ -24,9 +24,10 @@ namespace Quizzario.Data.Factories
             return CreateQuiz(quiz);
         }
 
-        public IEnumerable<QuizDTO> CreateAllQuizes()
+        public IEnumerable<QuizDTO> CreateAllUserQuizes(string userId)
         {
-            IEnumerable<Quiz> quizes = repository.All;
+            IEnumerable<Quiz> quizes = repository.All.
+                Where(q => q.ApplicationUserId.Equals(userId));
             List<QuizDTO> quizesDTO = new List<QuizDTO>();
             quizes = quizes.ToList();
             foreach (var q in quizes)

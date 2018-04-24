@@ -6,6 +6,6 @@ namespace Quizzario.Data.Abstracts
     public interface IQuizDTOFactory
     {
         QuizDTO Create(string id);
-        IEnumerable<QuizDTO> CreateAllQuizes();
+        IEnumerable<QuizDTO> CreateAllUserQuizes(string userId);
     }
 }
