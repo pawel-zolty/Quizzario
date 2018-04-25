@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - Quizzario</title>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.flatly.min.css">
+    <!-- Additional stylesheets begin -->
+    @RenderSection("AdditionalStylesheets", required: false)
+    <!-- Additional stylesheets end -->
+</head>
+<body>
+    <nav class="container-fluid" id="-navigation">
+        <!-- Topmenu begin -->
+        <div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand">Quizzario</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse -navigation-collapse">
+                <form class="form-inline my-2 my-md-0 mr-auto">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+        <!-- Topmenu end -->
+    </nav>
+
+    <div class="container-fluid -content-without-sidemenu" id="-content-wrapper">
+        <!-- Content begin -->
+        @RenderBody()
+        <!-- Content end -->
+    </div>
+
+    <!-- Footer begin -->
+    <footer class="bg-primary text-white" id="-footer">
+        <div class="py-3 text-center">
+            © 2018 Copyright: ...
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- Additional scripts begin -->
+    @RenderSection("AdditionalScripts", required: false)
+    <!-- Additional scripts end -->
+</body>
+</html>

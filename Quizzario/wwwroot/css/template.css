@@ -1,0 +1,106 @@
+/** Navigation */
+#-navigation {
+	padding: 0;
+	
+	/* Making menu scrollable in smaller viewports */
+	overflow: auto;
+	max-height: 100%;
+}
+
+#-topmenu {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1031;
+}
+
+@media (max-width: 767.98px) {
+	#-navigation {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		z-index: 1030;
+	}
+}
+/** Content */
+#-content-wrapper {
+	padding-top: 70px;
+	padding-right: 0px;
+}
+
+.-content-without-sidemenu {
+	padding-left: 0px;
+}
+
+.-content-with-sidemenu {
+	padding-left: 190px;
+}
+/** Footer */
+#-footer {
+	/* Making footer appear in front of sidemenu */
+	position: relative;
+	z-index: 1031;
+}
+
+
+/* Sidemenu */
+#-sidemenu {
+	width: 190px;
+	position: fixed;
+	top: 70px;
+	z-index: 1030;
+	height: 100%;
+	
+	box-shadow: -2px 0px 4px gray;
+}
+
+#-sidemenu-collapse-button {
+	cursor: pointer;
+}
+
+.-sidemenu-collapsed {
+	width: 50px !important;
+}
+
+.-content-sidemenu-collapsed {
+	padding-left: 50px !important;
+}
+
+@media (min-width: 768px) {
+	#-sidemenu-collapse {
+		display: block;
+	}
+	
+	#-sidemenu {
+		align-items: flex-start;
+	}
+}
+
+@media (max-width: 767.98px) {
+	#-content-wrapper {
+		padding-left: 0px !important;
+		padding-top: 54px;
+	}
+
+	#-topmenu {
+		position: static;
+	}
+	
+	#-sidemenu {
+		position: static;
+		width: 100%;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	
+	.-sidemenu-hr-wrapper {
+		display: none;
+	}
+}
+
+/* Landing page */
+.-fa-xl {
+	font-size: 150px;
+}
