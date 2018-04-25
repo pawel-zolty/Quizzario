@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Quizzario.Models;
+using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Identity;
 using Quizzario.Data.Entities;
 
@@ -18,6 +19,28 @@ namespace Quizzario.Controllers
         {
             if (_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Quizes");
             return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpGet]
+        public ViewResult Searching()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ViewResult Searching(SearchingModel searchingModel)
+        {
+            return View("SearchingByName",searchingModel);
         }
     }
 }

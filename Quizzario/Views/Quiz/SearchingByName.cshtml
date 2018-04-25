@@ -1,0 +1,24 @@
+﻿@model Quizzario.Models.QuizViewModels.SearchingByNameModel
+@addTagHelper *, Quizzario.Extensions
+@{
+    ViewData["Title"] = "Quizes: ";
+}
+<h2>SearchingByName</h2>
+
+
+@if (Model != null)
+{
+    @foreach (var quiz in Model.Quizes)
+    {
+        @Html.Partial("QuizSummary", quiz);
+
+
+    }
+    <div class="pager">
+        <!--TagHelper.Pagination(Model.PagingInfo, x => Url.Action("List", new { category = Model.CurrentCategory, page = x }))-->
+        <pagination info="@Model.PagingInfo" route="/Quiz/SearchingByName">x</pagination>
+    </div>
+}@if (Model == null)
+{
+    <h4>Quiz not found</h4>
+}

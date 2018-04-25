@@ -7,5 +7,7 @@ namespace Quizzario.BusinessLogic.Abstract
     {
         IEnumerable<QuizDTO> GetAllUserQuizes(string userId);
         IEnumerable<QuizDTO> GetUserFavouriteQuizes(string userId);        
+        IEnumerable<QuizDTO> SearchByName(string name);
+        IEnumerable<QuizDTO> GetAllQuizes();
     }
 }

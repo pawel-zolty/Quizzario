@@ -3,6 +3,7 @@ using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
 
+
 namespace Quizzario.BusinessLogic.Services
 {
     public class QuizService : IQuizService
@@ -23,6 +24,12 @@ namespace Quizzario.BusinessLogic.Services
         public IEnumerable<QuizDTO> GetAllUserQuizes(string userId)
         {         
             IEnumerable<QuizDTO> quizes = factory.CreateAllUserQuizes(userId);
+            return quizes;
+        }
+
+        public IEnumerable<QuizDTO> SearchByName(string name)
+        {
+            IEnumerable<QuizDTO> quizes = factory.SearchByName(name);
             return quizes;
         }
     }
