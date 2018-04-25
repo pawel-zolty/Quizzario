@@ -40,8 +40,7 @@ namespace Quizzario.BusinessLogic.Factories
                 Select(q => q.Id);
             
             if (userFavouriteQuizesIds.ToList().Count == 0)
-                return quizesDTO;
-            IEnumerable<Quiz> quizes2 = quizRepository.Quizes.ToList();
+                return quizesDTO;            
             
             IEnumerable <Quiz> quizes = quizRepository.Quizes.
                 Where(
