@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Quizzario.Models;
+using Quizzario.Models.QuizViewModels;
 
 namespace Quizzario.Controllers
 {
@@ -32,6 +33,16 @@ namespace Quizzario.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpGet]
+        public ViewResult Searching()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ViewResult Searching(SearchingModel searchingModel)
+        {
+            return View("SearchingByName",searchingModel);
         }
     }
 }

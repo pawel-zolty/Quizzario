@@ -4,6 +4,7 @@ using Quizzario.Data.DTOs;
 using Quizzario.Data.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Quizzario.Data.Factories
 {
@@ -23,6 +24,7 @@ namespace Quizzario.Data.Factories
             Quiz quiz = repository.GetById(id);
             return CreateQuiz(quiz);
         }
+        
 
         public IEnumerable<QuizDTO> CreateAllQuizes()
         {
@@ -76,6 +78,58 @@ namespace Quizzario.Data.Factories
             quizesDTO.Add(a);
             quizesDTO.Add(b);
             return quizesDTO;
+        }
+
+        public IEnumerable<QuizDTO> SearchByName(string name)
+        {
+            IEnumerable<Quiz> quizes = repository.All;
+            List<QuizDTO> quizesDTO = new List<QuizDTO>();
+            quizes = quizes.ToList();
+            foreach (var q in quizes)
+            {
+                quizesDTO.Add(CreateQuizByName(q,name));
+          
+            }
+            for(int i=0;i<quizesDTO.Count;i++)
+            {
+                if(quizesDTO[i]==null)
+                {
+                    quizesDTO.RemoveAt(i);
+                }
+            }
+            return quizesDTO;
+        }
+
+        private QuizDTO CreateQuizByName(Quiz q, string name)
+        {
+            if (q == null)
+                return null;
+            if (name != q.Title)
+                return null;
+            string id = q.Id;
+            string title = q.Title;
+            string userId = q.ApplicationUserId;
+            string filePath = q.FilePath;
+
+            ApplicationUserDTO user = userFactory.Create(userId);
+            //if (user == null || title == null || filePath == null)
+            //  return null;
+            DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
+            QuizDTO quizDTO = new QuizDTO
+            {
+                Id = id,
+                Title = title,
+                ApplicationUserId = "1",
+                QuizSettingsId = "1",
+                QuizType = type,
+                FilePath = filePath,
+                ApplicationUser = user,
+                //AssignedUsers,
+                //Scores,
+                //QuizSettings = 
+                //TO DO 
+            };
+            return quizDTO;
         }
 
         private QuizDTO CreateQuiz(Quiz quiz)

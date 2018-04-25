@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Quizzario.BusinessLogic.Services
 {
     public class QuizService : IQuizService
@@ -22,6 +23,12 @@ namespace Quizzario.BusinessLogic.Services
         public IEnumerable<QuizDTO> GetAllQuizes()
         {         
             IEnumerable<QuizDTO> quizes = factory.CreateAllQuizes();
+            return quizes;
+        }
+
+        public IEnumerable<QuizDTO> SearchByName(string name)
+        {
+            IEnumerable<QuizDTO> quizes = factory.SearchByName(name);
             return quizes;
         }
     }

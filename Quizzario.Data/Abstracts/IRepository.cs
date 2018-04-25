@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Quizzario.Data.DTOs;
+using System.Collections.Generic;
 
 namespace Quizzario.Data.Abstracts
 {

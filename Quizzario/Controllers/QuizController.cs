@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Quizzario.Services;
 using Quizzario.BusinessLogic.Abstract;
 using Quizzario.Models.QuizViewModels;
+using Quizzario.Data.DTOs;
 
 namespace Quizzario.Controllers
 {
@@ -21,6 +22,7 @@ namespace Quizzario.Controllers
 
         public ViewResult List(int p = 1)
         {
+
             PagingInfoService pagingInfoService = new PagingInfoService();
             var quizesCollection = quizService.GetAllQuizes();
 
@@ -36,5 +38,41 @@ namespace Quizzario.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public ViewResult Searching()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult Searching(SearchingModel searchingModel, string returnUrl = null, int p=1)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            string title = "User's 1 Quiz";
+            PagingInfoService pagingInfoService = new PagingInfoService();
+            var quizesCollection = quizService.SearchByName(searchingModel.Name);
+            if (quizesCollection.ElementAt(0) == null)
+            {
+                return View("SearchingByName");
+            }
+            else
+            {
+                SearchingByNameModel model = new SearchingByNameModel
+                {
+                    Quizes = quizesCollection.
+                   OrderBy(q => q.Title).
+                   Skip((p - 1) * PageSize).
+                   Take(PageSize),
+                    PagingInfo = pagingInfoService.GetMetaData(quizesCollection.Count(),
+               p, PageSize)
+                };
+
+                return View("SearchingByName", model);
+            }
+        }
+
     }
+
 }

@@ -7,5 +7,6 @@ namespace Quizzario.Data.Abstracts
     {
         QuizDTO Create(string id);
         IEnumerable<QuizDTO> CreateAllQuizes();
+        IEnumerable<QuizDTO> SearchByName(string name);
     }
 }

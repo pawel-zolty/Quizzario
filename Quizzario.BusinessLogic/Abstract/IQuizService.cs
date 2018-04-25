@@ -11,5 +11,6 @@ namespace Quizzario.BusinessLogic.Abstract
     public interface IQuizService
     {
         IEnumerable<QuizDTO> GetAllQuizes();
+        IEnumerable<QuizDTO> SearchByName(string name);
     }
 }

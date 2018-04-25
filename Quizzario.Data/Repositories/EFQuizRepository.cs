@@ -26,5 +26,18 @@ namespace Quizzario.Data.Repositories
                 Where(q => q.Id.Equals(id)).
                 FirstOrDefault();
         }
+        public Quiz GetByType(QuizType quizType)
+        {
+            return context.Quizes.ToList<Quiz>().
+                Where(q => q.QuizType.Equals(quizType)).
+                FirstOrDefault();
+        }
+        public Quiz GetByTitle(string title)
+        {
+            return context.Quizes.ToList<Quiz>().
+               Where(q => q.Title.Equals(title)).
+               FirstOrDefault();
+        }
+
     }
 }
