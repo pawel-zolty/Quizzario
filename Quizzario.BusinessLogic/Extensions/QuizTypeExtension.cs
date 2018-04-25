@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Quizzario.Data.Extensions
+﻿namespace Quizzario.BusinessLogic.Extensions
 {
     public static class QuizTypeExtension
     {
-        public static DTOs.QuizType? ToDTOQuizType(this Entities.QuizType? value)
+        public static BusinessLogic.DTOs.QuizType? ToDTOQuizType(this Data.Entities.QuizType? value)
         {
             if (value == null)
                 return null;

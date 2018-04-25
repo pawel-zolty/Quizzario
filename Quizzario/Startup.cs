@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
@@ -47,8 +43,8 @@ namespace Quizzario
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             //factories
-            services.AddScoped<Data.Abstracts.IQuizDTOFactory, Data.Factories.QuizDTOFactory>();
-            services.AddScoped<Data.Abstracts.IApplicationUserDTOFactory, Data.Factories.ApplicationUserDTOFactory>();
+            services.AddScoped<BusinessLogic.Abstracts.IQuizDTOFactory, BusinessLogic.Factories.QuizDTOFactory>();
+            services.AddScoped<BusinessLogic.Abstracts.IApplicationUserDTOFactory, BusinessLogic.Factories.ApplicationUserDTOFactory>();
 
             //services
             services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();

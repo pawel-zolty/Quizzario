@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Quizzario.Data.DTOs
+namespace Quizzario.BusinessLogic.DTOs
 {
     public class ApplicationUserDTO
     {

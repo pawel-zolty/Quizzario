@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Quizzario.Data.Abstracts;
-using Quizzario.Data.DTOs;
+﻿using Quizzario.Data.Abstracts;
+using Quizzario.BusinessLogic.Abstracts;
+using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
 
-namespace Quizzario.Data.Factories
+namespace Quizzario.BusinessLogic.Factories
 {
     public class ApplicationUserDTOFactory : IApplicationUserDTOFactory
     {

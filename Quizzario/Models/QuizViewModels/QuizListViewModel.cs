@@ -1,4 +1,4 @@
-﻿using Quizzario.Data.DTOs;
+﻿using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
 
 namespace Quizzario.Models.QuizViewModels

@@ -1,5 +1,3 @@
-using System;
-
 namespace Quizzario.Models
 {
     public class ErrorViewModel

@@ -288,7 +288,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstracts\IQuizDTOFactory.cs" />
     <Compile Include="Abstracts\IRepository.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="EFDBInitializer.cs" />
@@ -297,10 +296,6 @@
     <Compile Include="Entities\Quiz.cs" />
     <Compile Include="Entities\QuizSettings.cs" />
     <Compile Include="Entities\Score.cs" />
-    <Compile Include="Extensions\QuizTypeExtension.cs" />
-    <Compile Include="Factories\ApplicationUserDTOFactory.cs" />
-    <Compile Include="Factories\QuizDTOFactory.cs" />
-    <Compile Include="Abstracts\IApplicationUserDTOFactory.cs" />
     <Compile Include="Migrations\20180424174644_Migration_AddDesccirptionToQuiz.cs" />
     <Compile Include="Migrations\20180424174644_Migration_AddDesccirptionToQuiz.designer.cs">
       <DependentUpon>20180424174644_Migration_AddDesccirptionToQuiz.cs</DependentUpon>

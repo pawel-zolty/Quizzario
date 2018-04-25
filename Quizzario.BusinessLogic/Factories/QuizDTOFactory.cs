@@ -1,12 +1,14 @@
-﻿using Quizzario.Data.Extensions;
+﻿using Quizzario.BusinessLogic.Extensions;
+using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.Data.Abstracts;
-using Quizzario.Data.DTOs;
+using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace Quizzario.Data.Factories
+
+namespace Quizzario.BusinessLogic.Factories
 {
     public class QuizDTOFactory : IQuizDTOFactory
     {

@@ -1,10 +1,5 @@
-﻿using Quizzario.BusinessLogic.Models;
-using Quizzario.Data.DTOs;
-using System;
+﻿using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizzario.BusinessLogic.Abstract
 {

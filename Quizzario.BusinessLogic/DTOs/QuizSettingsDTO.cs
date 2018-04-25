@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Quizzario.Data.DTOs
+namespace Quizzario.BusinessLogic.DTOs
 {
     public class QuizSettingsDTO
     {

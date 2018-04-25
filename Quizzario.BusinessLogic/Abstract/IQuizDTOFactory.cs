@@ -1,7 +1,7 @@
-﻿using Quizzario.Data.DTOs;
+﻿using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
 
-namespace Quizzario.Data.Abstracts
+namespace Quizzario.BusinessLogic.Abstracts
 {
     public interface IQuizDTOFactory
     {

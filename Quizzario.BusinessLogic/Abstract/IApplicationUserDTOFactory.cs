@@ -1,6 +1,6 @@
-﻿using Quizzario.Data.DTOs;
+﻿using Quizzario.BusinessLogic.DTOs;
 
-namespace Quizzario.Data.Abstracts
+namespace Quizzario.BusinessLogic.Abstracts
 {
     public interface IApplicationUserDTOFactory
     {

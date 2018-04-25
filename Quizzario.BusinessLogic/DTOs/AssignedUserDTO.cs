@@ -1,4 +1,4 @@
-﻿namespace Quizzario.Data.DTOs
+﻿namespace Quizzario.BusinessLogic.DTOs
 {
     public enum AssignType
     {
