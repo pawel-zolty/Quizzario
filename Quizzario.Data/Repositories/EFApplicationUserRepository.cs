@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Quizzario.Data.Repositories
 {
-    public class EFApplicationUserRepository : IRepository<ApplicationUser>
+    public class EFApplicationUserRepository : IApplicationUserRepository
     {
         private ApplicationDbContext context;
 
@@ -15,7 +15,7 @@ namespace Quizzario.Data.Repositories
             context = new ApplicationDbContext(options);
         }
 
-        public IEnumerable<ApplicationUser> All
+        public IEnumerable<ApplicationUser> Users
         {
             get { return context.Users; }
         }

@@ -6,5 +6,6 @@ namespace Quizzario.BusinessLogic.Abstract
     public interface IQuizService
     {
         IEnumerable<QuizDTO> GetAllUserQuizes(string userId);
+        IEnumerable<QuizDTO> GetUserFavouriteQuizes(string userId);        
     }
 }

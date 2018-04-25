@@ -7,9 +7,9 @@ namespace Quizzario.BusinessLogic.Factories
 {
     public class ApplicationUserDTOFactory : IApplicationUserDTOFactory
     {
-        private IRepository<ApplicationUser> repository;
+        private IApplicationUserRepository repository;
 
-        public ApplicationUserDTOFactory(IRepository<ApplicationUser> repository)
+        public ApplicationUserDTOFactory(IApplicationUserRepository repository)
         {
             this.repository = repository;
         }

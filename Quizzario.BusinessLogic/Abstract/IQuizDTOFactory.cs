@@ -7,5 +7,6 @@ namespace Quizzario.BusinessLogic.Abstracts
     {
         QuizDTO Create(string id);
         IEnumerable<QuizDTO> CreateAllUserQuizes(string userId);
+        IEnumerable<QuizDTO> CreateUserFavouriteQuizes(string userId);        
     }
 }

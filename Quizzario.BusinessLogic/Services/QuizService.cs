@@ -14,6 +14,12 @@ namespace Quizzario.BusinessLogic.Services
             this.factory = factory;
         }
 
+        public IEnumerable<QuizDTO> GetUserFavouriteQuizes(string userId)
+        {
+            IEnumerable<QuizDTO> quizes = factory.CreateUserFavouriteQuizes(userId);
+            return quizes;
+        }
+
         public IEnumerable<QuizDTO> GetAllUserQuizes(string userId)
         {         
             IEnumerable<QuizDTO> quizes = factory.CreateAllUserQuizes(userId);

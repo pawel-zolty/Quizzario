@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Quizzario.Data.Repositories
 {
-    public class EFQuizRepository : IRepository<Quiz>
+    public class EFQuizRepository : IQuizRepository
     {
         private ApplicationDbContext context;
 
@@ -15,7 +15,7 @@ namespace Quizzario.Data.Repositories
             context = new ApplicationDbContext(options);
         }
 
-        public IEnumerable<Quiz> All
+        public IEnumerable<Quiz> Quizes
         {
             get { return context.Quizes; }
         }

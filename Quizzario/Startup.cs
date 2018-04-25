@@ -50,10 +50,12 @@ namespace Quizzario
             services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();
 
             //repos
-            services.AddScoped<Data.Abstracts.IRepository<Data.Entities.Quiz>,
+            services.AddScoped<Data.Abstracts.IQuizRepository,
                 Data.Repositories.EFQuizRepository>();
-            services.AddScoped<Data.Abstracts.IRepository<Data.Entities.ApplicationUser>,
+            services.AddScoped<Data.Abstracts.IApplicationUserRepository,
                 Data.Repositories.EFApplicationUserRepository>();
+            services.AddScoped<Data.Abstracts.IAssignedRepository,
+                Data.Repositories.EFAssignedRepository>();
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -94,6 +96,17 @@ namespace Quizzario
                     name: "MyQuizListPage", 
                     template: "Quiz/List/Page{p}",
                     defaults: new { controller = "Quiz", action = "List"  },
+                    constraints: new { p = @"\d+" }
+                    );
+                routes.MapRoute(
+                    name: "FavouriteList",
+                    template: "Quiz/Favourite",
+                    defaults: new { controller = "Quiz", action = "Favourite", p = 1 }
+                    );
+                routes.MapRoute(
+                    name: "FavouriteListPage",
+                    template: "Quiz/Favourite/Page{p}",
+                    defaults: new { controller = "Quiz", action = "Favourite" },
                     constraints: new { p = @"\d+" }
                     );
                 routes.MapRoute(
