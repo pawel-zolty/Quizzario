@@ -5,6 +5,7 @@ using Quizzario.Services;
 using System.Security.Claims;
 using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Quizzario.BusinessLogic.DTOs;
 
 namespace Quizzario.Controllers
 {
@@ -43,6 +44,12 @@ namespace Quizzario.Controllers
             };
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ViewResult AddToFavourite(QuizDTO model)
+        {
+            return null;
         }
 
         public IActionResult Index(int p = 1)

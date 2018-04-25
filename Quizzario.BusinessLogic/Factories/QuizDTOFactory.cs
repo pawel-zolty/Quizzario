@@ -37,26 +37,30 @@ namespace Quizzario.BusinessLogic.Factories
             IEnumerable<string> userFavouriteQuizesIds =
                 assignedRepository.GetUserAssigns(userId).
                 Where(q => q.AssignType == Data.Entities.AssignType.Favourite).
-                Select(q => q.ApplicationUserId);
-            
+                Select(q => q.Id);
+            foreach (var v in userFavouriteQuizesIds)
+            {
+                var cos = v;
+            }
             if (userFavouriteQuizesIds.ToList().Count == 0)
                 return quizesDTO;
+            IEnumerable<Quiz> quizes2 = quizRepository.Quizes.ToList();
             foreach(var v in quizRepository.Quizes)
             {
-                var a = v.ApplicationUserId;
+                var cos = v.Id;
             }
+            IEnumerable <Quiz> quizes = quizRepository.Quizes.
+                Where(
+                    q => userFavouriteQuizesIds.
+                    Contains(q.Id)
+                );
 
-            IEnumerable<Quiz> quizes = quizRepository.Quizes.
-                Where(q => 
-                    userFavouriteQuizesIds.
-                    Any(qid => qid.Equals(q.ApplicationUserId))
-                );            
             quizes = quizes.ToList();
             foreach (var q in quizes)
             {
                 quizesDTO.Add(CreateQuiz(q));
             }
-            AddStaticMockData(quizesDTO);
+            //AddStaticMockData(quizesDTO);
             return quizesDTO;
         }
 
