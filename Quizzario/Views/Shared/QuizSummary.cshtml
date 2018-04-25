@@ -1,8 +1,33 @@
 ﻿@model Quizzario.BusinessLogic.DTOs.QuizDTO
-
+    <!--
 <div class="well">
     <h3>
         <strong>@Model.Title</strong>
         <span class="pull-right label label-primary">@Model.QuizType </span>
     </h3>
+</div>
+-->
+<div class="row py-2 mb-2 -quizes-card">
+    <div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
+        <img class="img-fluid" src="http://via.placeholder.com/300x300" />
+    </div>
+    <div class="col">
+        <h5 class="-quizes-card-title">@Model.Title</h5>
+        <p class="-quizes-card-description">@Model.Description</p>
+        <div class="row align-bottom">
+            <div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>1230 times</div>
+            <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>@Model.CreationDate</div>
+            <div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>5430</div>
+        </div>
+    </div>
+    <div>
+        <div class="-quizes-card-data"
+             data-title = "@Model.Title"
+             data-description = "@Model.Description"
+             data-type = "@Model.QuizType"
+             data-date-created = "@Model.CreationDate"
+             data-last-edited = "@Model.CreationDate"
+             data-image-src="http://via.placeholder.com/300x300">
+        </div>
+    </div>
 </div>

@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse -navigation-collapse" id="-sidemenu-collapse">
                 <ul class="nav navbar-nav flex-column">
                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
-                        <a asp-controller="Quizes" asp-action="Index" class="nav-link">
+                        <a asp-controller="Quizes" asp-action="MyQuizes" class="nav-link">
                             <i class="fas fa-fw fa-file"></i>
                             <span class="ml-1">My quizes</span>
                         </a>

@@ -1,16 +1,71 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Quizzario.BusinessLogic.Abstract;
+using Quizzario.Services;
+using System.Security.Claims;
+using Quizzario.Models.QuizViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Quizzario.Controllers
 {
+    [Authorize]
     public class QuizesController : Controller
     {
-        public IActionResult Index()
+        public int PageSize = 2;
+        private IQuizService quizService;
+        private PagingInfoService pagingInfoService = new PagingInfoService();
+
+        public QuizesController(IQuizService quizService)
         {
-            return View();
+            this.quizService = quizService;
+        }
+
+        public ViewResult MyQuizes(int p = 1)
+        {
+            QuizListViewModel model = CreateQuizViewModelWithPagination(p);
+            return View(model);
+        }
+
+        public ViewResult Favourite(int p = 1)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var quizesCollection = quizService.GetUserFavouriteQuizes(userId);
+
+            QuizListViewModel model = new QuizListViewModel
+            {
+                Quizes = quizesCollection.
+                    OrderBy(q => q.Title).
+                    Skip((p - 1) * PageSize).
+                    Take(PageSize),
+                PagingInfo = pagingInfoService.GetMetaData(quizesCollection.Count(),
+                p, PageSize)
+            };
+
+            return View(model);
+        }
+
+        public IActionResult Index(int p = 1)
+        {
+            QuizListViewModel model = CreateQuizViewModelWithPagination(p);
+            return View(model);
+        }
+
+        private QuizListViewModel CreateQuizViewModelWithPagination(int p)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var quizesCollection = quizService.GetAllUserQuizes(userId);
+
+            QuizListViewModel model = new QuizListViewModel
+            {
+                Quizes = quizesCollection.
+                    OrderBy(q => q.Title).
+                    Skip((p - 1) * PageSize).
+                    Take(PageSize),
+                PagingInfo = pagingInfoService.GetMetaData(quizesCollection.Count(),
+                p, PageSize)
+            };
+            return model;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public string QuizSettingsId { get; set; }
         public QuizType? QuizType { get; set; }
         public string FilePath { get; set; }
-        public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }

@@ -78,39 +78,39 @@ namespace Quizzario.BusinessLogic.Factories
         {
             var x = new QuizDTO
             {
-                Title = "Cos1",
-                Id = "1",
-                FilePath = "xd"
+                Title = "Quiz1",
+                Description = "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
+                CreationDate = "1996.01.11"
             };
             var y = new QuizDTO
             {
-                Title = "Cos2",
-                Id = "1",
-                FilePath = "xd"
+                Title = "Quiz2",
+                Description = "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
+                CreationDate = "2000.01.11"
             };
             var z = new QuizDTO
             {
-                Title = "Cos3",
-                Id = "1",
-                FilePath = "xd"
+                Title = "Quiz3",
+                Description = "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
+                CreationDate = "2011.01.11"
             };
             var o = new QuizDTO
             {
-                Title = "Cos4",
-                Id = "1",
-                FilePath = "xd"
+                Title = "Quiz4",
+                Description = "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
+                CreationDate = "2016.01.11"
             };
             var a = new QuizDTO
             {
-                Title = "Cos5",
-                Id = "1",
-                FilePath = "xd"
+                Title = "Quiz5",
+                Description = "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
+                CreationDate = "1990.01.11"
             };
             var b = new QuizDTO
             {
-                Title = "Cos6",
-                Id = "1",
-                FilePath = "xd"
+                Title = "Quiz6",
+                Description = "6 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
+                CreationDate = "2006.01.11"
             };
             quizesDTO.Add(x);
             quizesDTO.Add(y);
@@ -145,7 +145,7 @@ namespace Quizzario.BusinessLogic.Factories
                 QuizType = type,
                 FilePath = filePath,
                 ApplicationUser = user,
-                CreationDate = creationDate
+                CreationDate = creationDate.ToString()
                 //AssignedUsers,
                 //Scores,
                 //QuizSettings = 

@@ -89,24 +89,24 @@ namespace Quizzario
             {
                 routes.MapRoute(
                     name: "MyQuizList", 
-                    template: "Quiz/List",
-                    defaults: new { controller = "Quiz", action = "List", p = 1}
+                    template: "Quizes/MyQuizes",
+                    defaults: new { controller = "Quizes", action = "MyQuizes", p = 1}
                     );
                 routes.MapRoute(
                     name: "MyQuizListPage", 
-                    template: "Quiz/List/Page{p}",
-                    defaults: new { controller = "Quiz", action = "List"  },
+                    template: "Quizes/MyQuizes/Page{p}",
+                    defaults: new { controller = "Quizes", action = "MyQuizes" },
                     constraints: new { p = @"\d+" }
                     );
                 routes.MapRoute(
                     name: "FavouriteList",
-                    template: "Quiz/Favourite",
-                    defaults: new { controller = "Quiz", action = "Favourite", p = 1 }
+                    template: "Quizes/Favourite",
+                    defaults: new { controller = "Quizes", action = "Favourite", p = 1 }
                     );
                 routes.MapRoute(
                     name: "FavouriteListPage",
-                    template: "Quiz/Favourite/Page{p}",
-                    defaults: new { controller = "Quiz", action = "Favourite" },
+                    template: "Quizes/Favourite/Page{p}",
+                    defaults: new { controller = "Quizes", action = "Favourite" },
                     constraints: new { p = @"\d+" }
                     );
                 routes.MapRoute(
