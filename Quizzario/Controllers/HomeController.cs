@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Quizzario.Models;
 using Microsoft.AspNetCore.Identity;
+using Quizzario.Data.Entities;
 
 namespace Quizzario.Controllers
 {
@@ -19,7 +20,7 @@ namespace Quizzario.Controllers
 
         public IActionResult Index()
         {
-            if (!_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Quizes");
+            if (_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Quizes");
             return View();
         }
     }
