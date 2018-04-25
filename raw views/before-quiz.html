@@ -1,0 +1,199 @@
+<!-- Stems from: basic-template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.flatly.min.css">
+	<!-- Additional stylesheets begin -->
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/before-quiz.css">
+	<!-- Additional stylesheets end -->
+</head>
+<body>
+	<nav class="container-fluid" id="-navigation">
+		<!-- Topmenu begin -->
+		<div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
+			<a class="navbar-brand" href="#">Quizzario</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+	 
+			<div class="collapse navbar-collapse -navigation-collapse">
+				<form class="form-inline my-2 my-md-0 mr-auto">
+					<div class="input-group">
+						<input class="form-control" type="text" placeholder="Search">
+						<span class="input-group-btn">
+							<button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+						</span>
+					</div>
+				</form>
+				<div class="navbar-nav navbar-right flex-row">
+					<a class="nav-link">Sign in</a>
+					<span class="navbar-text text-dark mx-1 mx-md-0">or</span>
+					<a class="nav-link">Sign up</a>
+				</div>
+			</div>
+		</div>
+		<!-- Topmenu end -->
+	 
+		<!-- Sidemenu begin -->
+		<div class="navbar fixed-top navbar-dark bg-dark" id="-sidemenu">
+			<div class="collapse navbar-collapse -navigation-collapse" id="-sidemenu-collapse">
+				<ul class="nav navbar-nav flex-column">
+					<li class="nav-item"><a class="nav-link" href="#">
+						<i class="fas fa-fw fa-plus"></i>
+						<span class="ml-1">Create a quiz</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">
+						<i class="fas fa-fw fa-heart"></i>
+						<span class="ml-1">Favourite quizes</span>
+					</a></li>
+					<li class="nav-item active"><a class="nav-link" href="#">
+						<i class="fas fa-fw fa-file"></i>
+						<span class="ml-1">My quizes</span>
+					</a></li>
+					<li class="-sidemenu-hr-wrapper"><hr /></li>
+					<li class="nav-item"><a class="nav-link" href="#">
+						<i class="fas fa-fw fa-cog"></i>
+						<span class="ml-1">Profile settings</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">
+						<i class="fas fa-fw fa-sign-out-alt"></i>
+						<span class="ml-1">Logout</span>
+					</a></li>
+				</ul>
+				
+				<a class="navbar-text mt-2 text-white float-right" id="-sidemenu-collapse-button">
+					<i class="fas fa-fw fa-angle-double-left" id="-sidemenu-collapse-left"></i>
+					<i class="fas fa-fw fa-angle-double-right d-none" id="-sidemenu-collapse-right"></i>
+				</a>
+			</div>
+		</div>
+		<!-- Sidemenu end -->
+	</nav>
+   
+	<div class="container-fluid -content-with-sidemenu" id="-content-wrapper">
+		<!-- Content begin -->
+		<div class="row px-3 py-3 mx-0">
+			<div class="col-12">
+				<div class="row mb-1 mb-md-2">
+					<div class="col-12">
+						<h1 class="d-inline">Some exam title</h1> 
+						<p class="font-italic d-inline ml-1 ml-md-3">by <b>Mike</b></p>
+						
+						<div class="float-md-right">
+							<button class="btn btn-outline-primary my-1 mr-md-1">
+								<i class="fas fa-fw fa-share"></i>
+								<span class="ml-1">Share</span>
+							</button>
+							<button class="btn btn-outline-danger my-1 mr-md-3">
+								<i class="fas fa-fw fa-heart"></i>
+								<span class="ml-1">Favourite</span>
+							</button>
+							<button class="btn btn-success my-1 mr-md-1">
+								<i class="fas fa-fw fa-edit"></i>
+								<span class="ml-1">Edit</span>
+							</button>
+							<button class="btn btn-dark my-1 ">
+								<i class="fas fa-fw fa-trash"></i>
+								<span class="ml-1">Remove</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="text-center float-md-left" id="-before-quiz-left-panel">
+							<span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: </span>
+							<span>2</span>
+							<button class="btn btn-success my-1 btn-block">
+								<i class="fas fa-fw fa-play"></i>
+								<span class="ml-1">Let's begin</span>
+							</button>
+							<button class="btn btn-outline-primary my-1 btn-block">
+								<i class="fas fa-fw fa-arrow-left"></i>
+								<span class="ml-1">Back</span>
+							</button>
+						</div>
+						<div id="-before-quiz-right-panel">
+							<div class="row mb-1 mb-md-2">
+								<div class="col-12">
+									<span class="mr-3 mr-md-4">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Type: </span>
+										<span>Exam</span>
+									</span>
+									<span class="mr-3 mr-md-4">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
+										<span>2</span>
+									</span>
+									<span class="mr-3 mr-md-4">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
+										<span>5 minutes</span>
+									</span>
+								</div>
+							</div>
+							<div class="row mb-1 mb-md-2">
+								<div class="col-12 text-justify">
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt sapien lacus, pretium maximus tellus suscipit eu. Nulla tortor nisl, lobortis nec faucibus ac, luctus id neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec dapibus dignissim turpis, at malesuada nunc pretium eu. Integer tempus, nunc a lacinia suscipit, libero risus condimentum ipsum, a ullamcorper nulla urna non dolor. In magna arcu, fringilla vel lacus at, dapibus finibus elit. Suspendisse ut ante a urna vehicula imperdiet. Fusce ut volutpat mi. Aenean diam orci, dignissim vitae risus ac, gravida tincidunt nisi. Morbi rhoncus nulla at bibendum condimentum. Aliquam vestibulum erat eget purus mollis pharetra. Mauris porttitor eros a arcu tempus egestas.
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<h5>Attempt history</h5>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
+										<span>1</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
+										<span>28</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
+										<span>28</span>
+									</p>
+								</div>
+								<div class="col-6">
+									<h5>Details</h5>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
+										<span>March 5, 2018</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Date created: </span>
+										<span>March 2, 2018</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Total number of questions: </span>
+										<span>40	</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Total number of attempts: </span>
+										<span>432</span>
+									</p>
+									<p class="my-0">
+										<span class="text-secondary font-weight-light font-italic mr-md-1">Added to favourite: </span>
+										<span>23 times</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Content end -->
+	</div>
+   
+   
+   
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Additional scripts begin -->
+<script src="js/custom.js"></script>
+<!-- Additional scripts end -->
+ 
+</body>
+</html>

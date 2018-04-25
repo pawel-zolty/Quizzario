@@ -1,36 +1,53 @@
 ﻿@model RegisterViewModel
+
 @{
     ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LayoutSimple.cshtml";
 }
 
-<h2>@ViewData["Title"]</h2>
+@section AdditionalStylesheets
+{
+    <link rel="stylesheet" href="~/css/login.css">
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-default">Register</button>
-        </form>
+@section AdditionalScripts
+{
+    <script src="~/js/custom.js"></script>
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-center mt-md-4">
+        <div class="col-xl-4 col-lg-6 col-md-8 bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px">
+            <button class="btn btn-block btn-info py-md-2">Register with Facebook</button>
+            <button class="btn btn-block btn-danger py-md-2">Register with Google</button>
+            <hr>
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="needs-validation" id="-register-form" method="post" novalidate>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Email" for="-register-form-email">E-mail</label>
+                    <input asp-for="Email" type="text" class="form-control" id="-register-form-email" placeholder="E-mail" required>
+                    <div class="invalid-feedback">
+                        Please provide a username.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" for="-register-form-password">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" id="-register-form-password" placeholder="Password" required>
+                    <div class="invalid-feedback">
+                        Please provide a password.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" for="-register-form-confirm-password">Confirm password</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" id="-register-form-confirm-password" placeholder="Confirm password" required>
+                    <div class="invalid-feedback">
+                        Passwords must match.
+                    </div>
+                </div>
+
+                <button class="btn btn-success btn-block py-md-2 mb-2" type="submit">Register</button>
+
+            </form>
+        </div>
     </div>
 </div>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
