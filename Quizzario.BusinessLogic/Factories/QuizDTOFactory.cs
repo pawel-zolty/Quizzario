@@ -71,6 +71,25 @@ namespace Quizzario.BusinessLogic.Factories
             return quizesDTO;
         }
 
+        public void AddQuizToFavourite(string userId, string quizId)
+        {
+            var quiz = quizRepository.GetById(userId);
+            var user = userFactory.CreateUserWithId(userId);
+            if (quiz == null || user == null)
+                return;
+            assignedRepository.AddFavouriteAssign(userId, quizId);
+
+        }
+
+        public void RemoveQuizFromFavourite(string userId, string quizId)
+        {
+            var quiz = quizRepository.GetById(userId);
+            var user = userFactory.CreateUserWithId(userId);
+            if (quiz == null || user == null)
+                return;
+            assignedRepository.RemoveFavouriteAssign(userId, quizId);
+        }
+
         private static void AddStaticMockData(List<QuizDTO> quizesDTO)
         {
             var x = new QuizDTO
@@ -128,7 +147,7 @@ namespace Quizzario.BusinessLogic.Factories
             string filePath = quiz.FilePath;
             DateTime creationDate = quiz.CreationDate;
 
-            ApplicationUserDTO user = userFactory.Create(userId);
+            ApplicationUserDTO user = userFactory.CreateUserWithId(userId);
             //if (user == null || title == null || filePath == null)
             //  return null;
             DTOs.QuizType? type = quiz.QuizType.ToDTOQuizType();

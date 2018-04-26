@@ -47,9 +47,17 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
-        public ViewResult AddToFavourite(QuizDTO model)
+        public void AddToFavourite(string quizId)
         {
-            return null;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            quizService.AddQuizToFavourite(userId, quizId);
+        }
+
+        [HttpPost]
+        public void RemoveFromFavourite(string quizId)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            quizService.RemoveQuizFromFavourite(userId, quizId);
         }
 
         public IActionResult Index(int p = 1)
