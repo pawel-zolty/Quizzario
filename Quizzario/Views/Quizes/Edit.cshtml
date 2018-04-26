@@ -1,0 +1,14 @@
+﻿@model Quizzario.BusinessLogic.DTOs.QuizDTO
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Quiz/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Edit","Quizes"))
+{
+    @Html.EditorForModel()
+    <input type="submit" value="Save"  />
+    @Html.ActionLink("Discard and back to list", "EditQuiz")
+}

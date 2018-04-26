@@ -1,4 +1,5 @@
 ﻿using Quizzario.BusinessLogic.DTOs;
+using Quizzario.Data.Entities;
 using System.Collections.Generic;
 
 namespace Quizzario.BusinessLogic.Abstracts
@@ -10,5 +11,9 @@ namespace Quizzario.BusinessLogic.Abstracts
         IEnumerable<QuizDTO> CreateUserFavouriteQuizes(string userId);
         void AddQuizToFavourite(string userId, string quizId);
         void RemoveQuizFromFavourite(string userId, string quizId);
+        IEnumerable<QuizDTO> SearchByName(string name);
+        IEnumerable<QuizDTO> GetAllQuizes();
+        IEnumerable<QuizDTO> Quizes { get; }
+        void SaveQuiz(QuizDTO quiz);
     }
 }
