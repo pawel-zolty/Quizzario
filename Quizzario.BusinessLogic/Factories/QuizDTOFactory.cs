@@ -194,13 +194,19 @@ namespace Quizzario.BusinessLogic.Factories
                 quizesDTO.Add(CreateQuizByName(q, name));
 
             }
-            for (int i = 0; i < quizesDTO.Count; i++)
+            
+            for (int j = 0; j < quizesDTO.Count; j++)
             {
-                if (quizesDTO[i] == null)
+                
+                if (quizesDTO[j] == null)
                 {
-                    quizesDTO.RemoveAt(i);
+                    quizesDTO.RemoveAt(j);
+                    j--;
+                   
                 }
+             
             }
+            
             return quizesDTO;
         }
 
@@ -215,7 +221,7 @@ namespace Quizzario.BusinessLogic.Factories
             string userId = q.ApplicationUserId;
             string filePath = q.FilePath;
 
-            ApplicationUserDTO user = userFactory.Create(userId);
+            ApplicationUserDTO user = userFactory.CreateUserWithId(userId);
             //if (user == null || title == null || filePath == null)
             //  return null;
             DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
