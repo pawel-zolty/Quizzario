@@ -74,5 +74,29 @@ namespace Quizzario.Controllers
             };
             return model;
         }
+        public ViewResult EditQuiz()
+        {
+            return View(quizService.Quizes);
+        }
+        public ViewResult Edit(string Id)
+        {
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            return View(quizDTO);
+        }
+        [HttpPost]
+        public ActionResult Edit(QuizDTO quizDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                quizService.SaveQuiz(quizDTO);
+                TempData["message"] = string.Format("Zapisano {0}", quizDTO.Title);
+                return RedirectToAction("MyQuizes");
+            }
+            return View(quizDTO);
+        }
+        public ViewResult Create()
+        {
+            return View("Edit", new QuizDTO());
+        }
     }
 }

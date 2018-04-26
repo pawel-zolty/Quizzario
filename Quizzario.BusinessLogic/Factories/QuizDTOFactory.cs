@@ -17,7 +17,7 @@ namespace Quizzario.BusinessLogic.Factories
         private IQuizRepository quizRepository;
         IAssignedRepository assignedRepository;
         private IApplicationUserDTOFactory userFactory;
-        List<QuizDTO> quizesDTO = new List<QuizDTO>();
+ 
        
         public QuizDTOFactory(IQuizRepository quizRepository,
             IAssignedRepository assignedRepository,
@@ -62,16 +62,18 @@ namespace Quizzario.BusinessLogic.Factories
 
         public IEnumerable<QuizDTO> CreateAllUserQuizes(string userId)
         {
-            //IEnumerable<Quiz> quizes = quizRepository.Quizes.
-            //    Where(q => q.ApplicationUserId.Equals(userId));
-            //if (quizes != null)
-            //{
-            //    quizes = quizes.ToList();
-            //    foreach (var q in quizes)
-            //    {
-            //        quizesDTO.Add(CreateQuiz(q));
-            //    }
-            //}
+            
+            IEnumerable<Quiz> quizes = quizRepository.Quizes.
+                Where(q => q.ApplicationUserId.Equals(userId));
+            List<QuizDTO> quizesDTO = new List<QuizDTO>();
+            if (quizes != null)
+            {
+                quizes = quizes.ToList();
+                foreach (var q in quizes)
+                {
+                    quizesDTO.Add(CreateQuiz(q));
+                }
+            }
             AddStaticMockData(quizesDTO);
             return quizesDTO;
         }
@@ -83,7 +85,8 @@ namespace Quizzario.BusinessLogic.Factories
                 Id = "3",
                 Title = "Quiz1",
                 Description = "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
-                CreationDate = "1996.01.11"
+                CreationDate = "1996.01.11",
+                ApplicationUserId = "8ded9b6f-e8a8-425b-a115-c280885e92c1"
             };
             var y = new QuizDTO
             {
@@ -236,6 +239,7 @@ namespace Quizzario.BusinessLogic.Factories
             quiz.QuizSettingsId = quizDTO.QuizSettingsId;
             quiz.Title = quizDTO.Title;
             quiz.Description = quizDTO.Description;
+            quiz.ApplicationUserId = quizDTO.ApplicationUserId;
             quizRepository.SaveQuiz(quiz);
 
            
