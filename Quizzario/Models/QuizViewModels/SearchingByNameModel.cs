@@ -1,8 +1,8 @@
 ﻿using System;
-using Quizzario.Data.DTOs;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Quizzario.BusinessLogic.DTOs;
 
 namespace Quizzario.Models.QuizViewModels
 {

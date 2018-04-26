@@ -107,7 +107,6 @@
     <Compile Include="Extensions\QuizTypeExtension.cs" />
     <Compile Include="Factories\ApplicationUserDTOFactory.cs" />
     <Compile Include="Factories\QuizDTOFactory.cs" />
-    <Compile Include="Models\Quiz.cs" />
     <Compile Include="Models\SearchingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\QuizService.cs" />

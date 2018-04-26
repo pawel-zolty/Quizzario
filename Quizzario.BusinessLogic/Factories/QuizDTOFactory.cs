@@ -6,7 +6,9 @@ using Quizzario.Data.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-
+using Quizzario.Data;
+using Quizzario.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Quizzario.BusinessLogic.Factories
 {
@@ -15,7 +17,8 @@ namespace Quizzario.BusinessLogic.Factories
         private IQuizRepository quizRepository;
         IAssignedRepository assignedRepository;
         private IApplicationUserDTOFactory userFactory;
-
+        List<QuizDTO> quizesDTO = new List<QuizDTO>();
+       
         public QuizDTOFactory(IQuizRepository quizRepository,
             IAssignedRepository assignedRepository,
             IApplicationUserDTOFactory userFactory)
@@ -59,14 +62,16 @@ namespace Quizzario.BusinessLogic.Factories
 
         public IEnumerable<QuizDTO> CreateAllUserQuizes(string userId)
         {
-            IEnumerable<Quiz> quizes = quizRepository.Quizes.
-                Where(q => q.ApplicationUserId.Equals(userId));
-            List<QuizDTO> quizesDTO = new List<QuizDTO>();
-            quizes = quizes.ToList();
-            foreach (var q in quizes)
-            {
-                quizesDTO.Add(CreateQuiz(q));
-            }
+            //IEnumerable<Quiz> quizes = quizRepository.Quizes.
+            //    Where(q => q.ApplicationUserId.Equals(userId));
+            //if (quizes != null)
+            //{
+            //    quizes = quizes.ToList();
+            //    foreach (var q in quizes)
+            //    {
+            //        quizesDTO.Add(CreateQuiz(q));
+            //    }
+            //}
             AddStaticMockData(quizesDTO);
             return quizesDTO;
         }
@@ -75,36 +80,42 @@ namespace Quizzario.BusinessLogic.Factories
         {
             var x = new QuizDTO
             {
+                Id = "3",
                 Title = "Quiz1",
                 Description = "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
                 CreationDate = "1996.01.11"
             };
             var y = new QuizDTO
             {
+                Id = "4",
                 Title = "Quiz2",
                 Description = "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
                 CreationDate = "2000.01.11"
             };
             var z = new QuizDTO
             {
+                Id = "5",
                 Title = "Quiz3",
                 Description = "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
                 CreationDate = "2011.01.11"
             };
             var o = new QuizDTO
             {
+                Id = "6",
                 Title = "Quiz4",
                 Description = "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
                 CreationDate = "2016.01.11"
             };
             var a = new QuizDTO
             {
+                Id = "7",
                 Title = "Quiz5",
                 Description = "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
                 CreationDate = "1990.01.11"
             };
             var b = new QuizDTO
             {
+                Id = "8",
                 Title = "Quiz6",
                 Description = "6 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
                 CreationDate = "2006.01.11"
@@ -150,5 +161,87 @@ namespace Quizzario.BusinessLogic.Factories
             };
             return quizDTO;
         }
+
+        public IEnumerable<QuizDTO> SearchByName(string name)
+        {
+            IEnumerable<Quiz> quizes = quizRepository.Quizes;
+            List<QuizDTO> quizesDTO = new List<QuizDTO>();
+            quizes = quizes.ToList();
+            foreach (var q in quizes)
+            {
+                quizesDTO.Add(CreateQuizByName(q, name));
+
+            }
+            for (int i = 0; i < quizesDTO.Count; i++)
+            {
+                if (quizesDTO[i] == null)
+                {
+                    quizesDTO.RemoveAt(i);
+                }
+            }
+            return quizesDTO;
+        }
+
+        private QuizDTO CreateQuizByName(Quiz q, string name)
+        {
+            if (q == null)
+                return null;
+            if (name != q.Title)
+                return null;
+            string id = q.Id;
+            string title = q.Title;
+            string userId = q.ApplicationUserId;
+            string filePath = q.FilePath;
+
+            ApplicationUserDTO user = userFactory.Create(userId);
+            //if (user == null || title == null || filePath == null)
+            //  return null;
+            DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
+            QuizDTO quizDTO = new QuizDTO
+            {
+                Id = id,
+                Title = title,
+                ApplicationUserId = "1",
+                QuizSettingsId = "1",
+                QuizType = type,
+                FilePath = filePath,
+                ApplicationUser = user,
+                //AssignedUsers,
+                //Scores,
+                //QuizSettings = 
+                //TO DO 
+            };
+            return quizDTO;
+        }
+
+        public IEnumerable<QuizDTO> GetAllQuizes()
+        {
+            IEnumerable<Quiz> quizes = quizRepository.Quizes;
+            List<QuizDTO> quizesDTO = new List<QuizDTO>();
+            quizes = quizes.ToList();
+            foreach (var q in quizes)
+            {
+                quizesDTO.Add(CreateQuiz(q));
+            }
+            AddStaticMockData(quizesDTO);
+            return quizesDTO;
+        }
+
+        public void SaveQuiz(QuizDTO quizDTO)
+        {
+
+
+            Quiz quiz = new Quiz();
+            quiz.Id = quizDTO.Id;
+            quiz.QuizSettingsId = quizDTO.QuizSettingsId;
+            quiz.Title = quizDTO.Title;
+            quiz.Description = quizDTO.Description;
+            quizRepository.SaveQuiz(quiz);
+
+           
+           
+        }
+
+        public IEnumerable<QuizDTO> Quizes => GetAllQuizes();
     }
 }

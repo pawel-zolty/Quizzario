@@ -1,6 +1,7 @@
 ﻿using Quizzario.BusinessLogic.Abstract;
 using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
+using Quizzario.Data.Entities;
 using System.Collections.Generic;
 
 
@@ -10,10 +11,14 @@ namespace Quizzario.BusinessLogic.Services
     {
         private IQuizDTOFactory factory;
 
+     
+
         public QuizService(IQuizDTOFactory factory)
         {
             this.factory = factory;
         }
+
+        public IEnumerable<QuizDTO> Quizes => factory.Quizes;
 
         public IEnumerable<QuizDTO> GetUserFavouriteQuizes(string userId)
         {
@@ -31,6 +36,17 @@ namespace Quizzario.BusinessLogic.Services
         {
             IEnumerable<QuizDTO> quizes = factory.SearchByName(name);
             return quizes;
+        }
+
+        public IEnumerable<QuizDTO> GetAllQuizes()
+        {
+            IEnumerable<QuizDTO> quizes = factory.GetAllQuizes();
+            return quizes;
+        }
+
+        public void SaveQuiz(QuizDTO quiz)
+        {
+            factory.SaveQuiz(quiz);
         }
     }
 }
