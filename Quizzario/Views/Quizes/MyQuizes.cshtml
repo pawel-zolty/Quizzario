@@ -22,6 +22,7 @@
                 <h1>My quizes</h1>
             </div>
             <div class="col-md-4">
+                @* Sorting by select, functionalitites missing *@
                 @*<div class="form-group form-inline float-right">
                         <label for="-quizes-sort-by-select">Sort by</label>
                         <select class="form-control ml-2" id="-quizes-sort-by-select">
@@ -37,12 +38,36 @@
             <div class="col text-justify">
                 @foreach (var quiz in Model.Quizes)
                 {
-                    @Html.Partial("QuizSummary", quiz);
+                    <div class="row py-2 mb-2 -quizes-card">
+                        <div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
+                            <img class="img-fluid" src="http://via.placeholder.com/300x300" />
+                        </div>
+                        <div class="col">
+                            <h5 class="-quizes-card-title">@quiz.Title</h5>
+                            <p class="-quizes-card-description">@quiz.Description</p>
+                            <div class="row align-bottom">
+                                <div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>@* Data missing *@ times</div>
+                                <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>@quiz.CreationDate</div>
+                                <div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>@* Data missing *@</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="-quizes-card-data"
+                                 data-title="@quiz.Title"
+                                 data-description="@quiz.Description"
+                                 data-type="@quiz.QuizType"
+                                 data-date-created="@quiz.CreationDate"
+                                 data-last-edited="@quiz.CreationDate">
+                            </div>
+                        </div>
+                    </div>
                 }
             </div>
         </div>
         <div class="row">
-            <pagination info="@Model.PagingInfo" route="/Quizes/MyQuizes"></pagination>
+            <nav class="w-100 mt-3">
+                <pagination info="@Model.PagingInfo" route="/Quizes/MyQuizes"></pagination>
+            </nav>
         </div>
     </div>
     <div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
@@ -62,9 +87,10 @@
                 </button>
                 <h2 class="mt-2" id="-quizes-right-panel-title"></h2>
 
+                @* Quiz image, functionalities goes here *@
                 @*<p class="text-center">
-                        <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
-                    </p>*@
+                    <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
+                </p>*@
 
                 <p class="my-0">
                     <span class="text-secondary font-weight-light font-italic mr-2">Type: </span>

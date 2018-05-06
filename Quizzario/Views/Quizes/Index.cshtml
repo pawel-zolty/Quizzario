@@ -36,11 +36,11 @@
 		</div>
 		<div class="row">
 			<div class="col text-justify">
-                @foreach (var quiz in Model.Quizes)
-                {
-                    @Html.Partial("QuizSummary", quiz);                    
-                }
-                <!--
+				@foreach (var quiz in Model.Quizes)
+				{
+					@Html.Partial("QuizSummary", quiz);                    
+				}
+				<!--
 				<div class="row py-2 mb-2 -quizes-card">
 					<div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
 						<img class="img-fluid" src="http://via.placeholder.com/300x300" />
@@ -113,12 +113,14 @@
 						</div>
 					</div>
 				</div>
-                -->
+				-->
 			</div>
 		</div>
-        <div class="row">                       
-            <pagination info="@Model.PagingInfo" route="/Quizes/MyQuizes"></pagination>            
-        </div>
+		<div class="row">
+			<nav class="w-100 mt-3">
+				<pagination info="@Model.PagingInfo" route="/Quizes/MyQuizes"></pagination>
+			</nav>
+		</div>
 	</div>
 	<div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
 		<div id="-quizes-right-panel">

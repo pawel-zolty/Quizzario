@@ -13,39 +13,34 @@ namespace Quizzario.Extensions
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             BuildParent(output);
-            if (Info.PreviousPage.Display)
-                AddPreviousPage(output);
+            AddPreviousPage(output, Info.PreviousPage.Display);
 
             AddPageNodes(output);
 
-            if (Info.NextPage.Display)
-                AddNextPage(output);
+            AddNextPage(output, Info.NextPage.Display);
         }
 
         private static void BuildParent(TagHelperOutput output)
         {
             output.TagName = "ul";
-            output.Attributes.Add("class", "pagination");
-            output.Attributes.Add("role", "navigation");
+            output.Attributes.Add("class", "pagination justify-content-center");
             output.Attributes.Add("aria-label", "Pagination");
         }
         
-        private void AddPreviousPage(TagHelperOutput output)
+        private void AddPreviousPage(TagHelperOutput output, bool enabled)
         {
-            var html =
-$@"<li class=""pagination-previous"">
-    <a href=""{Route}/Page{Info.PreviousPage.PageNumber}"" aria-label=""{PreviousPageText} page"">{PreviousPageText} <span class=""show-for-sr"">page</span></a>
-</li>";
+            var html = $@"<li class=""page-item" + (enabled?"":" disabled") + $@""">
+                    <a class=""page-link" + (enabled?"":" bg-light text-secondary") + $@""" href=""{Route}/Page{Info.PreviousPage.PageNumber}"" aria-label=""{PreviousPageText} page"">{PreviousPageText}</a>
+                </li>";
 
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
         }
         
-        private void AddNextPage(TagHelperOutput output)
+        private void AddNextPage(TagHelperOutput output, bool enabled)
         {
-            var html =
-$@"<li class=""pagination-next"">
-    <a href=""{Route}/Page{Info.NextPage.PageNumber}"" aria-label=""{NextPageText} page"">{NextPageText} <span class=""show-for-sr"">page</span></a>
-</li>";
+            var html = $@"<li class=""page-item" + (enabled ? "" : " disabled") + $@""">
+                    <a class=""page-link" + (enabled ? "" : " bg-light text-secondary") + $@""" href=""{Route}/Page{Info.NextPage.PageNumber}"" aria-label=""{NextPageText} page"">{NextPageText}</a>
+                </li>";
 
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
         }
@@ -54,14 +49,9 @@ $@"<li class=""pagination-next"">
         {
             foreach (var infoPage in Info.Pages)
             {
-                string html;
-                if (infoPage.IsCurrent)
-                {
-                    html = $@"<li class=""current""><span class=""show-for-sr"">You're on page</span> {infoPage.PageNumber}</li>";
-                    output.Content.SetHtmlContent(output.Content.GetContent() + html);
-                    continue;
-                }
-                html = $@"<li><a href=""{Route}/Page{infoPage.PageNumber}"" aria-label=""Page {infoPage.PageNumber}"">{infoPage.PageNumber}</a></li>";
+                string html = $@"<li class=""page-item" + (infoPage.IsCurrent?" active":"") + $@""">
+                    <a class=""page-link"" href=""{Route}/Page{infoPage.PageNumber}"" aria-label=""Page {infoPage.PageNumber}"">{infoPage.PageNumber}</a>
+                </li>";
                 output.Content.SetHtmlContent(output.Content.GetContent() + html);
             }
         }
