@@ -30,7 +30,7 @@ namespace Quizzario.Extensions
         private void AddPreviousPage(TagHelperOutput output, bool enabled)
         {
             var html = $@"<li class=""page-item" + (enabled?"":" disabled") + $@""">
-                    <a class=""page-link" + (enabled?"":" bg-light text-secondary") + $@""" href=""{Route}/Page{Info.PreviousPage.PageNumber}"" aria-label=""{PreviousPageText} page"">{PreviousPageText}</a>
+                    <a class=""page-link" + (enabled?"":" bg-light text-secondary") + $@""" href=""{Route}/{Info.PreviousPage.PageNumber}"" aria-label=""{PreviousPageText} page"">{PreviousPageText}</a>
                 </li>";
 
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
@@ -39,7 +39,7 @@ namespace Quizzario.Extensions
         private void AddNextPage(TagHelperOutput output, bool enabled)
         {
             var html = $@"<li class=""page-item" + (enabled ? "" : " disabled") + $@""">
-                    <a class=""page-link" + (enabled ? "" : " bg-light text-secondary") + $@""" href=""{Route}/Page{Info.NextPage.PageNumber}"" aria-label=""{NextPageText} page"">{NextPageText}</a>
+                    <a class=""page-link" + (enabled ? "" : " bg-light text-secondary") + $@""" href=""{Route}/{Info.NextPage.PageNumber}"" aria-label=""{NextPageText} page"">{NextPageText}</a>
                 </li>";
 
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
@@ -50,7 +50,7 @@ namespace Quizzario.Extensions
             foreach (var infoPage in Info.Pages)
             {
                 string html = $@"<li class=""page-item" + (infoPage.IsCurrent?" active":"") + $@""">
-                    <a class=""page-link"" href=""{Route}/Page{infoPage.PageNumber}"" aria-label=""Page {infoPage.PageNumber}"">{infoPage.PageNumber}</a>
+                    <a class=""page-link"" href=""{Route}/{infoPage.PageNumber}"" aria-label=""Page {infoPage.PageNumber}"">{infoPage.PageNumber}</a>
                 </li>";
                 output.Content.SetHtmlContent(output.Content.GetContent() + html);
             }
