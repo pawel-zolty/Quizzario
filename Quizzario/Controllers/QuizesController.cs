@@ -12,7 +12,7 @@ namespace Quizzario.Controllers
     [Authorize]
     public class QuizesController : Controller
     {
-        public int PageSize = 2;
+        public int PageSize = 4;
         private IQuizService quizService;
         private PagingInfoService pagingInfoService = new PagingInfoService();
 
@@ -59,6 +59,11 @@ namespace Quizzario.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             quizService.RemoveQuizFromFavourite(userId, quizId);
         }
+        public ViewResult Summary(string Id)
+        {
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            return View(quizDTO);
+        }
 
         public IActionResult Index(int p = 1)
         {
@@ -104,7 +109,26 @@ namespace Quizzario.Controllers
         }
         public ViewResult Create()
         {
-            return View("Edit", new QuizDTO());
+            return View();
+            //return View("Edit", new QuizDTO());
+        }
+
+        /// <summary>
+        /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Solving()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Full version of action will require passing result data
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Results()
+        {
+            return View();
         }
     }
 }
