@@ -32,7 +32,8 @@ $(function () {
 		);
 		$('#-quizes-right-panel-description').html(
 			$(".-quizes-card-data", this).data('description')
-		);
+        );
+        
 
 		$('#-quizes-right-panel-content').fadeIn(500);
 	});
