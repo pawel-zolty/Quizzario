@@ -59,7 +59,7 @@ $(function () {
 			},
             function (data, status) {
                 if (status === "success") {
-                    button.data('is-favourite',(button.data('is-favourite') === "True" ? "False" : "True");
+                    button.data('is-favourite', button.data('is-favourite') === "True" ? "False" : "True");
                     button.toggleClass("btn-danger");
                     button.toggleClass("btn-outline-danger");
                 }
