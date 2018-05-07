@@ -69,7 +69,7 @@ namespace Quizzario.Controllers
         public ViewResult Searching(SearchingModel searchingModel, string returnUrl = null, int p=1)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            string title = "User's 1 Quiz";
+            // string title = "User's 1 Quiz";
             PagingInfoService pagingInfoService = new PagingInfoService();
             var quizesCollection = quizService.SearchByName(searchingModel.Name);
             if (quizesCollection.ElementAt(0) == null)

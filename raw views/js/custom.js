@@ -84,13 +84,21 @@ $(function () {
 	$('.-question-card-add-new-question').click(function() {
 		$('#-questions').append('\
 			<div class="py-2 px-3 mb-2 -question-card">\
-				<h6>Question <span class="-question-card-index">1</span>. <span class="-question-card-title font-weight-bold">Question title</span></h5>\
+				<h6 class="d-inline">Question <span class="-question-card-index">1</span>. <span class="-question-card-title font-weight-bold">Question title</span></h6>\
+				<button type="button" class="btn btn-sm btn-outline-primary py-0 float-right" data-toggle="button" autocomplete="off">Multiple answers</button>\
 				<fieldset class="form-group pl-2 mb-1">\
 				</fieldset>\
-				<button class="-question-card-add-new-answer btn btn-sm btn-link px-3">Add new answer...</button>\
+				<button type="button" class="-question-card-add-new-answer btn btn-sm btn-link px-3">Add new answer...</button>\
 			</div>\
 		');
 	});
+	
+	/*$('#-questions').on('click', '.-questions-toggle-answer-type', function() {
+		var parent = $(this).parent();
+		parent.find("input[type=radio]").get(0).type = "checkbox";
+	});*/
+	
+	
 
 	$(document).ready(function () {
 		// Clicking on the first card after page load

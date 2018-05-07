@@ -109,7 +109,26 @@ namespace Quizzario.Controllers
         }
         public ViewResult Create()
         {
-            return View("Edit", new QuizDTO());
+            return View();
+            //return View("Edit", new QuizDTO());
+        }
+
+        /// <summary>
+        /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Solving()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Full version of action will require passing result data
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Results()
+        {
+            return View();
         }
     }
 }
