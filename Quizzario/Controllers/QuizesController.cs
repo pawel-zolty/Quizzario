@@ -12,7 +12,7 @@ namespace Quizzario.Controllers
     [Authorize]
     public class QuizesController : Controller
     {
-        public int PageSize = 2;
+        public int PageSize = 4;
         private IQuizService quizService;
         private PagingInfoService pagingInfoService = new PagingInfoService();
 
@@ -58,6 +58,11 @@ namespace Quizzario.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             quizService.RemoveQuizFromFavourite(userId, quizId);
+        }
+        public ViewResult Summary(string Id)
+        {
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            return View(quizDTO);
         }
 
         public IActionResult Index(int p = 1)

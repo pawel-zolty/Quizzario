@@ -32,13 +32,43 @@ $(function () {
 		);
 		$('#-quizes-right-panel-description').html(
 			$(".-quizes-card-data", this).data('description')
-        );
-        
+		);
+
+		var link = $('#-view-link').attr("href");
+		link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+		$('#-view-link').attr("href", link);
+		
 
 		$('#-quizes-right-panel-content').fadeIn(500);
 	});
 
+	//$(this).data('favourite')
+    $('.-favourite-button').click(function () {
+        var target;
+        if ($(this).data('is-favourite') === "True") {
+            target = $(this).data('target-remove');
+        }
+        else {
+            target = $(this).data('target-add');
+        }
+
+        var button = $(this);
+		$.post(target,
+			{
+				quizId: $(this).data('id')
+			},
+            function (data, status) {
+                if (status === "success") {
+                    button.data('is-favourite',(button.data('is-favourite') === "True" ? "False" : "True");
+                    button.toggleClass("btn-danger");
+                    button.toggleClass("btn-outline-danger");
+                }
+			}
+		);
+	});
+
 	$(document).ready(function () {
+		// Clicking on the first card after page load
 		$('.-quizes-card').first().click();
 	});
 });
