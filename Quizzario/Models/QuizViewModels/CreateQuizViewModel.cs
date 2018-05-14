@@ -17,9 +17,22 @@ namespace Quizzario.Models.QuizViewModels
     }
     public class CreateQuestionViewModel
     {
+        public CreateQuestionViewModel()
+        {
+            Answers = new List<CreateAnswerViewModel>();
+        }
         public string Question { get; set; }
-        public List<String> Answers { get; set; }
-        public string CorrectAnswer { get; set; }
-        public int QuestionNumber { get; set; }
+        public List<CreateAnswerViewModel> Answers { get; set; }
+    }
+    public class CreateAnswerViewModel
+    {
+        public string Answer { get; set; }
+        public bool isCorrect { get; set; }
+
+        public CreateAnswerViewModel()
+        {
+            isCorrect = false;
+        }
+
     }
 }

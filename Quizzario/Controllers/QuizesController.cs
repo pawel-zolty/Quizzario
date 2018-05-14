@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
+using System.Collections.Generic;
 
 namespace Quizzario.Controllers
 {
@@ -109,8 +110,27 @@ namespace Quizzario.Controllers
         }
         public ViewResult Create()
         {
-            return View();
-            //return View("Edit", new QuizDTO());
+            var model = new CreateQuizViewModel();
+            return View("Create", model);
+        }
+        [HttpPost]
+        public RedirectToActionResult Create([FromForm] CreateQuizViewModel quizViewModel)
+        {
+            return RedirectToAction("MyQuizes");
+        }
+
+        [HttpPost]
+        public PartialViewResult AddQuestion([FromBody]CreateQuizViewModel model)
+        {
+            model.Questions.Add(new CreateQuestionViewModel());
+            return PartialView("CreateQuizQuestionPartialView", model.Questions);
+        }
+
+        [HttpPost]
+        public PartialViewResult AddAnswer([FromBody]List<CreateAnswerViewModel> models)
+        {
+            models.Add(new CreateAnswerViewModel());
+            return PartialView("CreateQuizAnswerPartialView", models);
         }
 
         /// <summary>
