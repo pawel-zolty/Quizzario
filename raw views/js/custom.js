@@ -34,10 +34,11 @@ $(function () {
 			$(".-quizes-card-data", this).data('description')
 		);
 
+		/* Turned off for raw views
 		var link = $('#-view-link').attr("href");
 		link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
 		$('#-view-link').attr("href", link);
-		
+		*/
 
 		$('#-quizes-right-panel-content').fadeIn(500);
 	});
