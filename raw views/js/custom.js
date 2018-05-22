@@ -13,7 +13,7 @@ $(function () {
 	$('.-quizes-card').click(function() {
 		if ($(this).hasClass('-quizes-card-active')) return;
 
-		$('#-quizes-right-panel-content').fadeOut(50);
+		$('#-quizes-right-panel-content').hide();
 
 		$('.-quizes-card-active').toggleClass('-quizes-card-active');
 		$(this).toggleClass('-quizes-card-active');
@@ -99,6 +99,17 @@ $(function () {
 		parent.find("input[type=radio]").get(0).type = "checkbox";
 	});*/
 	
+	$('input[type!="submit"]').focus(function() {
+		$(this).attr('data-default', $(this).css("width"));
+		$(this).animate({
+			width: 290
+		}, 300);
+	}).blur(function() { /* lookup the original width */
+		var w = parseInt($(this).attr('data-default'));
+		$(this).animate({
+			width: w
+		}, 300);
+	});
 	
 
 	$(document).ready(function () {
