@@ -99,14 +99,17 @@ $(function () {
 		parent.find("input[type=radio]").get(0).type = "checkbox";
 	});*/
 	
-	$('input[type!="submit"]').focus(function() {
-		$(this).attr('data-default', $(this).css("width"));
-		$(this).animate({
-			width: 290
+	$('#-search').focus(function() {
+		if ($(this).data("default-width") == null) {
+			$(this).attr('data-default-width', $(this).css("width"));
+		}
+		var expand_width = $(this).data("expand-width");
+		$(this).stop().animate({
+			width: expand_width
 		}, 300);
 	}).blur(function() { /* lookup the original width */
-		var w = parseInt($(this).attr('data-default'));
-		$(this).animate({
+		var w = $(this).data("default-width");
+		$(this).stop().animate({
 			width: w
 		}, 300);
 	});
