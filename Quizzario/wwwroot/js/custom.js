@@ -94,7 +94,7 @@ $(function () {
 	});
 
 	$('#-search').focus(function () {
-		if ($(this).data("default-width") === null) {
+        if (typeof ($(this).data("default-width")) === "undefined") {
 			$(this).attr('data-default-width', $(this).css("width"));
 		}
 		var expand_width = $(this).data("expand-width");
