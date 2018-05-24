@@ -12,20 +12,23 @@
 	<nav class="container-fluid" id="-navigation">
 		<!-- Topmenu begin -->
 		<div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
-			<a class="navbar-brand" href="#">Quizzario</a>
+			<a class="navbar-brand mr-md-5" href="#">Quizzario</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 	 
 			<div class="collapse navbar-collapse -navigation-collapse">
-				<form class="form-inline my-2 my-md-0 mr-auto">
+				<form class="form-inline my-2 my-md-0 mr-2">
 					<div class="input-group">
-						<input class="form-control" type="text" placeholder="Search">
-						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+						<input class="form-control border border-dark bg-primary text-light" data-expand-width="290" type="text" id="-search" placeholder="Search">
+						<span class="input-group-append">
+							<button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
 						</span>
 					</div>
 				</form>
+				<div class="navbar-nav mr-auto">
+					<a class="nav-link">Browse</a>
+				</div>
 				<div class="navbar-nav navbar-right flex-row">
 					<a class="nav-link">Sign in</a>
 					<span class="navbar-text text-dark mx-1 mx-md-0">or</span>
@@ -50,6 +53,10 @@
 					<li class="nav-item"><a class="nav-link" href="#">
 						<i class="fas fa-fw fa-file"></i>
 						<span class="ml-1">My quizes</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">
+						<i class="fas fa-fw fa-file-alt"></i>
+						<span class="ml-1">Assigned quizes</span>
 					</a></li>
 					<li class="-sidemenu-hr-wrapper"><hr /></li>
 					<li class="nav-item"><a class="nav-link" href="#">

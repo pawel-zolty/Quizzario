@@ -21,10 +21,16 @@ namespace Quizzario.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Search()
         {
-            ViewData["Message"] = "Your contact page.";
-
+            ViewData["HideFooter"] = true;
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Search(string q)
+        {
+            ViewData["q"] = q;
+            ViewData["HideFooter"] = true;
             return View();
         }
 

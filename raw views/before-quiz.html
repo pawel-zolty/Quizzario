@@ -14,20 +14,23 @@
 	<nav class="container-fluid" id="-navigation">
 		<!-- Topmenu begin -->
 		<div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
-			<a class="navbar-brand" href="#">Quizzario</a>
+			<a class="navbar-brand mr-md-5" href="#">Quizzario</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 	 
 			<div class="collapse navbar-collapse -navigation-collapse">
-				<form class="form-inline my-2 my-md-0 mr-auto">
+				<form class="form-inline my-2 my-md-0 mr-2">
 					<div class="input-group">
-						<input class="form-control" type="text" placeholder="Search">
-						<span class="input-group-btn">
-							<button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+						<input class="form-control border border-dark bg-primary text-light" data-expand-width="290" type="text" id="-search" placeholder="Search">
+						<span class="input-group-append">
+							<button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
 						</span>
 					</div>
 				</form>
+				<div class="navbar-nav mr-auto">
+					<a class="nav-link">Browse</a>
+				</div>
 				<div class="navbar-nav navbar-right flex-row">
 					<a class="nav-link">Sign in</a>
 					<span class="navbar-text text-dark mx-1 mx-md-0">or</span>
@@ -49,9 +52,13 @@
 						<i class="fas fa-fw fa-heart"></i>
 						<span class="ml-1">Favourite quizes</span>
 					</a></li>
-					<li class="nav-item active"><a class="nav-link" href="#">
+					<li class="nav-item"><a class="nav-link" href="#">
 						<i class="fas fa-fw fa-file"></i>
 						<span class="ml-1">My quizes</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">
+						<i class="fas fa-fw fa-file-alt"></i>
+						<span class="ml-1">Assigned quizes</span>
 					</a></li>
 					<li class="-sidemenu-hr-wrapper"><hr /></li>
 					<li class="nav-item"><a class="nav-link" href="#">
@@ -138,8 +145,9 @@
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt sapien lacus, pretium maximus tellus suscipit eu. Nulla tortor nisl, lobortis nec faucibus ac, luctus id neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec dapibus dignissim turpis, at malesuada nunc pretium eu. Integer tempus, nunc a lacinia suscipit, libero risus condimentum ipsum, a ullamcorper nulla urna non dolor. In magna arcu, fringilla vel lacus at, dapibus finibus elit. Suspendisse ut ante a urna vehicula imperdiet. Fusce ut volutpat mi. Aenean diam orci, dignissim vitae risus ac, gravida tincidunt nisi. Morbi rhoncus nulla at bibendum condimentum. Aliquam vestibulum erat eget purus mollis pharetra. Mauris porttitor eros a arcu tempus egestas.
 								</div>
 							</div>
+							<hr>
 							<div class="row">
-								<div class="col-6">
+								<div class="col-md-4 mb-2">
 									<h5>Attempt history</h5>
 									<p class="my-0">
 										<span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
@@ -154,7 +162,7 @@
 										<span>28</span>
 									</p>
 								</div>
-								<div class="col-6">
+								<div class="col-md-4 mb-2">
 									<h5>Details</h5>
 									<p class="my-0">
 										<span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
@@ -177,8 +185,67 @@
 										<span>23 times</span>
 									</p>
 								</div>
+								<div class="col-md-4">								
+									<h5 class="d-inline">Assigned users</h5>
+									<button class="btn btn-sm btn-link mb-1 d-inline" data-toggle="modal" data-target="#-assign-user-modal">
+										<i class="fas fa-fw fa-plus"></i>
+									</button>
+									<div id="-before-quiz-assigned">
+										<ul class="list-group">
+											<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+												Example user 1
+												<button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+												Example user 2
+												<button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+												Example user 3
+												<button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+												Example user 4
+												<button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+												Example user 5
+												<button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+											</li>
+											<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+												Example user 6
+												<button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+											</li>
+										</ul>
+									</div>
+								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="-assign-user-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Assign new user</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="-assign-user-modal-user" class="col-form-label">Username:</label>
+								<input type="text" class="form-control" id="-assign-user-modal-user">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-success">Add user</button>
 					</div>
 				</div>
 			</div>

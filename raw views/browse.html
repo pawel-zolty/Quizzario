@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.flatly.min.css">
+	<!-- Additional stylesheets begin -->
+    <link rel="stylesheet" href="css/template.css">
+    <link rel="stylesheet" href="css/my-quizes.css">
+	<!-- Additional stylesheets end -->
+</head>
+<body>
+	<nav class="container-fluid" id="-navigation">
+		<!-- Topmenu begin -->
+		<div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
+			<a class="navbar-brand mr-md-5" href="#">Quizzario</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+	 
+			<div class="collapse navbar-collapse -navigation-collapse">
+				<form class="form-inline my-2 my-md-0 mr-2">
+					<div class="input-group">
+						<input class="form-control border border-dark bg-primary text-light" data-expand-width="290" type="text" id="-search" placeholder="Search">
+						<span class="input-group-append">
+							<button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+						</span>
+					</div>
+				</form>
+				<div class="navbar-nav mr-auto">
+					<a class="nav-link">Browse</a>
+				</div>
+				<div class="navbar-nav navbar-right flex-row">
+					<a class="nav-link">Sign in</a>
+					<span class="navbar-text text-dark mx-1 mx-md-0">or</span>
+					<a class="nav-link">Sign up</a>
+				</div>
+			</div>
+		</div>
+		<!-- Topmenu end -->
+	</nav>
+   
+	<div class="container-fluid -content-without-sidemenu" id="-content-wrapper">
+		<!-- Content begin -->
+		<div class="row px-3 py-3 mx-0">
+			<div class="col-md-8" id="-quizes-list">
+				<div class="row my-md-3">
+					<div class="col-sm-6">
+						<h3>11 quizes found</h3>
+					</div>	
+					<div class="col-sm-6 text-right">
+						<div class="form-group form-inline float-sm-right">
+							<label for="-quizes-sort-by-select">Sort by</label>
+							<select class="form-control ml-2" id="-quizes-sort-by-select">
+								<option>Title</option>
+								<option>Date created</option>
+								<option>Popularity</option>
+								<option>Favourites</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col text-justify">
+						<div class="row py-2 mb-2 -quizes-card">
+							<div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
+								<img class="img-fluid" src="http://via.placeholder.com/300x300" />
+							</div>
+							<div class="col">
+								<h5 class="-quizes-card-title">This is a quiz title!</h5>
+								<p class="-quizes-card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...</p>
+								<div class="row align-bottom">
+									<div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>1230 times</div>
+									<div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>08.03.2018</div>
+									<div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>5430</div>
+								</div>
+							</div>
+							<div>
+								<div class="-quizes-card-data"
+									data-title="This is a quiz title!"
+									data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec. Vestibulum et velit at metus imperdiet finibus. Nullam pharetra efficitur faucibus. Nunc ac varius lectus. In non accumsan diam. Donec quis lobortis nisl. In vel ex odio. Vivamus malesuada semper eleifend. Proin ultrices urna nec dui congue, nec porttitor lorem lobortis. Pellentesque aliquet cursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque lectus eget nisl eleifend, quis porta arcu rhoncus. Sed vitae diam ut magna interdum dignissim. In vestibulum pulvinar molestie. Pellentesque accumsan nibh erat, nec convallis est bibendum in. Nulla id lectus vel nunc porta pellentesque."
+									data-type="Standard quiz"
+									data-date-created="March 2, 2018"
+									data-last-edited="March 2, 2018"
+									data-image-src="http://via.placeholder.com/300x300">
+								</div>
+							</div>
+						</div>
+						<div class="row py-2 mb-2 -quizes-card">
+							<div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
+								<img class="img-fluid" src="http://via.placeholder.com/300x300" />
+							</div>
+							<div class="col">
+								<h5 class="-quizes-card-title">Another title!</h5>
+								<p class="-quizes-card-description">ursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque ll...</p>
+								<div class="row align-bottom">
+									<div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>1230 times</div>
+									<div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>08.03.2018</div>
+									<div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>5430</div>
+								</div>
+							</div>
+							<div>
+								<div class="-quizes-card-data"
+									data-title="Another title!"
+									data-description="ursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque lectus eget nisl eleifend, quis porta arcu rhoncus. Sed vitae diam ut magna interdum dignissim. In vestibulum pulvinar molestie. Pellentesque accumsan nibh erat, nec convallis est bibendum in. Nulla id lectus vel nunc porta pellentesque."
+									data-type="Standard quiz"
+									data-date-created="March 2, 2018"
+									data-last-edited="March 2, 2018"
+									data-image-src="http://via.placeholder.com/300x300">
+								</div>
+							</div>
+						</div>
+						<div class="row py-2 mb-2 -quizes-card">
+							<div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
+								<img class="img-fluid" src="http://via.placeholder.com/300x300" />
+							</div>
+							<div class="col">
+								<h5 class="-quizes-card-title">This is a quiz title!</h5>
+								<p class="-quizes-card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...</p>
+								<div class="row align-bottom">
+									<div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>1230 times</div>
+									<div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>08.03.2018</div>
+									<div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>5430</div>
+								</div>
+							</div>
+							<div>
+								<div class="-quizes-card-data"
+									data-title="This is a quiz title!"
+									data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec. Vestibulum et velit at metus imperdiet finibus. Nullam pharetra efficitur faucibus. Nunc ac varius lectus. In non accumsan diam. Donec quis lobortis nisl. In vel ex odio. Vivamus malesuada semper eleifend. Proin ultrices urna nec dui congue, nec porttitor lorem lobortis. Pellentesque aliquet cursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque lectus eget nisl eleifend, quis porta arcu rhoncus. Sed vitae diam ut magna interdum dignissim. In vestibulum pulvinar molestie. Pellentesque accumsan nibh erat, nec convallis est bibendum in. Nulla id lectus vel nunc porta pellentesque."
+									data-type="Standard quiz"
+									data-date-created="March 2, 2018"
+									data-last-edited="March 2, 2018"
+									data-image-src="http://via.placeholder.com/300x300">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<nav class="w-100 mt-3">
+						<ul class="pagination justify-content-center" role="navigation" aria-label="Pagination">
+							<li class="page-item disabled"><a class="page-link bg-light text-secondary" href="#">Previous</a></li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
+				<div id="-quizes-right-panel">
+					<div id="-quizes-right-panel-content">
+						<button class="btn btn-success my-1 mr-md-2">
+							<i class="fas fa-fw fa-play"></i>
+							<span class="ml-1">Start</span>
+						</button>
+						<button class="btn btn-success my-1 mr-md-auto">
+							<i class="fas fa-fw fa-edit"></i>
+							<span class="ml-1">Edit</span>
+						</button>
+						<button class="btn btn-dark my-1 float-xl-right">
+							<i class="fas fa-fw fa-trash"></i>
+							<span class="ml-1">Remove</span>
+						</button>
+						<h2 class="mt-2" id="-quizes-right-panel-title"></h2>
+						
+						<p class="text-center">
+							<i class="fas fa-fw fa-question -quizes-fa-xl"></i>
+						</p>
+						
+						<p class="my-0">
+							<span class="text-secondary font-weight-light font-italic mr-2">Type: </span>
+							<span id="-quizes-right-panel-type"></span>
+						</p>
+						<p class="my-0">
+							<span class="text-secondary font-weight-light font-italic mr-2">Date created: </span>
+							<span id="-quizes-right-panel-date-created"></span>
+						</p>
+						<p class="my-0">
+							<span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
+							<span id="-quizes-right-panel-last-edited"></span>
+						</p>
+						<p class="text-secondary font-weight-light font-italic my-0 mr-2"> Description</p>
+						<p id="-quizes-right-panel-description"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Content end -->
+	</div>
+   
+	<!-- Footer begin -->
+
+	<!-- Footer end -->
+   
+   
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Additional scripts begin -->
+<script src="js/custom.js"></script>
+<!-- Additional scripts end -->
+ 
+</body>
+</html>

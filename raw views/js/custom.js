@@ -13,7 +13,7 @@ $(function () {
 	$('.-quizes-card').click(function() {
 		if ($(this).hasClass('-quizes-card-active')) return;
 
-		$('#-quizes-right-panel-content').fadeOut(50);
+		$('#-quizes-right-panel-content').hide();
 
 		$('.-quizes-card-active').toggleClass('-quizes-card-active');
 		$(this).toggleClass('-quizes-card-active');
@@ -34,10 +34,11 @@ $(function () {
 			$(".-quizes-card-data", this).data('description')
 		);
 
+		/* Turned off for raw views
 		var link = $('#-view-link').attr("href");
 		link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
 		$('#-view-link').attr("href", link);
-		
+		*/
 
 		$('#-quizes-right-panel-content').fadeIn(500);
 	});
@@ -98,6 +99,20 @@ $(function () {
 		parent.find("input[type=radio]").get(0).type = "checkbox";
 	});*/
 	
+	$('#-search').focus(function() {
+		if ($(this).data("default-width") == null) {
+			$(this).attr('data-default-width', $(this).css("width"));
+		}
+		var expand_width = $(this).data("expand-width");
+		$(this).stop().animate({
+			width: expand_width
+		}, 300);
+	}).blur(function() { /* lookup the original width */
+		var w = $(this).data("default-width");
+		$(this).stop().animate({
+			width: w
+		}, 300);
+	});
 	
 
 	$(document).ready(function () {
