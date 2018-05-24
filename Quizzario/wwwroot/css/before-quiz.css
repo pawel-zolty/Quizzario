@@ -1,13 +1,18 @@
 #-before-quiz-left-panel {
-	width: 100%;
+    width: 100%;
 }
 
 #-before-quiz-right-panel {
-	width: 100%;
+    width: 100%;
+}
+
+#-before-quiz-assigned {
+    max-height: 200px;
+    overflow: auto;
 }
 
 @media (min-width: 768px) {
-	#-before-quiz-left-panel {
-		width: 180px;
-	}
+    #-before-quiz-left-panel {
+        width: 180px;
+    }
 }

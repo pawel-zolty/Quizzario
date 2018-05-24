@@ -88,8 +88,9 @@
                             @Model.Description
                         </div>
                     </div>
+                    <hr>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-4 mb-2">
                             <h5>Attempt history</h5>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
@@ -104,7 +105,7 @@
                                 <span>@* Data missing, updated controller needed *@</span>
                             </p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-4 mb-2">
                             <h5>Details</h5>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
@@ -127,8 +128,68 @@
                                 <span>@* Data missing, updated controller needed *@</span>
                             </p>
                         </div>
+                        <div class="col-md-4">
+                            <h5 class="d-inline">Assigned users</h5>
+                            <button class="btn btn-sm btn-link mb-1 d-inline" data-toggle="modal" data-target="#-assign-user-modal">
+                                <i class="fas fa-fw fa-plus"></i>
+                            </button>
+                            <div id="-before-quiz-assigned">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                        Example user 1
+                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                        Example user 2
+                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                        Example user 3
+                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                        Example user 4
+                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                        Example user 5
+                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                        Example user 6
+                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Assing user modal *@
+<div class="modal fade" id="-assign-user-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Assign new user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="-assign-user-modal-user" class="col-form-label">E-mail:</label>
+                        <input type="text" class="form-control" id="-assign-user-modal-user">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Add user</button>
             </div>
         </div>
     </div>

@@ -14,20 +14,23 @@
     <nav class="container-fluid" id="-navigation">
         <!-- Topmenu begin -->
         <div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
-            <a asp-controller="Home" asp-action="Index" class="navbar-brand">Quizzario</a>
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand mr-md-5">Quizzario</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse -navigation-collapse">
-                <form class="form-inline my-2 my-md-0 mr-auto">
+                <form method="get" asp-controller="Home" asp-action="Search" class="form-inline my-2 my-md-0 mr-2">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="submit"><i class="fas fa-search"></i></button>
+                        <input class="form-control border border-dark bg-primary text-light" data-expand-width="290" type="text" id="-search" name="q" value="@ViewData["q"]" placeholder="Search">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
                         </span>
                     </div>
                 </form>
+                <div class="navbar-nav mr-auto">
+                    <a asp-controller="Home" asp-action="Search" class="nav-link">Browse</a>
+                </div>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
@@ -40,13 +43,18 @@
         <!-- Content end -->
     </div>
 
-    <!-- Footer begin -->
-    <footer class="bg-primary text-white" id="-footer">
-        <div class="py-3 text-center">
-            © 2018 Copyright: ...
-        </div>
-    </footer>
-    <!-- Footer end -->
+    @{
+        if (ViewData["HideFooter"] == null)
+        {
+             <!-- Footer begin -->
+            <footer class="bg-primary text-white" id="-footer">
+                <div class="py-3 text-center">
+                    © 2018 Copyright: ...
+                </div>
+            </footer>
+             <!-- Footer end -->
+        }
+    }
 
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
