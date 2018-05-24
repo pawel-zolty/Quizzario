@@ -14,7 +14,7 @@
     <nav class="container-fluid" id="-navigation">
         <!-- Topmenu begin -->
         <div class="navbar navbar-expand-md navbar-dark bg-primary py-2 py-md-3" id="-topmenu">
-            <a asp-controller="Quizes" asp-action="Index" class="navbar-brand mr-md-5">Quizzario</a>
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand mr-md-5">Quizzario</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".-navigation-collapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,7 +52,7 @@
                             <span class="ml-1">Favourite quizes</span>
                         </a>
                     </li>
-                    <li class="nav-item" @(ViewContext.RouteData.Values["Action"].ToString() == "Assigned" ? "active" : "")">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Assigned" ? "active" : "")">
                         <a asp-controller="Quizes" asp-action="Assigned" class="nav-link">
                             <i class="fas fa-fw fa-file-alt"></i>
                             <span class="ml-1">Assigned quizes</span>
@@ -72,7 +72,7 @@
                         </a>
                     </li>*@
                     <li class="nav-item">
-                        <form  asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                        <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
                             <button class="nav-link btn btn-link py-0" type="submit">
                                 <i class="fas fa-fw fa-sign-out-alt"></i>
                                 <span class="ml-1">Logout</span>

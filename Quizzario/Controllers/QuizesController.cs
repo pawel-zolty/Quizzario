@@ -114,6 +114,17 @@ namespace Quizzario.Controllers
         }
 
         /// <summary>
+        /// Full version of action will require passing quiz data, to which user is assigned
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Assigned(int p = 1)
+        {
+            // This is a placeholder code, all of it will be replaced
+            QuizListViewModel model = CreateQuizViewModelWithPagination(p);
+            return View(model);
+        }
+
+        /// <summary>
         /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
         /// </summary>
         /// <returns></returns>

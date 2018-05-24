@@ -104,3 +104,33 @@
 .-fa-xl {
 	font-size: 150px;
 }
+
+.-with-video {
+    position: relative;
+    overflow: hidden;
+}
+
+.-video {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    z-index: -2
+}
+
+@media (max-width: 991.98px) {
+    .-video {
+        display: none;
+    }
+
+    .-video-curtain {
+        opacity: 1;
+    }
+}
+
+.-video-curtain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.8;
+}

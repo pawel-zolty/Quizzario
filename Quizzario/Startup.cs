@@ -110,6 +110,17 @@ namespace Quizzario
                     constraints: new { p = @"\d+" }
                     );
                 routes.MapRoute(
+                    name: "AssignedList",
+                    template: "Quizes/Assigned",
+                    defaults: new { controller = "Quizes", action = "Assigned", p = 1 }
+                    );
+                routes.MapRoute(
+                    name: "AssignedListPage",
+                    template: "Quizes/Assigned/{p}",
+                    defaults: new { controller = "Quizes", action = "Assigned" },
+                    constraints: new { p = @"\d+" }
+                    );
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
