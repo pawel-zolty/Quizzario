@@ -1,5 +1,3 @@
-//import { Alert } from "../lib/bootstrap/js/src/index";
-
 $(function () {
     // Sidemenu collapse button
     $('#-sidemenu-collapse-button').click(function () {
@@ -15,7 +13,7 @@ $(function () {
     $('.-quizes-card').click(function () {
         if ($(this).hasClass('-quizes-card-active')) return;
 
-        $('#-quizes-right-panel-content').fadeOut(50);
+        $('#-quizes-right-panel-content').hide();
 
         $('.-quizes-card-active').toggleClass('-quizes-card-active');
         $(this).toggleClass('-quizes-card-active');
@@ -35,18 +33,18 @@ $(function () {
         $('#-quizes-right-panel-description').html(
             $(".-quizes-card-data", this).data('description')
         );
-        var link = $('#-view-link').attr("href");
-        link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
 
-        var link2 = $('#-edit-link').attr("href");
-        link2 = link2.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+        var viewLink = $('#-view-link').attr("href");
+        if (viewLink !== undefined) {
+            viewLink = viewLink.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+            $('#-view-link').attr("href", viewLink);
+        }
 
-        var link3 = $('#-remove-link').attr("href");
-        link3 = link3.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
-
-        $('#-view-link').attr("href", link);
-        $('#-edit-link').attr("href", link2);
-        $('#-remove-link').attr("href", link3);
+        var editLink = $('#-edit-link').attr("href");
+        if (editLink !== undefined) {
+            editLink = editLink.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+            $('#-edit-link').attr("href", editLink);
+        }
 
 
         $('#-quizes-right-panel-content').fadeIn(500);
@@ -76,12 +74,26 @@ $(function () {
             }
         );
     });
-});
-$(document).ready(function () {
 
+    $('#-search').focus(function () {
+        if (typeof ($(this).data("default-width")) === "undefined") {
+            $(this).attr('data-default-width', $(this).css("width"));
+        }
+        var expand_width = $(this).data("expand-width");
+        $(this).stop().animate({
+            width: expand_width
+        }, 300);
+    }).blur(function () { /* lookup the original width */
+        var w = $(this).data("default-width");
+        $(this).stop().animate({
+            width: w
+        }, 300);
+    });
 
-    // Clicking on the first card after page load
-    $('.-quizes-card').first().click();
+    $(document).ready(function () {
+        // Clicking on the first card after page load
+        $('.-quizes-card').first().click();
+    });
 });
 
 function addQuestion() {
