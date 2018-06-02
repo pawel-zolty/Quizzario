@@ -5,7 +5,7 @@ namespace Quizzario.Data.Abstracts
 {
     public interface IApplicationUserRepository
     {
-        IEnumerable<ApplicationUser> Users { get; }
+        List<ApplicationUser> Users { get; }
         ApplicationUser GetById(string id);
     }
 }

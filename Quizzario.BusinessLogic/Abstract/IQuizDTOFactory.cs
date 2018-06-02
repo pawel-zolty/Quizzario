@@ -7,13 +7,13 @@ namespace Quizzario.BusinessLogic.Abstracts
     public interface IQuizDTOFactory
     {
         QuizDTO Create(string id);
-        IEnumerable<QuizDTO> CreateAllUserQuizes(string userId);
-        IEnumerable<QuizDTO> CreateUserFavouriteQuizes(string userId);
+        List<QuizDTO> CreateAllUserQuizes(string userId);
+        List<QuizDTO> CreateUserFavouriteQuizes(string userId);
         void AddQuizToFavourite(string userId, string quizId);
         void RemoveQuizFromFavourite(string userId, string quizId);
-        IEnumerable<QuizDTO> SearchByName(string name);
-        IEnumerable<QuizDTO> GetAllQuizes();
-        IEnumerable<QuizDTO> Quizes { get; }
+        List<QuizDTO> SearchByName(string name);
+        List<QuizDTO> GetAllQuizes();
+        List<QuizDTO> Quizes { get; }
         void SaveQuiz(QuizDTO quiz);
     }
 }
