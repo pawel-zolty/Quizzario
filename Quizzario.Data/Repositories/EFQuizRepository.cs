@@ -50,7 +50,7 @@ namespace Quizzario.Data.Repositories
         {
             if (quiz.ApplicationUserId != null)
             {
-                context.Quizes.Add(quiz);
+                context.Quizes.Update(quiz);
             }else
             {
 

@@ -5,10 +5,16 @@
     Layout = "~/Views/Quiz/_AdminLayout.cshtml";
 }
 
-
-@using (Html.BeginForm("Edit","Quizes"))
+@using (Html.BeginForm())
 {
-    @Html.EditorForModel()
-    <input type="submit" value="Save"  />
-    @Html.ActionLink("Discard and back to list", "EditQuiz")
+    <div>
+        <form action="">
+
+            <input name="Title" , value="@Model.Title">
+            <input name="Description" , value="@Model.Description">
+            <input name="QuizType" , value="@Model.QuizType">
+        </form>
+        <input type="submit" value="Save" />
+        
+    </div>
 }
