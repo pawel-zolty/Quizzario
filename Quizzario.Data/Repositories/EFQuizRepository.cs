@@ -48,7 +48,7 @@ namespace Quizzario.Data.Repositories
 
         public void SaveQuiz(Quiz quiz)
         {
-            if (quiz.Id == "0")
+            if (quiz.ApplicationUserId != null)
             {
                 context.Quizes.Add(quiz);
             }else

@@ -86,6 +86,9 @@ namespace Quizzario.Controllers
         [HttpPost]
         public ActionResult Edit(QuizDTO quizDTO)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (quizDTO.ApplicationUserId == null)
+                quizDTO.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
                 quizService.SaveQuiz(quizDTO);
