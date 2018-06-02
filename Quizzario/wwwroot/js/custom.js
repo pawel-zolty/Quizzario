@@ -1,3 +1,5 @@
+//import { Alert } from "../lib/bootstrap/js/src/index";
+
 $(function () {
 	// Sidemenu collapse button
 	$('#-sidemenu-collapse-button').click(function () {
@@ -34,13 +36,99 @@ $(function () {
 			$(".-quizes-card-data", this).data('description')
 		);
 
+		var link = $('#-view-link').attr("href");
+		link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+		$('#-view-link').attr("href", link);
+
+
 		$('#-quizes-right-panel-content').fadeIn(500);
 	});
 
-	$(document).ready(function () {
-		$('.-quizes-card').first().click();
+	// Favourite button click handler
+	$('.-favourite-button').click(function () {
+		var target;
+		if ($(this).data('is-favourite') === "True") {
+			target = $(this).data('target-remove');
+		}
+		else {
+			target = $(this).data('target-add');
+		}
+
+		var button = $(this);
+		$.post(target,
+			{
+				quizId: $(this).data('id')
+			},
+			function (data, status) {
+				if (status === "success") {
+					button.data('is-favourite', button.data('is-favourite') === "True" ? "False" : "True");
+					button.toggleClass("btn-danger");
+					button.toggleClass("btn-outline-danger");
+				}
+			}
+		);
 	});
 });
+	$(document).ready(function () {
+    
+
+	// Clicking on the first card after page load
+	$('.-quizes-card').first().click();
+});
+
+function addQuestion() {
+
+    var model = scrappModel();
+    $.ajax({
+        type: "POST",
+        data: JSON.stringify(model),
+        url: '/Quizes/AddQuestion',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (res) {
+        $("#-questions").html(res.responseText);
+    }).fail(function (res) {
+        $("#-questions").html(res.responseText);
+    })
+};
+
+function addAnswer(elem) {
+        var questionIndex = $(elem).attr('question-index');
+        var model = scrappModel();
+        var payload = model.Questions[questionIndex].Answers;
+        console.log("#quiz-question-" + questionIndex);
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify(payload),
+            url: '/Quizes/AddAnswer',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8"
+        }).done(function (res) {
+            $("#quiz-question-" + questionIndex).html(res.responseText);
+        }).fail(function (res) {
+            $("#quiz-question-" + questionIndex).html(res.responseText);
+        });
+};
+
+function scrappModel() {
+    var model = {
+        Title: $("#-quiz-title").val(),
+        Description: $("#-quiz-description").val(),
+        Questions: []
+    };
+
+    $('.-question-card').each(function () {
+        var question = $(this).find('.-question-card-title').val();
+        var answers = [];
+        $(this).find('[name="AnswerForm"]').each(function () {
+            var answer = $(this).find('#answer_Answer').val()
+            var isCorrect = $(this).find('#answer_isCorrect').val()
+            answers.push({ Answer: answer, isCorrect: isCorrect })
+        });
+        model.Questions.push({ Question: question, Answers: answers });
+    })
+    return model;
+}
 
 // Universal form validation
 (function () {

@@ -32,6 +32,16 @@ namespace Quizzario.BusinessLogic.Services
             return quizes;
         }
 
+        public void AddQuizToFavourite(string userId, string quizId)
+        {
+            factory.AddQuizToFavourite(userId, quizId);
+        }
+
+        public void RemoveQuizFromFavourite(string userId, string quizId)
+        {
+            factory.RemoveQuizFromFavourite(userId, quizId);
+        }
+
         public IEnumerable<QuizDTO> SearchByName(string name)
         {
             IEnumerable<QuizDTO> quizes = factory.SearchByName(name);

@@ -12,17 +12,19 @@ namespace Quizzario.Data.Entities
 
     public class Quiz
     {
-        [Key]
+        [Key, Required]
         public string Id { get; set; }
+        [Required]
         public string Title { get; set; }
         public string Description { get; set; }
-        [ForeignKey("ApplicationUser")]
+        [ForeignKey("ApplicationUser"), Required]
         public string ApplicationUserId { get; set; }
         [ForeignKey("QuizSettings")]
         public string QuizSettingsId { get; set; }
+        [Required]
         public QuizType? QuizType { get; set; }
         public string FilePath { get; set; }
-        [Column(TypeName = "Date")]
+        [Column(TypeName = "Date"), Required]
         public DateTime CreationDate { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }

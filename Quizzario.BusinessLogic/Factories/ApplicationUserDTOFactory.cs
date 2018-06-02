@@ -14,7 +14,7 @@ namespace Quizzario.BusinessLogic.Factories
             this.repository = repository;
         }
 
-        public ApplicationUserDTO Create(string id)
+        public ApplicationUserDTO CreateUserWithId(string id)
         {
             ApplicationUser user = repository.GetById(id);
             return CreateUser(user);

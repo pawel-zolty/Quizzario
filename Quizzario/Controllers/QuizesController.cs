@@ -6,13 +6,14 @@ using System.Security.Claims;
 using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
+using System.Collections.Generic;
 
 namespace Quizzario.Controllers
 {
     [Authorize]
     public class QuizesController : Controller
     {
-        public int PageSize = 2;
+        public int PageSize = 4;
         private IQuizService quizService;
         private PagingInfoService pagingInfoService = new PagingInfoService();
 
@@ -47,9 +48,22 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
-        public ViewResult AddToFavourite(QuizDTO model)
+        public void AddToFavourite(string quizId)
         {
-            return null;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            quizService.AddQuizToFavourite(userId, quizId);
+        }
+
+        [HttpPost]
+        public void RemoveFromFavourite(string quizId)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            quizService.RemoveQuizFromFavourite(userId, quizId);
+        }
+        public ViewResult Summary(string Id)
+        {
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            return View(quizDTO);
         }
 
         public IActionResult Index(int p = 1)
@@ -99,7 +113,45 @@ namespace Quizzario.Controllers
         }
         public ViewResult Create()
         {
-            return View("Edit", new QuizDTO());
+            var model = new CreateQuizViewModel();
+            return View("Create", model);
+        }
+        [HttpPost]
+        public RedirectToActionResult Create([FromForm] CreateQuizViewModel quizViewModel)
+        {
+            return RedirectToAction("MyQuizes");
+        }
+
+        [HttpPost]
+        public PartialViewResult AddQuestion([FromBody]CreateQuizViewModel model)
+        {
+            model.Questions.Add(new CreateQuestionViewModel());
+            return PartialView("CreateQuizQuestionPartialView", model.Questions);
+        }
+
+        [HttpPost]
+        public PartialViewResult AddAnswer([FromBody]List<CreateAnswerViewModel> models)
+        {
+            models.Add(new CreateAnswerViewModel());
+            return PartialView("CreateQuizAnswerPartialView", models);
+        }
+
+        /// <summary>
+        /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Solving()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Full version of action will require passing result data
+        /// </summary>
+        /// <returns></returns>
+        public ViewResult Results()
+        {
+            return View();
         }
     }
 }

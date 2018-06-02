@@ -6,7 +6,7 @@ namespace Quizzario.Data.Entities
 {
     public class QuizSettings
     {
-        [Key, ForeignKey("Quiz")]
+        [Key, ForeignKey("Quiz"), Required]
         public string QuizId { get; set; }
         public int AttemptLimit { get; set; }
         public TimeSpan? TimeLimit { get; set; }

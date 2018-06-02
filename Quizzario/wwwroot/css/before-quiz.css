@@ -1,0 +1,13 @@
+#-before-quiz-left-panel {
+	width: 100%;
+}
+
+#-before-quiz-right-panel {
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	#-before-quiz-left-panel {
+		width: 180px;
+	}
+}

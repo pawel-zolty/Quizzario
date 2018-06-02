@@ -94,7 +94,7 @@ namespace Quizzario
                     );
                 routes.MapRoute(
                     name: "MyQuizListPage", 
-                    template: "Quizes/MyQuizes/Page{p}",
+                    template: "Quizes/MyQuizes/{p}",
                     defaults: new { controller = "Quizes", action = "MyQuizes" },
                     constraints: new { p = @"\d+" }
                     );
@@ -105,7 +105,7 @@ namespace Quizzario
                     );
                 routes.MapRoute(
                     name: "FavouriteListPage",
-                    template: "Quizes/Favourite/Page{p}",
+                    template: "Quizes/Favourite/{p}",
                     defaults: new { controller = "Quizes", action = "Favourite" },
                     constraints: new { p = @"\d+" }
                     );

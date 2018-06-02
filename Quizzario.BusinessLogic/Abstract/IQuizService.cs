@@ -8,8 +8,10 @@ namespace Quizzario.BusinessLogic.Abstract
     {
         IEnumerable<QuizDTO> GetAllUserQuizes(string userId);
         IEnumerable<QuizDTO> GetUserFavouriteQuizes(string userId);
-        IEnumerable<QuizDTO> SearchByName(string name);
-        IEnumerable<QuizDTO> Quizes { get; }
+        void AddQuizToFavourite(string userId, string quizId);
+        void RemoveQuizFromFavourite(string userId, string quizId);
         void SaveQuiz(QuizDTO quiz);
+        IEnumerable<QuizDTO> Quizes { get; }
+        IEnumerable<QuizDTO> SearchByName(string name);
     }
 }

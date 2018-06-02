@@ -17,7 +17,7 @@ namespace Quizzario.Controllers
 
         public IActionResult Index()
         {
-            if (_signInManager.IsSignedIn(User)) return RedirectToAction("Index", "Quizes");
+            if (_signInManager.IsSignedIn(User)) return RedirectToAction("MyQuizes", "Quizes");
             return View();
         }
 
