@@ -3,32 +3,30 @@ using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace Quizzario.BusinessLogic.Services
 {
     public class QuizService : IQuizService
     {
         private IQuizDTOFactory factory;
-
-     
-
+        
         public QuizService(IQuizDTOFactory factory)
         {
             this.factory = factory;
         }
 
-        public IEnumerable<QuizDTO> Quizes => factory.Quizes;
+        public List<QuizDTO> Quizes => factory.Quizes.ToList();
 
-        public IEnumerable<QuizDTO> GetUserFavouriteQuizes(string userId)
+        public List<QuizDTO> GetUserFavouriteQuizes(string userId)
         {
-            IEnumerable<QuizDTO> quizes = factory.CreateUserFavouriteQuizes(userId);
+            List<QuizDTO> quizes = factory.CreateUserFavouriteQuizes(userId).ToList();
             return quizes;
         }
 
-        public IEnumerable<QuizDTO> GetAllUserQuizes(string userId)
+        public List<QuizDTO> GetAllUserQuizes(string userId)
         {         
-            IEnumerable<QuizDTO> quizes = factory.CreateAllUserQuizes(userId);
+            List<QuizDTO> quizes = factory.CreateAllUserQuizes(userId);
             return quizes;
         }
 
@@ -42,15 +40,15 @@ namespace Quizzario.BusinessLogic.Services
             factory.RemoveQuizFromFavourite(userId, quizId);
         }
 
-        public IEnumerable<QuizDTO> SearchByName(string name)
+        public List<QuizDTO> SearchByName(string name)
         {
-            IEnumerable<QuizDTO> quizes = factory.SearchByName(name);
+            List<QuizDTO> quizes = factory.SearchByName(name);
             return quizes;
         }
 
-        public IEnumerable<QuizDTO> GetAllQuizes()
+        public List<QuizDTO> GetAllQuizes()
         {
-            IEnumerable<QuizDTO> quizes = factory.GetAllQuizes();
+            List<QuizDTO> quizes = factory.GetAllQuizes();
             return quizes;
         }
 

@@ -29,8 +29,6 @@ namespace Quizzario.BusinessLogic.Factories
             string lastName = user.LastName;
             string origin = user.Origin;
 
-            if (firstName == null || lastName == null)
-                return null;
             ApplicationUserDTO userDTO = new ApplicationUserDTO
             {
                 Id = id,

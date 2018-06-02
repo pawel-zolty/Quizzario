@@ -18,7 +18,7 @@
     <div class="col-md-8" id="-quizes-list">
         <div class="row">
             <div class="col-md-8">
-                <h1>My quizes</h1>
+                <h1>@ViewData["Title"]</h1>
             </div>
             <div class="col-md-4">
                 @*<div class="form-group form-inline float-right">
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col text-justify">
-                @Model.Quizes.Count()
+                <!--@Model.Quizes.Count()THIS IS CUNT not Count-->
                 @foreach (var quiz in Model.Quizes)
                 {
                     @Html.Partial("QuizSummary", quiz);
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="row">
-            <pagination info="@Model.PagingInfo" route="/Quizes/MyQuizes"></pagination>
+            <pagination info="@Model.PagingInfo" route="/Quizes/Favourite"></pagination>
         </div>
     </div>
     <div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
