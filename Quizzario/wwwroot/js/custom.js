@@ -34,9 +34,18 @@ $(function () {
 			$(".-quizes-card-data", this).data('description')
 		);
 
-		var link = $('#-view-link').attr("href");
+        var link = $('#-view-link').attr("href");
 		link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
-		$('#-view-link').attr("href", link);
+
+        var link2 = $('#-edit-link').attr("href");
+        link2 = link2.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+
+        var link3 = $('#-remove-link').attr("href");
+        link3 = link3.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+
+        $('#-view-link').attr("href", link);
+        $('#-edit-link').attr("href", link2);
+        $('#-remove-link').attr("href", link3);
 
 
 		$('#-quizes-right-panel-content').fadeIn(500);
@@ -66,23 +75,24 @@ $(function () {
 			}
 		);
 	});
-
-	// Adds new answer button to create quiz question card click handler
-	$('#-questions').on('click', '.-question-card-add-new-answer', function () {
-		var parent = $(this).parent();
-		var fieldset = parent.find("fieldset");
-		fieldset.append('\
+});
+	
+// Adds new answer button to create quiz question card click handler
+$('#-questions').on('click', '.-question-card-add-new-answer', function () {
+    var parent = $(this).parent();
+    var fieldset = parent.find("fieldset");
+    fieldset.append('\
 			<div class="form-check my-1 w-100">\
 				<input class="form-check-input" type="radio" name="radio">\
 				<input type="text" class="w-100" placeholder="Type answer here">\
 			</div>\
 		');
-		fieldset.find("input").last().focus();
-	});
+    fieldset.find("input").last().focus();
+});
 
-	// Adds new question card to create quiz click handler
-	$('.-question-card-add-new-question').click(function () {
-		$('#-questions').append('\
+// Adds new question card to create quiz click handler
+$('.-question-card-add-new-question').click(function () {
+    $('#-questions').append('\
 			<div class="py-2 px-3 mb-2 -question-card">\
 				<h6 class="d-inline">Question <span class="-question-card-index">1</span>. <span class="-question-card-title font-weight-bold">Question title</span></h6>\
 				<button type="button" class="btn btn-sm btn-outline-primary py-0 float-right" data-toggle="button" autocomplete="off">Multiple answers</button>\
@@ -91,8 +101,12 @@ $(function () {
 				<button type="button" class="-question-card-add-new-answer btn btn-sm btn-link px-3">Add new answer...</button>\
 			</div>\
 		');
-	});
+});
 
+/*$('#-questions').on('click', '.-questions-toggle-answer-type', function() {
+    var parent = $(this).parent();
+    parent.find("input[type=radio]").get(0).type = "checkbox";
+});*/
 	$('#-search').focus(function () {
 		if (typeof ($(this).data("default-width")) === "undefined") {
 			$(this).attr('data-default-width', $(this).css("width"));
@@ -111,7 +125,13 @@ $(function () {
 	$(document).ready(function () {
 		// Clicking on the first card after page load
 		$('.-quizes-card').first().click();
-	});
+});
+
+
+$(document).ready(function () {
+    // Clicking on the first card after page load
+    $('.-quizes-card').first().click();
+});
 });
 
 // Universal form validation

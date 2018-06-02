@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Quizzario.BusinessLogic.Abstract;
 using Quizzario.Services;
@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
+using System.Collections.Generic;
 
 namespace Quizzario.Controllers
 {
@@ -87,18 +88,17 @@ namespace Quizzario.Controllers
             };
             return model;
         }
-        public ViewResult EditQuiz()
-        {
-            return View(quizService.Quizes);
-        }
         public ViewResult Edit(string Id)
         {
             QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
-            return View(quizDTO);
+            return View("Edit",quizDTO);
         }
         [HttpPost]
         public ActionResult Edit(QuizDTO quizDTO)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (quizDTO.ApplicationUserId == null)
+                quizDTO.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
                 quizService.SaveQuiz(quizDTO);
@@ -109,8 +109,27 @@ namespace Quizzario.Controllers
         }
         public ViewResult Create()
         {
-            return View();
-            //return View("Edit", new QuizDTO());
+            var model = new CreateQuizViewModel();
+            return View("Create", model);
+        }
+        [HttpPost]
+        public RedirectToActionResult Create([FromForm] CreateQuizViewModel quizViewModel)
+        {
+            return RedirectToAction("MyQuizes");
+        }
+
+        [HttpPost]
+        public PartialViewResult AddQuestion([FromBody]CreateQuizViewModel model)
+        {
+            model.Questions.Add(new CreateQuestionViewModel());
+            return PartialView("CreateQuizQuestionPartialView", model.Questions);
+        }
+
+        [HttpPost]
+        public PartialViewResult AddAnswer([FromBody]List<CreateAnswerViewModel> models)
+        {
+            models.Add(new CreateAnswerViewModel());
+            return PartialView("CreateQuizAnswerPartialView", models);
         }
 
         /// <summary>

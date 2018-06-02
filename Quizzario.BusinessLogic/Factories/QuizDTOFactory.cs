@@ -259,12 +259,15 @@ namespace Quizzario.BusinessLogic.Factories
         {
 
 
-            Quiz quiz = new Quiz();
-            quiz.Id = quizDTO.Id;
-            quiz.QuizSettingsId = quizDTO.QuizSettingsId;
-            quiz.Title = quizDTO.Title;
-            quiz.Description = quizDTO.Description;
-            quiz.ApplicationUserId = quizDTO.ApplicationUserId;
+            Quiz quiz = new Quiz
+            {
+                Id = quizDTO.Id,
+                QuizSettingsId = quizDTO.QuizSettingsId,
+                Title = quizDTO.Title,
+                Description = quizDTO.Description,
+                ApplicationUserId = quizDTO.ApplicationUserId,
+                QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
+            };
             quizRepository.SaveQuiz(quiz);
 
            

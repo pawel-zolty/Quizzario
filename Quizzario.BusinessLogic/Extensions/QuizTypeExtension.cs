@@ -11,5 +11,14 @@
             return quizType;
         }
 
+        public static Data.Entities.QuizType? ToEntityQuizType(this BusinessLogic.DTOs.QuizType? value)
+        {
+            if (value == null)
+                return null;
+            int val = (int)value;
+            Data.Entities.QuizType quizType = (Data.Entities.QuizType)val;
+            return quizType;
+        }
+
     }
 }

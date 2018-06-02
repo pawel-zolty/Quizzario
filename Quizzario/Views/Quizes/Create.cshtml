@@ -1,4 +1,5 @@
-﻿
+﻿@model CreateQuizViewModel
+
 @{
     ViewData["Title"] = "Create quiz";
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
@@ -15,7 +16,8 @@
     <script src="~/js/custom.js"></script>
 }
 
-<form>
+@using (Html.BeginForm())
+{
     <div class="row px-3 py-3 mx-0">
         <div class="col-12">
             <div class="row">
@@ -28,7 +30,7 @@
                             <i class="fas fa-fw fa-upload"></i>
                             <span class="ml-1">Import</span>
                         </button>
-                        <button class="btn btn-success my-1">
+                        <button class="btn btn-success my-1" type="submit">
                             <i class="fas fa-fw fa-plus"></i>
                             <span class="ml-1">Create</span>
                         </button>
@@ -38,19 +40,23 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <input class="form-control form-control-lg" type="text" id="-quiz-title" placeholder="Title">
+                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control form-control-lg", @id = "-quiz-title", @placeholder = "Title" })
+                        @*<input class="form-control form-control-lg" type="text" id="-quiz-title" placeholder="Title">*@
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" id="-quiz-description" rows="5" placeholder="Description"></textarea>
+                        @Html.TextAreaFor(model => model.Description, new { @class="form-control", @id="-quiz-description", @rows=5, @placeholder="Description" })
+                        @*<textarea class="form-control" id="-quiz-description" rows="5" placeholder="Description"></textarea>*@
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div id="-questions"></div>
-                    <button type="button" class="-question-card-add-new-question btn btn-sm btn-outline-primary px-3">Add new question...</button>
+                    <div id="-questions">
+                        @Html.PartialAsync("CreateQuizQuestionPartialView", Model.Questions).Result
+                    </div>
+                    <button type="button" onclick="addQuestion()" id="AddQuestionButton" class="-question-card-add-new-question btn btn-sm btn-outline-primary px-3">Add new question...</button>
                 </div>
             </div>
         </div>
     </div>
-</form>
+}

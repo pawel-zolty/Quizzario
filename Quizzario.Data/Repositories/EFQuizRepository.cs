@@ -48,9 +48,10 @@ namespace Quizzario.Data.Repositories
 
         public void SaveQuiz(Quiz quiz)
         {
-            if (quiz.Id == "0")
+            if (quiz.ApplicationUserId != null)
             {
-                context.Quizes.Add(quiz);
+               // context.Quizes.Add(quiz);
+                context.Quizes.Update(quiz);
             }else
             {
 
@@ -67,6 +68,7 @@ namespace Quizzario.Data.Repositories
                     dbEntry.CreationDate = quiz.CreationDate;
                     dbEntry.Description = quiz.Description;
                     context.Quizes.Add(dbEntry);
+                   
 
                 
             }
