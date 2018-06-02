@@ -76,6 +76,26 @@ $(function () {
             }
         );
     });
+
+    $('#-search').focus(function () {
+        if (typeof ($(this).data("default-width")) === "undefined") {
+            $(this).attr('data-default-width', $(this).css("width"));
+        }
+        var expand_width = $(this).data("expand-width");
+        $(this).stop().animate({
+            width: expand_width
+        }, 300);
+    }).blur(function () { /* lookup the original width */
+        var w = $(this).data("default-width");
+        $(this).stop().animate({
+            width: w
+        }, 300);
+    });
+
+    $(document).ready(function () {
+        // Clicking on the first card after page load
+        $('.-quizes-card').first().click();
+    });
 });
 $(document).ready(function () {
 
