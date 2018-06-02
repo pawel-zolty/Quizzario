@@ -1,5 +1,3 @@
-//import { Alert } from "../lib/bootstrap/js/src/index";
-
 $(function () {
     // Sidemenu collapse button
     $('#-sidemenu-collapse-button').click(function () {
@@ -15,7 +13,7 @@ $(function () {
     $('.-quizes-card').click(function () {
         if ($(this).hasClass('-quizes-card-active')) return;
 
-        $('#-quizes-right-panel-content').fadeOut(50);
+        $('#-quizes-right-panel-content').hide();
 
         $('.-quizes-card-active').toggleClass('-quizes-card-active');
         $(this).toggleClass('-quizes-card-active');
@@ -96,12 +94,6 @@ $(function () {
         // Clicking on the first card after page load
         $('.-quizes-card').first().click();
     });
-});
-$(document).ready(function () {
-
-
-    // Clicking on the first card after page load
-    $('.-quizes-card').first().click();
 });
 
 function addQuestion() {
