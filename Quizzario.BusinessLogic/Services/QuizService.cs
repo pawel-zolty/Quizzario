@@ -16,11 +16,11 @@ namespace Quizzario.BusinessLogic.Services
             this.factory = factory;
         }
 
-        public List<QuizDTO> Quizes => factory.Quizes.ToList();
+        public List<QuizDTO> Quizes => factory.Quizes;
 
         public List<QuizDTO> GetUserFavouriteQuizes(string userId)
         {
-            List<QuizDTO> quizes = factory.CreateUserFavouriteQuizes(userId).ToList();
+            List<QuizDTO> quizes = factory.CreateUserFavouriteQuizes(userId);
             return quizes;
         }
 
