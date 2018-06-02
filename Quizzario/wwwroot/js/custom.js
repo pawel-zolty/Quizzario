@@ -35,18 +35,18 @@ $(function () {
         $('#-quizes-right-panel-description').html(
             $(".-quizes-card-data", this).data('description')
         );
-        var link = $('#-view-link').attr("href");
-        link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
 
-        var link2 = $('#-edit-link').attr("href");
-        link2 = link2.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+        var viewLink = $('#-view-link').attr("href");
+        if (viewLink !== undefined) {
+            viewLink = viewLink.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+            $('#-view-link').attr("href", viewLink);
+        }
 
-        var link3 = $('#-remove-link').attr("href");
-        link3 = link3.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
-
-        $('#-view-link').attr("href", link);
-        $('#-edit-link').attr("href", link2);
-        $('#-remove-link').attr("href", link3);
+        var editLink = $('#-edit-link').attr("href");
+        if (editLink !== undefined) {
+            editLink = editLink.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+            $('#-edit-link').attr("href", editLink);
+        }
 
 
         $('#-quizes-right-panel-content').fadeIn(500);
