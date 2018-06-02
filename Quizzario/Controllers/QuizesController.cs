@@ -7,11 +7,8 @@ using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using System;
 using Microsoft.AspNetCore.Mvc.Filters;
-=======
->>>>>>> editQuiz
 
 namespace Quizzario.Controllers
 {
@@ -28,7 +25,7 @@ namespace Quizzario.Controllers
             this.quizService = quizService;
             this.pagingInfoService = pagingInfoService;
         }
-        
+
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             //Get user id   
@@ -39,7 +36,7 @@ namespace Quizzario.Controllers
         {
             QuizListViewModel model = GetMyQuizesModel(p);
             return View("MyQuizes", model);
-        }        
+        }
 
         public ViewResult MyQuizes(int p = 1)
         {
@@ -66,7 +63,7 @@ namespace Quizzario.Controllers
             var myAssignedQuizesCollection = quizService.GetAllUserQuizes(userId);
             QuizListViewModel model = CreateQuizViewModelWithPagination(p, myAssignedQuizesCollection);
             return View(model);
-        }        
+        }
 
         [HttpPost]
         public void AddToFavourite(string quizId)
@@ -109,14 +106,13 @@ namespace Quizzario.Controllers
 
         public ViewResult Summary(string Id)
         {
-<<<<<<< HEAD
             QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
             return View(quizDTO);
-        }        
-=======
+            /* KUBA TO TWOJE CHYBA brakuje jakiegos question view modelu 
             var model = new CreateQuizViewModel();
-            return View("Create", model);
+            return View("Create", model);*/
         }
+
         [HttpPost]
         public RedirectToActionResult Create([FromForm] CreateQuizViewModel quizViewModel)
         {
@@ -136,7 +132,6 @@ namespace Quizzario.Controllers
             models.Add(new CreateAnswerViewModel());
             return PartialView("CreateQuizAnswerPartialView", models);
         }
->>>>>>> editQuiz
 
         /// <summary>
         /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
