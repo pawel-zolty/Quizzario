@@ -6,9 +6,6 @@ using Quizzario.Data.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using Quizzario.Data;
-using Quizzario.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace Quizzario.BusinessLogic.Factories
 {
@@ -263,9 +260,10 @@ namespace Quizzario.BusinessLogic.Factories
                 QuizSettingsId = quizDTO.QuizSettingsId,
                 Title = quizDTO.Title,
                 Description = quizDTO.Description,
-                ApplicationUserId = quizDTO.ApplicationUserId
+                ApplicationUserId = quizDTO.ApplicationUserId,
+                QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
-            quizRepository.SaveQuiz(quiz);  
+            quizRepository.SaveQuiz(quiz);
         }
 
         public List<QuizDTO> Quizes => GetAllQuizes();

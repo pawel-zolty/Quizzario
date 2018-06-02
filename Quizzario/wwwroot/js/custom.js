@@ -35,10 +35,19 @@ $(function () {
         $('#-quizes-right-panel-description').html(
             $(".-quizes-card-data", this).data('description')
         );
-
         var link = $('#-view-link').attr("href");
-        link = link.replace(/(\/[0-9a-z\-]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
-        $('#-view-link').attr("href", link);        
+        link = link.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+
+        var link2 = $('#-edit-link').attr("href");
+        link2 = link2.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+
+        var link3 = $('#-remove-link').attr("href");
+        link3 = link3.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+
+        $('#-view-link').attr("href", link);
+        $('#-edit-link').attr("href", link2);
+        $('#-remove-link').attr("href", link3);
+
 
         $('#-quizes-right-panel-content').fadeIn(500);
     });

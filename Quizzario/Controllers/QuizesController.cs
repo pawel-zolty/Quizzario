@@ -7,8 +7,11 @@ using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System;
 using Microsoft.AspNetCore.Mvc.Filters;
+=======
+>>>>>>> editQuiz
 
 namespace Quizzario.Controllers
 {
@@ -92,6 +95,9 @@ namespace Quizzario.Controllers
         [HttpPost]
         public ActionResult Edit(QuizDTO quizDTO)
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (quizDTO.ApplicationUserId == null)
+                quizDTO.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
                 quizService.SaveQuiz(quizDTO);
@@ -103,9 +109,34 @@ namespace Quizzario.Controllers
 
         public ViewResult Summary(string Id)
         {
+<<<<<<< HEAD
             QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
             return View(quizDTO);
         }        
+=======
+            var model = new CreateQuizViewModel();
+            return View("Create", model);
+        }
+        [HttpPost]
+        public RedirectToActionResult Create([FromForm] CreateQuizViewModel quizViewModel)
+        {
+            return RedirectToAction("MyQuizes");
+        }
+
+        [HttpPost]
+        public PartialViewResult AddQuestion([FromBody]CreateQuizViewModel model)
+        {
+            model.Questions.Add(new CreateQuestionViewModel());
+            return PartialView("CreateQuizQuestionPartialView", model.Questions);
+        }
+
+        [HttpPost]
+        public PartialViewResult AddAnswer([FromBody]List<CreateAnswerViewModel> models)
+        {
+            models.Add(new CreateAnswerViewModel());
+            return PartialView("CreateQuizAnswerPartialView", models);
+        }
+>>>>>>> editQuiz
 
         /// <summary>
         /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
