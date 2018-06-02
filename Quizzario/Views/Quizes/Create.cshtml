@@ -52,6 +52,10 @@
             <div class="row">
                 <div class="col-12">
                     <div id="-questions">
+                        @if (Model.Questions == null)
+                        {
+                            <p>siemka</p>;
+                        }
                         @Html.PartialAsync("CreateQuizQuestionPartialView", Model.Questions).Result
                     </div>
                     <button type="button" onclick="addQuestion()" id="AddQuestionButton" class="-question-card-add-new-question btn btn-sm btn-outline-primary px-3">Add new question...</button>

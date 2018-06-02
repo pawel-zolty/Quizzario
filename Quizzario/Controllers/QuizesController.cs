@@ -79,7 +79,8 @@ namespace Quizzario.Controllers
 
         public ViewResult Create()
         {
-            return View();
+            var model = new CreateQuizViewModel();
+            return View("Create", model);
             //return View("Edit", new QuizDTO());
         }
 
