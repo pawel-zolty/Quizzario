@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Quizzario.BusinessLogic.Abstract;
 using Quizzario.Services;
@@ -88,10 +88,14 @@ namespace Quizzario.Controllers
             };
             return model;
         }
+        public ViewResult EditQuiz()
+        {
+            return View(quizService.Quizes);
+        }
         public ViewResult Edit(string Id)
         {
             QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
-            return View("Edit",quizDTO);
+            return View(quizDTO);
         }
         [HttpPost]
         public ActionResult Edit(QuizDTO quizDTO)

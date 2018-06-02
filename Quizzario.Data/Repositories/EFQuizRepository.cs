@@ -50,8 +50,7 @@ namespace Quizzario.Data.Repositories
         {
             if (quiz.ApplicationUserId != null)
             {
-               // context.Quizes.Add(quiz);
-                context.Quizes.Update(quiz);
+                context.Quizes.Add(quiz);
             }else
             {
 
@@ -68,7 +67,6 @@ namespace Quizzario.Data.Repositories
                     dbEntry.CreationDate = quiz.CreationDate;
                     dbEntry.Description = quiz.Description;
                     context.Quizes.Add(dbEntry);
-                   
 
                 
             }
