@@ -13,7 +13,7 @@ namespace Quizzario.Data.Entities
         public string LastName { get; set; }     
         public string Origin { get; set; }
 
-        public virtual ICollection<AssignedUser> AssignedUsers { get; set; }
+        public  ICollection<AssignedUser> AssignedUsers { get; set; }
         public virtual ICollection<Quiz> Quizes { get; set; }
         public virtual ICollection<Score> Scores { get; set; }
     }

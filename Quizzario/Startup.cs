@@ -7,7 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Quizzario.Services;
 using Quizzario.Data;
 using Quizzario.Data.Entities;
-
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Quizzario
 {
@@ -39,13 +40,15 @@ namespace Quizzario
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
             services.AddDbContext<ApplicationDbContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Quizzario.Data")));
+             options.//UseLazyLoadingProxies().
+             UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Quizzario.Data")));
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             //factories
-            services.AddScoped<BusinessLogic.Abstracts.IQuizDTOFactory, BusinessLogic.Factories.QuizDTOFactory>();
+            services.AddScoped<BusinessLogic.Abstracts.IQuizDTOMapper, BusinessLogic.Factories.QuizDTOMapper>();
             services.AddScoped<BusinessLogic.Abstracts.IApplicationUserDTOFactory, BusinessLogic.Factories.ApplicationUserDTOFactory>();
-
+            services.AddScoped<BusinessLogic.Abstract.IApplicationUserEntityFactory, BusinessLogic.Factories.ApplicationUserEntityFactory>();
+            services.AddScoped<BusinessLogic.Abstract.IQuizEntityMapper, BusinessLogic.Factories.QuizEntityMapper>();
             //services
             services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();
 
@@ -56,7 +59,7 @@ namespace Quizzario
                 Data.Repositories.EFApplicationUserRepository>();
             services.AddScoped<Data.Abstracts.IAssignedRepository,
                 Data.Repositories.EFAssignedRepository>();
-
+            
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
             //    .AddDefaultTokenProviders();

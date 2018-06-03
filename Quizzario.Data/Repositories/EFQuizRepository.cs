@@ -9,18 +9,34 @@ namespace Quizzario.Data.Repositories
     public class EFQuizRepository : IQuizRepository
     {
         private ApplicationDbContext context;
+        private IAssignedRepository assignedRepository;
 
-        public EFQuizRepository(DbContextOptions<ApplicationDbContext> options)
+        public EFQuizRepository(DbContextOptions<ApplicationDbContext> options,
+            IAssignedRepository assignedRepo)
         {
             context = new ApplicationDbContext(options);
+            this.assignedRepository = assignedRepo;
         }
 
-        public List<Quiz> Quizes
+        public IEnumerable<Quiz> Quizes
         {
-            get { return context.Quizes.ToList(); }
+            get
+            {
+                var qs = context.Quizes;
+                foreach (var q in qs)
+                {
+                    q.AssignedUsers = new List<AssignedUser>();
+                    var assings = assignedRepository.GetAssingsByQuizId(q.Id);
+                    foreach(var a in assings)
+                    {
+                        q.AssignedUsers.Add(a);
+                    }
+                }
+                return qs;
+            }
         }
 
-      
+
 
         public Quiz GetById(string id)
         {
@@ -46,12 +62,13 @@ namespace Quizzario.Data.Repositories
             throw new System.NotImplementedException();
         }
 
-        public void SaveQuiz(Quiz quiz)
+        public void Update(Quiz quiz)
         {
             if (quiz.ApplicationUserId != null)
             {
                 context.Quizes.Update(quiz);
-            }else
+            }
+            else
             {
 
                 Quiz dbEntry;
@@ -70,7 +87,7 @@ namespace Quizzario.Data.Repositories
                 };
                 context.Quizes.Add(dbEntry);
 
-                
+
             }
             context.SaveChanges();
         }

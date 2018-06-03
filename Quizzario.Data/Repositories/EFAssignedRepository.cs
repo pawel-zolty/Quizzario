@@ -45,5 +45,10 @@ namespace Quizzario.Data.Repositories
                 context.SaveChanges();
             }
         }
+
+        public List<AssignedUser> GetAssingsByQuizId(string id)
+        {
+            return context.AssignedUsers.Where(a => a.QuizId.Equals(id)).ToList();
+        }
     }
 }

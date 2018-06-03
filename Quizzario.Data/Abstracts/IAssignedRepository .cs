@@ -8,5 +8,6 @@ namespace Quizzario.Data.Abstracts
         List<AssignedUser> GetUserAssigns(string userId);
         void AddFavouriteAssign(string userId, string quizId);
         void RemoveFavouriteAssign(string userId, string quizId);
+        List<AssignedUser> GetAssingsByQuizId(string id);
     }
 }

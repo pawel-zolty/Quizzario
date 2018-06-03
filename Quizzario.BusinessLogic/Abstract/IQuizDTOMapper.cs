@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Quizzario.BusinessLogic.Abstracts
 {
-    public interface IQuizDTOFactory
+    public interface IQuizDTOMapper
     {
         QuizDTO Create(string id);
         List<QuizDTO> CreateAllUserQuizes(string userId);

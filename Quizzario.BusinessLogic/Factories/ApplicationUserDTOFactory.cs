@@ -2,6 +2,9 @@
 using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace Quizzario.BusinessLogic.Factories
 {
@@ -24,23 +27,32 @@ namespace Quizzario.BusinessLogic.Factories
         {
             if (user == null)
                 return null;
-            string id = user.Id;
-            string firstName = user.FirstName;
-            string lastName = user.LastName;
-            string origin = user.Origin;
 
             ApplicationUserDTO userDTO = new ApplicationUserDTO
             {
-                Id = id,
-                FirstName = firstName,
-                LastName = lastName,
-                Origin = origin,
-                //AssignedUsers,
-                //Quizes,
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Origin = user.Origin,
+                //Quizes = new List<QuizDTO>()
                 //Scores
                 //TO DO 
             };
+            //var favouriteQuizesIds = user.AssignedUsers.
+            //    Where(a => a.AssignType == 0).
+            //    Select(a => a.QuizId);
+            //Fill(userDTO.Favourites, favouriteQuizesIds);
             return userDTO;
         }
+
+        //private void Fill(List<QuizDTO> favourites, IEnumerable<string> favouriteQuizesIds)
+        //{
+        //    foreach (var id in favouriteQuizesIds)
+        //    {
+        //        var quiz = CreateQuiz(id);
+        //        if (quiz != null)
+        //            favourites.Add(quiz);
+        //    }
+        //}
     }
 }
