@@ -6,9 +6,6 @@ using Quizzario.Data.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using Quizzario.Data;
-using Quizzario.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace Quizzario.BusinessLogic.Factories
 {
@@ -34,22 +31,22 @@ namespace Quizzario.BusinessLogic.Factories
             return CreateQuiz(quiz);
         }
 
-        public IEnumerable<QuizDTO> CreateUserFavouriteQuizes(string userId)
+        public List<QuizDTO> CreateUserFavouriteQuizes(string userId)
         {
             List<QuizDTO> quizesDTO = new List<QuizDTO>();
-            IEnumerable<string> userFavouriteQuizesIds =
+            List<string> userFavouriteQuizesIds = 
                 assignedRepository.GetUserAssigns(userId).
                 Where(q => q.AssignType == Data.Entities.AssignType.Favourite).
-                Select(q => q.Id);
+                Select(q => q.QuizId).ToList();
             
             if (userFavouriteQuizesIds.ToList().Count == 0)
                 return quizesDTO;            
             
-            IEnumerable <Quiz> quizes = quizRepository.Quizes.
+            List<Quiz> quizes = quizRepository.Quizes.
                 Where(
                     q => userFavouriteQuizesIds.
                     Contains(q.Id)
-                );
+                ).ToList();
 
             quizes = quizes.ToList();
             foreach (var q in quizes)
@@ -60,11 +57,11 @@ namespace Quizzario.BusinessLogic.Factories
             return quizesDTO;
         }
 
-        public IEnumerable<QuizDTO> CreateAllUserQuizes(string userId)
+        public List<QuizDTO> CreateAllUserQuizes(string userId)
         {
             
-            IEnumerable<Quiz> quizes = quizRepository.Quizes.
-                Where(q => q.ApplicationUserId.Equals(userId));
+            List<Quiz> quizes = quizRepository.Quizes.
+                Where(q => q.ApplicationUserId.Equals(userId)).ToList();
             List<QuizDTO> quizesDTO = new List<QuizDTO>();
             if (quizes != null)
             {
@@ -80,7 +77,7 @@ namespace Quizzario.BusinessLogic.Factories
 
         public void AddQuizToFavourite(string userId, string quizId)
         {
-            var quiz = quizRepository.GetById(userId);
+            var quiz = quizRepository.GetById(quizId);
             var user = userFactory.CreateUserWithId(userId);
             if (quiz == null || user == null)
                 return;
@@ -184,9 +181,9 @@ namespace Quizzario.BusinessLogic.Factories
             return quizDTO;
         }
 
-        public IEnumerable<QuizDTO> SearchByName(string name)
+        public List<QuizDTO> SearchByName(string name)
         {
-            IEnumerable<Quiz> quizes = quizRepository.Quizes;
+            List<Quiz> quizes = quizRepository.Quizes;
             List<QuizDTO> quizesDTO = new List<QuizDTO>();
             quizes = quizes.ToList();
             foreach (var q in quizes)
@@ -242,9 +239,9 @@ namespace Quizzario.BusinessLogic.Factories
             return quizDTO;
         }
 
-        public IEnumerable<QuizDTO> GetAllQuizes()
+        public List<QuizDTO> GetAllQuizes()
         {
-            IEnumerable<Quiz> quizes = quizRepository.Quizes;
+            List<Quiz> quizes = quizRepository.Quizes;
             List<QuizDTO> quizesDTO = new List<QuizDTO>();
             quizes = quizes.ToList();
             foreach (var q in quizes)
@@ -257,8 +254,6 @@ namespace Quizzario.BusinessLogic.Factories
 
         public void SaveQuiz(QuizDTO quizDTO)
         {
-
-
             Quiz quiz = new Quiz
             {
                 Id = quizDTO.Id,
@@ -269,11 +264,8 @@ namespace Quizzario.BusinessLogic.Factories
                 QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
             quizRepository.SaveQuiz(quiz);
-
-           
-           
         }
 
-        public IEnumerable<QuizDTO> Quizes => GetAllQuizes();
+        public List<QuizDTO> Quizes => GetAllQuizes();
     }
 }

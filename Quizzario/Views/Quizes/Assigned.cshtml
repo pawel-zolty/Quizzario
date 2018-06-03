@@ -1,7 +1,7 @@
 ﻿@model Quizzario.Models.QuizViewModels.QuizListViewModel
 
 @{
-    ViewData["Title"] = "Assigned";
+    ViewData["Title"] = "Assigned Quizes";
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
 }
 
@@ -20,7 +20,7 @@
     <div class="col-md-8" id="-quizes-list">
         <div class="row">
             <div class="col-md-8">
-                <h1>Assigned quizes</h1>
+                <h1>@ViewData["Title"]</h1>
             </div>
             <div class="col-md-4">
                 @* Sorting by select, functionalitites missing *@

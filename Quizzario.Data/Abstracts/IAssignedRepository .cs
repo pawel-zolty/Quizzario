@@ -5,7 +5,7 @@ namespace Quizzario.Data.Abstracts
 {
     public interface IAssignedRepository
     {
-        IEnumerable<AssignedUser> GetUserAssigns(string userId);
+        List<AssignedUser> GetUserAssigns(string userId);
         void AddFavouriteAssign(string userId, string quizId);
         void RemoveFavouriteAssign(string userId, string quizId);
     }

@@ -16,10 +16,11 @@ namespace Quizzario.Data.Repositories
             context = new ApplicationDbContext(options);
         }
         
-        public IEnumerable<AssignedUser> GetUserAssigns(string userId)
+        public List<AssignedUser> GetUserAssigns(string userId)
         {
-            return context.AssignedUsers.ToList<AssignedUser>().
-                Where(q => q.ApplicationUserId.Equals(userId));
+            return context.AssignedUsers.
+                Where(q => q.ApplicationUserId.Equals(userId)).
+                ToList<AssignedUser>();
         }
 
         public void AddFavouriteAssign(string userId, string quizId)

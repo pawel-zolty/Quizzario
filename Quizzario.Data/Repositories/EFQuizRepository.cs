@@ -15,9 +15,9 @@ namespace Quizzario.Data.Repositories
             context = new ApplicationDbContext(options);
         }
 
-        public IEnumerable<Quiz> Quizes
+        public List<Quiz> Quizes
         {
-            get { return context.Quizes; }
+            get { return context.Quizes.ToList(); }
         }
 
       
@@ -41,7 +41,7 @@ namespace Quizzario.Data.Repositories
                FirstOrDefault();
         }
 
-        public IEnumerable<Quiz> GetQuiz()
+        public List<Quiz> GetQuiz()
         {
             throw new System.NotImplementedException();
         }
@@ -50,25 +50,25 @@ namespace Quizzario.Data.Repositories
         {
             if (quiz.ApplicationUserId != null)
             {
-               // context.Quizes.Add(quiz);
                 context.Quizes.Update(quiz);
             }else
             {
 
                 Quiz dbEntry;
-                    dbEntry = new Quiz();
-                    dbEntry.Title = quiz.Title;
-                    dbEntry.QuizSettings = quiz.QuizSettings;
-                    dbEntry.QuizSettingsId = quiz.QuizSettingsId;
-                    dbEntry.QuizType = quiz.QuizType;
-                    dbEntry.Scores = quiz.Scores;
-                    dbEntry.ApplicationUser = quiz.ApplicationUser;
-                    dbEntry.ApplicationUserId = quiz.ApplicationUserId;
-                    dbEntry.AssignedUsers = quiz.AssignedUsers;
-                    dbEntry.CreationDate = quiz.CreationDate;
-                    dbEntry.Description = quiz.Description;
-                    context.Quizes.Add(dbEntry);
-                   
+                dbEntry = new Quiz
+                {
+                    Title = quiz.Title,
+                    QuizSettings = quiz.QuizSettings,
+                    QuizSettingsId = quiz.QuizSettingsId,
+                    QuizType = quiz.QuizType,
+                    Scores = quiz.Scores,
+                    ApplicationUser = quiz.ApplicationUser,
+                    ApplicationUserId = quiz.ApplicationUserId,
+                    AssignedUsers = quiz.AssignedUsers,
+                    CreationDate = quiz.CreationDate,
+                    Description = quiz.Description
+                };
+                context.Quizes.Add(dbEntry);
 
                 
             }

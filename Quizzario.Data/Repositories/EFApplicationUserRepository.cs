@@ -15,9 +15,9 @@ namespace Quizzario.Data.Repositories
             context = new ApplicationDbContext(options);
         }
 
-        public IEnumerable<ApplicationUser> Users
+        public List<ApplicationUser> Users
         {
-            get { return context.Users; }
+            get { return context.Users.ToList(); }
         }
 
         public ApplicationUser GetById(string id)

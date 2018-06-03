@@ -7,14 +7,14 @@
 
 @using (Html.BeginForm())
 {
-<div>
-    <form action="">
+    <div>
+        <form action="">
 
-        <input name="Title" , value="@Model.Title">
-        <input name="Description" , value="@Model.Description">
-        <input name="QuizType" , value="@Model.QuizType">
-    </form>
-    <input type="submit" value="Save"  />
-    @Html.ActionLink("Discard and back to list", "EditQuiz")
-</div>
+            <input name="Title" , value="@Model.Title">
+            <input name="Description" , value="@Model.Description">
+            <input name="QuizType" , value="@Model.QuizType">
+        </form>
+        <input type="submit" value="Save" />
+        
+    </div>
 }
