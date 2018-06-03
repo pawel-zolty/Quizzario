@@ -29,7 +29,7 @@ namespace Quizzario.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-       // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseLazyLoadingProxies();
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseLazyLoadingProxies();
 
     }
 }

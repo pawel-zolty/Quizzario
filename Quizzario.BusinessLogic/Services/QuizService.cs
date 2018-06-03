@@ -1,19 +1,15 @@
 ﻿using Quizzario.BusinessLogic.Abstract;
-using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
-using Quizzario.BusinessLogic.Factories;
-using Quizzario.Data.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Quizzario.BusinessLogic.Services
 {
     public class QuizService : IQuizService
     {
-        private IQuizDTOMapper quizDTOMapper;
-        private IApplicationUserDTOFactory userFactory;
-        private IApplicationUserEntityFactory userEnFactory;
-        private IQuizEntityMapper quizEntityMapper;
+        private readonly IQuizDTOMapper quizDTOMapper;
+        private readonly IApplicationUserDTOFactory userFactory;
+        private readonly IApplicationUserEntityFactory userEnFactory;
+        private readonly IQuizEntityMapper quizEntityMapper;
 
         public QuizService(IQuizDTOMapper quizDTOMapper,
             IApplicationUserDTOFactory userFactory,
@@ -26,17 +22,17 @@ namespace Quizzario.BusinessLogic.Services
             this.userEnFactory = userEnFactory;
         }
 
-        public List<QuizDTO> Quizes => quizDTOMapper.Quizes;
-
-        public List<QuizDTO> GetUserFavouriteQuizes(string userId)
-        {
-            List<QuizDTO> quizes = quizDTOMapper.CreateUserFavouriteQuizes(userId);
-            return quizes;
-        }
+        public List<QuizDTO> Quizes => GetAllQuizes();
 
         public List<QuizDTO> GetAllUserQuizes(string userId)
         {
             List<QuizDTO> quizes = quizDTOMapper.CreateAllUserQuizes(userId);
+            return quizes;
+        }
+
+        public List<QuizDTO> GetUserFavouriteQuizes(string userId)
+        {
+            List<QuizDTO> quizes = quizDTOMapper.CreateUserFavouriteQuizes(userId);
             return quizes;
         }
 
@@ -45,13 +41,29 @@ namespace Quizzario.BusinessLogic.Services
             var user = userFactory.CreateUserWithId(userId);
             var quiz = quizDTOMapper.Create(quizId);
             quiz.AddToFavouritesUsers(user);
-            quizEntityMapper.SaveQuiz(quiz);
+            //quizEntityMapper.SaveQuiz(quiz);
             //quizFactory.AddQuizToFavourite(userId, quizId);
         }
 
         public void RemoveQuizFromFavourite(string userId, string quizId)
         {
-            quizDTOMapper.RemoveQuizFromFavourite(userId, quizId);
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            quiz.RemoveFromFavouritesUsers(user);
+            //quizDTOMapper.RemoveQuizFromFavourite(userId, quizId);
+        }
+
+        public bool IsQuizFavourite(string userId, string quizId)
+        {
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            var i = quiz.IsFavouritesUsers(user);
+            return i;
+        }
+
+        public void SaveQuiz(QuizDTO quiz)
+        {
+            quizDTOMapper.SaveQuiz(quiz);
         }
 
         public List<QuizDTO> SearchByName(string name)
@@ -60,15 +72,12 @@ namespace Quizzario.BusinessLogic.Services
             return quizes;
         }
 
-        public List<QuizDTO> GetAllQuizes()
+        private List<QuizDTO> GetAllQuizes()
         {
             List<QuizDTO> quizes = quizDTOMapper.GetAllQuizes();
             return quizes;
         }
 
-        public void SaveQuiz(QuizDTO quiz)
-        {
-            quizDTOMapper.SaveQuiz(quiz);
-        }
+
     }
 }

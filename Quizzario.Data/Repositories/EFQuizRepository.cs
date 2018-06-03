@@ -25,12 +25,12 @@ namespace Quizzario.Data.Repositories
                 var qs = context.Quizes;
                 foreach (var q in qs)
                 {
-                    q.AssignedUsers = new List<AssignedUser>();
-                    var assings = assignedRepository.GetAssingsByQuizId(q.Id);
-                    foreach(var a in assings)
-                    {
-                        q.AssignedUsers.Add(a);
-                    }
+                    //q.AssignedUsers = new List<AssignedUser>();
+                    //var assings = assignedRepository.GetAssingsByQuizId(q.Id);
+                    //foreach(var a in assings)
+                    //{
+                    //    q.AssignedUsers.Add(a);
+                    //}
                 }
                 return qs;
             }

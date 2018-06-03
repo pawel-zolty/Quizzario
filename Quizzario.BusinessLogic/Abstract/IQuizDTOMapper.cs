@@ -2,7 +2,7 @@
 using Quizzario.Data.Entities;
 using System.Collections.Generic;
 
-namespace Quizzario.BusinessLogic.Abstracts
+namespace Quizzario.BusinessLogic.Abstract
 {
     public interface IQuizDTOMapper
     {

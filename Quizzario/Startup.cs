@@ -14,7 +14,7 @@ namespace Quizzario
 {
     public class Startup
     {
-        string _testSecret = null;
+        readonly string _testSecret = null;
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
 
@@ -45,8 +45,8 @@ namespace Quizzario
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             //factories
-            services.AddScoped<BusinessLogic.Abstracts.IQuizDTOMapper, BusinessLogic.Factories.QuizDTOMapper>();
-            services.AddScoped<BusinessLogic.Abstracts.IApplicationUserDTOFactory, BusinessLogic.Factories.ApplicationUserDTOFactory>();
+            services.AddScoped<BusinessLogic.Abstract.IQuizDTOMapper, BusinessLogic.Factories.QuizDTOMapper>();
+            services.AddScoped<BusinessLogic.Abstract.IApplicationUserDTOFactory, BusinessLogic.Factories.ApplicationUserDTOFactory>();
             services.AddScoped<BusinessLogic.Abstract.IApplicationUserEntityFactory, BusinessLogic.Factories.ApplicationUserEntityFactory>();
             services.AddScoped<BusinessLogic.Abstract.IQuizEntityMapper, BusinessLogic.Factories.QuizEntityMapper>();
             //services

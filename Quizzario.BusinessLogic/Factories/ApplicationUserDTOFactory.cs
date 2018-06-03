@@ -1,10 +1,7 @@
 ﻿using Quizzario.Data.Abstracts;
-using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System;
+using Quizzario.BusinessLogic.Abstract;
 
 namespace Quizzario.BusinessLogic.Factories
 {

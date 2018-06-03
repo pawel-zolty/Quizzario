@@ -3,11 +3,7 @@ using Quizzario.BusinessLogic.DTOs;
 using Quizzario.BusinessLogic.Extensions;
 using Quizzario.Data.Abstracts;
 using Quizzario.Data.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Quizzario.BusinessLogic.Factories
 {
@@ -20,16 +16,10 @@ namespace Quizzario.BusinessLogic.Factories
             this.quizRepository = quizRepository;
         }
 
-        public Quiz CreateQuizEntity(QuizDTO quizDTO)
+        public Quiz CreateQuiz(QuizDTO quizDTO)
         {
-            var quiz = quizRepository.GetById(quizDTO.Id);
-            quiz.Id = quizDTO.Id;
-            quiz.ApplicationUserId = quizDTO.ApplicationUserId;
-            quiz.FilePath = quizDTO.FilePath;
-            quiz.Description = quizDTO.Description;
-            quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
-            quiz.Title = quizDTO.Title;
-
+            Quiz quiz = GetQuizEntity(quizDTO);
+            quiz.AssignedUsers = new List<AssignedUser>();
             foreach (var user in quizDTO.FavouritesUsers)
             {
                 var ass = new AssignedUser()
@@ -43,10 +33,22 @@ namespace Quizzario.BusinessLogic.Factories
             return quiz;
         }
 
-        public void SaveQuiz(QuizDTO quizDTO)
+        public void Update(QuizDTO quizDTO)
         {
-            var quiz = CreateQuizEntity(quizDTO);
+            var quiz = CreateQuiz(quizDTO);
             quizRepository.Update(quiz);
+        }
+
+        private Quiz GetQuizEntity(QuizDTO quizDTO)
+        {
+            var quiz = quizRepository.GetById(quizDTO.Id);
+            quiz.Id = quizDTO.Id;
+            quiz.ApplicationUserId = quizDTO.ApplicationUserId;
+            quiz.FilePath = quizDTO.FilePath;
+            quiz.Description = quizDTO.Description;
+            quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
+            quiz.Title = quizDTO.Title;
+            return quiz;
         }
     }
 }

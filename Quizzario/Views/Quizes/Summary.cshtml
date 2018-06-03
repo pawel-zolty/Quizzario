@@ -19,12 +19,12 @@
 @{
     // Formatting dates
     string creationDate = DateTime.Parse(Model.CreationDate).ToString("MMMM dd, yyyy");
-    bool isFavourite = false;   // Data missing, updated controller needed
+    bool isFavourite = @ViewBag.IsFavourite;   // Data missing, updated controller needed
                                 // string updateDate ...
 
 }
   
-
+<p>@isFavourite<p>
 <div class="row px-3 py-3 mx-0">
     <div class="col-12">
         <div class="row mb-1 mb-md-2">

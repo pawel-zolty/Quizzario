@@ -15,7 +15,7 @@ namespace Quizzario.Controllers
     [Authorize]
     public class QuizesController : Controller
     {
-        private int PageSize = 4;
+        private readonly int PageSize = 4;
         private IQuizService quizService;
         private IPagingInfoService pagingInfoService;
         private string userId;
@@ -77,6 +77,11 @@ namespace Quizzario.Controllers
             quizService.RemoveQuizFromFavourite(userId, quizId);
         }
 
+        //public bool IsFavourite(string quizId)
+        //{
+        //    return quizService.IsQuizFavourite(userId, quizId);
+        //}
+
         public ViewResult Create()
         {
             var model = new CreateQuizViewModel();
@@ -84,9 +89,9 @@ namespace Quizzario.Controllers
             //return View("Edit", new QuizDTO());
         }
 
-        public ViewResult Edit(string Id)
+        public ViewResult Edit(string quizId)
         {
-            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(quizId));
             return View(quizDTO);
         }
 
@@ -107,7 +112,9 @@ namespace Quizzario.Controllers
 
         public ViewResult Summary(string Id)
         {
-            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
+            var isFavourite = quizService.IsQuizFavourite(userId, Id);
+            ViewBag.IsFavourite = isFavourite;
             return View(quizDTO);
             /* KUBA TO TWOJE CHYBA brakuje jakiegos question view modelu 
             var model = new CreateQuizViewModel();

@@ -1,5 +1,4 @@
 ﻿using Quizzario.BusinessLogic.Extensions;
-using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.Data.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
@@ -17,15 +16,7 @@ namespace Quizzario.BusinessLogic.Factories
         private IApplicationUserDTOFactory userFactory;
         private IQuizEntityMapper quizEntityMapper;
 
-        private void FillList(List<ApplicationUserDTO> list, IEnumerable<string> usersIds)
-        {
-            foreach (var id in usersIds)
-            {
-                var user = userFactory.CreateUserWithId(id);
-                if (user != null)
-                    list.Add(user);
-            }
-        }
+        public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
             IAssignedRepository assignedRepository,
@@ -36,7 +27,7 @@ namespace Quizzario.BusinessLogic.Factories
             this.assignedRepository = assignedRepository;
             this.userFactory = userFactory;
             this.quizEntityMapper = quizEntityMapper;
-        }
+        }        
 
         public QuizDTO Create(string id)
         {
@@ -108,60 +99,7 @@ namespace Quizzario.BusinessLogic.Factories
             if (quiz == null || user == null)
                 return;
             assignedRepository.RemoveFavouriteAssign(userId, quizId);
-        }
-
-        //private static void AddStaticMockData(List<QuizDTO> quizesDTO)
-        //{
-        //    var x = new QuizDTO
-        //    {
-        //        Id = "3",
-        //        Title = "Quiz1",
-        //        Description = "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
-        //        CreationDate = "1996.01.11",
-        //        ApplicationUserId = "8ded9b6f-e8a8-425b-a115-c280885e92c1"
-        //    };
-        //    var y = new QuizDTO
-        //    {
-        //        Id = "4",
-        //        Title = "Quiz2",
-        //        Description = "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
-        //        CreationDate = "2000.01.11"
-        //    };
-        //    var z = new QuizDTO
-        //    {
-        //        Id = "5",
-        //        Title = "Quiz3",
-        //        Description = "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
-        //        CreationDate = "2011.01.11"
-        //    };
-        //    var o = new QuizDTO
-        //    {
-        //        Id = "6",
-        //        Title = "Quiz4",
-        //        Description = "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
-        //        CreationDate = "2016.01.11"
-        //    };
-        //    var a = new QuizDTO
-        //    {
-        //        Id = "7",
-        //        Title = "Quiz5",
-        //        Description = "5 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
-        //        CreationDate = "1990.01.11"
-        //    };
-        //    var b = new QuizDTO
-        //    {
-        //        Id = "8",
-        //        Title = "Quiz6",
-        //        Description = "6 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...",
-        //        CreationDate = "2006.01.11"
-        //    };
-        //    quizesDTO.Add(x);
-        //    quizesDTO.Add(y);
-        //    quizesDTO.Add(z);
-        //    quizesDTO.Add(o);
-        //    quizesDTO.Add(a);
-        //    quizesDTO.Add(b);
-        //}
+        }        
 
         private QuizDTO CreateQuiz(Quiz quiz)
         {
@@ -174,7 +112,7 @@ namespace Quizzario.BusinessLogic.Factories
             ApplicationUserDTO user = userFactory.CreateUserWithId(userId);
             DTOs.QuizType? type = quiz.QuizType.ToDTOQuizType();
 
-            QuizDTO quizDTO = new QuizDTO(quizEntityMapper.SaveQuiz)
+            QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {
                 
                 Id = quiz.Id,
@@ -194,14 +132,14 @@ namespace Quizzario.BusinessLogic.Factories
             {
                 idsList.Add(ass.ApplicationUserId);
             }
-            foreach (var id in idsList)
-            {
-                var userr = userFactory.CreateUserWithId(id);
-                if (userr != null)
-                    quizDTO.AddToFavouritesUsers(userr);
-                    //list.Add(user);
-            }
-            //FillList(quizDTO.FavouritesUsers, idsList);
+            //foreach (var id in idsList)
+            //{
+            //    var userr = userFactory.CreateUserWithId(id);
+            //    if (userr != null)
+            //        quizDTO.AddToFavouritesUsers(userr);
+            //        //list.Add(user);
+            //}
+            FillList(quizDTO.FavouritesUsers, idsList);
             //quizDTO.AddToFavouritesUsers(user);
 
             return quizDTO;
@@ -248,7 +186,7 @@ namespace Quizzario.BusinessLogic.Factories
             //if (user == null || title == null || filePath == null)
             //  return null;
             DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
-            QuizDTO quizDTO = new QuizDTO(quizEntityMapper.SaveQuiz)
+            QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {
                 Id = id,
                 Title = title,
@@ -274,7 +212,6 @@ namespace Quizzario.BusinessLogic.Factories
             {
                 quizesDTO.Add(CreateQuiz(q));
             }
-            //AddStaticMockData(quizesDTO);
             return quizesDTO;
         }
 
@@ -290,8 +227,16 @@ namespace Quizzario.BusinessLogic.Factories
                 QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
             quizRepository.Update(quiz);
-        }
+        }        
 
-        public List<QuizDTO> Quizes => GetAllQuizes();
+        private void FillList(List<ApplicationUserDTO> list, IEnumerable<string> usersIds)
+        {
+            foreach (var id in usersIds)
+            {
+                var user = userFactory.CreateUserWithId(id);
+                if (user != null)
+                    list.Add(user);
+            }
+        }
     }
 }

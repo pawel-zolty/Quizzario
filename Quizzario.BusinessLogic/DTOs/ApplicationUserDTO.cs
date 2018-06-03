@@ -12,5 +12,13 @@ namespace Quizzario.BusinessLogic.DTOs
         public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }
         public virtual ICollection<QuizDTO> Quizes { get; set; }
         public virtual ICollection<ScoreDTO> Scores { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+            var appuser = (ApplicationUserDTO)obj;
+            return (Id.Equals(appuser.Id));
+        }
     }
 }
