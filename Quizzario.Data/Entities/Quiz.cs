@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,6 +30,7 @@ namespace Quizzario.Data.Entities
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual ICollection<AssignedUser> AssignedUsers { get; set; }
+
         public virtual ICollection<Score> Scores { get; set; }
         public virtual QuizSettings QuizSettings { get; set; }
     }
