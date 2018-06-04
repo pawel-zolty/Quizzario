@@ -20,17 +20,25 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             Quiz quiz = GetQuizEntity(quizDTO);
             quiz.AssignedUsers = new List<AssignedUser>();
-            foreach (var user in quizDTO.FavouritesUsers)
+            var type = Data.Entities.AssignType.Favourite;
+            CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.FavouritesUsers);
+            type = Data.Entities.AssignType.AssignedToPrivate;
+            CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.PrivateAssignedUsers);
+            return quiz;
+        }
+
+        private static void CreateQuizEntityAssignList(QuizDTO quizDTO, Quiz quiz, Data.Entities.AssignType type, IEnumerable<ApplicationUserDTO> listOfusersDTO)
+        {
+            foreach (var user in listOfusersDTO)
             {
                 var ass = new AssignedUser()
                 {
                     ApplicationUserId = user.Id,
-                    AssignType = 0,
+                    AssignType = type,
                     QuizId = quizDTO.Id
                 };
                 quiz.AssignedUsers.Add(ass);
             }
-            return quiz;
         }
 
         public void Update(QuizDTO quizDTO)
@@ -47,6 +55,7 @@ namespace Quizzario.BusinessLogic.Mappers
             quiz.FilePath = quizDTO.FilePath;
             quiz.Description = quizDTO.Description;
             quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
+            quiz.QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel);
             quiz.Title = quizDTO.Title;
             return quiz;
         }

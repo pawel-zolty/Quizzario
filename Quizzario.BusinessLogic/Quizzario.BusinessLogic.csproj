@@ -139,7 +139,8 @@
     <Compile Include="DTOs\QuizDTO.cs" />
     <Compile Include="DTOs\QuizSettingsDTO.cs" />
     <Compile Include="DTOs\ScoreDTO.cs" />
-    <Compile Include="Extensions\AssignedTypeExtension.cs" />
+    <Compile Include="Extensions\QuizAssignedTypeExtension.cs" />
+    <Compile Include="Extensions\QuizAccessLevelExtension.cs" />
     <Compile Include="Extensions\QuizTypeExtension.cs" />
     <Compile Include="Mappers\ApplicationUserDTOMapper.cs" />
     <Compile Include="Mappers\QuizDTOMapper.cs" />

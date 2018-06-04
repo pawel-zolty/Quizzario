@@ -71,15 +71,22 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
+        public void AddToPrivateAssigned(string quizId)
+        {
+            quizService.AddQuizToPrivateAssigned(userId, quizId);
+        }
+
+        [HttpPost]
         public void RemoveFromFavourite(string quizId)
         {
             quizService.RemoveQuizFromFavourite(userId, quizId);
         }
 
-        //public bool IsFavourite(string quizId)
-        //{
-        //    return quizService.IsQuizFavourite(userId, quizId);
-        //}
+        [HttpPost]
+        public void RemoveFromPrivateAssigned(string quizId)
+        {
+            quizService.RemoveQuizFromPrivateAssigned(userId, quizId);
+        }        
 
         public ViewResult Create()
         {

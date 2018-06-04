@@ -36,19 +36,6 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             var type = Data.Entities.AssignType.Favourite;
             return CreateUserAssignedQuizes(userId, type);
-            //var favouriteQuizes = quizRepository.Quizes.
-            //    Where(
-            //        q => q.AssignedUsers.
-            //        Any(a => a.AssignType == Data.Entities.AssignType.Favourite && a.ApplicationUserId.Equals(userId))
-            //    ).ToList();
-            //List<QuizDTO> quizesDTO = new List<QuizDTO>();
-            //if (favouriteQuizes.Count == 0)
-            //    return quizesDTO;
-            //foreach (var q in favouriteQuizes)
-            //{
-            //    quizesDTO.Add(CreateQuiz(q));
-            //}
-            //return quizesDTO;
         }
 
         public List<QuizDTO> CreateUserAssignedToPrivateQuizes(string userId)
@@ -101,6 +88,7 @@ namespace Quizzario.BusinessLogic.Mappers
 
             ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
             DTOs.QuizType? type = quiz.QuizType.ToDTOQuizType();
+            DTOs.QuizAccessLevel? accessLevel = quiz.QuizAccessLevel.ToDTOQuizAccessLevel();
 
             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {
@@ -111,18 +99,26 @@ namespace Quizzario.BusinessLogic.Mappers
                 ApplicationUserId = user.Id,
                 //QuizSettingsId = "1",
                 QuizType = type,
+                QuizAccessLevel = accessLevel,
                 FilePath = quiz.FilePath,
                 ApplicationUser = user,
-                CreationDate = creationDate.ToString(),
-                FavouritesUsers = new List<ApplicationUserDTO>()
+                CreationDate = creationDate.ToString()
             };
 
             List<string> idsList = new List<string>();
-            foreach (var ass in quiz.AssignedUsers)
+            foreach (var ass in quiz.AssignedUsers.
+                Where(a => a.AssignType == Data.Entities.AssignType.Favourite))
             {
                 idsList.Add(ass.ApplicationUserId);
             }
             FillList(quizDTO.FavouritesUsers, idsList);
+            idsList = new List<string>();
+            foreach (var ass in quiz.AssignedUsers.
+                Where(a => a.AssignType == Data.Entities.AssignType.AssignedToPrivate))
+            {
+                idsList.Add(ass.ApplicationUserId);
+            }
+            FillList(quizDTO.PrivateAssignedUsers, idsList);
             return quizDTO;
         }
 

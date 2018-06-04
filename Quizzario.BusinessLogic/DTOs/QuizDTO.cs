@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Quizzario.BusinessLogic.DTOs
@@ -8,12 +9,17 @@ namespace Quizzario.BusinessLogic.DTOs
         Quiz, Exam, Test
     }
 
+    public enum QuizAccessLevel
+    {
+        Public, Private
+    }
+
     public class QuizDTO
     {
         public QuizDTO(SaveQuizDelegate saveQuiz)
         {
             this.SaveQuiz = saveQuiz;
-        }
+        }        
 
         public string Id { get; set; }
         public string Title { get; set; }
@@ -21,12 +27,14 @@ namespace Quizzario.BusinessLogic.DTOs
         public string ApplicationUserId { get; set; }
         public string QuizSettingsId { get; set; }
         public QuizType? QuizType { get; set; }
+        public QuizAccessLevel? QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
-        //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }
+        //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }       //RACZEJ NIE POTRZEBNE - 1 do 1 z encji EF. Nizej sa odpowiendnki biznesowe
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
+        public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
         //public virtual ICollection<ScoreDTO> Scores { get; set; }
         //public virtual QuizSettingsDTO QuizSettings { get; set; }
 
@@ -39,12 +47,21 @@ namespace Quizzario.BusinessLogic.DTOs
             SaveQuiz(this);
         }
 
+        public void AddToPrivateAssignedUsers(ApplicationUserDTO user)
+        {
+            PrivateAssignedUsers.Add(user);
+            SaveQuiz(this);
+        }
+
         public void RemoveFromFavouritesUsers(ApplicationUserDTO user)
         {
-            var a = FavouritesUsers;
-            var c = FavouritesUsers[0].Equals(user);
             FavouritesUsers.Remove(user);
-            var b = FavouritesUsers;
+            SaveQuiz(this);
+        }
+
+        public void RemoveFromPrivateAssignedUsers(ApplicationUserDTO user)
+        {
+            PrivateAssignedUsers.Remove(user);
             SaveQuiz(this);
         }
 
@@ -55,7 +72,7 @@ namespace Quizzario.BusinessLogic.DTOs
                 Select(u => u.Id).
                 FirstOrDefault();
             return isFavourite == null ? false : true;
-        }
+        }        
 
         public override bool Equals(object obj)
         {
