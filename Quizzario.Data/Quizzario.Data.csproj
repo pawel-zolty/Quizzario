@@ -336,10 +336,6 @@
     <Compile Include="Entities\Quiz.cs" />
     <Compile Include="Entities\QuizSettings.cs" />
     <Compile Include="Entities\Score.cs" />
-    <Compile Include="Migrations\20180603124718_migracja.cs" />
-    <Compile Include="Migrations\20180603124718_migracja.designer.cs">
-      <DependentUpon>20180603124718_migracja.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\20180603134301_AppUser_no_required_names.cs" />
     <Compile Include="Migrations\20180603134301_AppUser_no_required_names.designer.cs">
       <DependentUpon>20180603134301_AppUser_no_required_names.cs</DependentUpon>

@@ -152,14 +152,14 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             if (q == null)
                 return null;
-            if (name != q.Title)
+            if (name != q.Title || q.QuizAccessLevel == 0)
                 return null;
             string id = q.Id;
             string title = q.Title;
             string userId = q.ApplicationUserId;
             string filePath = q.FilePath;
-
-            ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
+            DTOs.QuizAccessLevel? Level = q.QuizAccessLevel.ToDTOQuizAccessLevel();
+                ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
             DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {
@@ -170,6 +170,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 QuizType = type,
                 FilePath = filePath,
                 ApplicationUser = user,
+                QuizAccessLevel = Level,
                 //AssignedUsers,
                 //Scores,
                 //QuizSettings = 
