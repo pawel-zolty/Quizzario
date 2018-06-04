@@ -1,8 +1,8 @@
 ﻿namespace Quizzario.BusinessLogic.Extensions
 {
-    public static class AssignedTypeExtension
+    public static class QuizAssignedTypeExtension
     {
-        public static BusinessLogic.DTOs.AssignType? ToDTOQuizType(this Data.Entities.AssignType? value)
+        public static BusinessLogic.DTOs.AssignType? ToDTOQuizAssignedType(this Data.Entities.AssignType? value)
         {
             if (value == null)
                 return null;
@@ -11,7 +11,7 @@
             return quizType;
         }
 
-        public static Data.Entities.AssignType? ToEntityQuizType(this BusinessLogic.DTOs.AssignType? value)
+        public static Data.Entities.AssignType? ToEntityQuizAssignedType(this BusinessLogic.DTOs.AssignType? value)
         {
             if (value == null)
                 return null;

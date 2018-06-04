@@ -88,6 +88,7 @@ namespace Quizzario.BusinessLogic.Mappers
 
             ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
             DTOs.QuizType? type = quiz.QuizType.ToDTOQuizType();
+            DTOs.QuizAccessLevel? accessLevel = quiz.QuizAccessLevel.ToDTOQuizAccessLevel();
 
             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {
@@ -98,6 +99,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 ApplicationUserId = user.Id,
                 //QuizSettingsId = "1",
                 QuizType = type,
+                QuizAccessLevel = accessLevel,
                 FilePath = quiz.FilePath,
                 ApplicationUser = user,
                 CreationDate = creationDate.ToString()

@@ -55,6 +55,7 @@ namespace Quizzario.BusinessLogic.Mappers
             quiz.FilePath = quizDTO.FilePath;
             quiz.Description = quizDTO.Description;
             quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
+            quiz.QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel);
             quiz.Title = quizDTO.Title;
             return quiz;
         }

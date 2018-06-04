@@ -9,12 +9,17 @@ namespace Quizzario.BusinessLogic.DTOs
         Quiz, Exam, Test
     }
 
+    public enum QuizAccessLevel
+    {
+        Public, Private
+    }
+
     public class QuizDTO
     {
         public QuizDTO(SaveQuizDelegate saveQuiz)
         {
             this.SaveQuiz = saveQuiz;
-        }
+        }        
 
         public string Id { get; set; }
         public string Title { get; set; }
@@ -22,6 +27,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public string ApplicationUserId { get; set; }
         public string QuizSettingsId { get; set; }
         public QuizType? QuizType { get; set; }
+        public QuizAccessLevel? QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
 

@@ -29,7 +29,7 @@ namespace Quizzario.Data.Entities
         [Required]
         public QuizType? QuizType { get; set; }
         [Required]
-        public QuizAccessLevel QuizAccessLevel { get; set; }
+        public QuizAccessLevel? QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
         [Column(TypeName = "Date"), Required]
         public DateTime CreationDate { get; set; }
