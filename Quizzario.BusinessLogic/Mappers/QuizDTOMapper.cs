@@ -7,25 +7,25 @@ using System.Linq;
 using System;
 using Quizzario.BusinessLogic.Abstract;
 
-namespace Quizzario.BusinessLogic.Factories
+namespace Quizzario.BusinessLogic.Mappers
 {
     public class QuizDTOMapper : IQuizDTOMapper
     {
         private IQuizRepository quizRepository;
         private IAssignedRepository assignedRepository;
-        private IApplicationUserDTOFactory userFactory;
+        private IApplicationUserDTOMapper userDTOMapper;
         private IQuizEntityMapper quizEntityMapper;
 
         public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
             IAssignedRepository assignedRepository,
-            IApplicationUserDTOFactory userFactory,
+            IApplicationUserDTOMapper userDTOMapper,
             IQuizEntityMapper quizEntityMapper)
         {
             this.quizRepository = quizRepository;
             this.assignedRepository = assignedRepository;
-            this.userFactory = userFactory;
+            this.userDTOMapper = userDTOMapper;
             this.quizEntityMapper = quizEntityMapper;
         }        
 
@@ -95,7 +95,7 @@ namespace Quizzario.BusinessLogic.Factories
         public void RemoveQuizFromFavourite(string userId, string quizId)
         {
             var quiz = quizRepository.GetById(userId);
-            var user = userFactory.CreateUserWithId(userId);
+            var user = userDTOMapper.CreateUserWithId(userId);
             if (quiz == null || user == null)
                 return;
             assignedRepository.RemoveFavouriteAssign(userId, quizId);
@@ -109,7 +109,7 @@ namespace Quizzario.BusinessLogic.Factories
             
             DateTime creationDate = quiz.CreationDate;
 
-            ApplicationUserDTO user = userFactory.CreateUserWithId(userId);
+            ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
             DTOs.QuizType? type = quiz.QuizType.ToDTOQuizType();
 
             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
@@ -182,7 +182,7 @@ namespace Quizzario.BusinessLogic.Factories
             string userId = q.ApplicationUserId;
             string filePath = q.FilePath;
 
-            ApplicationUserDTO user = userFactory.CreateUserWithId(userId);
+            ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
             //if (user == null || title == null || filePath == null)
             //  return null;
             DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
@@ -233,7 +233,7 @@ namespace Quizzario.BusinessLogic.Factories
         {
             foreach (var id in usersIds)
             {
-                var user = userFactory.CreateUserWithId(id);
+                var user = userDTOMapper.CreateUserWithId(id);
                 if (user != null)
                     list.Add(user);
             }

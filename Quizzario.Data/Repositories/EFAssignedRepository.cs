@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Quizzario.Data.Abstracts;
 using Quizzario.Data.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

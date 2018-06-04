@@ -3,13 +3,13 @@ using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
 using Quizzario.BusinessLogic.Abstract;
 
-namespace Quizzario.BusinessLogic.Factories
+namespace Quizzario.BusinessLogic.Mappers
 {
-    public class ApplicationUserDTOFactory : IApplicationUserDTOFactory
+    public class ApplicationUserDTOMapper : IApplicationUserDTOMapper
     {
         private IApplicationUserRepository repository;
 
-        public ApplicationUserDTOFactory(IApplicationUserRepository repository)
+        public ApplicationUserDTOMapper(IApplicationUserRepository repository)
         {
             this.repository = repository;
         }

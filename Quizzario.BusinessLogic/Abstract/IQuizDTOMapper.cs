@@ -1,5 +1,4 @@
 ﻿using Quizzario.BusinessLogic.DTOs;
-using Quizzario.Data.Entities;
 using System.Collections.Generic;
 
 namespace Quizzario.BusinessLogic.Abstract

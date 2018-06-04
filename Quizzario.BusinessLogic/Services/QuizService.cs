@@ -7,19 +7,19 @@ namespace Quizzario.BusinessLogic.Services
     public class QuizService : IQuizService
     {
         private readonly IQuizDTOMapper quizDTOMapper;
-        private readonly IApplicationUserDTOFactory userFactory;
-        private readonly IApplicationUserEntityFactory userEnFactory;
+        private readonly IApplicationUserDTOMapper userFactory;
+        //private readonly IApplicationUserEntityMapper userEntityMapper;
         private readonly IQuizEntityMapper quizEntityMapper;
 
         public QuizService(IQuizDTOMapper quizDTOMapper,
-            IApplicationUserDTOFactory userFactory,
-            IApplicationUserEntityFactory userEnFactory,
+            IApplicationUserDTOMapper userFactory,
+            //IApplicationUserEntityMapper userEnFactory,
             IQuizEntityMapper quizEntityFactory)
         {
             this.quizDTOMapper = quizDTOMapper;
             this.quizEntityMapper = quizEntityFactory;
             this.userFactory = userFactory;
-            this.userEnFactory = userEnFactory;
+            //this.userEntityMapper = userEnFactory;
         }
 
         public List<QuizDTO> Quizes => GetAllQuizes();

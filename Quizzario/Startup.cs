@@ -45,10 +45,10 @@ namespace Quizzario
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             //factories
-            services.AddScoped<BusinessLogic.Abstract.IQuizDTOMapper, BusinessLogic.Factories.QuizDTOMapper>();
-            services.AddScoped<BusinessLogic.Abstract.IApplicationUserDTOFactory, BusinessLogic.Factories.ApplicationUserDTOFactory>();
-            services.AddScoped<BusinessLogic.Abstract.IApplicationUserEntityFactory, BusinessLogic.Factories.ApplicationUserEntityFactory>();
-            services.AddScoped<BusinessLogic.Abstract.IQuizEntityMapper, BusinessLogic.Factories.QuizEntityMapper>();
+            services.AddScoped<BusinessLogic.Abstract.IQuizDTOMapper, BusinessLogic.Mappers.QuizDTOMapper>();
+            services.AddScoped<BusinessLogic.Abstract.IApplicationUserDTOMapper, BusinessLogic.Mappers.ApplicationUserDTOMapper>();
+            services.AddScoped<BusinessLogic.Abstract.IApplicationUserEntityMapper, BusinessLogic.Mappers.ApplicationUserEntityMapper>();
+            services.AddScoped<BusinessLogic.Abstract.IQuizEntityMapper, BusinessLogic.Mappers.QuizEntityMapper>();
             //services
             services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();
 

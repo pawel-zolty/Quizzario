@@ -5,7 +5,7 @@ using Quizzario.Data.Abstracts;
 using Quizzario.Data.Entities;
 using System.Collections.Generic;
 
-namespace Quizzario.BusinessLogic.Factories
+namespace Quizzario.BusinessLogic.Mappers
 {
     public class QuizEntityMapper : IQuizEntityMapper
     {

@@ -2,7 +2,7 @@
 
 namespace Quizzario.BusinessLogic.Abstract
 {
-    public interface IApplicationUserEntityFactory
+    public interface IApplicationUserEntityMapper
     {
         void CreateUserEntity(ApplicationUserDTO user);
         void SaveUser(ApplicationUserDTO user);

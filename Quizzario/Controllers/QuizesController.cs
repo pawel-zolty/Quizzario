@@ -7,7 +7,6 @@ using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
-using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Quizzario.Controllers

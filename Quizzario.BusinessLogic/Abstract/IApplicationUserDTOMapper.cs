@@ -2,7 +2,7 @@
 
 namespace Quizzario.BusinessLogic.Abstract
 {
-    public interface IApplicationUserDTOFactory
+    public interface IApplicationUserDTOMapper
     {
         ApplicationUserDTO CreateUserWithId(string id);
     }
