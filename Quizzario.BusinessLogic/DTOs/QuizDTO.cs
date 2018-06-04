@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Quizzario.BusinessLogic.DTOs
@@ -27,6 +28,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
+        public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
         //public virtual ICollection<ScoreDTO> Scores { get; set; }
         //public virtual QuizSettingsDTO QuizSettings { get; set; }
 
@@ -39,12 +41,21 @@ namespace Quizzario.BusinessLogic.DTOs
             SaveQuiz(this);
         }
 
+        public void AddToPrivateAssignedUsers(ApplicationUserDTO user)
+        {
+            PrivateAssignedUsers.Add(user);
+            SaveQuiz(this);
+        }
+
         public void RemoveFromFavouritesUsers(ApplicationUserDTO user)
         {
-            var a = FavouritesUsers;
-            var c = FavouritesUsers[0].Equals(user);
             FavouritesUsers.Remove(user);
-            var b = FavouritesUsers;
+            SaveQuiz(this);
+        }
+
+        public void RemoveFromPrivateAssignedUsers(ApplicationUserDTO user)
+        {
+            PrivateAssignedUsers.Remove(user);
             SaveQuiz(this);
         }
 
@@ -55,7 +66,7 @@ namespace Quizzario.BusinessLogic.DTOs
                 Select(u => u.Id).
                 FirstOrDefault();
             return isFavourite == null ? false : true;
-        }
+        }        
 
         public override bool Equals(object obj)
         {

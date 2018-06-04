@@ -46,11 +46,25 @@ namespace Quizzario.BusinessLogic.Services
             quiz.AddToFavouritesUsers(user);
         }
 
+        public void AddQuizToPrivateAssigned(string userId, string quizId)
+        {
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            quiz.AddToPrivateAssignedUsers(user);
+        }
+
         public void RemoveQuizFromFavourite(string userId, string quizId)
         {
             var user = userFactory.CreateUserWithId(userId);
             var quiz = quizDTOMapper.Create(quizId);
             quiz.RemoveFromFavouritesUsers(user);
+        }
+
+        public void RemoveQuizFromPrivateAssigned(string userId, string quizId)
+        {
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            quiz.RemoveFromPrivateAssignedUsers(user);            
         }
 
         public bool IsQuizFavourite(string userId, string quizId)
@@ -76,6 +90,6 @@ namespace Quizzario.BusinessLogic.Services
         {
             List<QuizDTO> quizes = quizDTOMapper.GetAllQuizes();
             return quizes;
-        }
+        }        
     }
 }
