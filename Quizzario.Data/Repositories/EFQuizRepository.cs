@@ -9,34 +9,16 @@ namespace Quizzario.Data.Repositories
     public class EFQuizRepository : IQuizRepository
     {
         private ApplicationDbContext context;
-        //private IAssignedRepository assignedRepository;
 
         public EFQuizRepository(DbContextOptions<ApplicationDbContext> options)
-           // IAssignedRepository assignedRepo)
         {
             context = new ApplicationDbContext(options);
-            //this.assignedRepository = assignedRepo;
         }
 
         public IEnumerable<Quiz> Quizes
         {
-            get
-            {
-                var qs = context.Quizes;
-                foreach (var q in qs)
-                {
-                    //q.AssignedUsers = new List<AssignedUser>();
-                    //var assings = assignedRepository.GetAssingsByQuizId(q.Id);
-                    //foreach(var a in assings)
-                    //{
-                    //    q.AssignedUsers.Add(a);
-                    //}
-                }
-                return qs;
-            }
+            get { return context.Quizes; }
         }
-
-
 
         public Quiz GetById(string id)
         {
@@ -44,12 +26,14 @@ namespace Quizzario.Data.Repositories
                 Where(q => q.Id.Equals(id)).
                 FirstOrDefault();
         }
+
         public Quiz GetByType(QuizType quizType)
         {
             return context.Quizes.ToList<Quiz>().
                 Where(q => q.QuizType.Equals(quizType)).
                 FirstOrDefault();
         }
+
         public Quiz GetByTitle(string title)
         {
             return context.Quizes.ToList<Quiz>().

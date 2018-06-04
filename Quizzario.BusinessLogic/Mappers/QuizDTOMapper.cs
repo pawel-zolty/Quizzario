@@ -12,19 +12,16 @@ namespace Quizzario.BusinessLogic.Mappers
     public class QuizDTOMapper : IQuizDTOMapper
     {
         private IQuizRepository quizRepository;
-        //private IAssignedRepository assignedRepository;
         private IApplicationUserDTOMapper userDTOMapper;
         private IQuizEntityMapper quizEntityMapper;
 
         public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
-            //IAssignedRepository assignedRepository,
             IApplicationUserDTOMapper userDTOMapper,
             IQuizEntityMapper quizEntityMapper)
         {
             this.quizRepository = quizRepository;
-            //this.assignedRepository = assignedRepository;
             this.userDTOMapper = userDTOMapper;
             this.quizEntityMapper = quizEntityMapper;
         }

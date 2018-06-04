@@ -8,18 +8,15 @@ namespace Quizzario.BusinessLogic.Services
     {
         private readonly IQuizDTOMapper quizDTOMapper;
         private readonly IApplicationUserDTOMapper userFactory;
-        //private readonly IApplicationUserEntityMapper userEntityMapper;
         private readonly IQuizEntityMapper quizEntityMapper;
 
         public QuizService(IQuizDTOMapper quizDTOMapper,
             IApplicationUserDTOMapper userFactory,
-            //IApplicationUserEntityMapper userEnFactory,
             IQuizEntityMapper quizEntityFactory)
         {
             this.quizDTOMapper = quizDTOMapper;
             this.quizEntityMapper = quizEntityFactory;
             this.userFactory = userFactory;
-            //this.userEntityMapper = userEnFactory;
         }
 
         public List<QuizDTO> Quizes => GetAllQuizes();
@@ -41,8 +38,6 @@ namespace Quizzario.BusinessLogic.Services
             var user = userFactory.CreateUserWithId(userId);
             var quiz = quizDTOMapper.Create(quizId);
             quiz.AddToFavouritesUsers(user);
-            //quizEntityMapper.SaveQuiz(quiz);
-            //quizFactory.AddQuizToFavourite(userId, quizId);
         }
 
         public void RemoveQuizFromFavourite(string userId, string quizId)
@@ -50,7 +45,6 @@ namespace Quizzario.BusinessLogic.Services
             var user = userFactory.CreateUserWithId(userId);
             var quiz = quizDTOMapper.Create(quizId);
             quiz.RemoveFromFavouritesUsers(user);
-            //quizDTOMapper.RemoveQuizFromFavourite(userId, quizId);
         }
 
         public bool IsQuizFavourite(string userId, string quizId)
@@ -77,7 +71,5 @@ namespace Quizzario.BusinessLogic.Services
             List<QuizDTO> quizes = quizDTOMapper.GetAllQuizes();
             return quizes;
         }
-
-
     }
 }
