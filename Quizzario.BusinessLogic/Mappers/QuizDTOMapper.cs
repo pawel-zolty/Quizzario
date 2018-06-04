@@ -12,58 +12,49 @@ namespace Quizzario.BusinessLogic.Mappers
     public class QuizDTOMapper : IQuizDTOMapper
     {
         private IQuizRepository quizRepository;
-        private IAssignedRepository assignedRepository;
+        //private IAssignedRepository assignedRepository;
         private IApplicationUserDTOMapper userDTOMapper;
         private IQuizEntityMapper quizEntityMapper;
 
         public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
-            IAssignedRepository assignedRepository,
+            //IAssignedRepository assignedRepository,
             IApplicationUserDTOMapper userDTOMapper,
             IQuizEntityMapper quizEntityMapper)
         {
             this.quizRepository = quizRepository;
-            this.assignedRepository = assignedRepository;
+            //this.assignedRepository = assignedRepository;
             this.userDTOMapper = userDTOMapper;
             this.quizEntityMapper = quizEntityMapper;
-        }        
+        }
 
         public QuizDTO Create(string id)
         {
-            Quiz quiz = quizRepository.GetById(id);            
+            Quiz quiz = quizRepository.GetById(id);
             return CreateQuiz(quiz);
         }
 
         public List<QuizDTO> CreateUserFavouriteQuizes(string userId)
         {
-            List<QuizDTO> quizesDTO = new List<QuizDTO>();
-            List<string> userFavouriteQuizesIds = 
-                assignedRepository.GetUserAssigns(userId).
-                Where(q => q.AssignType == Data.Entities.AssignType.Favourite).
-                Select(q => q.QuizId).ToList();
-            
-            if (userFavouriteQuizesIds.ToList().Count == 0)
-                return quizesDTO;            
-            
-            List<Quiz> quizes = quizRepository.Quizes.
+            var favouriteQuizes = quizRepository.Quizes.
                 Where(
-                    q => userFavouriteQuizesIds.
-                    Contains(q.Id)
+                    q => q.AssignedUsers.
+                    Any(a => a.AssignType == Data.Entities.AssignType.Favourite && a.ApplicationUserId.Equals(userId))
                 ).ToList();
-
-            quizes = quizes.ToList();
-            foreach (var q in quizes)
+            List<QuizDTO> quizesDTO = new List<QuizDTO>();
+            if (favouriteQuizes.Count == 0)
+                return quizesDTO;
+            foreach (var q in favouriteQuizes)
             {
                 quizesDTO.Add(CreateQuiz(q));
             }
-            //AddStaticMockData(quizesDTO);
             return quizesDTO;
         }
 
         public List<QuizDTO> CreateAllUserQuizes(string userId)
         {
-            
+
             List<Quiz> quizes = quizRepository.Quizes.
                 Where(q => q.ApplicationUserId.Equals(userId)).ToList();
             List<QuizDTO> quizesDTO = new List<QuizDTO>();
@@ -82,31 +73,12 @@ namespace Quizzario.BusinessLogic.Mappers
             return quizesDTO;
         }
 
-        public void AddQuizToFavourite(string userId, string quizId)
-        {
-            //var quiz = quizRepository.GetById(quizId);
-            //var user = userFactory.CreateUserWithId(userId);
-            //if (quiz == null || user == null)
-            //    return;
-            //assignedRepository.AddFavouriteAssign(userId, quizId);
-
-        }
-
-        public void RemoveQuizFromFavourite(string userId, string quizId)
-        {
-            var quiz = quizRepository.GetById(userId);
-            var user = userDTOMapper.CreateUserWithId(userId);
-            if (quiz == null || user == null)
-                return;
-            assignedRepository.RemoveFavouriteAssign(userId, quizId);
-        }        
-
         private QuizDTO CreateQuiz(Quiz quiz)
         {
             if (quiz == null)
-                return null;            
+                return null;
             string userId = quiz.ApplicationUserId;
-            
+
             DateTime creationDate = quiz.CreationDate;
 
             ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
@@ -114,7 +86,7 @@ namespace Quizzario.BusinessLogic.Mappers
 
             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {
-                
+
                 Id = quiz.Id,
                 Title = quiz.Title,
                 Description = quiz.Description,
@@ -126,9 +98,9 @@ namespace Quizzario.BusinessLogic.Mappers
                 CreationDate = creationDate.ToString(),
                 FavouritesUsers = new List<ApplicationUserDTO>()
             };
-            
+
             List<string> idsList = new List<string>();
-            foreach(var ass in quiz.AssignedUsers)
+            foreach (var ass in quiz.AssignedUsers)
             {
                 idsList.Add(ass.ApplicationUserId);
             }
@@ -155,19 +127,19 @@ namespace Quizzario.BusinessLogic.Mappers
                 quizesDTO.Add(CreateQuizByName(q, name));
 
             }
-            
+
             for (int j = 0; j < quizesDTO.Count; j++)
             {
-                
+
                 if (quizesDTO[j] == null)
                 {
                     quizesDTO.RemoveAt(j);
                     j--;
-                   
+
                 }
-             
+
             }
-            
+
             return quizesDTO;
         }
 
@@ -227,7 +199,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
             quizRepository.Update(quiz);
-        }        
+        }
 
         private void FillList(List<ApplicationUserDTO> list, IEnumerable<string> usersIds)
         {
