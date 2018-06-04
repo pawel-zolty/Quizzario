@@ -7,7 +7,6 @@ using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
-using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Quizzario.Controllers
@@ -15,7 +14,7 @@ namespace Quizzario.Controllers
     [Authorize]
     public class QuizesController : Controller
     {
-        private int PageSize = 4;
+        private readonly int PageSize = 4;
         private IQuizService quizService;
         private IPagingInfoService pagingInfoService;
         private string userId;
@@ -60,7 +59,7 @@ namespace Quizzario.Controllers
             // This is a placeholder code, all of it will be replaced
             //TO DO 
             /*var myQuizesCollection = quizService.GetAllUserAssignedQuizes(userId);*/
-            var myAssignedQuizesCollection = quizService.GetAllUserQuizes(userId);
+            var myAssignedQuizesCollection = quizService.GetUserAssignedToPrivateQuizes(userId);
             QuizListViewModel model = CreateQuizViewModelWithPagination(p, myAssignedQuizesCollection);
             return View(model);
         }
@@ -72,10 +71,22 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
+        public void AddToPrivateAssigned(string quizId)
+        {
+            quizService.AddQuizToPrivateAssigned(userId, quizId);
+        }
+
+        [HttpPost]
         public void RemoveFromFavourite(string quizId)
         {
             quizService.RemoveQuizFromFavourite(userId, quizId);
         }
+
+        [HttpPost]
+        public void RemoveFromPrivateAssigned(string quizId)
+        {
+            quizService.RemoveQuizFromPrivateAssigned(userId, quizId);
+        }        
 
         public ViewResult Create()
         {
@@ -84,9 +95,9 @@ namespace Quizzario.Controllers
             //return View("Edit", new QuizDTO());
         }
 
-        public ViewResult Edit(string Id)
+        public ViewResult Edit(string quizId)
         {
-            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(quizId));
             return View(quizDTO);
         }
 
@@ -107,7 +118,9 @@ namespace Quizzario.Controllers
 
         public ViewResult Summary(string Id)
         {
-            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id == Id);
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
+            var isFavourite = quizService.IsQuizFavourite(userId, Id);
+            ViewBag.IsFavourite = isFavourite;
             return View(quizDTO);
             /* KUBA TO TWOJE CHYBA brakuje jakiegos question view modelu 
             var model = new CreateQuizViewModel();

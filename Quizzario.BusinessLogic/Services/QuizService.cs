@@ -1,60 +1,95 @@
 ﻿using Quizzario.BusinessLogic.Abstract;
-using Quizzario.BusinessLogic.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
-using Quizzario.Data.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Quizzario.BusinessLogic.Services
 {
     public class QuizService : IQuizService
     {
-        private IQuizDTOFactory factory;
-        
-        public QuizService(IQuizDTOFactory factory)
+        private readonly IQuizDTOMapper quizDTOMapper;
+        private readonly IApplicationUserDTOMapper userFactory;
+        private readonly IQuizEntityMapper quizEntityMapper;
+
+        public QuizService(IQuizDTOMapper quizDTOMapper,
+            IApplicationUserDTOMapper userFactory,
+            IQuizEntityMapper quizEntityFactory)
         {
-            this.factory = factory;
+            this.quizDTOMapper = quizDTOMapper;
+            this.quizEntityMapper = quizEntityFactory;
+            this.userFactory = userFactory;
         }
 
-        public List<QuizDTO> Quizes => factory.Quizes.ToList();
+        public List<QuizDTO> Quizes => GetAllQuizes();
 
-        public List<QuizDTO> GetUserFavouriteQuizes(string userId)
+        public List<QuizDTO> GetAllUserQuizes(string userId)
         {
-            List<QuizDTO> quizes = factory.CreateUserFavouriteQuizes(userId).ToList();
+            List<QuizDTO> quizes = quizDTOMapper.CreateAllUserQuizes(userId);
             return quizes;
         }
 
-        public List<QuizDTO> GetAllUserQuizes(string userId)
-        {         
-            List<QuizDTO> quizes = factory.CreateAllUserQuizes(userId);
+        public List<QuizDTO> GetUserFavouriteQuizes(string userId)
+        {
+            List<QuizDTO> quizes = quizDTOMapper.CreateUserFavouriteQuizes(userId);
+            return quizes;
+        }
+
+        public List<QuizDTO> GetUserAssignedToPrivateQuizes(string userId)
+        {
+            List<QuizDTO> quizes = quizDTOMapper.CreateUserAssignedToPrivateQuizes(userId);
             return quizes;
         }
 
         public void AddQuizToFavourite(string userId, string quizId)
         {
-            factory.AddQuizToFavourite(userId, quizId);
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            quiz.AddToFavouritesUsers(user);
+        }
+
+        public void AddQuizToPrivateAssigned(string userId, string quizId)
+        {
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            quiz.AddToPrivateAssignedUsers(user);
         }
 
         public void RemoveQuizFromFavourite(string userId, string quizId)
         {
-            factory.RemoveQuizFromFavourite(userId, quizId);
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            quiz.RemoveFromFavouritesUsers(user);
         }
 
-        public List<QuizDTO> SearchByName(string name)
+        public void RemoveQuizFromPrivateAssigned(string userId, string quizId)
         {
-            List<QuizDTO> quizes = factory.SearchByName(name);
-            return quizes;
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            quiz.RemoveFromPrivateAssignedUsers(user);            
         }
 
-        public List<QuizDTO> GetAllQuizes()
+        public bool IsQuizFavourite(string userId, string quizId)
         {
-            List<QuizDTO> quizes = factory.GetAllQuizes();
-            return quizes;
+            var user = userFactory.CreateUserWithId(userId);
+            var quiz = quizDTOMapper.Create(quizId);
+            var i = quiz.IsFavouritesUsers(user);
+            return i;
         }
 
         public void SaveQuiz(QuizDTO quiz)
         {
-            factory.SaveQuiz(quiz);
+            quizDTOMapper.SaveQuiz(quiz);
         }
+
+        public List<QuizDTO> SearchByName(string name)
+        {
+            List<QuizDTO> quizes = quizDTOMapper.SearchByName(name);
+            return quizes;
+        }
+
+        private List<QuizDTO> GetAllQuizes()
+        {
+            List<QuizDTO> quizes = quizDTOMapper.GetAllQuizes();
+            return quizes;
+        }        
     }
 }

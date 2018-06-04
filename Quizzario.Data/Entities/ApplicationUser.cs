@@ -7,9 +7,9 @@ namespace Quizzario.Data.Entities
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        [Required]
+        //[Required]
         public string FirstName { get; set; }
-        [Required]
+        //[Required]
         public string LastName { get; set; }     
         public string Origin { get; set; }
 
