@@ -36,19 +36,6 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             var type = Data.Entities.AssignType.Favourite;
             return CreateUserAssignedQuizes(userId, type);
-            //var favouriteQuizes = quizRepository.Quizes.
-            //    Where(
-            //        q => q.AssignedUsers.
-            //        Any(a => a.AssignType == Data.Entities.AssignType.Favourite && a.ApplicationUserId.Equals(userId))
-            //    ).ToList();
-            //List<QuizDTO> quizesDTO = new List<QuizDTO>();
-            //if (favouriteQuizes.Count == 0)
-            //    return quizesDTO;
-            //foreach (var q in favouriteQuizes)
-            //{
-            //    quizesDTO.Add(CreateQuiz(q));
-            //}
-            //return quizesDTO;
         }
 
         public List<QuizDTO> CreateUserAssignedToPrivateQuizes(string userId)
@@ -113,16 +100,23 @@ namespace Quizzario.BusinessLogic.Mappers
                 QuizType = type,
                 FilePath = quiz.FilePath,
                 ApplicationUser = user,
-                CreationDate = creationDate.ToString(),
-                FavouritesUsers = new List<ApplicationUserDTO>()
+                CreationDate = creationDate.ToString()
             };
 
             List<string> idsList = new List<string>();
-            foreach (var ass in quiz.AssignedUsers)
+            foreach (var ass in quiz.AssignedUsers.
+                Where(a => a.AssignType == Data.Entities.AssignType.Favourite))
             {
                 idsList.Add(ass.ApplicationUserId);
             }
             FillList(quizDTO.FavouritesUsers, idsList);
+            idsList = new List<string>();
+            foreach (var ass in quiz.AssignedUsers.
+                Where(a => a.AssignType == Data.Entities.AssignType.AssignedToPrivate))
+            {
+                idsList.Add(ass.ApplicationUserId);
+            }
+            FillList(quizDTO.PrivateAssignedUsers, idsList);
             return quizDTO;
         }
 
