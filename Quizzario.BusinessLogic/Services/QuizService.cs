@@ -58,5 +58,10 @@ namespace Quizzario.BusinessLogic.Services
         {
             factory.SaveQuiz(quiz);
         }
+
+        public void CreateQuiz(QuizDTO quiz)
+        {
+            factory.SaveQuiz(quiz);
+        }
     }
 }

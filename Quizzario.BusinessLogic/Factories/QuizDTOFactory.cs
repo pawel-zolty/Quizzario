@@ -9,6 +9,8 @@ using System;
 using Quizzario.Data;
 using Quizzario.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Quizzario.BusinessLogic.Factories
 {
@@ -175,13 +177,27 @@ namespace Quizzario.BusinessLogic.Factories
                 QuizType = type,
                 FilePath = filePath,
                 ApplicationUser = user,
-                CreationDate = creationDate.ToString()
+                CreationDate = creationDate.ToString(),
+                Questions = loadQuestions(filePath)
                 //AssignedUsers,
                 //Scores,
                 //QuizSettings = 
                 //TO DO 
             };
             return quizDTO;
+        }
+
+        private List<QuestionDTO> loadQuestions(string filePath)
+        {
+            string json = File.ReadAllText(filePath);
+            List<QuestionDTO> dtos = JsonConvert.DeserializeObject<List<QuestionDTO>>(json);
+            return dtos;
+        }
+
+        private void saveQuestions(QuizDTO quiz)
+        {
+            string json = JsonConvert.SerializeObject(quiz.Questions);
+            File.WriteAllText(quiz.FilePath, json);
         }
 
         public IEnumerable<QuizDTO> SearchByName(string name)
@@ -257,18 +273,20 @@ namespace Quizzario.BusinessLogic.Factories
 
         public void SaveQuiz(QuizDTO quizDTO)
         {
-
-
             Quiz quiz = new Quiz();
             quiz.Id = quizDTO.Id;
             quiz.QuizSettingsId = quizDTO.QuizSettingsId;
             quiz.Title = quizDTO.Title;
             quiz.Description = quizDTO.Description;
             quiz.ApplicationUserId = quizDTO.ApplicationUserId;
+            
+            
+            // This definetly shoud be there
+            //quiz.QuizType = quizDTO.QuizType;
+            quiz.CreationDate = System.DateTime.Parse(quizDTO.CreationDate);
             quizRepository.SaveQuiz(quiz);
-
-           
-           
+            quizDTO.FilePath = quiz.FilePath;
+            saveQuestions(quizDTO);
         }
 
         public IEnumerable<QuizDTO> Quizes => GetAllQuizes();

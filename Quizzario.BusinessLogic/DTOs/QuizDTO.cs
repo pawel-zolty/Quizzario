@@ -10,6 +10,10 @@ namespace Quizzario.BusinessLogic.DTOs
 
     public class QuizDTO
     {    
+        public QuizDTO()
+        {
+            Questions = new List<QuestionDTO>();
+        }
         public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -18,10 +22,12 @@ namespace Quizzario.BusinessLogic.DTOs
         public QuizType? QuizType { get; set; }
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
+        public List<QuestionDTO> Questions { get; set; }
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }
         public virtual ICollection<ScoreDTO> Scores { get; set; }
         public virtual QuizSettingsDTO QuizSettings { get; set; }
+
     }
 }

@@ -72,13 +72,34 @@ $(function () {
 	$(document).ready(function () {
     
 
-	// Clicking on the first card after page load
-	$('.-quizes-card').first().click();
+	    // Clicking on the first card after page load
+        $('.-quizes-card').first().click();
+
+        $('#create-quiz').click(function () {
+            var model = scrappModel();
+            console.log("Passing model");
+            console.log(model);
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(model),
+                url: '/Quizes/Create',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8"
+            }).done(function (res) {
+                console.log('Quiz creation call success')
+                
+            }).fail(function (res) {
+                console.log('Quiz creation call fail')
+            });
+            window.location.href = '/Quizes/MyQuizes';
+        });
+        
 });
 
 function addQuestion() {
 
     var model = scrappModel();
+    
     $.ajax({
         type: "POST",
         data: JSON.stringify(model),
@@ -96,7 +117,6 @@ function addAnswer(elem) {
         var questionIndex = $(elem).attr('question-index');
         var model = scrappModel();
         var payload = model.Questions[questionIndex].Answers;
-        console.log("#quiz-question-" + questionIndex);
         $.ajax({
             type: "POST",
             data: JSON.stringify(payload),

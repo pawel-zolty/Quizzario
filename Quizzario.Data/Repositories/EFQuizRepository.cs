@@ -9,7 +9,7 @@ namespace Quizzario.Data.Repositories
     public class EFQuizRepository : IQuizRepository
     {
         private ApplicationDbContext context;
-
+        private string directoryPath = "C://quizzario//";
         public EFQuizRepository(DbContextOptions<ApplicationDbContext> options)
         {
             context = new ApplicationDbContext(options);
@@ -51,26 +51,30 @@ namespace Quizzario.Data.Repositories
             if (quiz.Id == "0")
             {
                 context.Quizes.Add(quiz);
+                context.SaveChanges();
+                quiz.Id = quiz.Id;
             }else
             {
-
                 Quiz dbEntry;
-                    dbEntry = new Quiz();
-                    dbEntry.Title = quiz.Title;
-                    dbEntry.QuizSettings = quiz.QuizSettings;
-                    dbEntry.QuizSettingsId = quiz.QuizSettingsId;
-                    dbEntry.QuizType = quiz.QuizType;
-                    dbEntry.Scores = quiz.Scores;
-                    dbEntry.ApplicationUser = quiz.ApplicationUser;
-                    dbEntry.ApplicationUserId = quiz.ApplicationUserId;
-                    dbEntry.AssignedUsers = quiz.AssignedUsers;
-                    dbEntry.CreationDate = quiz.CreationDate;
-                    dbEntry.Description = quiz.Description;
-                    context.Quizes.Add(dbEntry);
-
-                
+                dbEntry = new Quiz();
+                dbEntry.Title = quiz.Title;
+                dbEntry.QuizSettings = quiz.QuizSettings;
+                dbEntry.QuizSettingsId = quiz.QuizSettingsId;
+                dbEntry.QuizType = quiz.QuizType;
+                dbEntry.Scores = quiz.Scores;
+                dbEntry.ApplicationUser = quiz.ApplicationUser;
+                dbEntry.ApplicationUserId = quiz.ApplicationUserId;
+                dbEntry.AssignedUsers = quiz.AssignedUsers;
+                dbEntry.CreationDate = quiz.CreationDate;
+                dbEntry.Description = quiz.Description;
+                context.Quizes.Add(dbEntry);
+                context.SaveChanges();
+                dbEntry.FilePath = this.directoryPath + dbEntry.Id;
+                context.Quizes.Update(dbEntry);
+                context.SaveChanges();
+                quiz.Id = dbEntry.Id;
+                quiz.FilePath = dbEntry.FilePath;
             }
-            context.SaveChanges();
         }
     }
 }

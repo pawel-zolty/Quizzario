@@ -13,5 +13,6 @@ namespace Quizzario.BusinessLogic.Abstract
         void SaveQuiz(QuizDTO quiz);
         IEnumerable<QuizDTO> Quizes { get; }
         IEnumerable<QuizDTO> SearchByName(string name);
+        void CreateQuiz(QuizDTO quizViewModel);
     }
 }

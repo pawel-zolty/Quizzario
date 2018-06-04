@@ -7,6 +7,9 @@ using Quizzario.Models.QuizViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
+using Quizzario.Extensions;
+using Quizzario.BusinessLogic.Factories;
+using Quizzario.BusinessLogic.Abstracts;
 
 namespace Quizzario.Controllers
 {
@@ -15,11 +18,13 @@ namespace Quizzario.Controllers
     {
         public int PageSize = 4;
         private IQuizService quizService;
+        private IApplicationUserDTOFactory userFactory;
         private PagingInfoService pagingInfoService = new PagingInfoService();
 
-        public QuizesController(IQuizService quizService)
+        public QuizesController(IQuizService quizService, IApplicationUserDTOFactory userFactory)
         {
             this.quizService = quizService;
+            this.userFactory = userFactory;
         }
 
         public ViewResult MyQuizes(int p = 1)
@@ -114,9 +119,40 @@ namespace Quizzario.Controllers
             return View("Create", model);
         }
         [HttpPost]
-        public RedirectToActionResult Create([FromForm] CreateQuizViewModel quizViewModel)
+        public StatusCodeResult Create([FromForm] CreateQuizViewModel quizViewModel)
         {
-            return RedirectToAction("MyQuizes");
+            var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = this.userFactory.CreateUserWithId(userid);
+
+            quizViewModel.Questions.Add(new CreateQuestionViewModel
+            {
+                Question = "First question",
+                Answers = new List<CreateAnswerViewModel>()
+            });
+
+            quizViewModel.Questions.Add(new CreateQuestionViewModel
+            {
+                Question = "Second question",
+                Answers = new List<CreateAnswerViewModel>()
+            });
+
+            foreach(var subViewModel in quizViewModel.Questions)
+            {
+                subViewModel.Answers.Add(new CreateAnswerViewModel
+                {
+                    Answer = "1st answer",
+                    isCorrect = true
+                });
+
+                subViewModel.Answers.Add(new CreateAnswerViewModel
+                {
+                    Answer = "2nd answer",
+                    isCorrect = false
+                });
+            }
+
+            quizService.CreateQuiz(DTOMapper.Map(quizViewModel, user));
+            return StatusCode(200);
         }
 
         [HttpPost]

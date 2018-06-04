@@ -67,6 +67,9 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -99,8 +102,10 @@
     <Compile Include="Abstract\IApplicationUserDTOFactory.cs" />
     <Compile Include="Abstract\IQuizDTOFactory.cs" />
     <Compile Include="Abstract\IQuizService.cs" />
+    <Compile Include="DTOs\AnswerDTO.cs" />
     <Compile Include="DTOs\ApplicationUserDTO.cs" />
     <Compile Include="DTOs\AssignedUserDTO.cs" />
+    <Compile Include="DTOs\QuestionDTO.cs" />
     <Compile Include="DTOs\QuizDTO.cs" />
     <Compile Include="DTOs\QuizSettingsDTO.cs" />
     <Compile Include="DTOs\ScoreDTO.cs" />

@@ -22,6 +22,7 @@ namespace Quizzario.Data
             };
             users.ForEach(u => context.Users.Add(u));
             context.SaveChanges();
+            
 
             var quizes = new List<Quiz>
             {
