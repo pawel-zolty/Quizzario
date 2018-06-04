@@ -9,13 +9,13 @@ namespace Quizzario.Data.Repositories
     public class EFQuizRepository : IQuizRepository
     {
         private ApplicationDbContext context;
-        private IAssignedRepository assignedRepository;
+        //private IAssignedRepository assignedRepository;
 
-        public EFQuizRepository(DbContextOptions<ApplicationDbContext> options,
-            IAssignedRepository assignedRepo)
+        public EFQuizRepository(DbContextOptions<ApplicationDbContext> options)
+           // IAssignedRepository assignedRepo)
         {
             context = new ApplicationDbContext(options);
-            this.assignedRepository = assignedRepo;
+            //this.assignedRepository = assignedRepo;
         }
 
         public IEnumerable<Quiz> Quizes

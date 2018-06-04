@@ -57,8 +57,8 @@ namespace Quizzario
                 Data.Repositories.EFQuizRepository>();
             services.AddScoped<Data.Abstracts.IApplicationUserRepository,
                 Data.Repositories.EFApplicationUserRepository>();
-            services.AddScoped<Data.Abstracts.IAssignedRepository,
-                Data.Repositories.EFAssignedRepository>();
+            //services.AddScoped<Data.Abstracts.IAssignedRepository,
+                //Data.Repositories.EFAssignedRepository>();
             
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
