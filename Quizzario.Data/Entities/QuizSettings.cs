@@ -11,6 +11,6 @@ namespace Quizzario.Data.Entities
         public int AttemptLimit { get; set; }
         public TimeSpan? TimeLimit { get; set; }
 
-        public Quiz Quiz { get; set; }
+        public virtual Quiz Quiz { get; set; }
     }
 }

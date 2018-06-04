@@ -5,9 +5,9 @@ namespace Quizzario.Data.Abstracts
 {
     public interface IQuizRepository
     {
-        List<Quiz> Quizes { get;}
+        IEnumerable<Quiz> Quizes { get;}
         Quiz GetById(string id);
-        List<Quiz> GetQuiz();
-        void SaveQuiz(Quiz quiz);
+        //List<Quiz> GetQuiz();
+        void Update(Quiz quiz);
     }
 }

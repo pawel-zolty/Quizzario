@@ -15,12 +15,10 @@ namespace Quizzario.Data.Repositories
             context = new ApplicationDbContext(options);
         }
 
-        public List<Quiz> Quizes
+        public IEnumerable<Quiz> Quizes
         {
-            get { return context.Quizes.ToList(); }
+            get { return context.Quizes; }
         }
-
-      
 
         public Quiz GetById(string id)
         {
@@ -28,32 +26,34 @@ namespace Quizzario.Data.Repositories
                 Where(q => q.Id.Equals(id)).
                 FirstOrDefault();
         }
-        public Quiz GetByType(QuizType quizType)
-        {
-            return context.Quizes.ToList<Quiz>().
-                Where(q => q.QuizType.Equals(quizType)).
-                FirstOrDefault();
-        }
-        public Quiz GetByTitle(string title)
-        {
-            return context.Quizes.ToList<Quiz>().
-               Where(q => q.Title.Equals(title)).
-               FirstOrDefault();
-        }
 
-        public List<Quiz> GetQuiz()
-        {
-            throw new System.NotImplementedException();
-        }
+        //public Quiz GetByType(QuizType quizType)
+        //{
+        //    return context.Quizes.ToList<Quiz>().
+        //        Where(q => q.QuizType.Equals(quizType)).
+        //        FirstOrDefault();
+        //}
 
-        public void SaveQuiz(Quiz quiz)
+        //public Quiz GetByTitle(string title)
+        //{
+        //    return context.Quizes.ToList<Quiz>().
+        //       Where(q => q.Title.Equals(title)).
+        //       FirstOrDefault();
+        //}
+
+        //public List<Quiz> GetQuiz()
+        //{
+        //    throw new System.NotImplementedException();
+        //}
+
+        public void Update(Quiz quiz)
         {
             if (quiz.ApplicationUserId != null)
             {
                 context.Quizes.Update(quiz);
-            }else
+            }
+            else
             {
-
                 Quiz dbEntry;
                 dbEntry = new Quiz
                 {
@@ -69,8 +69,6 @@ namespace Quizzario.Data.Repositories
                     Description = quiz.Description
                 };
                 context.Quizes.Add(dbEntry);
-
-                
             }
             context.SaveChanges();
         }
