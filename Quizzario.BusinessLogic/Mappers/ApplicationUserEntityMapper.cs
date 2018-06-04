@@ -16,7 +16,7 @@ namespace Quizzario.BusinessLogic.Mappers
             }
         }
 
-        public void SaveUser(ApplicationUserDTO user)
+        public void Update(ApplicationUserDTO user)
         {
 
         }

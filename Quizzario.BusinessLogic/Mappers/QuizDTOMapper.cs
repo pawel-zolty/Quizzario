@@ -57,7 +57,6 @@ namespace Quizzario.BusinessLogic.Mappers
             {
                 quizesDTO.Add(CreateQuiz(q));
             }
-            //AddStaticMockData(quizesDTO);
             return quizesDTO;
         }
 
@@ -72,34 +71,11 @@ namespace Quizzario.BusinessLogic.Mappers
                 quizes = quizes.ToList();
                 foreach (var q in quizes)
                 {
-                    quizesDTO.Add(CreateQuiz(q));
-                    //var v = q.AssignedUsers;
-                    //foreach (var a in v)
-                    //    System.Console.WriteLine("CONSOLE22: " + a.QuizId);
+                    quizesDTO.Add(CreateQuiz(q));                    
                 }
             }
-            //AddStaticMockData(quizesDTO);
             return quizesDTO;
-        }
-
-        public void AddQuizToFavourite(string userId, string quizId)
-        {
-            //var quiz = quizRepository.GetById(quizId);
-            //var user = userFactory.CreateUserWithId(userId);
-            //if (quiz == null || user == null)
-            //    return;
-            //assignedRepository.AddFavouriteAssign(userId, quizId);
-
-        }
-
-        public void RemoveQuizFromFavourite(string userId, string quizId)
-        {
-            var quiz = quizRepository.GetById(userId);
-            var user = userDTOMapper.CreateUserWithId(userId);
-            if (quiz == null || user == null)
-                return;
-            assignedRepository.RemoveFavouriteAssign(userId, quizId);
-        }        
+        }       
 
         private QuizDTO CreateQuiz(Quiz quiz)
         {
@@ -132,16 +108,7 @@ namespace Quizzario.BusinessLogic.Mappers
             {
                 idsList.Add(ass.ApplicationUserId);
             }
-            //foreach (var id in idsList)
-            //{
-            //    var userr = userFactory.CreateUserWithId(id);
-            //    if (userr != null)
-            //        quizDTO.AddToFavouritesUsers(userr);
-            //        //list.Add(user);
-            //}
             FillList(quizDTO.FavouritesUsers, idsList);
-            //quizDTO.AddToFavouritesUsers(user);
-
             return quizDTO;
         }
 
@@ -183,8 +150,6 @@ namespace Quizzario.BusinessLogic.Mappers
             string filePath = q.FilePath;
 
             ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
-            //if (user == null || title == null || filePath == null)
-            //  return null;
             DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {

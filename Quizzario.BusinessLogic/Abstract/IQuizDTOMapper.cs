@@ -8,8 +8,6 @@ namespace Quizzario.BusinessLogic.Abstract
         QuizDTO Create(string id);
         List<QuizDTO> CreateAllUserQuizes(string userId);
         List<QuizDTO> CreateUserFavouriteQuizes(string userId);
-        void AddQuizToFavourite(string userId, string quizId);
-        void RemoveQuizFromFavourite(string userId, string quizId);
         List<QuizDTO> SearchByName(string name);
         List<QuizDTO> GetAllQuizes();
         List<QuizDTO> Quizes { get; }
