@@ -6,15 +6,20 @@
 }
 
 @using (Html.BeginForm())
-{
-    <div>
-        <form action="">
+{@if (Model != null)
+    {<div>
+            <form action="">
 
-            <input name="Title" , value="@Model.Title">
-            <input name="Description" , value="@Model.Description">
-            <input name="QuizType" , value="@Model.QuizType">
-        </form>
-        <input type="submit" value="Save" />
-        
-    </div>
+                <input name="Title" , value="@Model.Title">
+                <input name="Description" , value="@Model.Description">
+                <input name="QuizType" , value="@Model.QuizType">
+            </form>
+            <input type="submit" value="Save" />
+
+        </div>
+    }
+@if (Model == null)
+{
+     <h4>Can not edit this quiz</h4>
+}
 }

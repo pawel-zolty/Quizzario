@@ -23,12 +23,12 @@ namespace Quizzario.Controllers
 
         public ViewResult List(int p = 1)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);            
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var quizesCollection = quizService.GetAllUserQuizes(userId);
 
             QuizListViewModel model = new QuizListViewModel
             {
-                Quizes = quizesCollection.                    
+                Quizes = quizesCollection.
                     OrderBy(q => q.Title).
                     Skip((p - 1) * PageSize).
                     Take(PageSize),
@@ -42,7 +42,7 @@ namespace Quizzario.Controllers
         public ViewResult Favourite(int p = 1)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            
+
             var quizesCollection = quizService.GetUserFavouriteQuizes(userId);
 
             QuizListViewModel model = new QuizListViewModel
@@ -58,6 +58,7 @@ namespace Quizzario.Controllers
             return View(model);
         }
 
+
         [HttpGet]
         public ViewResult Searching()
         {
@@ -66,7 +67,7 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
-        public ViewResult Searching(SearchingModel searchingModel, string returnUrl = null, int p=1)
+        public ViewResult Searching(SearchingModel searchingModel, string returnUrl = null, int p = 1)
         {
             ViewData["ReturnUrl"] = returnUrl;
             // string title = "User's 1 Quiz";
@@ -91,7 +92,7 @@ namespace Quizzario.Controllers
                 return View("SearchingByName", model);
             }
         }
-      
+
     }
 
 }

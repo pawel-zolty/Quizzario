@@ -95,9 +95,9 @@ namespace Quizzario.Controllers
             //return View("Edit", new QuizDTO());
         }
 
-        public ViewResult Edit(string quizId)
+        public ViewResult Edit(string Id)
         {
-            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(quizId));
+            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
             return View(quizDTO);
         }
 
@@ -194,7 +194,7 @@ namespace Quizzario.Controllers
                p, PageSize)
                 };
 
-                return View("SearchingByName", model);
+                return View("MyQuizes", model);
             }
         }
 
