@@ -7,7 +7,7 @@ namespace Quizzario.Data.Abstracts
     {
         IEnumerable<Quiz> Quizes { get;}
         Quiz GetById(string id);
-        List<Quiz> GetQuiz();
+        //List<Quiz> GetQuiz();
         void Update(Quiz quiz);
     }
 }

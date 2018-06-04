@@ -27,24 +27,24 @@ namespace Quizzario.Data.Repositories
                 FirstOrDefault();
         }
 
-        public Quiz GetByType(QuizType quizType)
-        {
-            return context.Quizes.ToList<Quiz>().
-                Where(q => q.QuizType.Equals(quizType)).
-                FirstOrDefault();
-        }
+        //public Quiz GetByType(QuizType quizType)
+        //{
+        //    return context.Quizes.ToList<Quiz>().
+        //        Where(q => q.QuizType.Equals(quizType)).
+        //        FirstOrDefault();
+        //}
 
-        public Quiz GetByTitle(string title)
-        {
-            return context.Quizes.ToList<Quiz>().
-               Where(q => q.Title.Equals(title)).
-               FirstOrDefault();
-        }
+        //public Quiz GetByTitle(string title)
+        //{
+        //    return context.Quizes.ToList<Quiz>().
+        //       Where(q => q.Title.Equals(title)).
+        //       FirstOrDefault();
+        //}
 
-        public List<Quiz> GetQuiz()
-        {
-            throw new System.NotImplementedException();
-        }
+        //public List<Quiz> GetQuiz()
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
         public void Update(Quiz quiz)
         {
@@ -54,7 +54,6 @@ namespace Quizzario.Data.Repositories
             }
             else
             {
-
                 Quiz dbEntry;
                 dbEntry = new Quiz
                 {
@@ -70,8 +69,6 @@ namespace Quizzario.Data.Repositories
                     Description = quiz.Description
                 };
                 context.Quizes.Add(dbEntry);
-
-
             }
             context.SaveChanges();
         }
