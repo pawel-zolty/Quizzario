@@ -10,6 +10,11 @@ namespace Quizzario.Data.Entities
         Quiz, Exam, Test
     }
 
+    public enum QuizAccessLevel
+    {
+        Public, Private
+    }
+
     public class Quiz
     {
         [Key, Required]
@@ -23,6 +28,8 @@ namespace Quizzario.Data.Entities
         public string QuizSettingsId { get; set; }
         [Required]
         public QuizType? QuizType { get; set; }
+        [Required]
+        public QuizAccessLevel QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
         [Column(TypeName = "Date"), Required]
         public DateTime CreationDate { get; set; }
