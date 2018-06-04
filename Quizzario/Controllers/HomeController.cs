@@ -21,19 +21,7 @@ namespace Quizzario.Controllers
             return View();
         }
 
-        public IActionResult Search()
-        {
-            ViewData["HideFooter"] = true;
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Search(string q)
-        {
-            ViewData["q"] = q;
-            ViewData["HideFooter"] = true;
-            return View();
-        }
-
+   
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -72,7 +72,7 @@ namespace Quizzario.Controllers
             // string title = "User's 1 Quiz";
             PagingInfoService pagingInfoService = new PagingInfoService();
             var quizesCollection = quizService.SearchByName(searchingModel.Name);
-            if (quizesCollection.ElementAt(0) == null)
+            if (quizesCollection.Count == 0)
             {
                 return View("SearchingByName");
             }
