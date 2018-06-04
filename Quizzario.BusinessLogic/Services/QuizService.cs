@@ -33,6 +33,12 @@ namespace Quizzario.BusinessLogic.Services
             return quizes;
         }
 
+        public List<QuizDTO> GetUserAssignedToPrivateQuizes(string userId)
+        {
+            List<QuizDTO> quizes = quizDTOMapper.CreateUserAssignedToPrivateQuizes(userId);
+            return quizes;
+        }
+
         public void AddQuizToFavourite(string userId, string quizId)
         {
             var user = userFactory.CreateUserWithId(userId);

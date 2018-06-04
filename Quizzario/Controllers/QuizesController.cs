@@ -59,7 +59,7 @@ namespace Quizzario.Controllers
             // This is a placeholder code, all of it will be replaced
             //TO DO 
             /*var myQuizesCollection = quizService.GetAllUserAssignedQuizes(userId);*/
-            var myAssignedQuizesCollection = quizService.GetAllUserQuizes(userId);
+            var myAssignedQuizesCollection = quizService.GetUserAssignedToPrivateQuizes(userId);
             QuizListViewModel model = CreateQuizViewModelWithPagination(p, myAssignedQuizesCollection);
             return View(model);
         }

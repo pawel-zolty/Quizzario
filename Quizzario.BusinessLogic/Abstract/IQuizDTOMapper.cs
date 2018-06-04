@@ -8,6 +8,7 @@ namespace Quizzario.BusinessLogic.Abstract
         QuizDTO Create(string id);
         List<QuizDTO> CreateAllUserQuizes(string userId);
         List<QuizDTO> CreateUserFavouriteQuizes(string userId);
+        List<QuizDTO> CreateUserAssignedToPrivateQuizes(string userId);
         List<QuizDTO> SearchByName(string name);
         List<QuizDTO> GetAllQuizes();
         List<QuizDTO> Quizes { get; }

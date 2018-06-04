@@ -34,15 +34,40 @@ namespace Quizzario.BusinessLogic.Mappers
 
         public List<QuizDTO> CreateUserFavouriteQuizes(string userId)
         {
-            var favouriteQuizes = quizRepository.Quizes.
-                Where(
-                    q => q.AssignedUsers.
-                    Any(a => a.AssignType == Data.Entities.AssignType.Favourite && a.ApplicationUserId.Equals(userId))
-                ).ToList();
+            var type = Data.Entities.AssignType.Favourite;
+            return CreateUserAssignedQuizes(userId, type);
+            //var favouriteQuizes = quizRepository.Quizes.
+            //    Where(
+            //        q => q.AssignedUsers.
+            //        Any(a => a.AssignType == Data.Entities.AssignType.Favourite && a.ApplicationUserId.Equals(userId))
+            //    ).ToList();
+            //List<QuizDTO> quizesDTO = new List<QuizDTO>();
+            //if (favouriteQuizes.Count == 0)
+            //    return quizesDTO;
+            //foreach (var q in favouriteQuizes)
+            //{
+            //    quizesDTO.Add(CreateQuiz(q));
+            //}
+            //return quizesDTO;
+        }
+
+        public List<QuizDTO> CreateUserAssignedToPrivateQuizes(string userId)
+        {
+            var type = Data.Entities.AssignType.AssignedToPrivate;
+            return CreateUserAssignedQuizes(userId, type);
+        }
+
+        private List<QuizDTO> CreateUserAssignedQuizes(string userId, Data.Entities.AssignType type)
+        {
+            var quizes = quizRepository.Quizes.
+                            Where(
+                                q => q.AssignedUsers.
+                                Any(a => a.AssignType == type && a.ApplicationUserId.Equals(userId))
+                            ).ToList();
             List<QuizDTO> quizesDTO = new List<QuizDTO>();
-            if (favouriteQuizes.Count == 0)
+            if (quizes.Count == 0)
                 return quizesDTO;
-            foreach (var q in favouriteQuizes)
+            foreach (var q in quizes)
             {
                 quizesDTO.Add(CreateQuiz(q));
             }
@@ -191,6 +216,6 @@ namespace Quizzario.BusinessLogic.Mappers
                 if (user != null)
                     list.Add(user);
             }
-        }
+        }        
     }
 }
