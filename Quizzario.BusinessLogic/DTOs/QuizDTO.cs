@@ -19,6 +19,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public QuizDTO(SaveQuizDelegate saveQuiz)
         {
             this.SaveQuiz = saveQuiz;
+            Questions = new List<QuestionDTO>();
         }        
 
         public string Id { get; set; }
@@ -30,6 +31,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public QuizAccessLevel? QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
+        public List<QuestionDTO> Questions { get; set; }
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }       //RACZEJ NIE POTRZEBNE - 1 do 1 z encji EF. Nizej sa odpowiendnki biznesowe

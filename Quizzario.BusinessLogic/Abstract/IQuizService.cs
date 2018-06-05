@@ -12,9 +12,11 @@ namespace Quizzario.BusinessLogic.Abstract
         void AddQuizToFavourite(string userId, string quizId);
         void AddQuizToPrivateAssigned(string userId, string quizId);
         void RemoveQuizFromFavourite(string userId, string quizId);
+
         void RemoveQuizFromPrivateAssigned(string userId, string quizId);
         bool IsQuizFavourite(string userId, string quizId);
         void SaveQuiz(QuizDTO quiz);        
         List<QuizDTO> SearchByName(string name);        
+        //void CreateQuiz(QuizDTO quizViewModel);
     }
 }

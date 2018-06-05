@@ -9,7 +9,7 @@ namespace Quizzario.Data.Repositories
     public class EFQuizRepository : IQuizRepository
     {
         private ApplicationDbContext context;
-
+        private string directoryPath = "C://quizzario//";
         public EFQuizRepository(DbContextOptions<ApplicationDbContext> options)
         {
             context = new ApplicationDbContext(options);
@@ -70,7 +70,6 @@ namespace Quizzario.Data.Repositories
                 };
                 context.Quizes.Add(dbEntry);
             }
-            context.SaveChanges();
         }
     }
 }
