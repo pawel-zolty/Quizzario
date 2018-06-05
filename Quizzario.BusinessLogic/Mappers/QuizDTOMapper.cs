@@ -200,6 +200,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 Title = quizDTO.Title,
                 Description = quizDTO.Description,
                 ApplicationUserId = quizDTO.ApplicationUserId,
+                QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel),
                 QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
             quizRepository.Update(quiz);

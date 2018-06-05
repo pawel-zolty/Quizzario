@@ -117,9 +117,11 @@ namespace Quizzario.Controllers
         }        
 
         [HttpPost]
-        public ActionResult Edit(QuizDTO quizDTO)
+        public ActionResult Edit(CreateQuizViewModel quizViewModel)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);//
+            var user = this.userMapper.CreateUserWithId(userId);
+            QuizDTO quizDTO = this.quizDTOMapperFromViewModel.Map(quizViewModel, user);
             if (quizDTO.ApplicationUserId == null)//
                 quizDTO.ApplicationUserId = userId;//TE LINIE MOGA BYC DO WYWALENIA 
             if (ModelState.IsValid)
@@ -145,8 +147,8 @@ namespace Quizzario.Controllers
             /* KUBA TO TWOJE CHYBA brakuje jakiegos question view modelu 
             var model = new CreateQuizViewModel();
             return View("Create", model);*/
-        }        
-
+        }
+       
         [HttpPost]
         public StatusCodeResult Create([FromForm] CreateQuizViewModel quizViewModel)
         {            

@@ -26,9 +26,11 @@ namespace Quizzario.Extensions
         {
             QuizDTO dto = new QuizDTO(quizEntityMapper.Update)
             {
+                Id=viewmodel.id,
                 Description = viewmodel.Description,
                 Title = viewmodel.Title,
                 ApplicationUserId = user.Id,
+                QuizAccessLevel = 0,
                 QuizType = QuizType.Test,
                 CreationDate = DateTime.Today.ToShortDateString(),
             };

@@ -11,6 +11,7 @@ namespace Quizzario.Models.QuizViewModels
         {
             Questions = new List<CreateQuestionViewModel>();
         }
+        public string id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public List<CreateQuestionViewModel> Questions { get; set; }
