@@ -51,6 +51,7 @@ namespace Quizzario.Data.Repositories
             if (quiz.ApplicationUserId != null)
             {
                 context.Quizes.Update(quiz);
+                context.SaveChanges();
             }
             else
             {
