@@ -97,6 +97,24 @@ $(function () {
     
 });
 
+function addQuiz() {
+    var model = scrappModel();
+    $.ajax({
+        type: "POST",
+        url: '/Quizes/Create',
+        data: JSON.stringify(model),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (res) {
+        console.log(res.responseText);
+        console.log('success');
+        window.location.replace("/Quizes/MyQuizes");
+    }).fail(function (res) {
+        console.log(res.responseText)
+        console.log('fail');
+    })
+}
+
 function addQuestion() {
     var model = scrappModel();
     $.ajax({
@@ -141,8 +159,8 @@ function scrappModel() {
         var question = $(this).find('.-question-card-title').val();
         var answers = [];
         $(this).find('[name="AnswerForm"]').each(function () {
-            var answer = $(this).find('#answer_Answer').val();
-            var isCorrect = $(this).find('#answer_isCorrect').prop('checked');
+            var answer = $(this).find('#Answer').val();
+            var isCorrect = $(this).find('#isCorrect').prop('checked');
             answers.push({ Answer: answer, isCorrect: isCorrect, NewAnswerRequested: false })
         });
         model.Questions.push({ Question: question, Answers: answers });

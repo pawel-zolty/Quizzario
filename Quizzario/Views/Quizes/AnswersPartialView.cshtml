@@ -1,0 +1,6 @@
+﻿@model CreateQuestionViewModel
+
+@foreach (var answer in Model.Answers)
+{
+    await Html.RenderPartialAsync("CreateQuizAnswerPartialView", answer);
+}   

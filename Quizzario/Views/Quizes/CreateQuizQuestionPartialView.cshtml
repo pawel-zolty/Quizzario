@@ -5,11 +5,8 @@
         @Html.TextBoxFor(model => model.Question, new { @placeholder = "Type question here", @class = "-question-card-title font-weight-bold", @name = "QuestionField" })
         @Html.HiddenFor(model => model.NewAnswerRequested)
     </h6>
-    <fieldset class="form-group pl-2 mb-1" id="quiz-question-">
-        @foreach (var item in Model.Answers)
-        {
-            @Html.PartialAsync("CreateQuizAnswerPartialView", item).Result
-        }
+    <fieldset class="form-group pl-2 mb-1" id="quiz-question-@ViewBag.QuestionNumber">
+        @Html.PartialAsync("AnswersPartialView", Model).Result
     </fieldset>
-    <button type="button" class="-question-card-add-new-answer btn btn-sm btn-link px-3" name="AddAnswerButton" question-index="i" onclick="addAnswer(this)">Add new answer...</button>
+    <button type="button" class="-question-card-add-new-answer btn btn-sm btn-link px-3" name="AddAnswerButton" question-index="@ViewBag.QuestionNumber" onclick="addAnswer(this)">Add new answer...</button>
 </div>

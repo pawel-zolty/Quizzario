@@ -160,14 +160,15 @@ namespace Quizzario.Controllers
         }        
         
         [HttpPost]
-        public RedirectToActionResult Create([FromForm]CreateQuizViewModel quizViewModel)
+        public JsonResult Create([FromBody]CreateQuizViewModel quizViewModel)
         {            
+            TempData.Remove("QuizInCreation");
+
+            return Json(new { status = "OK"});
             var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = this.userMapper.CreateUserWithId(userid);
         
             quizService.CreateQuiz(quizDTOMapperFromViewModel.Map(quizViewModel, user));
-            TempData.Remove("QuizInCreation");
-            return RedirectToAction("MyQuizes");
         }
 
         [HttpPost]
@@ -175,7 +176,7 @@ namespace Quizzario.Controllers
         {
             model.Questions.Add(new CreateQuestionViewModel());
             TempData["QuizInCreation"] = JsonConvert.SerializeObject(model);
-            return PartialView("CreateQuizQuestionPartialView", model.Questions);
+            return PartialView("QuestionsPartialView", model);
         }    
 
         [HttpPost]
@@ -196,7 +197,7 @@ namespace Quizzario.Controllers
                 }
             }
             TempData["QuizInCreation"] = JsonConvert.SerializeObject(model);
-            return PartialView("CreateQuizAnswerPartialView", model.Questions[addedToQuestionIndex].Answers);
+            return PartialView("AnswersPartialView", model.Questions[addedToQuestionIndex]);
         }        
 
         /// <summary>
