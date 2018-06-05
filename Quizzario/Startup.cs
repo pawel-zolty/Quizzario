@@ -42,7 +42,6 @@ namespace Quizzario
             services.AddDbContext<ApplicationDbContext>(options =>
              options.UseLazyLoadingProxies().
              UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Quizzario.Data")));
-            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
             //mappers
             services.AddScoped<BusinessLogic.Abstract.IQuizDTOMapper, BusinessLogic.Mappers.QuizDTOMapper>();
