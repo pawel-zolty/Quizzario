@@ -17,6 +17,6 @@ namespace Quizzario.BusinessLogic.Abstract
         bool IsQuizFavourite(string userId, string quizId);
         void SaveQuiz(QuizDTO quiz);        
         List<QuizDTO> SearchByName(string name);        
-        //void CreateQuiz(QuizDTO quizViewModel);
+        void CreateQuiz(QuizDTO quizViewModel);
     }
 }

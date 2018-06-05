@@ -90,11 +90,13 @@ namespace Quizzario.BusinessLogic.Services
         {
             List<QuizDTO> quizes = quizDTOMapper.GetAllQuizes();
             return quizes;
-        }        
+        }
 
-        //public void CreateQuiz(QuizDTO quiz)
-        //{
-        //    factory.SaveQuiz(quiz);
-        //}
+        public void CreateQuiz(QuizDTO quiz)
+        {
+            quiz.Update();
+            //quizEntityMapper.Update(quiz);
+            //ZMIANA PO MERGU
+        }
     }
 }

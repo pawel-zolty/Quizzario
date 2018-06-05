@@ -40,18 +40,19 @@ namespace Quizzario
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
             services.AddDbContext<ApplicationDbContext>(options =>
-             options.//UseLazyLoadingProxies().
+             options.UseLazyLoadingProxies().
              UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Quizzario.Data")));
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
-            //factories
+            //mappers
             services.AddScoped<BusinessLogic.Abstract.IQuizDTOMapper, BusinessLogic.Mappers.QuizDTOMapper>();
             services.AddScoped<BusinessLogic.Abstract.IApplicationUserDTOMapper, BusinessLogic.Mappers.ApplicationUserDTOMapper>();
             services.AddScoped<BusinessLogic.Abstract.IApplicationUserEntityMapper, BusinessLogic.Mappers.ApplicationUserEntityMapper>();
             services.AddScoped<BusinessLogic.Abstract.IQuizEntityMapper, BusinessLogic.Mappers.QuizEntityMapper>();
             //services
             services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();
-
+            //extension MAPpers
+            services.AddScoped<Quizzario.Extensions.IQuizDTOMapperFromViewModel, Quizzario.Extensions.DTOMapper>();
             //repos
             services.AddScoped<Data.Abstracts.IQuizRepository,
                 Data.Repositories.EFQuizRepository>();

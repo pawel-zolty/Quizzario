@@ -42,6 +42,7 @@ namespace Quizzario.BusinessLogic.DTOs
 
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);
         private readonly SaveQuizDelegate SaveQuiz;
+        public void Update() => SaveQuiz(this);//hermetyzacja Delegata
 
         public void AddToFavouritesUsers(ApplicationUserDTO user)
         {

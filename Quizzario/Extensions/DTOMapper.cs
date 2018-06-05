@@ -1,4 +1,5 @@
-﻿using Quizzario.BusinessLogic.DTOs;
+﻿using Quizzario.BusinessLogic.Abstract;
+using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Models.QuizViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,23 @@ using System.Threading.Tasks;
 
 namespace Quizzario.Extensions
 {
-    public class DTOMapper
+    public interface IQuizDTOMapperFromViewModel
     {
-        public static QuizDTO Map(CreateQuizViewModel viewmodel, ApplicationUserDTO user)
+        QuizDTO Map(CreateQuizViewModel viewmodel, ApplicationUserDTO user);
+    }
+
+    public class DTOMapper : IQuizDTOMapperFromViewModel
+    {
+        private IQuizEntityMapper quizEntityMapper;
+
+        public DTOMapper(IQuizEntityMapper quizEntityMapper)
         {
-            QuizDTO dto = new QuizDTO
+            this.quizEntityMapper = quizEntityMapper;
+        }
+
+        public QuizDTO Map(CreateQuizViewModel viewmodel, ApplicationUserDTO user)
+        {
+            QuizDTO dto = new QuizDTO(quizEntityMapper.Update)
             {
                 Description = viewmodel.Description,
                 Title = viewmodel.Title,
@@ -33,7 +46,7 @@ namespace Quizzario.Extensions
             {
                 Question = viewmodel.Question
             };
-            foreach(var answer in viewmodel.Answers)
+            foreach (var answer in viewmodel.Answers)
             {
                 dto.Answers.Add(DTOMapper.Map(answer));
             }

@@ -134,8 +134,10 @@
     <Compile Include="Abstract\IQuizEntityMapper.cs" />
     <Compile Include="Abstract\IQuizService.cs" />
     <Compile Include="Abstract\IApplicationUserEntityMapper.cs" />
+    <Compile Include="DTOs\AnswerDTO.cs" />
     <Compile Include="DTOs\ApplicationUserDTO.cs" />
     <Compile Include="DTOs\AssignedUserDTO.cs" />
+    <Compile Include="DTOs\QuestionDTO.cs" />
     <Compile Include="DTOs\QuizDTO.cs" />
     <Compile Include="DTOs\QuizSettingsDTO.cs" />
     <Compile Include="DTOs\ScoreDTO.cs" />
