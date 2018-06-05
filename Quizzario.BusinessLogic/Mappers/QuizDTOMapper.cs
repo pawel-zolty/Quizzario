@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Quizzario.BusinessLogic.Abstract;
+using System.Text.RegularExpressions;
 
 namespace Quizzario.BusinessLogic.Mappers
 {
@@ -152,8 +153,12 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             if (q == null)
                 return null;
-            if (name != q.Title || q.QuizAccessLevel == 0)
+            var regexname = Regex.Match(q.Title, @"\b"+name+".*");
+            if (regexname.Groups[0].Value != q.Title || q.QuizAccessLevel == 0)
+            {
                 return null;
+            }
+
             string id = q.Id;
             string title = q.Title;
             string userId = q.ApplicationUserId;
