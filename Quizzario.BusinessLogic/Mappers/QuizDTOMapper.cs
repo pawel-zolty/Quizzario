@@ -153,8 +153,9 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             if (q == null)
                 return null;
-            var regexname = Regex.Match(q.Title, @"\b"+name+".*");
-            if (regexname.Groups[0].Value != q.Title || q.QuizAccessLevel == 0)
+
+            var regexname = Regex.Match(q.Title, @".*" + name + ".*");
+            if (regexname.Groups[0].Value != q.Title || q.QuizAccessLevel == Data.Entities.QuizAccessLevel.Private)
             {
                 return null;
             }
@@ -205,6 +206,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 Title = quizDTO.Title,
                 Description = quizDTO.Description,
                 ApplicationUserId = quizDTO.ApplicationUserId,
+                QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel),
                 QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
             quizRepository.Update(quiz);
