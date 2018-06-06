@@ -44,13 +44,17 @@ namespace Quizzario.BusinessLogic.Mappers
         public void Update(QuizDTO quizDTO)
         {
             var quiz = CreateQuiz(quizDTO);
+            //var kolekcja pytan json lub xml = json mapper
             quizRepository.Update(quiz);
+            //jsonReposiotry.Update();
         }
 
         public void AddNewQuiz(QuizDTO quizDTO)
         {
             var quiz = CreateQuiz(quizDTO);
+            //var kolekcja pytan json lub xml = json save = / quiz.jsonFile pewnie bd trzeba cos dodac do tego jsona.
             quizRepository.Add(quiz);
+            //jsonReposiotry.Add();
         }
 
         private Quiz GetQuizEntity(QuizDTO quizDTO)

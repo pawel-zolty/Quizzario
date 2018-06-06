@@ -21,13 +21,6 @@ namespace Quizzario.BusinessLogic.DTOs
             this.SaveQuiz = saveQuiz;            
         }
 
-        public QuizDTO(SaveQuizDelegate saveQuiz, SaveQuizDelegate saveQuizQuestions)
-        {
-            this.SaveQuiz = saveQuiz;
-            this.SaveQuiz = saveQuizQuestions;
-            Questions = new List<QuestionDTO>();
-        }
-
         public string Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
