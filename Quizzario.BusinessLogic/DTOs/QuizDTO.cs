@@ -38,7 +38,6 @@ namespace Quizzario.BusinessLogic.DTOs
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
         public List<QuestionDTO> Questions { get; set; }
-        public int attemps { get; set; }
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }       //RACZEJ NIE POTRZEBNE - 1 do 1 z encji EF. Nizej sa odpowiendnki biznesowe

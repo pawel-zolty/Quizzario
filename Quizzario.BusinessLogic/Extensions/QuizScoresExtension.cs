@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Quizzario.BusinessLogic.Extensions
 {
-public static class QuizScoresExtension
+    public static class QuizScoresExtension
     {
 
         public static ICollection<BusinessLogic.DTOs.ScoreDTO> ToDTOQuizScore(this ICollection<Data.Entities.Score> value)
@@ -12,7 +12,7 @@ public static class QuizScoresExtension
             if (value == null)
                 return null;
             ICollection<DTOs.ScoreDTO> scores = new List<DTOs.ScoreDTO>();
-            foreach(Data.Entities.Score s in value)
+            foreach (Data.Entities.Score s in value)
             {
                 BusinessLogic.DTOs.ScoreDTO scoreDTO = new DTOs.ScoreDTO();
                 scoreDTO.Id = s.Id;
@@ -20,7 +20,7 @@ public static class QuizScoresExtension
                 scoreDTO.Result = s.Result;
                 scoreDTO.ApplicationUserId = s.ApplicationUserId;
                 scores.Add(scoreDTO);
-                
+
             }
 
             return scores;
@@ -43,4 +43,5 @@ public static class QuizScoresExtension
 
             return scores;
         }
+    }
 }

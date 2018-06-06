@@ -138,7 +138,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 FilePath = quiz.FilePath,
                 ApplicationUser = user,
                 AllScore= scoreDTO,
-                attemps=attemps,
+  
                 CreationDate = creationDate.ToString()
             };
 
