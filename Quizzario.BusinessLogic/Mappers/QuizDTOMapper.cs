@@ -180,34 +180,12 @@ namespace Quizzario.BusinessLogic.Mappers
             if (q == null)
                 return null;
 
-            var regexname = Regex.Match(q.Title, @".*" + name + ".*");
-            if (regexname.Groups[0].Value != q.Title || q.QuizAccessLevel == Data.Entities.QuizAccessLevel.Private)
+            var regexname = Regex.Match(q.Title, @".*" + name.ToLower() + ".*");
+            if (regexname.Groups[0].Value != q.Title.ToLower() || q.QuizAccessLevel == Data.Entities.QuizAccessLevel.Private)
             {
                 return null;
             }
             var quizDTO = CreateQuiz(q);
-            //string id = q.Id;
-            //string title = q.Title;
-            //string userId = q.ApplicationUserId;
-            //string filePath = q.FilePath;
-            //DTOs.QuizAccessLevel? Level = q.QuizAccessLevel.ToDTOQuizAccessLevel();
-            //    ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
-            //DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
-            //QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
-            //{
-            //    Id = id,
-            //    Title = title,
-            //    ApplicationUserId = "1",
-            //    QuizSettingsId = "1",
-            //    QuizType = type,
-            //    FilePath = filePath,
-            //    ApplicationUser = user,
-            //    QuizAccessLevel = Level,
-            //    //AssignedUsers,
-            //    //Scores,
-            //    //QuizSettings = 
-            //    //TO DO 
-            //};
             return quizDTO;
         }
 
