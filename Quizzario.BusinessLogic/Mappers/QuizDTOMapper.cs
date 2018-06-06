@@ -185,29 +185,29 @@ namespace Quizzario.BusinessLogic.Mappers
             {
                 return null;
             }
-
-            string id = q.Id;
-            string title = q.Title;
-            string userId = q.ApplicationUserId;
-            string filePath = q.FilePath;
-            DTOs.QuizAccessLevel? Level = q.QuizAccessLevel.ToDTOQuizAccessLevel();
-                ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
-            DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
-            QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
-            {
-                Id = id,
-                Title = title,
-                ApplicationUserId = "1",
-                QuizSettingsId = "1",
-                QuizType = type,
-                FilePath = filePath,
-                ApplicationUser = user,
-                QuizAccessLevel = Level,
-                //AssignedUsers,
-                //Scores,
-                //QuizSettings = 
-                //TO DO 
-            };
+            var quizDTO = CreateQuiz(q);
+            //string id = q.Id;
+            //string title = q.Title;
+            //string userId = q.ApplicationUserId;
+            //string filePath = q.FilePath;
+            //DTOs.QuizAccessLevel? Level = q.QuizAccessLevel.ToDTOQuizAccessLevel();
+            //    ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
+            //DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
+            //QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
+            //{
+            //    Id = id,
+            //    Title = title,
+            //    ApplicationUserId = "1",
+            //    QuizSettingsId = "1",
+            //    QuizType = type,
+            //    FilePath = filePath,
+            //    ApplicationUser = user,
+            //    QuizAccessLevel = Level,
+            //    //AssignedUsers,
+            //    //Scores,
+            //    //QuizSettings = 
+            //    //TO DO 
+            //};
             return quizDTO;
         }
 

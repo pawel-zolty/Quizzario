@@ -20,14 +20,14 @@ namespace Quizzario.Extensions
             AddNextPage(output, Info.NextPage.Display);
         }
 
-        private static void BuildParent(TagHelperOutput output)
+        protected static void BuildParent(TagHelperOutput output)
         {
             output.TagName = "ul";
             output.Attributes.Add("class", "pagination justify-content-center");
             output.Attributes.Add("aria-label", "Pagination");
         }
         
-        private void AddPreviousPage(TagHelperOutput output, bool enabled)
+        protected virtual void AddPreviousPage(TagHelperOutput output, bool enabled)
         {
             var html = $@"<li class=""page-item" + (enabled?"":" disabled") + $@""">
                     <a class=""page-link" + (enabled?"":" bg-light text-secondary") + $@""" href=""{Route}/{Info.PreviousPage.PageNumber}"" aria-label=""{PreviousPageText} page"">{PreviousPageText}</a>
@@ -36,7 +36,7 @@ namespace Quizzario.Extensions
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
         }
         
-        private void AddNextPage(TagHelperOutput output, bool enabled)
+        protected virtual void AddNextPage(TagHelperOutput output, bool enabled)
         {
             var html = $@"<li class=""page-item" + (enabled ? "" : " disabled") + $@""">
                     <a class=""page-link" + (enabled ? "" : " bg-light text-secondary") + $@""" href=""{Route}/{Info.NextPage.PageNumber}"" aria-label=""{NextPageText} page"">{NextPageText}</a>
@@ -45,7 +45,7 @@ namespace Quizzario.Extensions
             output.Content.SetHtmlContent(output.Content.GetContent() + html);
         }
 
-        private void AddPageNodes(TagHelperOutput output)
+        protected virtual void AddPageNodes(TagHelperOutput output)
         {
             foreach (var infoPage in Info.Pages)
             {

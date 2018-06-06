@@ -12,7 +12,7 @@ namespace Quizzario.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly int PageSize = 100;
+        private readonly int PageSize = 2;
         private IQuizService quizService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         public HomeController(SignInManager<ApplicationUser> signInManager, IQuizService quizService)
@@ -41,6 +41,12 @@ namespace Quizzario.Controllers
             ViewData["HideFooter"] = true;
             PagingInfoService pagingInfoService = new PagingInfoService();
             var quizesCollection = quizService.SearchByName(q);
+            string address = "?q=" + q;
+            ViewBag.Address = address;
+            foreach (var qu in quizesCollection)
+            {
+                string s = qu.Description;
+            }
             SearchingByNameModel model = new SearchingByNameModel
             {
                 Quizes = quizesCollection.
