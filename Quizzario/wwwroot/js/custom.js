@@ -106,12 +106,8 @@ function addQuiz() {
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (res) {
-        console.log(res.responseText);
-        console.log('success');
         window.location.replace("/Quizes/MyQuizes");
     }).fail(function (res) {
-        console.log(res.responseText)
-        console.log('fail');
     })
 }
 

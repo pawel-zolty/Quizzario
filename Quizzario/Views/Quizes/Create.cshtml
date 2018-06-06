@@ -16,7 +16,7 @@
     <script src="~/js/custom.js"></script>
 }
 
-@using (Html.BeginForm("Create", "Quizes", FormMethod.Post, new { id = "QuizCreateForm" }))
+@using (Html.BeginForm("Create", "Quizes", FormMethod.Post, new { id = "QuizCreateForm", onsubmit= "event.preventDefault();" }))
 {
     <div class="row px-3 py-3 mx-0">
         <div class="col-12">
