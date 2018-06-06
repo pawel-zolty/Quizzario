@@ -138,6 +138,7 @@ namespace Quizzario.Controllers
             ViewBag.IsFavourite = isFavourite;
             return View(quizDTO);
             /* KUBA TO TWOJE CHYBA brakuje jakiegos question view modelu 
+             * Nope, nie moje
             var model = new CreateQuizViewModel();
             return View("Create", model);*/
         }        
