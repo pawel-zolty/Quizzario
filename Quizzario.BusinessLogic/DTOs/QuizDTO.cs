@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Quizzario.BusinessLogic.DTOs
 {
@@ -42,6 +43,13 @@ namespace Quizzario.BusinessLogic.DTOs
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);
         private readonly SaveQuizDelegate SaveQuiz;
         public void Update() => SaveQuiz(this);//hermetyzacja Delegata
+
+        public string JSON => JsonConvert.SerializeObject(new {
+                Questions = this.Questions,
+                Title = this.Title,
+                Description = this.Description
+            }
+        );
 
         public void AddToFavouritesUsers(ApplicationUserDTO user)
         {
