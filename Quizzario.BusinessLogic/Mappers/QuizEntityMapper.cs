@@ -16,7 +16,7 @@ namespace Quizzario.BusinessLogic.Mappers
             this.quizRepository = quizRepository;
         }
 
-        public Quiz CreateQuiz(QuizDTO quizDTO)
+        private Quiz CreateQuiz(QuizDTO quizDTO)
         {
             Quiz quiz = GetQuizEntity(quizDTO);
             quiz.AssignedUsers = new List<AssignedUser>();
@@ -47,9 +47,17 @@ namespace Quizzario.BusinessLogic.Mappers
             quizRepository.Update(quiz);
         }
 
+        public void AddNewQuiz(QuizDTO quizDTO)
+        {
+            var quiz = CreateQuiz(quizDTO);
+            quizRepository.Add(quiz);
+        }
+
         private Quiz GetQuizEntity(QuizDTO quizDTO)
         {
             var quiz = quizRepository.GetById(quizDTO.Id);
+            if (quiz == null)
+                quiz = new Quiz();
             quiz.Id = quizDTO.Id;
             quiz.ApplicationUserId = quizDTO.ApplicationUserId;
             quiz.FilePath = quizDTO.FilePath;
@@ -58,6 +66,6 @@ namespace Quizzario.BusinessLogic.Mappers
             quiz.QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel);
             quiz.Title = quizDTO.Title;
             return quiz;
-        }
+        }        
     }
 }

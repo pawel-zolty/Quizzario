@@ -24,7 +24,7 @@ namespace Quizzario.Extensions
 
         public QuizDTO Map(CreateQuizViewModel viewmodel, ApplicationUserDTO user)
         {
-            QuizDTO dto = new QuizDTO(quizEntityMapper.Update)
+            QuizDTO dto = new QuizDTO(quizEntityMapper.AddNewQuiz)
             {
                 Description = viewmodel.Description,
                 Title = viewmodel.Title,

@@ -164,11 +164,16 @@ namespace Quizzario.Controllers
         {            
             TempData.Remove("QuizInCreation");
 
-            return Json(new { status = "OK"});
+            
             var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = this.userMapper.CreateUserWithId(userid);
-        
-            quizService.CreateQuiz(quizDTOMapperFromViewModel.Map(quizViewModel, user));
+            var quiz = quizDTOMapperFromViewModel.Map(quizViewModel, user);
+            //te 2 rzeczy dodaæ do GUI
+            quiz.QuizAccessLevel = QuizAccessLevel.Public;
+            quiz.QuizType = QuizType.Quiz;
+
+            quizService.CreateQuiz(quiz);
+            return Json(new { status = "OK" });
         }
 
         [HttpPost]
