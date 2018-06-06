@@ -147,6 +147,10 @@ namespace Quizzario.Controllers
         {
             QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
             var isFavourite = quizService.IsQuizFavourite(userId, Id);
+            var bestScore = quizService.GetBestScore(userId, Id);
+            ViewBag.bestScore = bestScore;
+            var attpemps = quizService.GetUserAttemps(userId, Id);
+            ViewBag.attemps = attpemps;
             ViewBag.IsFavourite = isFavourite;
             var assignedUsers = quizService.GetAssignedToPrivateQuizUsers(Id);//quizId
             ViewBag.AssignedUsers = assignedUsers;
