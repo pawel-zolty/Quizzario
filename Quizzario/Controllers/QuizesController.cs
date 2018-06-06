@@ -162,13 +162,11 @@ namespace Quizzario.Controllers
         [HttpPost]
         public JsonResult Create([FromBody]CreateQuizViewModel quizViewModel)
         {            
-            TempData.Remove("QuizInCreation");
-
-            
-            var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = this.userMapper.CreateUserWithId(userid);
+            TempData.Remove("QuizInCreation");          
+            var user = this.userMapper.CreateUserWithId(userId);
             var quiz = quizDTOMapperFromViewModel.Map(quizViewModel, user);
-            //te 2 rzeczy dodaæ do GUI
+            //te 2 rzeczy dodaæ do GUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //VIEW MODELU
             quiz.QuizAccessLevel = QuizAccessLevel.Public;
             quiz.QuizType = QuizType.Quiz;
 

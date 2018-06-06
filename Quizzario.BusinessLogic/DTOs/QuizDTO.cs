@@ -18,9 +18,15 @@ namespace Quizzario.BusinessLogic.DTOs
     {
         public QuizDTO(SaveQuizDelegate saveQuiz)
         {
+            this.SaveQuiz = saveQuiz;            
+        }
+
+        public QuizDTO(SaveQuizDelegate saveQuiz, SaveQuizDelegate saveQuizQuestions)
+        {
             this.SaveQuiz = saveQuiz;
+            this.SaveQuiz = saveQuizQuestions;
             Questions = new List<QuestionDTO>();
-        }        
+        }
 
         public string Id { get; set; }
         public string Title { get; set; }
@@ -31,14 +37,14 @@ namespace Quizzario.BusinessLogic.DTOs
         public QuizAccessLevel? QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
-        public List<QuestionDTO> Questions { get; set; }
+        public List<QuestionDTO> Questions { get; set; } = new List<QuestionDTO>();
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }       //RACZEJ NIE POTRZEBNE - 1 do 1 z encji EF. Nizej sa odpowiendnki biznesowe
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
         public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
         //public virtual ICollection<ScoreDTO> Scores { get; set; }
-        //public virtual QuizSettingsDTO QuizSettings { get; set; }
+        //public virtual QuizSettingsDTO QuizSettings { get; set; }        
 
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);
         private readonly SaveQuizDelegate SaveQuiz;
@@ -75,7 +81,7 @@ namespace Quizzario.BusinessLogic.DTOs
                 Select(u => u.Id).
                 FirstOrDefault();
             return isFavourite == null ? false : true;
-        }        
+        }
 
         public override bool Equals(object obj)
         {
