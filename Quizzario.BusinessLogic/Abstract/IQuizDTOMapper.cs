@@ -13,5 +13,6 @@ namespace Quizzario.BusinessLogic.Abstract
         List<QuizDTO> GetAllQuizes();
         List<QuizDTO> Quizes { get; }
         void SaveQuiz(QuizDTO quiz);
+        List<ApplicationUserDTO> CreateAssignedToPrivateQuizUsers(string quizId);
     }
 }

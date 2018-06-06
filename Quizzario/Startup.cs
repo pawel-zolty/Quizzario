@@ -50,6 +50,7 @@ namespace Quizzario
             services.AddScoped<BusinessLogic.Abstract.IQuizEntityMapper, BusinessLogic.Mappers.QuizEntityMapper>();
             //services
             services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();
+            services.AddScoped<BusinessLogic.Abstract.IUserService, BusinessLogic.Services.UserService>();
             //extension MAPpers
             services.AddScoped<Quizzario.Extensions.IQuizDTOMapperFromViewModel, Quizzario.Extensions.DTOMapper>();
             //repos

@@ -13,16 +13,19 @@ namespace Quizzario.BusinessLogic.Mappers
     public class QuizDTOMapper : IQuizDTOMapper
     {
         private IQuizRepository quizRepository;
+        private IApplicationUserRepository applicationUserRepository;
         private IApplicationUserDTOMapper userDTOMapper;
         private IQuizEntityMapper quizEntityMapper;
 
         public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
+            IApplicationUserRepository applicationUserRepository,
             IApplicationUserDTOMapper userDTOMapper,
             IQuizEntityMapper quizEntityMapper)
         {
             this.quizRepository = quizRepository;
+            this.applicationUserRepository = applicationUserRepository;
             this.userDTOMapper = userDTOMapper;
             this.quizEntityMapper = quizEntityMapper;
         }
@@ -43,6 +46,29 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             var type = Data.Entities.AssignType.AssignedToPrivate;
             return CreateUserAssignedQuizes(userId, type);
+        }
+
+        public List<ApplicationUserDTO> CreateAssignedToPrivateQuizUsers(string quizId)
+        {
+            var type = Data.Entities.AssignType.AssignedToPrivate;
+            return CreateAssignedQuizUsers(quizId, type);
+        }
+
+        private List<ApplicationUserDTO> CreateAssignedQuizUsers(string quizId, Data.Entities.AssignType type)
+        {
+            var users = applicationUserRepository.Users.
+                            Where(
+                                u => u.AssignedUsers.
+                                Any(a => a.AssignType == type && a.QuizId.Equals(quizId))
+                            ).ToList();
+            List<ApplicationUserDTO> usersDTO = new List<ApplicationUserDTO>();
+            if (users.Count == 0)
+                return usersDTO;
+            foreach (var u in users)
+            {
+                usersDTO.Add(userDTOMapper.CreateUserWithId(u.Id));
+            }
+            return usersDTO;
         }
 
         private List<QuizDTO> CreateUserAssignedQuizes(string userId, Data.Entities.AssignType type)
@@ -220,6 +246,8 @@ namespace Quizzario.BusinessLogic.Mappers
                 if (user != null)
                     list.Add(user);
             }
-        }        
+        }
+
+        
     }
 }
