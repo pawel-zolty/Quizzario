@@ -15,6 +15,11 @@
     {
     <script src="~/js/custom.js"></script>
 }
+
+@{ 
+    const int DescriptionSignLimit = 200;
+}
+
 <div class="row px-3 py-3 mx-0">
     <div class="col-md-8" id="-quizes-list">
         <div class="row">
@@ -36,19 +41,34 @@
         </div>
         <div class="row">
             <div class="col text-justify">
+                @if (!Model.Quizes.Any())
+                {
+
+
+                }
                 @foreach (var quiz in Model.Quizes)
                 {
+                    string creationDate = DateTime.Parse(@quiz.CreationDate).ToString("MMMM dd, yyyy");
                     <div class="row py-2 mb-2 -quizes-card">
                         <div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
                             <img class="img-fluid" src="http://via.placeholder.com/300x300" />
                         </div>
                         <div class="col">
                             <h5 class="-quizes-card-title">@quiz.Title</h5>
-                            <p class="-quizes-card-description">@quiz.Description</p>
+                            <p class="-quizes-card-description">
+                                @if (quiz.Description.Length > DescriptionSignLimit)
+                                {
+                                    @quiz.Description.Substring(0, DescriptionSignLimit)
+                                    @:...
+                                }
+                                else {
+                                    @quiz.Description
+                                }
+                            </p>
                             <div class="row align-bottom">
-                                <div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>@* Data missing *@ times</div>
-                                <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>@quiz.CreationDate</div>
-                                <div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>@* Data missing *@</div>
+                                @*<div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>... times</div>*@
+                                <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>@creationDate</div>
+                                @*<div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>...</div>*@
                             </div>
                         </div>
                         <div>
@@ -57,8 +77,8 @@
                                  data-title="@quiz.Title"
                                  data-description="@quiz.Description"
                                  data-type="@quiz.QuizType"
-                                 data-date-created="@quiz.CreationDate"
-                                 data-last-edited="@quiz.CreationDate">
+                                 data-date-created="@creationDate"
+                                 data-last-edited="null">
                             </div>
                         </div>
                     </div>
@@ -91,8 +111,8 @@
 
                 @* Quiz image, functionalities goes here *@
                 @*<p class="text-center">
-                <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
-            </p>*@
+                    <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
+                </p>*@
 
                 <p class="my-0">
                     <span class="text-secondary font-weight-light font-italic mr-2">Type: </span>
@@ -102,10 +122,10 @@
                     <span class="text-secondary font-weight-light font-italic mr-2">Date created: </span>
                     <span id="-quizes-right-panel-date-created"></span>
                 </p>
-                <p class="my-0">
+                @*<p class="my-0">
                     <span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
                     <span id="-quizes-right-panel-last-edited"></span>
-                </p>
+                </p>*@
                 <p class="text-secondary font-weight-light font-italic my-0 mr-2"> Description</p>
                 <p id="-quizes-right-panel-description"></p>
             </div>
