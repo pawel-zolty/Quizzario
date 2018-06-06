@@ -48,7 +48,7 @@ namespace Quizzario.BusinessLogic.Mappers
             var quiz = CreateQuiz(quizDTO);
             //var kolekcja pytan json lub xml = json mapper
             quizRepository.Update(quiz);
-            //jsonReposiotry.Update();
+            this.jsonRepository.SaveWithAbsolutePath(quizDTO.FilePath, quizDTO.JSON);
         }
 
         public void AddNewQuiz(QuizDTO quizDTO)
@@ -56,7 +56,9 @@ namespace Quizzario.BusinessLogic.Mappers
             var quiz = CreateQuiz(quizDTO);
             //var kolekcja pytan json lub xml = json save = / quiz.jsonFile pewnie bd trzeba cos dodac do tego jsona.
             quizRepository.Add(quiz);
-            //jsonReposiotry.Add();
+            quizDTO.FilePath = this.jsonRepository.BuildAbsolutePath(quizDTO.Id);
+            this.jsonRepository.SaveWithAbsolutePath(quizDTO.FilePath, quizDTO.JSON);
+            this.Update(quizDTO);
         }
         
         private Quiz GetQuizEntity(QuizDTO quizDTO)
@@ -71,6 +73,7 @@ namespace Quizzario.BusinessLogic.Mappers
             quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
             quiz.QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel);
             quiz.Title = quizDTO.Title;
+            
             return quiz;
         }        
     }
