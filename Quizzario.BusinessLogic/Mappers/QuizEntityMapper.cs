@@ -10,10 +10,12 @@ namespace Quizzario.BusinessLogic.Mappers
     public class QuizEntityMapper : IQuizEntityMapper
     {
         private IQuizRepository quizRepository;
+        private IJSONRepository jsonRepository;
 
-        public QuizEntityMapper(IQuizRepository quizRepository)
+        public QuizEntityMapper(IQuizRepository quizRepository, IJSONRepository jsonRepository)
         {
             this.quizRepository = quizRepository;
+            this.jsonRepository = jsonRepository;
         }
 
         private Quiz CreateQuiz(QuizDTO quizDTO)
@@ -56,7 +58,7 @@ namespace Quizzario.BusinessLogic.Mappers
             quizRepository.Add(quiz);
             //jsonReposiotry.Add();
         }
-
+        
         private Quiz GetQuizEntity(QuizDTO quizDTO)
         {
             var quiz = quizRepository.GetById(quizDTO.Id);
