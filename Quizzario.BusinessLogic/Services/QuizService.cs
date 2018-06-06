@@ -81,6 +81,7 @@ namespace Quizzario.BusinessLogic.Services
             return i;
         }
 
+     
         public void SaveQuiz(QuizDTO quiz)
         {
             quizDTOMapper.SaveQuiz(quiz);
@@ -105,6 +106,5 @@ namespace Quizzario.BusinessLogic.Services
             //ZMIANA PO MERGU
         }
 
-        
     }
 }

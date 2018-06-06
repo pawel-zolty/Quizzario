@@ -1,5 +1,4 @@
 ﻿@model Quizzario.BusinessLogic.DTOs.QuizDTO
-
 @{
     ViewData["Title"] = "Summary";
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
@@ -23,7 +22,8 @@
                                 // string updateDate ...
 
 }
-  
+
+
 <p>@isFavourite<p>
 <div class="row px-3 py-3 mx-0">
     <div class="col-12">
@@ -75,7 +75,7 @@
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
-                                <span> @*Data missing, updated controller needed *@</span>
+                                <span> @Model.attemps</span>
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
@@ -117,11 +117,11 @@
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of questions: </span>
-                                <span>@* Data missing, updated controller needed *@.</span>
+                                <span></span>
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of attempts: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
+                                <span>@Model.AllScore.Count()</span>
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Added to favourite: </span>

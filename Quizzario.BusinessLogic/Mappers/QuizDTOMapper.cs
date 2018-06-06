@@ -116,7 +116,15 @@ namespace Quizzario.BusinessLogic.Mappers
             ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
             DTOs.QuizType? type = quiz.QuizType.ToDTOQuizType();
             DTOs.QuizAccessLevel? accessLevel = quiz.QuizAccessLevel.ToDTOQuizAccessLevel();
-
+            ICollection<DTOs.ScoreDTO> scoreDTO = quiz.Scores.ToDTOQuizScore();
+            int attemps = 0;
+            for(int i=0; i<scoreDTO.Count();i++)
+            {
+                if(quiz.ApplicationUserId==scoreDTO.ElementAt(i).ApplicationUserId)
+                {
+                    attemps++;
+                }
+            }
             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
             {
 
@@ -129,6 +137,8 @@ namespace Quizzario.BusinessLogic.Mappers
                 QuizAccessLevel = accessLevel,
                 FilePath = quiz.FilePath,
                 ApplicationUser = user,
+                AllScore= scoreDTO,
+                attemps=attemps,
                 CreationDate = creationDate.ToString()
             };
 

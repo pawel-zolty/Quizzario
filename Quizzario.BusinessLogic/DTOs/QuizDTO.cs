@@ -38,18 +38,25 @@ namespace Quizzario.BusinessLogic.DTOs
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
         public List<QuestionDTO> Questions { get; set; }
+        public int attemps { get; set; }
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }       //RACZEJ NIE POTRZEBNE - 1 do 1 z encji EF. Nizej sa odpowiendnki biznesowe
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
         public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
-        //public virtual ICollection<ScoreDTO> Scores { get; set; }
+        //public virtual ICollection<ScoreDTO> UserScore { get; set; } 
+        public virtual ICollection<ScoreDTO> AllScore { get; set; } 
         //public virtual QuizSettingsDTO QuizSettings { get; set; }
 
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);
         private readonly SaveQuizDelegate SaveQuiz;
         public void Update() => SaveQuiz(this);//hermetyzacja Delegata
 
+        public void AddScore(ScoreDTO scoreDTO)
+        {
+            AllScore.Add(scoreDTO);
+            SaveQuiz(this);
+        }
         public void AddToFavouritesUsers(ApplicationUserDTO user)
         {
             FavouritesUsers.Add(user);
