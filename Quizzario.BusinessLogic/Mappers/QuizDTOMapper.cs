@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using Quizzario.BusinessLogic.Abstract;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace Quizzario.BusinessLogic.Mappers
 {
@@ -15,16 +16,19 @@ namespace Quizzario.BusinessLogic.Mappers
         private IQuizRepository quizRepository;
         private IApplicationUserDTOMapper userDTOMapper;
         private IQuizEntityMapper quizEntityMapper;
+        private IJSONRepository jsonRepository;
 
         public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
             IApplicationUserDTOMapper userDTOMapper,
-            IQuizEntityMapper quizEntityMapper)
+            IQuizEntityMapper quizEntityMapper,
+            IJSONRepository jsonRepository)
         {
             this.quizRepository = quizRepository;
             this.userDTOMapper = userDTOMapper;
             this.quizEntityMapper = quizEntityMapper;
+            this.jsonRepository = jsonRepository;
         }
 
         public QuizDTO Create(string id)
@@ -218,6 +222,6 @@ namespace Quizzario.BusinessLogic.Mappers
                 if (user != null)
                     list.Add(user);
             }
-        }        
+        }      
     }
 }

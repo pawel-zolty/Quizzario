@@ -14,14 +14,14 @@ namespace Quizzario.Data.Repositories
 
         public JSONRepository()
         {
-            this.StorageDirectoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            this.StorageDirectoryPath = Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory());
             this.StorageDirectoryPath += "\\jsonStorage";
             System.IO.Directory.CreateDirectory(this.StorageDirectoryPath);
         }
 
         public string BuildAbsolutePath(string filename)
         {
-            return this.StorageDirectoryPath + filename;
+            return this.StorageDirectoryPath + "\\" + filename;
         }
 
         public string Load(string filename)

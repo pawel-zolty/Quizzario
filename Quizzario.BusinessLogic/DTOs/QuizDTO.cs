@@ -45,9 +45,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public void Update() => SaveQuiz(this);//hermetyzacja Delegata
 
         public string JSON => JsonConvert.SerializeObject(new {
-                Questions = this.Questions,
-                Title = this.Title,
-                Description = this.Description
+                this.Questions
             }
         );
 
