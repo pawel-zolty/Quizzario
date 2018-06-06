@@ -6,6 +6,8 @@ namespace Quizzario.BusinessLogic.DTOs
     {
         public ApplicationUserDTO(string userName)
         {
+            var i = userName.IndexOf('@');
+            userName = userName.Substring(0, i);
             this.UserName = userName;
         }
 
