@@ -103,9 +103,11 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
-        public void RemoveFromPrivateAssigned(string userId, string quizId)
+        public void RemoveFromPrivateAssigned(string userName, string quizId)
         {
-            quizService.RemoveQuizFromPrivateAssigned(userId, quizId);
+            var userId = userService.GetUserIdByName(userName);
+            if (userId != null)
+                quizService.RemoveQuizFromPrivateAssigned(userId, quizId);
         }
 
         public ViewResult Create()
