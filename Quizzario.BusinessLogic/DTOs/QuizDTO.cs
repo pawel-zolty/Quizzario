@@ -14,6 +14,12 @@ namespace Quizzario.BusinessLogic.DTOs
         Public, Private
     }
 
+    public enum AssignType
+    {
+        Favourite, AssignedToPrivate
+    }
+
+
     public class QuizDTO
     {
         public QuizDTO(SaveQuizDelegate saveQuiz)

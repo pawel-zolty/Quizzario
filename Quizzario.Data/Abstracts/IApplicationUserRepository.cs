@@ -7,5 +7,6 @@ namespace Quizzario.Data.Abstracts
     {
         List<ApplicationUser> Users { get; }
         ApplicationUser GetById(string id);
+        ApplicationUser GetByName(string userName);
     }
 }

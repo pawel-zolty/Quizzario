@@ -17,17 +17,20 @@ namespace Quizzario.Controllers
     {
         private readonly int PageSize = 4;
         private IQuizService quizService;
+        private IUserService userService;
         private IPagingInfoService pagingInfoService;
-        private string userId;        
+        private string userId;
         private IApplicationUserDTOMapper userMapper;
         private IQuizDTOMapperFromViewModel quizDTOMapperFromViewModel;
 
-        public QuizesController(IQuizService quizService, 
+        public QuizesController(IQuizService quizService,
+            IUserService userService,
             IPagingInfoService pagingInfoService,
             IApplicationUserDTOMapper userMapper,
             IQuizDTOMapperFromViewModel quizDTOMapperFromViewModel)
         {
             this.quizService = quizService;
+            this.userService = userService; ;
             this.userMapper = userMapper;
             this.pagingInfoService = pagingInfoService;
             this.quizDTOMapperFromViewModel = quizDTOMapperFromViewModel;
@@ -86,9 +89,11 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
-        public void AddToPrivateAssigned(string quizId)
+        public void AddToPrivateAssigned(string userName, string quizId)
         {
-            quizService.AddQuizToPrivateAssigned(userId, quizId);
+            var userId = userService.GetUserIdByName(userName);
+            if (userId != null)
+                quizService.AddQuizToPrivateAssigned(userId, quizId);
         }
 
         [HttpPost]
@@ -98,23 +103,23 @@ namespace Quizzario.Controllers
         }
 
         [HttpPost]
-        public void RemoveFromPrivateAssigned(string quizId)
+        public void RemoveFromPrivateAssigned(string userId, string quizId)
         {
             quizService.RemoveQuizFromPrivateAssigned(userId, quizId);
-        }        
+        }
 
         public ViewResult Create()
         {
             var model = new CreateQuizViewModel();
             return View("Create", model);
             //return View("Edit", new QuizDTO());
-        }        
+        }
 
         public ViewResult Edit(string Id)
         {
             QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
             return View(quizDTO);
-        }        
+        }
 
         [HttpPost]
         public ActionResult Edit(CreateQuizViewModel quizViewModel)
@@ -138,20 +143,22 @@ namespace Quizzario.Controllers
             return View(quizService.Quizes);//KTOS WIE CZY POTRZEBNE
         }
 
-        public ViewResult Summary(string Id)
+        public ViewResult Summary(string Id)//quizId
         {
             QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
             var isFavourite = quizService.IsQuizFavourite(userId, Id);
             ViewBag.IsFavourite = isFavourite;
+            var assignedUsers = quizService.GetAssignedToPrivateQuizUsers(Id);//quizId
+            ViewBag.AssignedUsers = assignedUsers;
             return View(quizDTO);
             /* KUBA TO TWOJE CHYBA brakuje jakiegos question view modelu 
             var model = new CreateQuizViewModel();
             return View("Create", model);*/
         }
-       
+
         [HttpPost]
         public StatusCodeResult Create([FromForm] CreateQuizViewModel quizViewModel)
-        {            
+        {
             var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = this.userMapper.CreateUserWithId(userid);
 
@@ -192,14 +199,14 @@ namespace Quizzario.Controllers
         {
             model.Questions.Add(new CreateQuestionViewModel());
             return PartialView("CreateQuizQuestionPartialView", model.Questions);
-        }    
+        }
 
         [HttpPost]
         public PartialViewResult AddAnswer([FromBody]List<CreateAnswerViewModel> models)
         {
             models.Add(new CreateAnswerViewModel());
             return PartialView("CreateQuizAnswerPartialView", models);
-        }        
+        }
 
         /// <summary>
         /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
@@ -266,6 +273,6 @@ namespace Quizzario.Controllers
             return model;
         }
 
-        
-    }        
+
+    }
 }

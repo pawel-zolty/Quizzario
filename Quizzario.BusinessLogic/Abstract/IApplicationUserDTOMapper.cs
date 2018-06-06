@@ -5,5 +5,6 @@ namespace Quizzario.BusinessLogic.Abstract
     public interface IApplicationUserDTOMapper
     {
         ApplicationUserDTO CreateUserWithId(string id);
+        ApplicationUserDTO GetByName(string userName);
     }
 }

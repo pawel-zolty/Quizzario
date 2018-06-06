@@ -26,5 +26,12 @@ namespace Quizzario.Data.Repositories
                 Where(u => u.Id.Equals(id)).
                 FirstOrDefault();
         }
+
+        public ApplicationUser GetByName(string userName)
+        {
+            return context.Users.ToList<ApplicationUser>().
+                Where(u => u.UserName.Equals(userName)).
+                FirstOrDefault();
+        }
     }
 }

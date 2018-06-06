@@ -20,12 +20,18 @@ namespace Quizzario.BusinessLogic.Mappers
             return CreateUser(user);
         }
 
+        public ApplicationUserDTO GetByName(string userName)
+        {
+            ApplicationUser user = repository.GetByName(userName);
+            return CreateUser(user);
+        }
+
         private ApplicationUserDTO CreateUser(ApplicationUser user)
         {
             if (user == null)
                 return null;
 
-            ApplicationUserDTO userDTO = new ApplicationUserDTO
+            ApplicationUserDTO userDTO = new ApplicationUserDTO(user.UserName)
             {
                 Id = user.Id,
                 FirstName = user.FirstName,

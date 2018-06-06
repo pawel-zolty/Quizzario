@@ -30,7 +30,7 @@
         <div class="row mb-1 mb-md-2">
             <div class="col-12">
                 <h1 class="d-inline">@Model.Title</h1>
-                <p class="font-italic d-inline ml-1 ml-md-3">by <b>@* Data missing, updated controller needed *@</b></p>
+                <p class="font-italic d-inline ml-1 ml-md-3">by <b>DATA MISS </b></p>
 
                 <div class="float-md-right">
                     <button class="btn btn-outline-primary my-1 mr-md-1">
@@ -56,7 +56,7 @@
             <div class="col-12">
                 <div class="text-center float-md-left" id="-before-quiz-left-panel">
                     <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: </span>
-                    <span>@* Data missing, updated controller needed *@</span>
+                    <span>@*Data missing, updated controller needed *@</span>
                     <button class="btn btn-success my-1 btn-block">
                         <i class="fas fa-fw fa-play"></i>
                         <span class="ml-1">Let's begin</span>
@@ -71,15 +71,15 @@
                         <div class="col-12">
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Type: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
+                                <span> @Model.QuizType</span>
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
+                                <span> @*Data missing, updated controller needed *@</span>
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
-                                <span>@* Data missing, updated controller needed *@ minutes</span>
+                                <span> @*Data missing, updated controller needed  minutes*@</span>
                             </span>
                         </div>
                     </div>
@@ -135,30 +135,15 @@
                             </button>
                             <div id="-before-quiz-assigned">
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 1
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 2
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 3
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 4
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 5
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 6
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
+                                    @foreach (var u in ViewBag.AssignedUsers)
+                                    {
+                                        <li data-id ="@u.Id" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                            @u.UserName
+                                            <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                        </li>
+                                    }
+
+  
                                 </ul>
                             </div>
                         </div>
