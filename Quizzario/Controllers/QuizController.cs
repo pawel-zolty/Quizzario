@@ -12,7 +12,7 @@ namespace Quizzario.Controllers
     [Authorize]
     public class QuizController : Controller
     {
-        public int PageSize = 2;
+        public int PageSize = 5;
         private IQuizService quizService;
         private PagingInfoService pagingInfoService = new PagingInfoService();
 
@@ -86,7 +86,6 @@ namespace Quizzario.Controllers
                 return View(model);
             }
         }
-
     }
 
 }

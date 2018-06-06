@@ -1,18 +1,22 @@
 ﻿@model Quizzario.BusinessLogic.DTOs.QuizDTO
 
-@{
+@{ 
     const int DescriptionSignLimit = 200;
-    string creationDate = DateTime.Parse(@Model.CreationDate).ToString("MMMM dd, yyyy");
+    string creationDate = null;
+    if (Model.CreationDate != null)
+    {
+        creationDate = DateTime.Parse(@Model.CreationDate).ToString("MMMM dd, yyyy");
+    }
 }
 
 <div class="row py-2 mb-2 -quizes-card">
     @*<div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
-        <img class="img-fluid" src="http://via.placeholder.com/300x300" />
-    </div>*@
+            <img class="img-fluid" src="http://via.placeholder.com/300x300" />
+        </div>*@
     <div class="col">
         <h5 class="-quizes-card-title">@Model.Title</h5>
         <p class="-quizes-card-description">
-            @if (Model.Description.Length > DescriptionSignLimit)
+            @if (Model.Description != null && Model.Description.Length > DescriptionSignLimit)
             {
                 @Model.Description.Substring(0, DescriptionSignLimit)
                 @:...
@@ -24,7 +28,10 @@
         </p>
         <div class="row align-bottom">
             @*<div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>... times</div>*@
-            <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>@creationDate</div>
+            @if (creationDate != null)
+            {
+                <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>@creationDate</div>
+            }
             @*<div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>...</div>*@
         </div>
     </div>
