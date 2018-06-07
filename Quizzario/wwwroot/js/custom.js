@@ -148,6 +148,8 @@ function scrappModel() {
     var model = {
         Title: $("#-quiz-title").val(),
         Description: $("#-quiz-description").val(),
+        QuizAccessLevel: $("#QuizAccessLevel option:selected").text(),
+        QuizType: $("#QuizType option:selected").text(),
         Questions: []
     };
 
