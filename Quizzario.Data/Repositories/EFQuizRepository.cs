@@ -18,7 +18,7 @@ namespace Quizzario.Data.Repositories
         public IEnumerable<Quiz> Quizes
         {
             get { return context.Quizes; }
-        }
+        }        
 
         public Quiz GetById(string id)
         {
@@ -45,6 +45,14 @@ namespace Quizzario.Data.Repositories
         //{
         //    throw new System.NotImplementedException();
         //}
+
+        public void Add(Quiz quiz)
+        {
+            if (quiz == null)
+                return;
+            context.Quizes.Add(quiz);
+            context.SaveChanges();
+        }
 
         public void Update(Quiz quiz)
         {

@@ -9,6 +9,7 @@ using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Quizzario.Extensions;
+using Newtonsoft.Json;
 
 namespace Quizzario.Controllers
 {
@@ -112,12 +113,6 @@ namespace Quizzario.Controllers
                 quizService.RemoveQuizFromPrivateAssigned(userId, quizId);
         }
 
-        public ViewResult Create()
-        {
-            var model = new CreateQuizViewModel();
-            return View("Create", model);
-            //return View("Edit", new QuizDTO());
-        }
 
         public ViewResult Edit(string Id)
         {
@@ -160,61 +155,67 @@ namespace Quizzario.Controllers
             ViewBag.AssignedUsers = assignedUsers;
             return View(quizDTO);
             /* KUBA TO TWOJE CHYBA brakuje jakiegos question view modelu 
+             * Nope, nie moje
             var model = new CreateQuizViewModel();
             return View("Create", model);*/
         }
 
-        [HttpPost]
-        public StatusCodeResult Create([FromForm] CreateQuizViewModel quizViewModel)
+        public ViewResult Create()
         {
-            var userid = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = this.userMapper.CreateUserWithId(userid);
-
-            quizViewModel.Questions.Add(new CreateQuestionViewModel
+            CreateQuizViewModel model = null;
+            if (TempData.Peek("QuizInCreation") != null)
             {
-                Question = "First question",
-                Answers = new List<CreateAnswerViewModel>()
-            });
-
-            quizViewModel.Questions.Add(new CreateQuestionViewModel
+                string fromTemp = (string)TempData["QuizInCreation"];
+                model = JsonConvert.DeserializeObject<CreateQuizViewModel>(fromTemp);
+            }
+            else
             {
-                Question = "Second question",
-                Answers = new List<CreateAnswerViewModel>()
-            });
-
-            foreach (var subViewModel in quizViewModel.Questions)
-            {
-                subViewModel.Answers.Add(new CreateAnswerViewModel
-                {
-                    Answer = "1st answer",
-                    isCorrect = true
-                });
-
-                subViewModel.Answers.Add(new CreateAnswerViewModel
-                {
-                    Answer = "2nd answer",
-                    isCorrect = false
-                });
+                model = new CreateQuizViewModel();
             }
 
-            quizService.CreateQuiz(quizDTOMapperFromViewModel.Map(quizViewModel, user));
-            return StatusCode(200);
-            //    return RedirectToAction("MyQuizes");
+            TempData["QuizInCreation"] = JsonConvert.SerializeObject(model);
+            return View("Create", model);
+        }        
+        
+        [HttpPost]
+        public JsonResult Create([FromBody]CreateQuizViewModel quizViewModel)
+        {            
+            TempData.Remove("QuizInCreation");          
+            var user = this.userMapper.CreateUserWithId(userId);
+            var quiz = quizDTOMapperFromViewModel.Map(quizViewModel, user);
+            
+            quizService.CreateQuiz(quiz);
+            return Json(new { status = "OK" });
         }
 
         [HttpPost]
         public PartialViewResult AddQuestion([FromBody]CreateQuizViewModel model)
         {
             model.Questions.Add(new CreateQuestionViewModel());
-            return PartialView("CreateQuizQuestionPartialView", model.Questions);
-        }
+            TempData["QuizInCreation"] = JsonConvert.SerializeObject(model);
+            return PartialView("QuestionsPartialView", model);
+        }    
 
         [HttpPost]
-        public PartialViewResult AddAnswer([FromBody]List<CreateAnswerViewModel> models)
+        public PartialViewResult AddAnswer([FromBody]CreateQuizViewModel model)
         {
-            models.Add(new CreateAnswerViewModel());
-            return PartialView("CreateQuizAnswerPartialView", models);
-        }
+            if (model.Questions.Count == 0)
+            {
+                model.Questions.Add(new CreateQuestionViewModel());
+            }
+
+            int addedToQuestionIndex = 0;
+            for(int i = 0; i < model.Questions.Count; i++)
+            {
+                if(model.Questions[i].NewAnswerRequested)
+                {
+                    model.Questions[i].Answers.Add(new CreateAnswerViewModel());
+                    addedToQuestionIndex = i;
+                }
+            }
+            TempData["QuizInCreation"] = JsonConvert.SerializeObject(model);
+            return PartialView("AnswersPartialView", model.Questions[addedToQuestionIndex]);
+        }        
 
         /// <summary>
         /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number

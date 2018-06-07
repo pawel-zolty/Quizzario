@@ -24,17 +24,16 @@ namespace Quizzario.Extensions
 
         public QuizDTO Map(CreateQuizViewModel viewmodel, ApplicationUserDTO user)
         {
-            QuizDTO dto = new QuizDTO(quizEntityMapper.Update)
+            QuizDTO dto = new QuizDTO(quizEntityMapper.AddNewQuiz)
             {
-                Id=viewmodel.id,
                 Description = viewmodel.Description,
                 Title = viewmodel.Title,
                 ApplicationUserId = user.Id,
-                QuizAccessLevel = 0,
-                QuizType = QuizType.Test,
-                CreationDate = DateTime.Today.ToShortDateString(),
+                ApplicationUser = user,
+                QuizType = viewmodel.QuizType,
+                QuizAccessLevel = viewmodel.QuizAccessLevel,
+                CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
             };
-
             foreach (var question in viewmodel.Questions)
             {
                 dto.Questions.Add(DTOMapper.Map(question));
