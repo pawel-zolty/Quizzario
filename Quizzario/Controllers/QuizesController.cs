@@ -22,7 +22,7 @@ namespace Quizzario.Controllers
         private string userId;
         private IApplicationUserDTOMapper userMapper;
         private IQuizDTOMapperFromViewModel quizDTOMapperFromViewModel;
-
+        private int x = 0;
         public QuizesController(IQuizService quizService,
             IUserService userService,
             IPagingInfoService pagingInfoService,
@@ -52,12 +52,14 @@ namespace Quizzario.Controllers
         {
             var myQuizesCollection = quizService.GetAllUserQuizes(userId);
             QuizListViewModel model = CreateQuizViewModelWithPagination(p, myQuizesCollection);
+            x++;
             return model;
         }
 
         public ViewResult MyQuizes(int p = 1)
         {
             QuizListViewModel model = GetMyQuizesModel(p);
+            x++;
             return View(model);
         }
 
