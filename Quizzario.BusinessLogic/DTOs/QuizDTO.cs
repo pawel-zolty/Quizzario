@@ -44,10 +44,19 @@ namespace Quizzario.BusinessLogic.DTOs
         private readonly SaveQuizDelegate SaveQuiz;
         public void Update() => SaveQuiz(this);//hermetyzacja Delegata
 
-        public string JSON => JsonConvert.SerializeObject(new {
-                this.Questions
+        public string JSON
+        {
+            get
+            {
+                var toSerialize = new JSONScheme
+                {
+                    Questions = this.Questions
+                };
+                return JsonConvert.SerializeObject(toSerialize);
             }
-        );
+        }
+
+        public class JSONScheme { public List<QuestionDTO> Questions; };
 
         public void AddToFavouritesUsers(ApplicationUserDTO user)
         {

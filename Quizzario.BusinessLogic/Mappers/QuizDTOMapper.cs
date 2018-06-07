@@ -124,6 +124,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 idsList.Add(ass.ApplicationUserId);
             }
             FillList(quizDTO.PrivateAssignedUsers, idsList);
+            quizDTO.Questions = this.LoadQuestions(quizDTO);
             return quizDTO;
         }
 
@@ -185,6 +186,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 //QuizSettings = 
                 //TO DO 
             };
+            quizDTO.Questions = this.LoadQuestions(quizDTO);
             return quizDTO;
         }
 
@@ -223,5 +225,19 @@ namespace Quizzario.BusinessLogic.Mappers
                     list.Add(user);
             }
         }      
+
+        private List<QuestionDTO> LoadQuestions(QuizDTO quizDTO)
+        {
+            string json = this.jsonRepository.LoadWithAbsolutePath(quizDTO.FilePath);
+            if(json != null)
+            {
+                var deserialized = JsonConvert.DeserializeObject<QuizDTO.JSONScheme>(json);
+                return deserialized.Questions;
+            }
+            else
+            {
+                throw new NullReferenceException("Failed to load quiz questions from json file");
+            }
+        }
     }
 }
