@@ -3,7 +3,9 @@ using Quizzario.BusinessLogic.DTOs;
 using Quizzario.BusinessLogic.Extensions;
 using Quizzario.Data.Abstracts;
 using Quizzario.Data.Entities;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Quizzario.BusinessLogic.Mappers
 {
@@ -26,6 +28,7 @@ namespace Quizzario.BusinessLogic.Mappers
             CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.FavouritesUsers);
             type = Data.Entities.AssignType.AssignedToPrivate;
             CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.PrivateAssignedUsers);
+            quiz.CreationDate = DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
             return quiz;
         }
 
@@ -74,6 +77,7 @@ namespace Quizzario.BusinessLogic.Mappers
             quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
             quiz.QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel);
             quiz.Title = quizDTO.Title;
+            quiz.CreationDate = System.DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
 
             return quiz;
         }        

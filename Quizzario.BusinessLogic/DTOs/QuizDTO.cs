@@ -17,6 +17,7 @@ namespace Quizzario.BusinessLogic.DTOs
 
     public class QuizDTO
     {
+        static public string CreationDateFormat = "dd-MM-yyyy";
         public QuizDTO(SaveQuizDelegate saveQuiz)
         {
             this.SaveQuiz = saveQuiz;            
@@ -57,7 +58,7 @@ namespace Quizzario.BusinessLogic.DTOs
         }
 
         public class JSONScheme { public List<QuestionDTO> Questions; };
-
+        
         public void AddToFavouritesUsers(ApplicationUserDTO user)
         {
             FavouritesUsers.Add(user);
