@@ -5,8 +5,7 @@ namespace Quizzario.BusinessLogic.Abstract
 {
     public interface IQuizEntityMapper
     {
-        //Quiz CreateQuiz(QuizDTO quiz);
+        Quiz CreateQuiz(QuizDTO quiz);
         void Update(QuizDTO quiz);
-        void AddNewQuiz(QuizDTO quizDTo);
     }
 }

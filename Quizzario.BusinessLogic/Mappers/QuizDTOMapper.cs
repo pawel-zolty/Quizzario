@@ -1,4 +1,4 @@
-using Quizzario.BusinessLogic.Extensions;
+﻿using Quizzario.BusinessLogic.Extensions;
 using Quizzario.Data.Abstracts;
 using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
@@ -7,7 +7,6 @@ using System.Linq;
 using System;
 using Quizzario.BusinessLogic.Abstract;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json;
 
 namespace Quizzario.BusinessLogic.Mappers
 {
@@ -17,21 +16,18 @@ namespace Quizzario.BusinessLogic.Mappers
         private IApplicationUserRepository applicationUserRepository;
         private IApplicationUserDTOMapper userDTOMapper;
         private IQuizEntityMapper quizEntityMapper;
-        private IJSONRepository jsonRepository;
 
         public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
             IApplicationUserRepository applicationUserRepository,
             IApplicationUserDTOMapper userDTOMapper,
-            IQuizEntityMapper quizEntityMapper,
-            IJSONRepository jsonRepository)
+            IQuizEntityMapper quizEntityMapper)
         {
             this.quizRepository = quizRepository;
             this.applicationUserRepository = applicationUserRepository;
             this.userDTOMapper = userDTOMapper;
             this.quizEntityMapper = quizEntityMapper;
-            this.jsonRepository = jsonRepository;
         }
 
         public QuizDTO Create(string id)
@@ -160,7 +156,6 @@ namespace Quizzario.BusinessLogic.Mappers
                 idsList.Add(ass.ApplicationUserId);
             }
             FillList(quizDTO.PrivateAssignedUsers, idsList);
-            quizDTO.Questions = this.LoadQuestions(quizDTO);
             return quizDTO;
         }
 
@@ -239,20 +234,8 @@ namespace Quizzario.BusinessLogic.Mappers
                 if (user != null)
                     list.Add(user);
             }
-        }      
-
-        private List<QuestionDTO> LoadQuestions(QuizDTO quizDTO)
-        {
-            string json = this.jsonRepository.LoadWithAbsolutePath(quizDTO.FilePath);
-            if(json != null)
-            {
-                var deserialized = JsonConvert.DeserializeObject<QuizDTO.JSONScheme>(json);
-                return deserialized.Questions;
-            }
-            else
-            {
-                throw new NullReferenceException("Failed to load quiz questions from json file");
-            }
         }
+
+        
     }
 }

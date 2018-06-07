@@ -9,6 +9,5 @@ namespace Quizzario.Data.Abstracts
         Quiz GetById(string id);
         //List<Quiz> GetQuiz();
         void Update(Quiz quiz);
-        void Add(Quiz quiz);
     }
 }

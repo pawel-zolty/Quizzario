@@ -1,8 +1,10 @@
-﻿@model CreateAnswerViewModel
-
-<div class="form-check my-1 w-100">
-    <div class="form-check my-1 w-100" name="AnswerForm">
-        @Html.CheckBoxFor(modelItem => Model.isCorrect, new { @class = "form-check-input", @name = "radio" })
-        @Html.TextBoxFor(modelItem => Model.Answer, new { @class = "w-100", @placeholder = "Type answer here", @name = "AnswerField" })
+﻿@model IEnumerable<CreateAnswerViewModel>
+@foreach (var answer in Model)
+{ 
+    <div class="form-check my-1 w-100">
+        <div class="form-check my-1 w-100" name="AnswerForm">
+            @Html.CheckBoxFor(modelItem => answer.isCorrect, new { @class = "form-check-input", @name = "radio" })
+            @Html.TextBoxFor(modelItem => answer.Answer, new { @class = "w-100", @placeholder = "Type answer here", @name = "AnswerField" })
+        </div>
     </div>
-</div>
+}
