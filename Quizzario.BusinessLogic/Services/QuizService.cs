@@ -81,6 +81,7 @@ namespace Quizzario.BusinessLogic.Services
             return i;
         }
 
+     
         public void SaveQuiz(QuizDTO quiz)
         {
             quizDTOMapper.SaveQuiz(quiz);
@@ -105,6 +106,44 @@ namespace Quizzario.BusinessLogic.Services
             //ZMIANA PO MERGU
         }
 
-        
+        public float? GetBestScore(string userId, string quizId)
+        {
+            QuizDTO quiz = quizDTOMapper.Create(quizId);
+            ICollection<ScoreDTO> scoreDTO;
+            scoreDTO = quiz.AllScore;
+            float? bestScore=float.MinValue;
+            foreach(ScoreDTO score in scoreDTO)
+                {
+                    if(score.ApplicationUserId==userId)
+                    {
+                    if (bestScore < score.Result)
+                        bestScore = score.Result;
+                    }
+                }
+            return bestScore;
+        }
+
+        public float? GetLastScore(string userId, string quizId)
+        {
+
+            throw new System.NotImplementedException();
+        }
+
+        public int GetUserAttemps(string userId, string quizId)
+        {
+
+            QuizDTO quiz = quizDTOMapper.Create(quizId);
+            ICollection<ScoreDTO> scoreDTO;
+            scoreDTO = quiz.AllScore;
+            int attemps = 0;
+            foreach (ScoreDTO score in scoreDTO)
+            {
+                if (score.ApplicationUserId == userId)
+                {
+                    attemps++;
+                }
+            }
+            return attemps;
+        }
     }
 }

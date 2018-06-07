@@ -2,6 +2,8 @@
 using Quizzario.BusinessLogic.DTOs;
 using Quizzario.Data.Entities;
 using Quizzario.BusinessLogic.Abstract;
+using Quizzario.BusinessLogic.Extensions;
+using System.Collections.Generic;
 
 namespace Quizzario.BusinessLogic.Mappers
 {
@@ -30,7 +32,7 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             if (user == null)
                 return null;
-
+            ICollection<DTOs.ScoreDTO> scoreDTO = user.Scores.ToDTOQuizScore();
             ApplicationUserDTO userDTO = new ApplicationUserDTO(user.UserName)
             {
                 Id = user.Id,
@@ -38,7 +40,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 LastName = user.LastName,
                 Origin = user.Origin,
                 //Quizes = new List<QuizDTO>()
-                //Scores
+                Scores = scoreDTO
                 //TO DO 
             };
             //var favouriteQuizesIds = user.AssignedUsers.

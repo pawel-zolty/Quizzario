@@ -1,5 +1,4 @@
 ﻿@model Quizzario.BusinessLogic.DTOs.QuizDTO
-
 @{
     ViewData["Title"] = "Summary";
     Layout = "~/Views/Shared/_LayoutLoggedIn.cshtml";
@@ -20,8 +19,13 @@
     // Formatting dates
     string creationDate = DateTime.Parse(Model.CreationDate).ToString("MMMM dd, yyyy");
     bool isFavourite = @ViewBag.IsFavourite;   // Data missing, updated controller needed
+                                               // string updateDate ...
+    float? bestScore = @ViewBag.bestScore;
+
 }
-  
+
+
+<p>@isFavourite<p>
 <div class="row px-3 py-3 mx-0">
     <div class="col-12">
         <div class="row mb-1 mb-md-2">
@@ -52,8 +56,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="text-center float-md-left" id="-before-quiz-left-panel">
+
                     <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: 1</span>
                     <span>@*Data missing, updated controller needed *@</span>
+
                     <button class="btn btn-success my-1 btn-block">
                         <i class="fas fa-fw fa-play"></i>
                         <span class="ml-1">Let's begin</span>
@@ -72,7 +78,8 @@
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
-                                <span> @*Data missing, updated controller needed*@</span>
+
+                                <span> @ViewBag.attemps</span>
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
@@ -88,25 +95,19 @@
                     <div class="row">
                         <div class="col-md-4 mb-2">
                             <h5>Attempt history</h5>
-                            @if (true) // if (noAttempts)
-                            {
-                                <p>No attempts registered</p>
-                            }
-                            else
-                            {
-                                <p class="my-0">
-                                    <span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
-                                    <span>@*Data missing, updated controller needed*@</span>
-                                </p>
-                                <p class="my-0">
-                                    <span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
-                                    <span>@*Data missing, updated controller needed*@</span>
-                                </p>
-                                <p class="my-0">
-                                    <span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
-                                    <span>@*Data missing, updated controller needed*@</span>
-                                </p>
-                            }
+
+                            <p class="my-0">
+                                <span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
+                                <span>@* Data missing, updated controller needed *@</span>
+                            </p>
+                            <p class="my-0">
+                                <span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
+                                <span>@* Data missing, updated controller needed *@</span>
+                            </p>
+                            <p class="my-0">
+                                <span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
+                                <span>@ViewBag.bestScore</span>
+                            </p>
                         </div>
                         <div class="col-md-4 mb-2">
                             <h5>Details</h5>
@@ -120,11 +121,11 @@
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of questions: </span>
-                                <span>@*Data missing, updated controller needed*@</span>
+             <span></span>
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of attempts: </span>
-                                <span>@*Data missing, updated controller needed*@</span>
+                                <span>@Model.AllScore.Count()</span>
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Added to favourite: </span>
