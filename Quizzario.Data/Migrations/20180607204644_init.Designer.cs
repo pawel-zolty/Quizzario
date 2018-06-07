@@ -10,8 +10,8 @@ using Quizzario.Data;
 namespace Quizzario.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180604135924_add_public_private_TOQUIZ")]
-    partial class add_public_private_TOQUIZ
+    [Migration("20180607204644_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

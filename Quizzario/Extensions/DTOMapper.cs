@@ -45,7 +45,8 @@ namespace Quizzario.Extensions
         {
             QuestionDTO dto = new QuestionDTO
             {
-                Question = viewmodel.Question
+                Question = viewmodel.Question,
+                Multiplicity = viewmodel.Multiplicity
             };
             foreach (var answer in viewmodel.Answers)
             {

@@ -155,13 +155,14 @@ function scrappModel() {
 
     $('.-question-card').each(function () {
         var question = $(this).find('.-question-card-title').val();
+        var multiplicity = false;        
         var answers = [];
         $(this).find('[name="AnswerForm"]').each(function () {
             var answer = $(this).find('#Answer').val();
             var isCorrect = $(this).find('#isCorrect').prop('checked');
             answers.push({ Answer: answer, isCorrect: isCorrect, NewAnswerRequested: false })
         });
-        model.Questions.push({ Question: question, Answers: answers });
+        model.Questions.push({ Question: question, Answers: answers, Multiplicity: multiplicity });
     })
     return model;
 }

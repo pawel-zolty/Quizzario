@@ -24,15 +24,18 @@ namespace Quizzario.Models.QuizViewModels
         public QuizAccessLevel QuizAccessLevel { get; set; }
         public List<CreateQuestionViewModel> Questions { get; set; }
     }
+
     public class CreateQuestionViewModel
     {
         public CreateQuestionViewModel()
         {
             Answers = new List<CreateAnswerViewModel>();
             Question = "";
+            
             NewAnswerRequested = false;
         }
         public string Question { get; set; }
+        public bool Multiplicity { get; set; }
         public List<CreateAnswerViewModel> Answers { get; set; }
         public Boolean NewAnswerRequested { get; set; }
     }
