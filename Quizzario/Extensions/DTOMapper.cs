@@ -16,6 +16,7 @@ namespace Quizzario.Extensions
     public class DTOMapper : IQuizDTOMapperFromViewModel
     {
         private IQuizEntityMapper quizEntityMapper;
+        private string dateformat;
 
         public DTOMapper(IQuizEntityMapper quizEntityMapper)
         {
@@ -31,8 +32,7 @@ namespace Quizzario.Extensions
                 Title = viewmodel.Title,
                 ApplicationUserId = user.Id,
                 ApplicationUser = user,
-                QuizType = viewmodel.QuizType,
-                QuizAccessLevel = viewmodel.QuizAccessLevel,
+                QuizType = QuizType.Test,
                 CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
             };
             foreach (var question in viewmodel.Questions)

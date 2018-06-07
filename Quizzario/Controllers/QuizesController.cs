@@ -177,7 +177,11 @@ namespace Quizzario.Controllers
             TempData.Remove("QuizInCreation");          
             var user = this.userMapper.CreateUserWithId(userId);
             var quiz = quizDTOMapperFromViewModel.Map(quizViewModel, user);
-            
+            //te 2 rzeczy dodaæ do GUI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //VIEW MODELU
+            quiz.QuizAccessLevel = QuizAccessLevel.Public;
+            quiz.QuizType = QuizType.Quiz;
+
             quizService.CreateQuiz(quiz);
             return Json(new { status = "OK" });
         }
