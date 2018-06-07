@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Quizzario.BusinessLogic.DTOs
 {
@@ -22,11 +23,11 @@ namespace Quizzario.BusinessLogic.DTOs
 
     public class QuizDTO
     {
+        static public string CreationDateFormat = "dd-MM-yyyy";
         public QuizDTO(SaveQuizDelegate saveQuiz)
         {
-            this.SaveQuiz = saveQuiz;
-            Questions = new List<QuestionDTO>();
-        }        
+            this.SaveQuiz = saveQuiz;            
+        }
 
         public string Id { get; set; }
         public string Title { get; set; }
@@ -37,25 +38,44 @@ namespace Quizzario.BusinessLogic.DTOs
         public QuizAccessLevel? QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
         public string CreationDate { get; set; }
-        public List<QuestionDTO> Questions { get; set; }
+        public List<QuestionDTO> Questions { get; set; } = new List<QuestionDTO>();
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
         //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }       //RACZEJ NIE POTRZEBNE - 1 do 1 z encji EF. Nizej sa odpowiendnki biznesowe
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
         public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
+
         //public virtual ICollection<ScoreDTO> UserScore { get; set; } 
         public virtual ICollection<ScoreDTO> AllScore { get; set; } 
         //public virtual QuizSettingsDTO QuizSettings { get; set; }
 
+
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);
         private readonly SaveQuizDelegate SaveQuiz;
         public void Update() => SaveQuiz(this);//hermetyzacja Delegata
+
+
+        public string JSON
+        {
+            get
+            {
+                var toSerialize = new JSONScheme
+                {
+                    Questions = this.Questions
+                };
+                return JsonConvert.SerializeObject(toSerialize);
+            }
+        }
+
+        public class JSONScheme { public List<QuestionDTO> Questions; };
+        
 
         public void AddScore(ScoreDTO scoreDTO)
         {
             AllScore.Add(scoreDTO);
             SaveQuiz(this);
         }
+
         public void AddToFavouritesUsers(ApplicationUserDTO user)
         {
             FavouritesUsers.Add(user);
@@ -87,7 +107,7 @@ namespace Quizzario.BusinessLogic.DTOs
                 Select(u => u.Id).
                 FirstOrDefault();
             return isFavourite == null ? false : true;
-        }        
+        }
 
         public override bool Equals(object obj)
         {
