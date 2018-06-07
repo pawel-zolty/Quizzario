@@ -44,26 +44,20 @@ namespace Quizzario.BusinessLogic.DTOs
         //public virtual ICollection<AssignedUserDTO> AssignedUsers { get; set; }       //RACZEJ NIE POTRZEBNE - 1 do 1 z encji EF. Nizej sa odpowiendnki biznesowe
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
         public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
-<<<<<<< HEAD
         //public virtual ICollection<ScoreDTO> UserScore { get; set; } 
         public virtual ICollection<ScoreDTO> AllScore { get; set; } 
         //public virtual QuizSettingsDTO QuizSettings { get; set; }
-=======
-        //public virtual ICollection<ScoreDTO> Scores { get; set; }
-        //public virtual QuizSettingsDTO QuizSettings { get; set; }        
->>>>>>> quiz-session-creation
 
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);
         private readonly SaveQuizDelegate SaveQuiz;
         public void Update() => SaveQuiz(this);//hermetyzacja Delegata
 
-<<<<<<< HEAD
         public void AddScore(ScoreDTO scoreDTO)
         {
             AllScore.Add(scoreDTO);
             SaveQuiz(this);
         }
-=======
+
         public string JSON
         {
             get
@@ -78,7 +72,6 @@ namespace Quizzario.BusinessLogic.DTOs
 
         public class JSONScheme { public List<QuestionDTO> Questions; };
         
->>>>>>> quiz-session-creation
         public void AddToFavouritesUsers(ApplicationUserDTO user)
         {
             FavouritesUsers.Add(user);
