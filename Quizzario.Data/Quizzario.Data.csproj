@@ -328,7 +328,6 @@
   <ItemGroup>
     <Compile Include="Abstracts\IApplicationUserRepository.cs" />
     <Compile Include="Abstracts\IAssignedRepository .cs" />
-    <Compile Include="Abstracts\IJSONRepository.cs" />
     <Compile Include="Abstracts\IQuizRepository.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="EFDBInitializer.cs" />
@@ -350,7 +349,6 @@
     <Compile Include="Repositories\EFAssignedRepository.cs" />
     <Compile Include="Repositories\EFApplicationUserRepository.cs" />
     <Compile Include="Repositories\EFQuizRepository.cs" />
-    <Compile Include="Repositories\JsonRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

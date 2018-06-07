@@ -1,7 +1,0 @@
-﻿@model CreateQuizViewModel
-
-@for (int i = 0; i < Model.Questions.Count; i++)
-{
-    ViewBag.QuestionNumber = i;
-    await Html.RenderPartialAsync("CreateQuizQuestionPartialView", Model.Questions.ElementAt(i));
-}   

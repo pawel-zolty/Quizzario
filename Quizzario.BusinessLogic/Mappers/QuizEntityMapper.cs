@@ -3,24 +3,20 @@ using Quizzario.BusinessLogic.DTOs;
 using Quizzario.BusinessLogic.Extensions;
 using Quizzario.Data.Abstracts;
 using Quizzario.Data.Entities;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace Quizzario.BusinessLogic.Mappers
 {
     public class QuizEntityMapper : IQuizEntityMapper
     {
         private IQuizRepository quizRepository;
-        private IJSONRepository jsonRepository;
 
-        public QuizEntityMapper(IQuizRepository quizRepository, IJSONRepository jsonRepository)
+        public QuizEntityMapper(IQuizRepository quizRepository)
         {
             this.quizRepository = quizRepository;
-            this.jsonRepository = jsonRepository;
         }
 
-        private Quiz CreateQuiz(QuizDTO quizDTO)
+        public Quiz CreateQuiz(QuizDTO quizDTO)
         {
             Quiz quiz = GetQuizEntity(quizDTO);
             quiz.AssignedUsers = new List<AssignedUser>();
@@ -28,7 +24,6 @@ namespace Quizzario.BusinessLogic.Mappers
             CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.FavouritesUsers);
             type = Data.Entities.AssignType.AssignedToPrivate;
             CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.PrivateAssignedUsers);
-            quiz.CreationDate = DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
             return quiz;
         }
 
@@ -49,27 +44,12 @@ namespace Quizzario.BusinessLogic.Mappers
         public void Update(QuizDTO quizDTO)
         {
             var quiz = CreateQuiz(quizDTO);
-            //var kolekcja pytan json lub xml = json mapper
             quizRepository.Update(quiz);
-            this.jsonRepository.SaveWithAbsolutePath(quizDTO.FilePath, quizDTO.JSON);
         }
 
-        public void AddNewQuiz(QuizDTO quizDTO)
-        {
-            var quiz = CreateQuiz(quizDTO);
-            //var kolekcja pytan json lub xml = json save = / quiz.jsonFile pewnie bd trzeba cos dodac do tego jsona.
-            quizRepository.Add(quiz);
-            quizDTO.Id = quiz.Id;
-            quizDTO.FilePath = this.jsonRepository.BuildAbsolutePath(quizDTO.Id);
-            this.jsonRepository.SaveWithAbsolutePath(quizDTO.FilePath, quizDTO.JSON);
-            this.Update(quizDTO);
-        }
-        
         private Quiz GetQuizEntity(QuizDTO quizDTO)
         {
             var quiz = quizRepository.GetById(quizDTO.Id);
-            if (quiz == null)
-                quiz = new Quiz();
             quiz.Id = quizDTO.Id;
             quiz.ApplicationUserId = quizDTO.ApplicationUserId;
             quiz.FilePath = quizDTO.FilePath;
@@ -77,9 +57,7 @@ namespace Quizzario.BusinessLogic.Mappers
             quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
             quiz.QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel);
             quiz.Title = quizDTO.Title;
-            quiz.CreationDate = System.DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
-
             return quiz;
-        }        
+        }
     }
 }
