@@ -15,6 +15,12 @@ namespace Quizzario.BusinessLogic.DTOs
         Public, Private
     }
 
+    public enum AssignType
+    {
+        Favourite, AssignedToPrivate
+    }
+
+
     public class QuizDTO
     {
         static public string CreationDateFormat = "dd-MM-yyyy";

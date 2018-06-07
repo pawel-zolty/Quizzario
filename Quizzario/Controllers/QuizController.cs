@@ -12,7 +12,7 @@ namespace Quizzario.Controllers
     [Authorize]
     public class QuizController : Controller
     {
-        public int PageSize = 2;
+        public int PageSize = 5;
         private IQuizService quizService;
         private PagingInfoService pagingInfoService = new PagingInfoService();
 
@@ -60,39 +60,32 @@ namespace Quizzario.Controllers
 
 
         [HttpGet]
-        public ViewResult Searching()
+        public ActionResult Searching(string q)
         {
-
-            return View();
-        }
-
-        [HttpPost]
-        public ViewResult Searching(SearchingModel searchingModel, string returnUrl = null, int p = 1)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
+            int p = 1;
+            //ViewData["ReturnUrl"] = returnUrl;
             // string title = "User's 1 Quiz";
             PagingInfoService pagingInfoService = new PagingInfoService();
-            var quizesCollection = quizService.SearchByName(searchingModel.Name);
+            var quizesCollection = quizService.SearchByName(q);
             if (quizesCollection.Count == 0)
             {
-                return View("SearchingByName");
+                return View();
             }
             else
             {
                 SearchingByNameModel model = new SearchingByNameModel
                 {
                     Quizes = quizesCollection.
-                   OrderBy(q => q.Title).
+                   OrderBy(o => o.Title).
                    Skip((p - 1) * PageSize).
                    Take(PageSize),
                     PagingInfo = pagingInfoService.GetMetaData(quizesCollection.Count(),
                p, PageSize)
                 };
 
-                return View("SearchingByName", model);
+                return View(model);
             }
         }
-
     }
 
 }

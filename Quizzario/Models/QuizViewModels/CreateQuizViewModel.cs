@@ -15,6 +15,7 @@ namespace Quizzario.Models.QuizViewModels
             Title = "";
             Description = "";
         }
+        public string id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         [Display(Name = "Quiz type")]

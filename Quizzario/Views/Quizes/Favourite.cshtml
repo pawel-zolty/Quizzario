@@ -14,13 +14,19 @@
     {
     <script src="~/js/custom.js"></script>
 }
+
+@{
+    bool noData = !Model.Quizes.Any();
+}
+
 <div class="row px-3 py-3 mx-0">
     <div class="col-md-8" id="-quizes-list">
         <div class="row">
             <div class="col-md-8">
-                <h1>@ViewData["Title"]</h1>
+                <h1>Favourite quizes</h1>
             </div>
             <div class="col-md-4">
+                @* Sorting by select, functionalitites missing *@
                 @*<div class="form-group form-inline float-right">
                         <label for="-quizes-sort-by-select">Sort by</label>
                         <select class="form-control ml-2" id="-quizes-sort-by-select">
@@ -34,55 +40,64 @@
         </div>
         <div class="row">
             <div class="col text-justify">
-                <!--@Model.Quizes.Count()THIS IS CUNT not Count-->
+                @if (noData)
+                {
+                    <h4 class="mt-2">No quizes to list</h4>
+                }
                 @foreach (var quiz in Model.Quizes)
                 {
-                    @Html.Partial("QuizSummary", quiz);
+                    @await Html.PartialAsync("_QuizCardPartial", quiz);
                 }
             </div>
         </div>
-        <div class="row">
-            <pagination info="@Model.PagingInfo" route="/Quizes/Favourite"></pagination>
-        </div>
+        @if (!noData)
+        {
+            <div class="row">
+                <nav class="w-100 mt-3">
+                    <pagination info="@Model.PagingInfo" route="/Quizes/Favourite"></pagination>
+                </nav>
+            </div>
+        }
     </div>
-    <div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
-        <div id="-quizes-right-panel">
-            <div id="-quizes-right-panel-content">
-                <button class="btn btn-success my-1 mr-md-2">
-                    <i class="fas fa-fw fa-play"></i>
-                    <span class="ml-1">Start</span>
-                </button>
-                <!--if (wybrany quiz)-->
-                <button class="btn btn-success my-1 mr-md-auto">
-                    <i class="fas fa-fw fa-edit"></i>
-                    <span class="ml-1">Edit</span>
-                </button>
-                <button class="btn btn-dark my-1 float-xl-right">
-                    <i class="fas fa-fw fa-trash"></i>
-                    <span class="ml-1">Remove</span>
-                </button>
-                <h2 class="mt-2" id="-quizes-right-panel-title"></h2>
+    @if (!noData)
+    {
+        <div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
+            <div id="-quizes-right-panel">
+                <div id="-quizes-right-panel-content">
+                    <a asp-controller="Quizes" asp-action="Summary" id="-view-link" class="btn btn-success my-1 mr-md-2">
+                        <i class="fas fa-fw fa-eye"></i>
+                        <span class="ml-1">View</span>
+                    </a>
+                    <h2 class="mt-2" id="-quizes-right-panel-title"></h2>
 
-                @*<p class="text-center">
-                        <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
-                    </p>*@
+                    @* Quiz image, functionalities goes here *@
+                    @*<p class="text-center">
+                            <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
+                        </p>*@
 
-                <p class="my-0">
-                    <span class="text-secondary font-weight-light font-italic mr-2">Type: </span>
-                    <span id="-quizes-right-panel-type"></span>
-                </p>
-                <p class="my-0">
-                    <span class="text-secondary font-weight-light font-italic mr-2">Date created: </span>
-                    <span id="-quizes-right-panel-date-created"></span>
-                </p>
-                <p class="my-0">
-                    <span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
-                    <span id="-quizes-right-panel-last-edited"></span>
-                </p>
-                <p class="text-secondary font-weight-light font-italic my-0 mr-2"> Description</p>
-                <p id="-quizes-right-panel-description"></p>
+                    <p class="my-0">
+                        <span class="text-secondary font-weight-light font-italic mr-2">Type: </span>
+                        <span id="-quizes-right-panel-type"></span>
+                    </p>
+                    <p class="my-0">
+                        <span class="text-secondary font-weight-light font-italic mr-2">Date created: </span>
+                        <span id="-quizes-right-panel-date-created"></span>
+                    </p>
+                    @*<p class="my-0">
+                            <span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
+                            <span id="-quizes-right-panel-last-edited"></span>
+                        </p>*@
+                    <p class="text-secondary font-weight-light font-italic my-0 mr-2"> Description</p>
+                    <p id="-quizes-right-panel-description"></p>
+                    <!-- width hack -->
+                    <p style="visibility: hidden">
+                        @for (int i = 0; i < 60; i++)
+                        {
+                            @: &nbsp; &nbsp;
+                        }
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
+    }
 </div>
-

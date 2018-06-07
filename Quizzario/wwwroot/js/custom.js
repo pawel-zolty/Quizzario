@@ -27,9 +27,9 @@ $(function () {
         $('#-quizes-right-panel-date-created').html(
             $(".-quizes-card-data", this).data('date-created')
         );
-        $('#-quizes-right-panel-last-edited').html(
-            $(".-quizes-card-data", this).data('last-edited')
-        );
+        //$('#-quizes-right-panel-last-edited').html(
+        //    $(".-quizes-card-data", this).data('last-edited')
+        //);
         $('#-quizes-right-panel-description').html(
             $(".-quizes-card-data", this).data('description')
         );

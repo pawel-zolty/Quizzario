@@ -14,6 +14,7 @@ namespace Quizzario.BusinessLogic.Mappers
     public class QuizDTOMapper : IQuizDTOMapper
     {
         private IQuizRepository quizRepository;
+        private IApplicationUserRepository applicationUserRepository;
         private IApplicationUserDTOMapper userDTOMapper;
         private IQuizEntityMapper quizEntityMapper;
         private IJSONRepository jsonRepository;
@@ -21,11 +22,13 @@ namespace Quizzario.BusinessLogic.Mappers
         public List<QuizDTO> Quizes => GetAllQuizes();
 
         public QuizDTOMapper(IQuizRepository quizRepository,
+            IApplicationUserRepository applicationUserRepository,
             IApplicationUserDTOMapper userDTOMapper,
             IQuizEntityMapper quizEntityMapper,
             IJSONRepository jsonRepository)
         {
             this.quizRepository = quizRepository;
+            this.applicationUserRepository = applicationUserRepository;
             this.userDTOMapper = userDTOMapper;
             this.quizEntityMapper = quizEntityMapper;
             this.jsonRepository = jsonRepository;
@@ -47,6 +50,29 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             var type = Data.Entities.AssignType.AssignedToPrivate;
             return CreateUserAssignedQuizes(userId, type);
+        }
+
+        public List<ApplicationUserDTO> CreateAssignedToPrivateQuizUsers(string quizId)
+        {
+            var type = Data.Entities.AssignType.AssignedToPrivate;
+            return CreateAssignedQuizUsers(quizId, type);
+        }
+
+        private List<ApplicationUserDTO> CreateAssignedQuizUsers(string quizId, Data.Entities.AssignType type)
+        {
+            var users = applicationUserRepository.Users.
+                            Where(
+                                u => u.AssignedUsers.
+                                Any(a => a.AssignType == type && a.QuizId.Equals(quizId))
+                            ).ToList();
+            List<ApplicationUserDTO> usersDTO = new List<ApplicationUserDTO>();
+            if (users.Count == 0)
+                return usersDTO;
+            foreach (var u in users)
+            {
+                usersDTO.Add(userDTOMapper.CreateUserWithId(u.Id));
+            }
+            return usersDTO;
         }
 
         private List<QuizDTO> CreateUserAssignedQuizes(string userId, Data.Entities.AssignType type)
@@ -158,35 +184,38 @@ namespace Quizzario.BusinessLogic.Mappers
         {
             if (q == null)
                 return null;
-            var regexname = Regex.Match(q.Title, @"\b"+name+".*");
-            if (regexname.Groups[0].Value != q.Title || q.QuizAccessLevel == 0)
+
+            var regexname = Regex.Match(q.Title, @".*" + name.ToLower() + ".*");
+            if (regexname.Groups[0].Value != q.Title.ToLower() || q.QuizAccessLevel == Data.Entities.QuizAccessLevel.Private)
             {
                 return null;
             }
+//             string id = q.Id;
+//             string title = q.Title;
+//             string userId = q.ApplicationUserId;
+//             string filePath = q.FilePath;
+//             DTOs.QuizAccessLevel? Level = q.QuizAccessLevel.ToDTOQuizAccessLevel();
+//                 ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
+//             DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
+//             QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
+//             {
+//                 Id = id,
+//                 Title = title,
+//                 ApplicationUserId = "1",
+//                 QuizSettingsId = "1",
+//                 QuizType = type,
+//                 FilePath = filePath,
+//                 ApplicationUser = user,
+//                 QuizAccessLevel = Level,
+//                 //AssignedUsers,
+//                 //Scores,
+//                 //QuizSettings = 
+//                 //TO DO 
+//             };
+//             quizDTO.Questions = this.LoadQuestions(quizDTO);
+//          Not sure about this merge conflict resolve
 
-            string id = q.Id;
-            string title = q.Title;
-            string userId = q.ApplicationUserId;
-            string filePath = q.FilePath;
-            DTOs.QuizAccessLevel? Level = q.QuizAccessLevel.ToDTOQuizAccessLevel();
-                ApplicationUserDTO user = userDTOMapper.CreateUserWithId(userId);
-            DTOs.QuizType? type = q.QuizType.ToDTOQuizType();
-            QuizDTO quizDTO = new QuizDTO(quizEntityMapper.Update)
-            {
-                Id = id,
-                Title = title,
-                ApplicationUserId = "1",
-                QuizSettingsId = "1",
-                QuizType = type,
-                FilePath = filePath,
-                ApplicationUser = user,
-                QuizAccessLevel = Level,
-                //AssignedUsers,
-                //Scores,
-                //QuizSettings = 
-                //TO DO 
-            };
-            quizDTO.Questions = this.LoadQuestions(quizDTO);
+            var quizDTO = CreateQuiz(q);
             return quizDTO;
         }
 
@@ -211,6 +240,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 Title = quizDTO.Title,
                 Description = quizDTO.Description,
                 ApplicationUserId = quizDTO.ApplicationUserId,
+                QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel),
                 QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
             quizRepository.Update(quiz);

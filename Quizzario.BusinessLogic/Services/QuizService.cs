@@ -39,6 +39,12 @@ namespace Quizzario.BusinessLogic.Services
             return quizes;
         }
 
+        public List<ApplicationUserDTO> GetAssignedToPrivateQuizUsers(string quizId)
+        {
+            List<ApplicationUserDTO> users = quizDTOMapper.CreateAssignedToPrivateQuizUsers(quizId);
+            return users;
+        }
+
         public void AddQuizToFavourite(string userId, string quizId)
         {
             var user = userFactory.CreateUserWithId(userId);
@@ -98,5 +104,7 @@ namespace Quizzario.BusinessLogic.Services
             //quizEntityMapper.Update(quiz);
             //ZMIANA PO MERGU
         }
+
+        
     }
 }

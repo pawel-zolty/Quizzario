@@ -20,17 +20,14 @@
     // Formatting dates
     string creationDate = DateTime.Parse(Model.CreationDate).ToString("MMMM dd, yyyy");
     bool isFavourite = @ViewBag.IsFavourite;   // Data missing, updated controller needed
-                                // string updateDate ...
-
 }
   
-<p>@isFavourite<p>
 <div class="row px-3 py-3 mx-0">
     <div class="col-12">
         <div class="row mb-1 mb-md-2">
             <div class="col-12">
                 <h1 class="d-inline">@Model.Title</h1>
-                <p class="font-italic d-inline ml-1 ml-md-3">by <b>@* Data missing, updated controller needed *@</b></p>
+                <p class="font-italic d-inline ml-1 ml-md-3">by @Model.ApplicationUser.UserName</p>
 
                 <div class="float-md-right">
                     <button class="btn btn-outline-primary my-1 mr-md-1">
@@ -55,8 +52,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="text-center float-md-left" id="-before-quiz-left-panel">
-                    <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: </span>
-                    <span>@* Data missing, updated controller needed *@</span>
+                    <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: 1</span>
+                    <span>@*Data missing, updated controller needed *@</span>
                     <button class="btn btn-success my-1 btn-block">
                         <i class="fas fa-fw fa-play"></i>
                         <span class="ml-1">Let's begin</span>
@@ -71,15 +68,15 @@
                         <div class="col-12">
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Type: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
+                                <span> @Model.QuizType</span>
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
+                                <span> @*Data missing, updated controller needed*@</span>
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
-                                <span>@* Data missing, updated controller needed *@ minutes</span>
+                                <span> @*Data missing, updated controller needed*@</span>
                             </span>
                         </div>
                     </div>
@@ -88,44 +85,50 @@
                             @Model.Description
                         </div>
                     </div>
-                    <hr>
                     <div class="row">
                         <div class="col-md-4 mb-2">
                             <h5>Attempt history</h5>
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
-                            </p>
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
-                            </p>
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
-                            </p>
+                            @if (true) // if (noAttempts)
+                            {
+                                <p>No attempts registered</p>
+                            }
+                            else
+                            {
+                                <p class="my-0">
+                                    <span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
+                                    <span>@*Data missing, updated controller needed*@</span>
+                                </p>
+                                <p class="my-0">
+                                    <span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
+                                    <span>@*Data missing, updated controller needed*@</span>
+                                </p>
+                                <p class="my-0">
+                                    <span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
+                                    <span>@*Data missing, updated controller needed*@</span>
+                                </p>
+                            }
                         </div>
                         <div class="col-md-4 mb-2">
                             <h5>Details</h5>
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
-                            </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Date created: </span>
                                 <span>@creationDate</span>
                             </p>
                             <p class="my-0">
+                                <span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
+                                <span>@*Data missing, updated controller needed*@</span>
+                            </p>
+                            <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of questions: </span>
-                                <span>@* Data missing, updated controller needed *@.</span>
+                                <span>@*Data missing, updated controller needed*@</span>
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of attempts: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
+                                <span>@*Data missing, updated controller needed*@</span>
                             </p>
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Added to favourite: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
+                                <span>@*Data missing, updated controller needed*@</span>
                             </p>
                         </div>
                         <div class="col-md-4">
@@ -135,30 +138,19 @@
                             </button>
                             <div id="-before-quiz-assigned">
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 1
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 2
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 3
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 4
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 5
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                        Example user 6
-                                        <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                    </li>
+                                    @if (ViewBag.AssignedUsers.Count == 0)
+                                    {
+                                        <p>No users assigned</p>
+                                    }
+                                    @foreach (var u in ViewBag.AssignedUsers)
+                                    {
+                                        <li data-id ="@u.Id" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
+                                            @u.UserName
+                                            <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
+                                        </li>
+                                    }
+
+  
                                 </ul>
                             </div>
                         </div>
@@ -179,18 +171,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
+            <form method="post" action="Quizes/AddToPrivateAssigned">
+                @* WIP *@
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="-assign-user-modal-user" class="col-form-label">E-mail:</label>
                         <input type="text" class="form-control" id="-assign-user-modal-user">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Add user</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-success" value="Add user" />
+                </div>
+            </form>
         </div>
     </div>
 </div>

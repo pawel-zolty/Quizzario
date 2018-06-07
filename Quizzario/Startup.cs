@@ -46,10 +46,11 @@ namespace Quizzario
             //mappers
             services.AddScoped<BusinessLogic.Abstract.IQuizDTOMapper, BusinessLogic.Mappers.QuizDTOMapper>();
             services.AddScoped<BusinessLogic.Abstract.IApplicationUserDTOMapper, BusinessLogic.Mappers.ApplicationUserDTOMapper>();
-            services.AddScoped<BusinessLogic.Abstract.IApplicationUserEntityMapper, BusinessLogic.Mappers.ApplicationUserEntityMapper>();
+                //services.AddScoped<BusinessLogic.Abstract.IApplicationUserEntityMapper, BusinessLogic.Mappers.ApplicationUserEntityMapper>();
             services.AddScoped<BusinessLogic.Abstract.IQuizEntityMapper, BusinessLogic.Mappers.QuizEntityMapper>();
             //services
             services.AddScoped<BusinessLogic.Abstract.IQuizService, BusinessLogic.Services.QuizService>();
+            services.AddScoped<BusinessLogic.Abstract.IUserService, BusinessLogic.Services.UserService>();
             //extension MAPpers
             services.AddScoped<Quizzario.Extensions.IQuizDTOMapperFromViewModel, Quizzario.Extensions.DTOMapper>();
             //repos

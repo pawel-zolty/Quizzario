@@ -1,4 +1,5 @@
-﻿
+﻿@model Quizzario.Models.QuizViewModels.SearchingByNameModel
+
 @{
     ViewData["Title"] = "Search";
     Layout = "~/Views/Shared/_LayoutLandingPage.cshtml";
@@ -15,13 +16,17 @@
     <script src="~/js/custom.js"></script>
 }
 
+@{
+    bool noData = !Model.Quizes.Any();
+}
+
 <div class="row px-3 py-3 mx-0">
     <div class="col-md-8" id="-quizes-list">
         <div class="row my-md-3">
             <div class="col-sm-6">
-                <h3>11 quizes found</h3>
+                <h3>... quizes found</h3>
             </div>
-            <div class="col-sm-6 text-right">
+            @*<div class="col-sm-6 text-right">
                 <div class="form-group form-inline float-sm-right">
                     <label for="-quizes-sort-by-select">Sort by</label>
                     <select class="form-control ml-2" id="-quizes-sort-by-select">
@@ -31,133 +36,70 @@
                         <option>Favourites</option>
                     </select>
                 </div>
-            </div>
+            </div>*@
         </div>
         <div class="row">
             <div class="col text-justify">
-                <div class="row py-2 mb-2 -quizes-card">
-                    <div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
-                        <img class="img-fluid" src="http://via.placeholder.com/300x300" />
-                    </div>
-                    <div class="col">
-                        <h5 class="-quizes-card-title">This is a quiz title!</h5>
-                        <p class="-quizes-card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...</p>
-                        <div class="row align-bottom">
-                            <div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>1230 times</div>
-                            <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>08.03.2018</div>
-                            <div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>5430</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="-quizes-card-data"
-                             data-id="1"
-                             data-title="This is a quiz title!"
-                             data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec. Vestibulum et velit at metus imperdiet finibus. Nullam pharetra efficitur faucibus. Nunc ac varius lectus. In non accumsan diam. Donec quis lobortis nisl. In vel ex odio. Vivamus malesuada semper eleifend. Proin ultrices urna nec dui congue, nec porttitor lorem lobortis. Pellentesque aliquet cursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque lectus eget nisl eleifend, quis porta arcu rhoncus. Sed vitae diam ut magna interdum dignissim. In vestibulum pulvinar molestie. Pellentesque accumsan nibh erat, nec convallis est bibendum in. Nulla id lectus vel nunc porta pellentesque."
-                             data-type="Standard quiz"
-                             data-date-created="March 2, 2018"
-                             data-last-edited="March 2, 2018">
-                        </div>
-                    </div>
-                </div>
-                <div class="row py-2 mb-2 -quizes-card">
-                    <div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
-                        <img class="img-fluid" src="http://via.placeholder.com/300x300" />
-                    </div>
-                    <div class="col">
-                        <h5 class="-quizes-card-title">Another title!</h5>
-                        <p class="-quizes-card-description">ursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque ll...</p>
-                        <div class="row align-bottom">
-                            <div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>1230 times</div>
-                            <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>08.03.2018</div>
-                            <div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>5430</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="-quizes-card-data"
-                             data-id="1"
-                             data-title="Another title!"
-                             data-description="ursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque lectus eget nisl eleifend, quis porta arcu rhoncus. Sed vitae diam ut magna interdum dignissim. In vestibulum pulvinar molestie. Pellentesque accumsan nibh erat, nec convallis est bibendum in. Nulla id lectus vel nunc porta pellentesque."
-                             data-type="Standard quiz"
-                             data-date-created="March 2, 2018"
-                             data-last-edited="March 2, 2018">
-                        </div>
-                    </div>
-                </div>
-                <div class="row py-2 mb-2 -quizes-card">
-                    <div class="col-2 d-flex align-items-center px-2 px-xl-3 -quizes-card-img-wrapper">
-                        <img class="img-fluid" src="http://via.placeholder.com/300x300" />
-                    </div>
-                    <div class="col">
-                        <h5 class="-quizes-card-title">This is a quiz title!</h5>
-                        <p class="-quizes-card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec...</p>
-                        <div class="row align-bottom">
-                            <div class="col-sm-4"><i class="fas fa-fw fa-play mr-2"></i>1230 times</div>
-                            <div class="col-sm-4"><i class="fas fa-fw fa-calendar-alt mr-2"></i>08.03.2018</div>
-                            <div class="col-sm-4"><i class="fas fa-fw fa-heart mr-2"></i>5430</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="-quizes-card-data"
-                             data-id="1"
-                             data-title="This is a quiz title!"
-                             data-description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mollis justo orci, eget vulputate orci malesuada nec. Vestibulum et velit at metus imperdiet finibus. Nullam pharetra efficitur faucibus. Nunc ac varius lectus. In non accumsan diam. Donec quis lobortis nisl. In vel ex odio. Vivamus malesuada semper eleifend. Proin ultrices urna nec dui congue, nec porttitor lorem lobortis. Pellentesque aliquet cursus sapien in fringilla. Curabitur sit amet purus rutrum, molestie lorem sed, maximus elit. Mauris scelerisque lectus eget nisl eleifend, quis porta arcu rhoncus. Sed vitae diam ut magna interdum dignissim. In vestibulum pulvinar molestie. Pellentesque accumsan nibh erat, nec convallis est bibendum in. Nulla id lectus vel nunc porta pellentesque."
-                             data-type="Standard quiz"
-                             data-date-created="March 2, 2018"
-                             data-last-edited="March 2, 2018">
-                        </div>
-                    </div>
+                @if (noData)
+                {
+                    <h4 class="mt-2">No quizes to list</h4>
+                }
+                @foreach (var quiz in Model.Quizes)
+                {
+                    @await Html.PartialAsync("_QuizCardPartial", quiz);
+                }
+            </div>
+        </div>
+        @if (!noData)
+        {
+            <div class="row">
+                <nav class="w-100 mt-3">
+                    @*06.06: Pagination routing not working, needs special pagination service*@
+                    <searching-pagination info="@Model.PagingInfo" route="/Home/Search/@ViewBag.Address"></searching-pagination>
+                </nav>
+            </div>
+        }
+    </div>
+    @if (!noData)
+    {
+        <div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
+            <div id="-quizes-right-panel">
+                <div id="-quizes-right-panel-content">
+                    <a asp-controller="Quizes" asp-action="Summary" id="-view-link" class="btn btn-success my-1 mr-md-2">
+                        <i class="fas fa-fw fa-eye"></i>
+                        <span class="ml-1">View</span>
+                    </a>
+                    <h2 class="mt-2" id="-quizes-right-panel-title"></h2>
+
+                    @* Quiz image, functionalities goes here *@
+                    @*<p class="text-center">
+                            <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
+                        </p>*@
+
+                    <p class="my-0">
+                        <span class="text-secondary font-weight-light font-italic mr-2">Type: </span>
+                        <span id="-quizes-right-panel-type"></span>
+                    </p>
+                    <p class="my-0">
+                        <span class="text-secondary font-weight-light font-italic mr-2">Date created: </span>
+                        <span id="-quizes-right-panel-date-created"></span>
+                    </p>
+                    @*<p class="my-0">
+                            <span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
+                            <span id="-quizes-right-panel-last-edited"></span>
+                        </p>*@
+                    <p class="text-secondary font-weight-light font-italic my-0 mr-2"> Description</p>
+                    <p id="-quizes-right-panel-description"></p>
+                    <!-- width hack -->
+                    <p style="visibility: hidden">
+                        @for (int i = 0; i < 60; i++)
+                        {
+                            @: &nbsp; &nbsp;
+                        }
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <nav class="w-100 mt-3">
-                <ul class="pagination justify-content-center" role="navigation" aria-label="Pagination">
-                    <li class="page-item disabled"><a class="page-link bg-light text-secondary" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-    <div class="col-md-4 px-0" id="-quizes-right-panel-wrapper">
-        <div id="-quizes-right-panel">
-            <div id="-quizes-right-panel-content">
-                <a asp-controller="Quizes" asp-action="Summary" id="-view-link" class="btn btn-success my-1 mr-md-2">
-                    <i class="fas fa-fw fa-eye"></i>
-                    <span class="ml-1">View</span>
-                </a>
-                @*<button class="btn btn-success my-1 mr-md-auto">
-                    <i class="fas fa-fw fa-edit"></i>
-                    <span class="ml-1">Edit</span>
-                </button>
-                <button class="btn btn-dark my-1 float-xl-right">
-                    <i class="fas fa-fw fa-trash"></i>
-                    <span class="ml-1">Remove</span>
-                </button>*@
-                <h2 class="mt-2" id="-quizes-right-panel-title"></h2>
-
-                @* Quiz image, functionalities goes here *@
-                @*<p class="text-center">
-                        <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
-                    </p>*@
-
-                <p class="my-0">
-                    <span class="text-secondary font-weight-light font-italic mr-2">Type: </span>
-                    <span id="-quizes-right-panel-type"></span>
-                </p>
-                <p class="my-0">
-                    <span class="text-secondary font-weight-light font-italic mr-2">Date created: </span>
-                    <span id="-quizes-right-panel-date-created"></span>
-                </p>
-                <p class="my-0">
-                    <span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
-                    <span id="-quizes-right-panel-last-edited"></span>
-                </p>
-                <p class="text-secondary font-weight-light font-italic my-0 mr-2"> Description</p>
-                <p id="-quizes-right-panel-description"></p>
-            </div>
-        </div>
-    </div>
+    }
 </div>
+
