@@ -89,20 +89,34 @@ $(function () {
             width: w
         }, 300);
     });
-
+    
     $(document).ready(function () {
         // Clicking on the first card after page load
-        $('.-quizes-card').first().click();
+        $('.-quizes-card').first().click();  
     });
+    
 });
 
-function addQuestion() {
-
+function addQuiz() {
     var model = scrappModel();
     $.ajax({
         type: "POST",
+        url: '/Quizes/Create',
         data: JSON.stringify(model),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (res) {
+        window.location.replace("/Quizes/MyQuizes");
+    }).fail(function (res) {
+    })
+}
+
+function addQuestion() {
+    var model = scrappModel();
+    $.ajax({
+        type: "POST",
         url: '/Quizes/AddQuestion',
+        data: JSON.stringify(model),
         dataType: "json",
         contentType: "application/json; charset=utf-8"
     }).done(function (res) {
@@ -115,11 +129,11 @@ function addQuestion() {
 function addAnswer(elem) {
     var questionIndex = $(elem).attr('question-index');
     var model = scrappModel();
-    var payload = model.Questions[questionIndex].Answers;
-    console.log("#quiz-question-" + questionIndex);
+    model.Questions[questionIndex].NewAnswerRequested = true;
+    console.log(JSON.stringify(model));
     $.ajax({
         type: "POST",
-        data: JSON.stringify(payload),
+        data: JSON.stringify(model),
         url: '/Quizes/AddAnswer',
         dataType: "json",
         contentType: "application/json; charset=utf-8"
@@ -134,6 +148,8 @@ function scrappModel() {
     var model = {
         Title: $("#-quiz-title").val(),
         Description: $("#-quiz-description").val(),
+        QuizAccessLevel: $("#QuizAccessLevel option:selected").text(),
+        QuizType: $("#QuizType option:selected").text(),
         Questions: []
     };
 
@@ -141,9 +157,9 @@ function scrappModel() {
         var question = $(this).find('.-question-card-title').val();
         var answers = [];
         $(this).find('[name="AnswerForm"]').each(function () {
-            var answer = $(this).find('#answer_Answer').val()
-            var isCorrect = $(this).find('#answer_isCorrect').val()
-            answers.push({ Answer: answer, isCorrect: isCorrect })
+            var answer = $(this).find('#Answer').val();
+            var isCorrect = $(this).find('#isCorrect').prop('checked');
+            answers.push({ Answer: answer, isCorrect: isCorrect, NewAnswerRequested: false })
         });
         model.Questions.push({ Question: question, Answers: answers });
     })
