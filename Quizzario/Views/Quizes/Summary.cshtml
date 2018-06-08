@@ -16,16 +16,13 @@
 }
 
 @{
-    // Formatting dates
+    // Formatting date
     string creationDate = DateTime.Parse(Model.CreationDate).ToString("MMMM dd, yyyy");
-    bool isFavourite = @ViewBag.IsFavourite;   // Data missing, updated controller needed
-                                               // string updateDate ...
-    float? bestScore = @ViewBag.bestScore;
+
+    bool isFavourite = @ViewBag.IsFavourite;
 
 }
 
-
-<p>@isFavourite<p>
 <div class="row px-3 py-3 mx-0">
     <div class="col-12">
         <div class="row mb-1 mb-md-2">
@@ -34,22 +31,25 @@
                 <p class="font-italic d-inline ml-1 ml-md-3">by @Model.ApplicationUser.UserName</p>
 
                 <div class="float-md-right">
+                    @* TODO Button share
                     <button class="btn btn-outline-primary my-1 mr-md-1">
                         <i class="fas fa-fw fa-share"></i>
                         <span class="ml-1">Share</span>
-                    </button>
-                    <button data-id="@Model.Id" data-is-favourite="@isFavourite" data-target-add="../AddToFavourite" data-target-remove="../RemoveFromFavourite" class="-favourite-button btn @(isFavourite ? "btn-danger" : "btn-outline-danger") my-1 mr-md-3">
+                    </button>*@
+                    <button data-id="@Model.Id" data-is-favourite="@isFavourite" data-target-add="/Quizes/AddToFavourite" data-target-remove="/Quizes/RemoveFromFavourite" class="-favourite-button btn @(isFavourite ? "btn-danger" : "btn-outline-danger") my-1 mr-md-3">
                         <i class="fas fa-fw fa-heart"></i>
                         <span class="ml-1">Favourite</span>
                     </button>
+                    @* TODO Button edit
                     <button class="btn btn-success my-1 mr-md-1">
                         <i class="fas fa-fw fa-edit"></i>
                         <span class="ml-1">Edit</span>
-                    </button>
+                    </button>*@
+                    @* Button remove
                     <button class="btn btn-dark my-1 ">
                         <i class="fas fa-fw fa-trash"></i>
                         <span class="ml-1">Remove</span>
-                    </button>
+                    </button>*@
                 </div>
             </div>
         </div>
@@ -57,17 +57,18 @@
             <div class="col-12">
                 <div class="text-center float-md-left" id="-before-quiz-left-panel">
 
-                    <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: 1</span>
-                    <span>@*Data missing, updated controller needed *@</span>
+                     @* TODO Current attempt number
+                    <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: 1</span> *@
 
                     <button class="btn btn-success my-1 btn-block">
                         <i class="fas fa-fw fa-play"></i>
                         <span class="ml-1">Let's begin</span>
                     </button>
+                    @* TODO Back button
                     <button class="btn btn-outline-primary my-1 btn-block">
                         <i class="fas fa-fw fa-arrow-left"></i>
                         <span class="ml-1">Back</span>
-                    </button>
+                    </button>*@
                 </div>
                 <div id="-before-quiz-right-panel">
                     <div class="row mb-1 mb-md-2">
@@ -78,13 +79,13 @@
                             </span>
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
-
                                 <span> @ViewBag.attemps</span>
                             </span>
+                            @* TODO Time limit 
                             <span class="mr-3 mr-md-4">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
-                                <span> @*Data missing, updated controller needed*@</span>
-                            </span>
+                                <span></span>
+                            </span>*@
                         </div>
                     </div>
                     <div class="row mb-1 mb-md-2">
@@ -96,17 +97,19 @@
                         <div class="col-md-4 mb-2">
                             <h5>Attempt history</h5>
 
+                            @* TODO Total number of your previous attempts
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
-                            </p>
+                                <span></span>
+                            </p>*@
+                            @* TODO Your last score
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
-                                <span>@* Data missing, updated controller needed *@</span>
-                            </p>
+                                <span></span>
+                            </p>*@
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
-                                <span>@ViewBag.bestScore</span>
+                                <span>@((ViewBag.bestScore < 0)? "no data" : ViewBag.bestScore)</span>
                             </p>
                         </div>
                         <div class="col-md-4 mb-2">
@@ -115,23 +118,27 @@
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Date created: </span>
                                 <span>@creationDate</span>
                             </p>
+                            @* TODO Last edited
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
-                                <span>@*Data missing, updated controller needed*@</span>
-                            </p>
+                                <span></span>
+                            </p>*@
+                            @* TODO Total number of questions
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of questions: </span>
-             <span></span>
-                            </p>
+                                <span></span>
+                            </p>*@
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of attempts: </span>
                                 <span>@Model.AllScore.Count()</span>
                             </p>
+                            @* TODO Added to favourite number
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Added to favourite: </span>
-                                <span>@*Data missing, updated controller needed*@</span>
-                            </p>
+                                <span></span>
+                            </p>*@
                         </div>
+                        @* TODO Assigned list
                         <div class="col-md-4">
                             <h5 class="d-inline">Assigned users</h5>
                             <button class="btn btn-sm btn-link mb-1 d-inline" data-toggle="modal" data-target="#-assign-user-modal">
@@ -154,7 +161,7 @@
   
                                 </ul>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -162,7 +169,7 @@
     </div>
 </div>
 
-@* Assing user modal *@
+@* TODO Assigned list add modal
 <div class="modal fade" id="-assign-user-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -173,7 +180,6 @@
                 </button>
             </div>
             <form method="post" action="Quizes/AddToPrivateAssigned">
-                @* WIP *@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="-assign-user-modal-user" class="col-form-label">E-mail:</label>
@@ -187,5 +193,5 @@
             </form>
         </div>
     </div>
-</div>
+</div>*@
 
