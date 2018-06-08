@@ -250,15 +250,14 @@ namespace Quizzario.Controllers
         /// <param name="number">Number of a question stored in session</param>
         /// <returns>Partial view for question</returns>
         [HttpPost]
-        PartialViewResult SolvingGetQuestion(int number)
+        public PartialViewResult SolvingGetQuestion(int number)
         {
             // Sample data
-            List<SolvingQuizAnswerViewModel> answers = new List<SolvingQuizAnswerViewModel>
+            List<SolvingQuizAnswerViewModel> answers = new List<SolvingQuizAnswerViewModel>();
+            for (int i = 1; i <= number; i++)
             {
-                new SolvingQuizAnswerViewModel { Number = 1, Answer = "This is a first answer" },
-                new SolvingQuizAnswerViewModel { Number = 2, Answer = "This is a second answer" },
-                new SolvingQuizAnswerViewModel { Number = 3, Answer = "and third" }
-            };
+                answers.Add(new SolvingQuizAnswerViewModel { Number = i, Answer = "This is answer number" + i });
+            }
             SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel
             {
                 Title = "This is a title of a quiz",
@@ -267,7 +266,7 @@ namespace Quizzario.Controllers
                 Multiple = true,
                 Answers = answers
             };
-            return PartialView("_TakingQuizQuestionPartial", question);
+            return PartialView("_SolvingQuizQuestionPartial", question);
         }
 
         /// <summary>
