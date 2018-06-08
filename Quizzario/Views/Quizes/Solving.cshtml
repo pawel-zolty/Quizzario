@@ -30,7 +30,7 @@
                         <button class="btn btn-outline-primary">14</button>*@
                     @for (int i = 1; i <= totalNumberOfQuestions; i++)
                     {
-                        <button class="btn btn-outline-primary -taking-quiz-button" data-number="@i">@i</button>
+                        <button class="btn btn-outline-primary -taking-quiz-button -go-to-question" data-number="@i">@i</button>
                     }
                 </div>
                 <button class="btn btn-block btn-success mt-3">Submit</button>
@@ -46,11 +46,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="float-right">
-                            <button class="btn btn-outline-primary py-md-2 mr-2">
+                            <button class="btn btn-outline-primary py-md-2 mr-2 -go-to-question" id="-taking-quiz-previous-button">
                                 <i class="fas fa-fw fa-arrow-left"></i>
                                 <span class="ml-1">Previous</span>
                             </button>
-                            <button class="btn btn-outline-primary py-md-2">
+                            <button class="btn btn-outline-primary py-md-2 -go-to-question" id="-taking-quiz-next-button">
                                 <i class="fas fa-fw fa-arrow-right"></i>
                                 <span class="ml-1">Next</span>
                             </button>

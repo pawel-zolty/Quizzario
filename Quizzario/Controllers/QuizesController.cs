@@ -245,7 +245,7 @@ namespace Quizzario.Controllers
         }
 
         /// <summary>
-        /// Returns question of said number
+        /// Returns question of said number from model stored in session
         /// </summary>
         /// <param name="number">Number of a question stored in session</param>
         /// <returns>Partial view for question</returns>
@@ -267,6 +267,18 @@ namespace Quizzario.Controllers
                 Answers = answers
             };
             return PartialView("_SolvingQuizQuestionPartial", question);
+        }
+
+        /// <summary>
+        /// Retrieves data about selected answers and updates session model
+        /// </summary>
+        /// <param name="model">Selected answers model</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ContentResult SolvingUpdateAnswer([FromBody] SolvingQuizUpdateAnswerViewModel model)
+        {
+            // Returns ContentResult object only for test purposes
+            return Content(JsonConvert.SerializeObject(model).ToString());
         }
 
         /// <summary>
