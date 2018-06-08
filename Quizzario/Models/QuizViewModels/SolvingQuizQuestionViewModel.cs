@@ -8,11 +8,11 @@ namespace Quizzario.Models.QuizViewModels
     /// <summary>
     /// View model for question
     /// </summary>
-    public class TakingQuestionViewModel
+    public class SolvingQuizQuestionViewModel
     {
-        public TakingQuestionViewModel()
+        public SolvingQuizQuestionViewModel()
         {
-            Answers = new List<TakingAnswerViewModel>();
+            Answers = new List<SolvingQuizAnswerViewModel>();
             Title = "";
             Question = "";
             Number = 0;
@@ -37,33 +37,11 @@ namespace Quizzario.Models.QuizViewModels
         /// <summary>
         /// List of answers
         /// </summary>
-        public List<TakingAnswerViewModel> Answers { get; set; }
+        public List<SolvingQuizAnswerViewModel> Answers { get; set; }
 
         /// <summary>
         /// Is question multiple answer or not
         /// </summary>
         public bool Multiple { get; set; }
-    }
-
-    /// <summary>
-    /// View model for answer
-    /// </summary>
-    public class TakingAnswerViewModel
-    {
-        public TakingAnswerViewModel()
-        {
-            Number = 0;
-            Answer = "";
-        }
-
-        /// <summary>
-        /// Number of an answer
-        /// </summary>
-        public int Number;
-
-        /// <summary>
-        /// Text of an answer
-        /// </summary>
-        public string Answer;
     }
 }

@@ -218,12 +218,56 @@ namespace Quizzario.Controllers
         }        
 
         /// <summary>
-        /// Full version of action will require at least 2 GET parameters: quiz ID and question ID / number
+        /// Should return model for a first question to the view or something
         /// </summary>
         /// <returns></returns>
         public ViewResult Solving()
         {
-            return View();
+            // Total number of questions. Used to generate content in left panel and links
+            ViewData["TotalNumberOfQuestions"] = 10;
+
+            // Creating sample data
+            List<SolvingQuizAnswerViewModel> answers = new List<SolvingQuizAnswerViewModel>
+            {
+                new SolvingQuizAnswerViewModel { Number = 1, Answer = "This is a first answer" },
+                new SolvingQuizAnswerViewModel { Number = 2, Answer = "This is a second answer" },
+                new SolvingQuizAnswerViewModel { Number = 3, Answer = "and third" }
+            };
+            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel
+            {
+                Title = "This is a title of a quiz",
+                Question = "This is a title of a question",
+                Number = 1,
+                Multiple = true,
+                Answers = answers
+            };
+            return View(question);
+        }
+
+        /// <summary>
+        /// Returns question of said number
+        /// </summary>
+        /// <param name="number">Number of a question stored in session</param>
+        /// <returns>Partial view for question</returns>
+        [HttpPost]
+        PartialViewResult SolvingGetQuestion(int number)
+        {
+            // Sample data
+            List<SolvingQuizAnswerViewModel> answers = new List<SolvingQuizAnswerViewModel>
+            {
+                new SolvingQuizAnswerViewModel { Number = 1, Answer = "This is a first answer" },
+                new SolvingQuizAnswerViewModel { Number = 2, Answer = "This is a second answer" },
+                new SolvingQuizAnswerViewModel { Number = 3, Answer = "and third" }
+            };
+            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel
+            {
+                Title = "This is a title of a quiz",
+                Question = "This is a title of a question",
+                Number = number,
+                Multiple = true,
+                Answers = answers
+            };
+            return PartialView("_TakingQuizQuestionPartial", question);
         }
 
         /// <summary>

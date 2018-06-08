@@ -1,0 +1,14 @@
+﻿@model SolvingQuizQuestionViewModel
+
+@{
+    string type = (Model.Multiple == true) ? "checkbox" : "radio";
+    string answerPartial = "_SolvingQuizAnswer" + type.ToUpper() + "Partial";
+}
+
+<h5>Question @Model.Number. <strong>@Model.Question</strong></h5>
+<fieldset class="form-group pl-2">
+    @foreach (SolvingQuizAnswerViewModel answerModel in Model.Answers)
+    {
+        @Html.PartialAsync(answerPartial, answerModel).Result
+    }
+</fieldset>
