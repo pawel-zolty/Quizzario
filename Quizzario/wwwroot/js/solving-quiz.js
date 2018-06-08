@@ -3,8 +3,10 @@
     var solvingGetQuestionActive = false;
 
     $('.-go-to-question').click(function () {
+        // Send data
         updateAnswer();
 
+        // Make parent element height const
         var content = $("#-taking-quiz-right-panel-content");
         var parent = content.parent();
         var heightOfParent = parent.height();
@@ -12,9 +14,13 @@
 
         content.html("<h5>Loading...</h5>");
 
+        // Number of question to get
         var number = $(this).data('number');
 
-        if (solvingGetQuestionActive) solvingGetQuestionXHR.abort();       // Abort pending ajax requests
+        highlightButton(number);
+
+        // Abort pending ajax requests
+        if (solvingGetQuestionActive) solvingGetQuestionXHR.abort();       
         solvingGetQuestionActive = true;
         solvingGetQuestionXHR = $.post("/Quizes/SolvingGetQuestion", {
             number: number
@@ -31,6 +37,7 @@
     });
 
     updateNavigationButtons();
+    highlightButton(1);
 });
 
 // Scraps data and sends ajax update request
@@ -80,4 +87,9 @@ function updateNavigationButtons() {
     else {
         nextButton.attr("disabled", "true");
     }
+}
+
+function highlightButton(number) {
+    $(".-taking-quiz-button.btn-primary").removeClass("btn-primary").addClass("btn-outline-primary");
+    $(".-taking-quiz-button[data-number=" + number + "]").removeClass("btn-outline-primary").addClass("btn-primary");
 }
