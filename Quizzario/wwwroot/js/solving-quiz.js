@@ -36,12 +36,19 @@
         });
     });
 
+    $("#-taking-quiz-submit").click(function (e) {
+        e.preventDefault();
+        updateAnswer(function () {
+            $('#-taking-quiz-form-submit').submit(); 
+        });
+    });
+
     updateNavigationButtons();
     highlightButton(1);
 });
 
 // Scraps data and sends ajax update request
-function updateAnswer() {
+function updateAnswer(_callback) {
     var model = {
         QuestionNumber: $("#-question-number").val(),
         SelectedAnswersNumbers: []
@@ -62,6 +69,8 @@ function updateAnswer() {
         console.log(res);
     }).fail(function (res) {
         console.log(res);
+    }).always(function () {
+        if (_callback !== undefined) _callback();
     });
 }
 
