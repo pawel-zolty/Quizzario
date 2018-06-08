@@ -14,6 +14,7 @@ namespace Quizzario.Models.QuizViewModels
         {
             Number = 0;
             Answer = "";
+            Selected = false;
         }
 
         /// <summary>
@@ -25,5 +26,10 @@ namespace Quizzario.Models.QuizViewModels
         /// Text of an answer
         /// </summary>
         public string Answer;
+
+        /// <summary>
+        /// Is selected
+        /// </summary>
+        public bool Selected;
     }
 }

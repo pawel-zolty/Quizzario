@@ -1,6 +1,6 @@
 ﻿@model SolvingQuizAnswerViewModel
 
 <div class="form-check my-1 w-100">
-    <input class="form-check-input" type="radio" name="answer" value="@Model.Number" id="radio-@Model.Number">
+    <input class="form-check-input" type="radio" name="answer" value="@Model.Number" id="radio-@Model.Number" @(Model.Selected ? "checked" : "")>
     <label class="form-check-label w-100" for="radio-@Model.Number">@Model.Answer</label>
 </div>

@@ -256,14 +256,14 @@ namespace Quizzario.Controllers
             List<SolvingQuizAnswerViewModel> answers = new List<SolvingQuizAnswerViewModel>();
             for (int i = 1; i <= number; i++)
             {
-                answers.Add(new SolvingQuizAnswerViewModel { Number = i, Answer = "This is answer number" + i });
+                answers.Add(new SolvingQuizAnswerViewModel { Number = i, Answer = "This is answer number" + i, Selected = (i%2 == 0) ? true:false });
             }
             SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel
             {
                 Title = "This is a title of a quiz",
                 Question = "This is a title of a question",
                 Number = number,
-                Multiple = true,
+                Multiple = (number%2 == 0) ? true:false,
                 Answers = answers
             };
             return PartialView("_SolvingQuizQuestionPartial", question);
