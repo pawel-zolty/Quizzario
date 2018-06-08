@@ -40,6 +40,7 @@ namespace Quizzario.Controllers
         {
             ViewData["HideFooter"] = true;
             PagingInfoService pagingInfoService = new PagingInfoService();
+           
             var quizesCollection = quizService.SearchByName(q);
             string address = "?q=" + q;
             ViewBag.Address = address;
