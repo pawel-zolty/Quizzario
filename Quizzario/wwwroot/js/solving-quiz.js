@@ -19,7 +19,6 @@
         // Number of question to get
         var number = $(this).attr('data-number');
         var quizId = $(this).attr('data-quizId');
-        document.writeln("czesc" + quizId);
         highlightButton(number);
 
         // Abort pending ajax requests
