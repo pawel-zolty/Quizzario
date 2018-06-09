@@ -11,7 +11,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public SolveDTO(QuizDTO quizDTO)
         {
             this.quizID = quizDTO.Id;
-            this.Time = 0;
+            //this.Time = 0;
             this.Date = DateTime.Now.Date;
             this.Answers = new List<UserAnswerDTO>(quizDTO.Questions.Count);
             foreach(var question in quizDTO.Questions)
@@ -22,22 +22,25 @@ namespace Quizzario.BusinessLogic.DTOs
         }
         public SolveDTO(QuizDTO quizDTO, int timeSpent) : this(quizDTO)
         {
-            this.Time = timeSpent;
+            //this.Time = timeSpent;
         }
         public string quizID { get; set; }
         public List<UserAnswerDTO> Answers { get; set; }
         // In seconds
-        public int Time {
-            get
-            {
-                return this.Time;
-            }
-            set
-            {
-                this.Time = value;
-                //this.Date = DateTime.Now.Date;
-            }
-        }
+
+        //public int Time
+        //{
+        //    //get
+        //    //{
+        //    //    return this.Time;
+        //    //}
+        //    //set
+        //    //{
+        //    //    this.Time = value;
+        //    //    this.Date = DateTime.Now.Date;
+        //    //}
+        //}
+
         public DateTime Date { get; set; }
         public string UserId { get; set; }
     }
