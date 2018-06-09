@@ -156,8 +156,7 @@ namespace Quizzario.BusinessLogic.Services
 
         public QuizDTO GetQuiz(string quizId)
         {
-            // TODO @Paweł
-            throw new System.NotImplementedException();
+            return quizDTOMapper.Create(quizId);
         }
 
         public void AddResult(SolveDTO solvingDTO)
