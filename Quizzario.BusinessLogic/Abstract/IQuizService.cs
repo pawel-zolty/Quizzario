@@ -18,7 +18,7 @@ namespace Quizzario.BusinessLogic.Abstract
         void RemoveQuizFromPrivateAssigned(string userId, string quizId);
         bool IsQuizFavourite(string userId, string quizId);
         void SaveQuiz(QuizDTO quiz);        
-        List<QuizDTO> SearchByName(string name);        
+        List<QuizDTO> SearchByName(string name);
         void CreateQuiz(QuizDTO quizViewModel);
         float? GetBestScore(string userId, string quizId);
         float? GetLastScore(string userId, string quizId);

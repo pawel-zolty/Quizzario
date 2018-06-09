@@ -89,10 +89,18 @@ namespace Quizzario.BusinessLogic.Services
 
         public List<QuizDTO> SearchByName(string name)
         {
-            List<QuizDTO> quizes = quizDTOMapper.SearchByName(name);
+            List<QuizDTO> quizes;
+            if (name == null)
+            {
+                quizes = quizDTOMapper.GetAllPublicQuizes();
+            }
+            else
+            {
+                quizes = quizDTOMapper.SearchByName(name);
+            }
             return quizes;
         }
-
+       
         private List<QuizDTO> GetAllQuizes()
         {
             List<QuizDTO> quizes = quizDTOMapper.GetAllQuizes();
