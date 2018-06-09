@@ -143,7 +143,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 ApplicationUser = user,
                 AllScore= scoreDTO,
   
-                CreationDate = creationDate.ToString()
+                CreationDate = creationDate.ToString(QuizDTO.CreationDateFormat)
             };
 
             List<string> idsList = new List<string>();
