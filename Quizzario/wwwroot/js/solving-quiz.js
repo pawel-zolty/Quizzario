@@ -2,6 +2,8 @@
     var solvingGetQuestionXHR;
     var solvingGetQuestionActive = false;
 
+
+
     $('.-go-to-question').click(function () {
         // Send data
         updateAnswer();
@@ -45,6 +47,18 @@
 
     updateNavigationButtons();
     highlightButton(1);
+});
+
+$(document).keydown(function (e) {
+    switch (e.key) {
+        case 'ArrowLeft':
+            $('#-taking-quiz-previous-button').click();
+            break;
+        case 'ArrowRight':
+            $('#-taking-quiz-next-button').click();
+            break;
+        default: return;
+    }
 });
 
 // Scraps data and sends ajax update request
