@@ -222,10 +222,10 @@ namespace Quizzario.Controllers
         /// Should return model for a first question to the view or something
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public ViewResult Solving(string quizId)
+        [HttpPost]
+        public ViewResult Solving(string Id)
         {
-            QuizDTO quizDTO = this.quizService.GetQuiz(quizId);
+            QuizDTO quizDTO = this.quizService.GetQuiz(Id);
 
             if(quizDTO == null)
             {
