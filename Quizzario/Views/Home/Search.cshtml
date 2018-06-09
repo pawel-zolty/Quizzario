@@ -23,10 +23,12 @@
 <div class="row px-3 py-3 mx-0">
     <div class="col-md-8" id="-quizes-list">
         <div class="row my-md-3">
+            @* TODO Quizes found
             <div class="col-sm-6">
-                <h3>... quizes found</h3>
-            </div>
-            @*<div class="col-sm-6 text-right">
+               <h3>... quizes found</h3>
+            </div>*@
+            @* TODO Sorting
+            <div class="col-sm-6 text-right">
                 <div class="form-group form-inline float-sm-right">
                     <label for="-quizes-sort-by-select">Sort by</label>
                     <select class="form-control ml-2" id="-quizes-sort-by-select">
@@ -54,7 +56,6 @@
         {
             <div class="row">
                 <nav class="w-100 mt-3">
-                    @*06.06: Pagination routing not working, needs special pagination service*@
                     <searching-pagination info="@Model.PagingInfo" route="/Home/Search/@ViewBag.Address"></searching-pagination>
                 </nav>
             </div>
@@ -70,12 +71,10 @@
                         <span class="ml-1">View</span>
                     </a>
                     <h2 class="mt-2" id="-quizes-right-panel-title"></h2>
-
-                    @* Quiz image, functionalities goes here *@
-                    @*<p class="text-center">
-                            <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
-                        </p>*@
-
+                    @* TODO Quiz image
+                    <p class="text-center">
+                        <i class="fas fa-fw fa-question -quizes-fa-xl"></i>
+                    </p>*@
                     <p class="my-0">
                         <span class="text-secondary font-weight-light font-italic mr-2">Type: </span>
                         <span id="-quizes-right-panel-type"></span>
@@ -84,10 +83,11 @@
                         <span class="text-secondary font-weight-light font-italic mr-2">Date created: </span>
                         <span id="-quizes-right-panel-date-created"></span>
                     </p>
-                    @*<p class="my-0">
-                            <span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
-                            <span id="-quizes-right-panel-last-edited"></span>
-                        </p>*@
+                    @* TODO Last edited
+                    <p class="my-0">
+                        <span class="text-secondary font-weight-light font-italic mr-2">Last edited: </span>
+                        <span id="-quizes-right-panel-last-edited"></span>
+                    </p>*@
                     <p class="text-secondary font-weight-light font-italic my-0 mr-2"> Description</p>
                     <p id="-quizes-right-panel-description"></p>
                     <!-- width hack -->

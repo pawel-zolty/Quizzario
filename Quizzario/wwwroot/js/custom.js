@@ -36,15 +36,15 @@ $(function () {
 
         var viewLink = $('#-view-link').attr("href");
         if (viewLink !== undefined) {
-            viewLink = viewLink.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+            viewLink = viewLink.replace(/(\/[0-9a-z\-]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
             $('#-view-link').attr("href", viewLink);
         }
 
-        var editLink = $('#-edit-link').attr("href");
+        /* var editLink = $('#-edit-link').attr("href");
         if (editLink !== undefined) {
-            editLink = editLink.replace(/(\/[0-9]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
+            editLink = editLink.replace(/(\/[0-9a-z\-]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
             $('#-edit-link').attr("href", editLink);
-        }
+        } */
 
 
         $('#-quizes-right-panel-content').fadeIn(500);

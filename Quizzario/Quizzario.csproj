@@ -43,5 +43,10 @@
     <None Include="wwwroot\js\particles\app.js" />
     <None Include="wwwroot\js\particles\particles.min.js" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Quizes\_SolvingQuizAnswerCheckboxPartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
 
 </Project>
