@@ -17,8 +17,8 @@
         content.html("<h5>Loading...</h5>");
 
         // Number of question to get
-        var number = $(this).data('number');
-        var quizId = $(this).data('quizId');
+        var number = $(this).attr('data-number');
+        var quizId = $(this).attr('data-quizId');
         document.writeln("czesc" + quizId);
         highlightButton(number);
 
@@ -68,7 +68,7 @@ function updateAnswer(_callback) {
     var model = {
         QuestionNumber: $("#-question-number").val(),
         SelectedAnswersNumbers: [],
-        QuizId: $("#quizId").val(),
+        QuizId: $("#-quiz-id").val(),
     };
 
     $("input[name=answer]:checked").each(function () {

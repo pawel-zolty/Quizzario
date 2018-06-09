@@ -12,6 +12,7 @@
         {
             @Html.PartialAsync(answerPartial, answerModel).Result
         }
-        <input type="hidden" id="-question-number" value="@Model.Number" />
+        <input type="hidden" id="-question-number" value="@Model.Number" name="QuestionNumber"/>
+        <input type="hidden" id="-quiz-id" value="@Model.QuizId" name="QuizId" />
     </fieldset>
 </form>
