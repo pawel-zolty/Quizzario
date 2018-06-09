@@ -35,7 +35,7 @@ namespace Quizzario.BusinessLogic.DTOs
             set
             {
                 this.Time = value;
-                this.Date = DateTime.Now.Date;
+                //this.Date = DateTime.Now.Date;
             }
         }
         public DateTime Date { get; set; }
