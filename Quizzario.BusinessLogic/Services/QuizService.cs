@@ -145,5 +145,17 @@ namespace Quizzario.BusinessLogic.Services
             }
             return attemps;
         }
+
+        public QuizDTO GetQuiz(string quizId)
+        {
+            // TODO @Paweł
+            throw new System.NotImplementedException();
+        }
+
+        public void AddResult(SolveDTO solvingDTO)
+        {
+            // TODO @Paweł
+            throw new System.NotImplementedException();
+        }
     }
 }

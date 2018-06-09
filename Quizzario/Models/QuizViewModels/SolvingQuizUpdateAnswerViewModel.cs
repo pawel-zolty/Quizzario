@@ -11,7 +11,7 @@ namespace Quizzario.Models.QuizViewModels
     /// </summary>
     public class SolvingQuizUpdateAnswerViewModel
     {
-        public SolvingQuizUpdateAnswerViewModel()
+        public SolvingQuizUpdateAnswerViewModel(string quizId)
         {
             QuestionNumber = 0;
             SelectedAnswersNumbers = new List<int>();
@@ -20,6 +20,7 @@ namespace Quizzario.Models.QuizViewModels
         /// Question number
         /// </summary>
         public int QuestionNumber { get; set; }
+        public string QuizId { get; }
         /// <summary>
         /// Selected answers list
         /// </summary>

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Quizzario.Extensions;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Quizzario.Controllers
 {
@@ -221,26 +222,22 @@ namespace Quizzario.Controllers
         /// Should return model for a first question to the view or something
         /// </summary>
         /// <returns></returns>
-        public ViewResult Solving()
+        [HttpGet]
+        public ViewResult Solving(string quizId)
         {
-            // Total number of questions. Used to generate content in left panel and links
-            ViewData["TotalNumberOfQuestions"] = 10;
+            QuizDTO quizDTO = this.quizService.GetQuiz(quizId);
 
-            // Creating sample data
-            List<SolvingQuizAnswerViewModel> answers = new List<SolvingQuizAnswerViewModel>
+            if(quizDTO == null)
             {
-                new SolvingQuizAnswerViewModel { Number = 1, Answer = "This is a first answer" },
-                new SolvingQuizAnswerViewModel { Number = 2, Answer = "This is a second answer" },
-                new SolvingQuizAnswerViewModel { Number = 3, Answer = "and third" }
-            };
-            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel
-            {
-                Title = "This is a title of a quiz",
-                Question = "This is a title of a question",
-                Number = 1,
-                Multiple = true,
-                Answers = answers
-            };
+                return View("NotFoundErrorPage");
+            }
+            SolveDTO solveDTO = new SolveDTO(quizDTO);
+            HttpContext.Session.SetString("QuizAttempt-" + solveDTO.quizID, JsonConvert.SerializeObject(solveDTO));
+
+            // Total number of questions. Used to generate content in left panel and links
+            ViewData["TotalNumberOfQuestions"] = quizDTO.Questions.Count;
+            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel(quizDTO.Questions.ElementAt(0), 0);
+            
             return View(question);
         }
 
@@ -250,22 +247,20 @@ namespace Quizzario.Controllers
         /// <param name="number">Number of a question stored in session</param>
         /// <returns>Partial view for question</returns>
         [HttpPost]
-        public PartialViewResult SolvingGetQuestion(int number)
+        public PartialViewResult SolvingGetQuestion(int number, string quizId)
         {
-            // Sample data
-            List<SolvingQuizAnswerViewModel> answers = new List<SolvingQuizAnswerViewModel>();
-            for (int i = 1; i <= number; i++)
+            string solveDTOString = HttpContext.Session.GetString("QuizAttempt-" + quizId);
+            var quizDTO = this.quizService.GetQuiz(quizId);
+            if(quizDTO == null)
             {
-                answers.Add(new SolvingQuizAnswerViewModel { Number = i, Answer = "This is answer number" + i, Selected = (i%2 == 0) ? true:false });
+                return PartialView("NotFoundError");
             }
-            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel
+            if(number >= quizDTO.Questions.Count)
             {
-                Title = "This is a title of a quiz",
-                Question = "This is a title of a question",
-                Number = number,
-                Multiple = (number%2 == 0) ? true:false,
-                Answers = answers
-            };
+                return PartialView("NotFoundError");
+            }
+            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel(quizDTO.Questions[number], number);
+
             return PartialView("_SolvingQuizQuestionPartial", question);
         }
 
@@ -277,7 +272,11 @@ namespace Quizzario.Controllers
         [HttpPost]
         public ContentResult SolvingUpdateAnswer([FromBody] SolvingQuizUpdateAnswerViewModel model)
         {
-            // Returns ContentResult object only for test purposes
+            QuestionDTO questionDTO = DTOMapper.Map(model);
+            string solveDTOString = HttpContext.Session.GetString("QuizAttempt-" + model.QuizId);
+            SolveDTO solveDTO = JsonConvert.DeserializeObject<SolveDTO>(solveDTOString);
+            solveDTO.Answers.Insert(model.QuestionNumber, new UserAnswerDTO(questionDTO));
+            HttpContext.Session.SetString("QuizAttempt-" + solveDTO.quizID, JsonConvert.SerializeObject(solveDTO));
             return Content(JsonConvert.SerializeObject(model).ToString());
         }
 
@@ -285,8 +284,13 @@ namespace Quizzario.Controllers
         /// Full version of action will require passing result data
         /// </summary>
         /// <returns></returns>
-        public ViewResult Results()
+        [HttpPost]
+        public ViewResult Results(string quizId)
         {
+            var solvingDTOJson = HttpContext.Session.GetString("QuizAttempt-" + quizId);
+            var solvingDTO = JsonConvert.DeserializeObject<SolveDTO>(solvingDTOJson);
+            this.quizService.AddResult(solvingDTO);
+            HttpContext.Session.Remove("QuizAttempt-" + quizId);
             return View();
         }
 
