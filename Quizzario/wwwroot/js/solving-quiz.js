@@ -18,14 +18,15 @@
 
         // Number of question to get
         var number = $(this).data('number');
-
+        var quizId = $(this).data('quizId');
         highlightButton(number);
 
         // Abort pending ajax requests
         if (solvingGetQuestionActive) solvingGetQuestionXHR.abort();       
         solvingGetQuestionActive = true;
         solvingGetQuestionXHR = $.post("/Quizes/SolvingGetQuestion", {
-            number: number
+            number: number,
+            quizId: quizId
         }).done(function (res) {
             content.hide();
             content.html(res);
