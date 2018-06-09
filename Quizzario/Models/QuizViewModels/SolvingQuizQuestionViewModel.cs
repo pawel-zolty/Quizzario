@@ -10,19 +10,23 @@ namespace Quizzario.Models.QuizViewModels
     /// </summary>
     public class SolvingQuizQuestionViewModel
     {
-        public SolvingQuizQuestionViewModel()
+        public SolvingQuizQuestionViewModel(BusinessLogic.DTOs.QuestionDTO questionDTO, int questionNumber)
         {
             Answers = new List<SolvingQuizAnswerViewModel>();
-            Title = "";
-            Question = "";
-            Number = 0;
-            Multiple = true;
+
+            this.Question = questionDTO.Question;
+            this.Number = questionNumber;
+            this.Multiple = questionDTO.Multiple;
+            for(int i= 0; i < questionDTO.Answers.Count; i++)
+            {
+                this.Answers.Add(new SolvingQuizAnswerViewModel(questionDTO.Answers[i], i));
+            }
         }
 
         /// <summary>
         /// Title of a quiz
         /// </summary>
-        public string Title { get; set; }
+        //public string Title { get; set; }
 
         /// <summary>
         /// Text of a question

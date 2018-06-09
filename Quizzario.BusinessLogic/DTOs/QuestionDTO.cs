@@ -10,5 +10,6 @@ namespace Quizzario.BusinessLogic.DTOs
         }
         public string Question { get; set; }
         public List<AnswerDTO> Answers { get; set; }
+        public bool Multiple { get; set; }
     }
 }

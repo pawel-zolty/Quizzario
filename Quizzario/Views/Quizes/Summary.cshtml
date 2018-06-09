@@ -59,11 +59,13 @@
 
                      @* TODO Current attempt number
                     <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: 1</span> *@
-
-                    <button class="btn btn-success my-1 btn-block">
-                        <i class="fas fa-fw fa-play"></i>
-                        <span class="ml-1">Let's begin</span>
-                    </button>
+                    <form method="get" action="/Quizes/Solving">
+                        <button class="btn btn-success my-1 btn-block" type="submit">
+                            <i class="fas fa-fw fa-play"></i>
+                            <span class="ml-1">Let's begin</span>
+                        </button>
+                        <hidden value="@Model.Id" name="quizId"></hidden>
+                    </form>
                     @* TODO Back button
                     <button class="btn btn-outline-primary my-1 btn-block">
                         <i class="fas fa-fw fa-arrow-left"></i>
