@@ -10,10 +10,10 @@ namespace Quizzario.Models.QuizViewModels
     /// </summary>
     public class SolvingQuizQuestionViewModel
     {
-        public SolvingQuizQuestionViewModel(BusinessLogic.DTOs.QuestionDTO questionDTO, int questionNumber)
+        public SolvingQuizQuestionViewModel(BusinessLogic.DTOs.QuestionDTO questionDTO, int questionNumber, string quizId)
         {
             Answers = new List<SolvingQuizAnswerViewModel>();
-
+            this.QuizId = quizId;
             this.Question = questionDTO.Question;
             this.Number = questionNumber;
             this.Multiple = questionDTO.Multiple;
@@ -32,6 +32,8 @@ namespace Quizzario.Models.QuizViewModels
         /// Text of a question
         /// </summary>
         public string Question { get; set; }
+
+        public string QuizId { get; set; }
 
         /// <summary>
         /// Number of a question

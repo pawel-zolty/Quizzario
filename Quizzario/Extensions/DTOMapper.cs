@@ -59,9 +59,14 @@ namespace Quizzario.Extensions
             return new AnswerDTO { isCorrect = viewModel.isCorrect, Answer = viewModel.Answer };
         }
 
-        internal static QuestionDTO Map(SolvingQuizUpdateAnswerViewModel model)
-        {
-            throw new NotImplementedException();
-        }
+        //internal static QuestionDTO Map(SolvingQuizUpdateAnswerViewModel model)
+        //{
+        //    QuestionDTO question = new QuestionDTO
+        //    {
+        //        Multiple = true,
+        //        Question = model.,
+        //        Answers = new List<AnswerDTO>
+        //    };
+        //}
     }
 }

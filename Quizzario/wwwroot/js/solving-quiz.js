@@ -19,6 +19,7 @@
         // Number of question to get
         var number = $(this).data('number');
         var quizId = $(this).data('quizId');
+        document.writeln("czesc" + quizId);
         highlightButton(number);
 
         // Abort pending ajax requests
@@ -66,7 +67,8 @@ $(document).keydown(function (e) {
 function updateAnswer(_callback) {
     var model = {
         QuestionNumber: $("#-question-number").val(),
-        SelectedAnswersNumbers: []
+        SelectedAnswersNumbers: [],
+        QuizId: $("#quizId").val(),
     };
 
     $("input[name=answer]:checked").each(function () {
