@@ -27,6 +27,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public string quizID { get; set; }
         public List<UserAnswerDTO> Answers { get; set; }
         // In seconds
+
         //public int Time
         //{
         //    //get
@@ -39,6 +40,7 @@ namespace Quizzario.BusinessLogic.DTOs
         //    //    this.Date = DateTime.Now.Date;
         //    //}
         //}
+
         public DateTime Date { get; set; }
         public string UserId { get; set; }
     }
