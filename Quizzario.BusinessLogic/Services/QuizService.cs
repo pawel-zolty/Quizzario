@@ -153,8 +153,20 @@ namespace Quizzario.BusinessLogic.Services
 
         public void AddResult(SolveDTO solvingDTO)
         {
-            // TODO @Paweł
-            throw new System.NotImplementedException();
+            var quizId = solvingDTO.quizID;
+            var quiz = quizDTOMapper.Create(quizId);
+            var answers = solvingDTO.Answers;
+            foreach(var a in answers)
+            {
+                var ans = new ScoreDTO
+                {
+                    ApplicationUserId = solvingDTO.UserId,
+                    QuizId = quizId,
+                    Result = a.isCorrect ? 1 : 0
+                };
+                quiz.AddScore(ans);
+            }
+            
         }
     }
 }
