@@ -10,5 +10,6 @@ namespace Quizzario.Models.QuizViewModels
     {
         public IEnumerable<QuizDTO> Quizes { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public int allQuizes { get; set; }
     }
 }
