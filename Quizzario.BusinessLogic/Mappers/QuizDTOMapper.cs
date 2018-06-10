@@ -141,9 +141,8 @@ namespace Quizzario.BusinessLogic.Mappers
                 QuizAccessLevel = accessLevel,
                 FilePath = quiz.FilePath,
                 ApplicationUser = user,
-                AllScore = scoreDTO,
-
-                CreationDate = creationDate.ToString(QuizDTO.CreationDateFormat)
+                AllScore= scoreDTO,
+                CreationDate = creationDate
             };
 
             List<string> idsList = new List<string>();

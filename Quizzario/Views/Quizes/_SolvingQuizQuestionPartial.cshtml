@@ -5,13 +5,14 @@
     string answerPartial = "_SolvingQuizAnswer" + type.ToUpper() + "Partial";
 }
 
-<h5>Question @Model.Number. <strong>@Model.Question</strong></h5>
+<h5>Question @(Model.Number + 1) . <strong>@Model.Question</strong></h5>
 <form id="-taking-quiz-form">
     <fieldset class="form-group pl-2">
         @foreach (SolvingQuizAnswerViewModel answerModel in Model.Answers)
         {
             @Html.PartialAsync(answerPartial, answerModel).Result
         }
-        <input type="hidden" id="-question-number" value="@Model.Number" />
+        <input type="hidden" id="-question-number" value="@Model.Number" name="QuestionNumber"/>
+        <input type="hidden" id="-quiz-id" value="@Model.QuizId" name="QuizId" />
     </fieldset>
 </form>

@@ -2,6 +2,8 @@
     var solvingGetQuestionXHR;
     var solvingGetQuestionActive = false;
 
+
+
     $('.-go-to-question').click(function () {
         // Send data
         updateAnswer();
@@ -16,14 +18,15 @@
 
         // Number of question to get
         var number = $(this).data('number');
-
+        var quizId = $(this).attr('data-quizId');
         highlightButton(number);
 
         // Abort pending ajax requests
         if (solvingGetQuestionActive) solvingGetQuestionXHR.abort();       
         solvingGetQuestionActive = true;
         solvingGetQuestionXHR = $.post("/Quizes/SolvingGetQuestion", {
-            number: number
+            number: number,
+            quizId: quizId
         }).done(function (res) {
             content.hide();
             content.html(res);
@@ -44,14 +47,27 @@
     });
 
     updateNavigationButtons();
-    highlightButton(1);
+    highlightButton(0);
+});
+
+$(document).keydown(function (e) {
+    switch (e.key) {
+        case 'ArrowLeft':
+            $('#-taking-quiz-previous-button').click();
+            break;
+        case 'ArrowRight':
+            $('#-taking-quiz-next-button').click();
+            break;
+        default: return;
+    }
 });
 
 // Scraps data and sends ajax update request
 function updateAnswer(_callback) {
     var model = {
         QuestionNumber: $("#-question-number").val(),
-        SelectedAnswersNumbers: []
+        SelectedAnswersNumbers: [],
+        QuizId: $("#-quiz-id").val(),
     };
 
     $("input[name=answer]:checked").each(function () {
@@ -81,7 +97,7 @@ function updateNavigationButtons() {
     var nextButton = $('#-taking-quiz-next-button');
 
 
-    if (currentQuestionNumber > 1) {
+    if (currentQuestionNumber > 0) {
         previousButton.data("number", currentQuestionNumber - 1);
         previousButton.removeAttr("disabled");
     }

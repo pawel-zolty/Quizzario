@@ -35,7 +35,8 @@ namespace Quizzario.Extensions
                 FilePath = viewmodel.Path,
                 QuizType = viewmodel.QuizType,
                 QuizAccessLevel = viewmodel.QuizAccessLevel,
-                CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
+                //CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
+                CreationDate = DateTime.Today
             };
             foreach (var question in viewmodel.Questions)
             {
@@ -61,6 +62,7 @@ namespace Quizzario.Extensions
         {
             return new AnswerDTO { isCorrect = viewModel.isCorrect, Answer = viewModel.Answer };
         }
+
         public CreateQuizViewModel CreateQuizViewModelFromQuizDTO(QuizDTO quiz)
         {
             CreateQuizViewModel viewModel = new CreateQuizViewModel();

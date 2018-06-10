@@ -23,5 +23,7 @@ namespace Quizzario.BusinessLogic.Abstract
         float? GetBestScore(string userId, string quizId);
         float? GetLastScore(string userId, string quizId);
         int GetUserAttemps(string userId, string quizId);
+        QuizDTO GetQuiz(string quizId);
+        float? AddResult(SolveDTO solvingDTO);
     }
 }
