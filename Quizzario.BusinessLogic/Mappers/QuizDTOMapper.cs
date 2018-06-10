@@ -195,7 +195,7 @@ namespace Quizzario.BusinessLogic.Mappers
             if (q == null)
                 return null;
 
-            var regexname = Regex.Match(q.Title.ToLower(), @".*" + name.ToLower()+ ".*");
+            var regexname = Regex.Match(q.Title.ToLower(), @".*" + name.ToLower() + ".*");
             if (regexname.Groups[0].Value != q.Title.ToLower() || q.QuizAccessLevel == Data.Entities.QuizAccessLevel.Private)
             {
                 return null;
@@ -225,6 +225,7 @@ namespace Quizzario.BusinessLogic.Mappers
                 Title = quizDTO.Title,
                 Description = quizDTO.Description,
                 ApplicationUserId = quizDTO.ApplicationUserId,
+                FilePath = quizDTO.FilePath,
                 QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel),
                 QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType)
             };
@@ -254,7 +255,6 @@ namespace Quizzario.BusinessLogic.Mappers
                 throw new NullReferenceException("Failed to load quiz questions from json file");
             }
         }
-
         public List<QuizDTO> GetAllPublicQuizes()
         {
             List<Quiz> quizes = quizRepository.Quizes.ToList();
@@ -266,8 +266,8 @@ namespace Quizzario.BusinessLogic.Mappers
                 {
                     quizesDTO.Add(CreateQuiz(q));
                 }
-            }
             return quizesDTO;
+            }
             throw new NotImplementedException();
         }
     }
