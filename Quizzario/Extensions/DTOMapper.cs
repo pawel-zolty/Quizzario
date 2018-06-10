@@ -32,7 +32,8 @@ namespace Quizzario.Extensions
                 ApplicationUser = user,
                 QuizType = viewmodel.QuizType,
                 QuizAccessLevel = viewmodel.QuizAccessLevel,
-                CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
+                //CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
+                CreationDate = DateTime.Today
             };
             foreach (var question in viewmodel.Questions)
             {

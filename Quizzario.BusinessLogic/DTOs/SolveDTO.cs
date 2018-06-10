@@ -14,7 +14,7 @@ namespace Quizzario.BusinessLogic.DTOs
             this.Time = 0;
             this.Date = DateTime.Now.Date;
             this.Answers = new List<UserAnswerDTO>(quizDTO.Questions.Count);
-            foreach(var question in quizDTO.Questions)
+            foreach (var question in quizDTO.Questions)
             {
                 this.Answers.Add(new UserAnswerDTO(question));
             }
@@ -82,5 +82,6 @@ namespace Quizzario.BusinessLogic.DTOs
         public QuestionDTO Question {get; set;}
         public Boolean isChecked { get; set; }
         public Boolean isCorrect { get; set; }
+        public List<int> userAnswers { get; set; } = new List<int>();
     }
 }
