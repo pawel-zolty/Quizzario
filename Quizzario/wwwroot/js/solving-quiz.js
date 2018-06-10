@@ -17,7 +17,7 @@
         content.html("<h5>Loading...</h5>");
 
         // Number of question to get
-        var number = $(this).attr('data-number');
+        var number = $(this).data('number');
         var quizId = $(this).attr('data-quizId');
         highlightButton(number);
 
@@ -47,7 +47,7 @@
     });
 
     updateNavigationButtons();
-    highlightButton(1);
+    highlightButton(0);
 });
 
 $(document).keydown(function (e) {
@@ -97,7 +97,7 @@ function updateNavigationButtons() {
     var nextButton = $('#-taking-quiz-next-button');
 
 
-    if (currentQuestionNumber > 1) {
+    if (currentQuestionNumber > 0) {
         previousButton.data("number", currentQuestionNumber - 1);
         previousButton.removeAttr("disabled");
     }
