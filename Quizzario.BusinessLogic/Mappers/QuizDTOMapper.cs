@@ -122,9 +122,9 @@ namespace Quizzario.BusinessLogic.Mappers
             DTOs.QuizAccessLevel? accessLevel = quiz.QuizAccessLevel.ToDTOQuizAccessLevel();
             ICollection<DTOs.ScoreDTO> scoreDTO = quiz.Scores.ToDTOQuizScore();
             int attemps = 0;
-            for(int i=0; i<scoreDTO.Count();i++)
+            for (int i = 0; i < scoreDTO.Count(); i++)
             {
-                if(quiz.ApplicationUserId==scoreDTO.ElementAt(i).ApplicationUserId)
+                if (quiz.ApplicationUserId == scoreDTO.ElementAt(i).ApplicationUserId)
                 {
                     attemps++;
                 }
@@ -141,8 +141,8 @@ namespace Quizzario.BusinessLogic.Mappers
                 QuizAccessLevel = accessLevel,
                 FilePath = quiz.FilePath,
                 ApplicationUser = user,
-                AllScore= scoreDTO,
-  
+                AllScore = scoreDTO,
+
                 CreationDate = creationDate.ToString(QuizDTO.CreationDateFormat)
             };
 
@@ -245,7 +245,7 @@ namespace Quizzario.BusinessLogic.Mappers
         private List<QuestionDTO> LoadQuestions(QuizDTO quizDTO)
         {
             string json = this.jsonRepository.LoadWithAbsolutePath(quizDTO.FilePath);
-            if(json != null)
+            if (json != null)
             {
                 var deserialized = JsonConvert.DeserializeObject<QuizDTO.JSONScheme>(json);
                 return deserialized.Questions;
@@ -265,10 +265,11 @@ namespace Quizzario.BusinessLogic.Mappers
                 if (q.QuizAccessLevel == Data.Entities.QuizAccessLevel.Public)
                 {
                     quizesDTO.Add(CreateQuiz(q));
+
                 }
-            return quizesDTO;
+                return quizesDTO;
+                throw new NotImplementedException();
             }
-            throw new NotImplementedException();
         }
     }
 }
