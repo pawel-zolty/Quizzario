@@ -267,9 +267,10 @@ namespace Quizzario.BusinessLogic.Mappers
                     quizesDTO.Add(CreateQuiz(q));
 
                 }
-                return quizesDTO;
-                throw new NotImplementedException();
+               
             }
+            return quizesDTO;
+            throw new NotImplementedException();
         }
     }
 }
