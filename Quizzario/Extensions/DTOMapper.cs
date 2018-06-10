@@ -27,7 +27,7 @@ namespace Quizzario.Extensions
         {
             QuizDTO dto = new QuizDTO(quizEntityMapper.AddNewQuiz)
             {
-                Id = viewmodel.id,
+                Id = viewmodel.Id,
                 Description = viewmodel.Description,
                 Title = viewmodel.Title,
                 ApplicationUserId = user.Id,
@@ -64,7 +64,7 @@ namespace Quizzario.Extensions
         public CreateQuizViewModel CreateQuizViewModelFromQuizDTO(QuizDTO quiz)
         {
             CreateQuizViewModel viewModel = new CreateQuizViewModel();
-            viewModel.id = quiz.Id;
+            viewModel.Id = quiz.Id;
             viewModel.Description = quiz.Description;
             viewModel.Title = quiz.Title;
             viewModel.Path = quiz.FilePath;
