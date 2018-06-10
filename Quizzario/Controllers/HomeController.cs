@@ -40,6 +40,7 @@ namespace Quizzario.Controllers
         {
             ViewData["HideFooter"] = true;
             PagingInfoService pagingInfoService = new PagingInfoService();
+           
             var quizesCollection = quizService.SearchByName(q);
             string address = "?q=" + q;
             ViewBag.Address = address;
@@ -54,7 +55,8 @@ namespace Quizzario.Controllers
                 Skip((p - 1) * PageSize).
                 Take(PageSize),
                 PagingInfo = pagingInfoService.GetMetaData(quizesCollection.Count(),
-                p, PageSize)
+                p, PageSize),
+                allQuizes = quizesCollection.Count()
             };
 
             return View(model);

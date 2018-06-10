@@ -11,6 +11,7 @@ namespace Quizzario.BusinessLogic.Abstract
         List<QuizDTO> CreateUserAssignedToPrivateQuizes(string userId);
         List<QuizDTO> SearchByName(string name);
         List<QuizDTO> GetAllQuizes();
+        List<QuizDTO> GetAllPublicQuizes();
         List<QuizDTO> Quizes { get; }
         void SaveQuiz(QuizDTO quiz);
         List<ApplicationUserDTO> CreateAssignedToPrivateQuizUsers(string quizId);

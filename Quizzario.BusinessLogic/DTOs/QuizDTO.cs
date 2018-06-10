@@ -23,7 +23,7 @@ namespace Quizzario.BusinessLogic.DTOs
 
     public class QuizDTO
     {
-        static public string CreationDateFormat = "dd-MM-yyyy";
+        static public string CreationDateFormat = "dd-MM-yyyy-HH-mm-ss";
         public QuizDTO(SaveQuizDelegate saveQuiz)
         {
             this.SaveQuiz = saveQuiz;            
@@ -37,7 +37,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public QuizType? QuizType { get; set; }
         public QuizAccessLevel? QuizAccessLevel { get; set; }
         public string FilePath { get; set; }
-        public string CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
         public List<QuestionDTO> Questions { get; set; } = new List<QuestionDTO>();
 
         public virtual ApplicationUserDTO ApplicationUser { get; set; }
@@ -45,7 +45,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
         public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
         //public virtual ICollection<ScoreDTO> UserScore { get; set; } 
-        public virtual ICollection<ScoreDTO> AllScore { get; set; } 
+        public virtual ICollection<ScoreDTO> AllScore { get; set; } = new List<ScoreDTO>();
         //public virtual QuizSettingsDTO QuizSettings { get; set; }
 
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);

@@ -32,7 +32,8 @@ namespace Quizzario.Extensions
                 ApplicationUser = user,
                 QuizType = viewmodel.QuizType,
                 QuizAccessLevel = viewmodel.QuizAccessLevel,
-                CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
+                //CreationDate = DateTime.Today.ToString(QuizDTO.CreationDateFormat),
+                CreationDate = DateTime.Today
             };
             foreach (var question in viewmodel.Questions)
             {
@@ -58,5 +59,15 @@ namespace Quizzario.Extensions
         {
             return new AnswerDTO { isCorrect = viewModel.isCorrect, Answer = viewModel.Answer };
         }
+
+        //internal static QuestionDTO Map(SolvingQuizUpdateAnswerViewModel model)
+        //{
+        //    QuestionDTO question = new QuestionDTO
+        //    {
+        //        Multiple = true,
+        //        Question = model.,
+        //        Answers = new List<AnswerDTO>
+        //    };
+        //}
     }
 }

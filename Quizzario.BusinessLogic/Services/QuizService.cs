@@ -1,6 +1,7 @@
 ﻿using Quizzario.BusinessLogic.Abstract;
 using Quizzario.BusinessLogic.DTOs;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Quizzario.BusinessLogic.Services
 {
@@ -89,10 +90,18 @@ namespace Quizzario.BusinessLogic.Services
 
         public List<QuizDTO> SearchByName(string name)
         {
-            List<QuizDTO> quizes = quizDTOMapper.SearchByName(name);
+            List<QuizDTO> quizes;
+            if (name == null)
+            {
+                quizes = quizDTOMapper.GetAllPublicQuizes();
+            }
+            else
+            {
+                quizes = quizDTOMapper.SearchByName(name);
+            }
             return quizes;
         }
-
+       
         private List<QuizDTO> GetAllQuizes()
         {
             List<QuizDTO> quizes = quizDTOMapper.GetAllQuizes();
@@ -144,6 +153,64 @@ namespace Quizzario.BusinessLogic.Services
                 }
             }
             return attemps;
+        }
+
+        public QuizDTO GetQuiz(string quizId)
+        {
+            return quizDTOMapper.Create(quizId);
+        }
+
+        public float? AddResult(SolveDTO solvingDTO)
+        {
+            var quizId = solvingDTO.quizID;
+            var quiz = quizDTOMapper.Create(quizId);
+            var answers = solvingDTO.Answers;
+            var score = new ScoreDTO
+            {
+                ApplicationUserId = solvingDTO.UserId,
+                QuizId = quizId,
+                Result = 0
+            };
+            int i = 0;
+            foreach(var A in answers)//A is whole user answer
+            {
+                var pytanie = quiz.Questions.ElementAt(i);
+                var j = 0;
+                foreach(var a in A.userAnswers)//just one from multiple answer
+                {
+                    var odp = pytanie.Answers.ElementAt(j);
+                }
+            }
+            i = 0;
+            foreach(var q in quiz.Questions)
+            {
+                var j = 0;
+                foreach(var a in q.Answers)
+                {                    
+                    bool isCorrect = a.isCorrect;
+                    var c = answers.ElementAt(i).userAnswers;
+                    if ((!isCorrect && !c.Any(o => o == j)) ||
+                            (isCorrect && c.Any(o => o == j)))
+                    {
+                        ++j;
+                    }
+                    else
+                    {
+                        answers.ElementAt(i).isCorrect = false;
+                        break;
+                    }
+                    answers.ElementAt(i).isCorrect = true;
+                }                
+                ++i;
+            }
+
+            foreach (var a in answers)
+            {
+
+                score.Result += a.isCorrect ? 1 : 0;                                
+            }
+            quiz.AddScore(score);
+            return score.Result;
         }
     }
 }
