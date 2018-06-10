@@ -17,16 +17,16 @@
 <div class="container-fluid">
     <div class="row justify-content-center mt-md-4">
         <div class="col-xl-4 col-lg-6 col-md-8 bg-light border border-dark py-3 py-md-4 px-md-4 -border-2px text-center">
-            <h3>Some exam title</h3>
+            <h3>@ViewBag.QuizTitle</h3>
             @* TODO Attempt number
             <p class="h5">
                 <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: </span>
                 <span>2</span>
             </p>*@
-            <h1 class="my-1 my-md-5">Your score is: <span class="badge badge-primary">@* TODO Insert result *@10</span></h1>
-
-            <button class="btn btn-block btn-success py-md-2">Go to main quiz screen</button>
-            <button class="btn btn-block btn-outline-primary py-md-2">Go to main page</button>
+            <h1 class="my-1 my-md-5">Your score is: <span class="badge badge-primary">@ViewBag.Result</span></h1>
+          
+            <a button asp-controller="Quizes" asp-action="Summary" asp-route-Id="@ViewBag.QuizId" method="get" class="btn btn-block btn-success py-md-2">Go to main quiz screen</a>
+            <a button method="get" asp-controller="Home" asp-action="Index" class="btn btn-block btn-outline-primary py-md-2">Go to main page</a>
         </div>
     </div>
 </div>

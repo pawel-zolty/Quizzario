@@ -14,7 +14,7 @@ namespace Quizzario.BusinessLogic.DTOs
             this.Time = 0;
             this.Date = DateTime.Now.Date;
             this.Answers = new List<UserAnswerDTO>(quizDTO.Questions.Count);
-            foreach(var question in quizDTO.Questions)
+            foreach (var question in quizDTO.Questions)
             {
                 this.Answers.Add(new UserAnswerDTO(question));
             }
@@ -24,6 +24,21 @@ namespace Quizzario.BusinessLogic.DTOs
         {
             this.Time = timeSpent;
         }
+
+        public SolveDTO(string quizId, List<UserAnswerDTO> Answers, int Time, DateTime Date, string UserId)
+        {
+            this.quizID = quizID;
+            this.Answers = Answers;
+            this.Time = Time;
+            this.Date = Date;
+            this.UserId = UserId;
+        }
+
+        public SolveDTO()
+        {
+
+        }
+
         public string quizID { get; set; }
         public List<UserAnswerDTO> Answers { get; set; }
         // In seconds
@@ -54,8 +69,19 @@ namespace Quizzario.BusinessLogic.DTOs
             this.isChecked = false;
             this.isCorrect = true;
         }
+        public UserAnswerDTO(QuestionDTO Question, Boolean isChecked, Boolean isCorrect)
+        {
+            this.Question = Question;
+            this.isChecked = isChecked;
+            this.isCorrect = isCorrect;
+        }
+        public UserAnswerDTO()
+        {
+
+        }
         public QuestionDTO Question {get; set;}
         public Boolean isChecked { get; set; }
         public Boolean isCorrect { get; set; }
+        public List<int> userAnswers { get; set; } = new List<int>();
     }
 }

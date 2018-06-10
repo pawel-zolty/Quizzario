@@ -5,7 +5,7 @@
     string creationDate = null;
     if (Model.CreationDate != null)
     {
-        creationDate = DateTime.Parse(@Model.CreationDate).ToString("MMMM dd, yyyy");
+        creationDate = @Model.CreationDate.ToString("MMMM dd, yyyy");
     }
 }
 

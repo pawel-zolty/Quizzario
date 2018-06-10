@@ -15,6 +15,7 @@ namespace Quizzario.Models.QuizViewModels
         {
             QuestionNumber = 0;
             SelectedAnswersNumbers = new List<int>();
+            QuizId = quizId;
         }
         /// <summary>
         /// Question number

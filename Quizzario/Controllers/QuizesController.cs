@@ -232,11 +232,12 @@ namespace Quizzario.Controllers
                 return View("NotFoundErrorPage");
             }
             SolveDTO solveDTO = new SolveDTO(quizDTO);
+            solveDTO.UserId = userId;
             HttpContext.Session.SetString("QuizAttempt-" + solveDTO.quizID, JsonConvert.SerializeObject(solveDTO));
 
             // Total number of questions. Used to generate content in left panel and links
             ViewData["TotalNumberOfQuestions"] = quizDTO.Questions.Count;
-            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel(quizDTO.Questions.ElementAt(0), 0);
+            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel(quizDTO.Questions.ElementAt(0), 0, Id);
             
             return View(question);
         }
@@ -259,7 +260,7 @@ namespace Quizzario.Controllers
             {
                 return PartialView("NotFoundError");
             }
-            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel(quizDTO.Questions[number], number);
+            SolvingQuizQuestionViewModel question = new SolvingQuizQuestionViewModel(quizDTO.Questions[number], number, quizId);
 
             return PartialView("_SolvingQuizQuestionPartial", question);
         }
@@ -272,10 +273,19 @@ namespace Quizzario.Controllers
         [HttpPost]
         public ContentResult SolvingUpdateAnswer([FromBody] SolvingQuizUpdateAnswerViewModel model)
         {
-            QuestionDTO questionDTO = DTOMapper.Map(model);
+            string quizId = model.QuizId;
+            var quiz = quizService.GetQuiz(quizId);
+            var question = quiz.Questions.ElementAt(model.QuestionNumber);
+
             string solveDTOString = HttpContext.Session.GetString("QuizAttempt-" + model.QuizId);
             SolveDTO solveDTO = JsonConvert.DeserializeObject<SolveDTO>(solveDTOString);
-            solveDTO.Answers.Insert(model.QuestionNumber, new UserAnswerDTO(questionDTO));
+            //solveDTO.Answers.Insert(model.QuestionNumber, new UserAnswerDTO(question));
+            var userAnswer = solveDTO.Answers.ElementAt(model.QuestionNumber);
+            userAnswer.userAnswers = new List<int>();
+            foreach (var a in model.SelectedAnswersNumbers)
+            {
+                userAnswer.userAnswers.Add(a);
+            }            
             HttpContext.Session.SetString("QuizAttempt-" + solveDTO.quizID, JsonConvert.SerializeObject(solveDTO));
             return Content(JsonConvert.SerializeObject(model).ToString());
         }
@@ -289,8 +299,12 @@ namespace Quizzario.Controllers
         {
             var solvingDTOJson = HttpContext.Session.GetString("QuizAttempt-" + quizId);
             var solvingDTO = JsonConvert.DeserializeObject<SolveDTO>(solvingDTOJson);
-            this.quizService.AddResult(solvingDTO);
+            var result = this.quizService.AddResult(solvingDTO);
             HttpContext.Session.Remove("QuizAttempt-" + quizId);
+            ViewBag.Result = result;
+            ViewBag.QuizId = quizId;
+            var title = quizService.GetQuiz(quizId).Title;
+            ViewBag.QuizTitle = title;
             return View();
         }
 

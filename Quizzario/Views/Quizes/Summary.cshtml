@@ -17,8 +17,7 @@
 
 @{
     // Formatting date
-    string creationDate = DateTime.Parse(Model.CreationDate).ToString("MMMM dd, yyyy");
-
+    string creationDate = Model.CreationDate.ToString("MMMM dd, yyyy"); ;    
     bool isFavourite = @ViewBag.IsFavourite;
 
 }

@@ -18,7 +18,7 @@
 
         // Number of question to get
         var number = $(this).data('number');
-        var quizId = $(this).data('quizId');
+        var quizId = $(this).attr('data-quizId');
         highlightButton(number);
 
         // Abort pending ajax requests
@@ -47,7 +47,7 @@
     });
 
     updateNavigationButtons();
-    highlightButton(1);
+    highlightButton(0);
 });
 
 $(document).keydown(function (e) {
@@ -66,7 +66,8 @@ $(document).keydown(function (e) {
 function updateAnswer(_callback) {
     var model = {
         QuestionNumber: $("#-question-number").val(),
-        SelectedAnswersNumbers: []
+        SelectedAnswersNumbers: [],
+        QuizId: $("#-quiz-id").val(),
     };
 
     $("input[name=answer]:checked").each(function () {
@@ -96,7 +97,7 @@ function updateNavigationButtons() {
     var nextButton = $('#-taking-quiz-next-button');
 
 
-    if (currentQuestionNumber > 1) {
+    if (currentQuestionNumber > 0) {
         previousButton.data("number", currentQuestionNumber - 1);
         previousButton.removeAttr("disabled");
     }

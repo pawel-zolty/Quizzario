@@ -28,7 +28,19 @@ namespace Quizzario.BusinessLogic.Mappers
             CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.FavouritesUsers);
             type = Data.Entities.AssignType.AssignedToPrivate;
             CreateQuizEntityAssignList(quizDTO, quiz, type, quizDTO.PrivateAssignedUsers);
-            quiz.CreationDate = DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
+            quiz.Scores = new List<Score>();
+            foreach(var s in quizDTO.AllScore)
+            {
+                Score score = new Score
+                {
+                    ApplicationUserId = s.ApplicationUserId,
+                    QuizId = s.QuizId,
+                    Result = s.Result
+                };
+                quiz.Scores.Add(score);
+            }
+            //quiz.CreationDate = DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
+            quiz.CreationDate = quizDTO.CreationDate;
             return quiz;
         }
 
@@ -77,8 +89,9 @@ namespace Quizzario.BusinessLogic.Mappers
             quiz.QuizType = QuizTypeExtension.ToEntityQuizType(quizDTO.QuizType);
             quiz.QuizAccessLevel = QuizAccessLevelExtension.ToEntityQuizAccessLevel(quizDTO.QuizAccessLevel);
             quiz.Title = quizDTO.Title;
-            quiz.CreationDate = System.DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
 
+            //quiz.CreationDate = System.DateTime.ParseExact(quizDTO.CreationDate, QuizDTO.CreationDateFormat, null);
+            quiz.CreationDate =quizDTO.CreationDate;
             return quiz;
         }        
     }
