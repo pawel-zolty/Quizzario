@@ -2,6 +2,8 @@
     var solvingGetQuestionXHR;
     var solvingGetQuestionActive = false;
 
+
+
     $('.-go-to-question').click(function () {
         // Send data
         updateAnswer();
@@ -15,15 +17,16 @@
         content.html("<h5>Loading...</h5>");
 
         // Number of question to get
-        var number = $(this).data('number');
-
+        var number = $(this).attr('data-number');
+        var quizId = $(this).attr('data-quizId');
         highlightButton(number);
 
         // Abort pending ajax requests
         if (solvingGetQuestionActive) solvingGetQuestionXHR.abort();       
         solvingGetQuestionActive = true;
         solvingGetQuestionXHR = $.post("/Quizes/SolvingGetQuestion", {
-            number: number
+            number: number,
+            quizId: quizId
         }).done(function (res) {
             content.hide();
             content.html(res);
@@ -47,11 +50,24 @@
     highlightButton(1);
 });
 
+$(document).keydown(function (e) {
+    switch (e.key) {
+        case 'ArrowLeft':
+            $('#-taking-quiz-previous-button').click();
+            break;
+        case 'ArrowRight':
+            $('#-taking-quiz-next-button').click();
+            break;
+        default: return;
+    }
+});
+
 // Scraps data and sends ajax update request
 function updateAnswer(_callback) {
     var model = {
         QuestionNumber: $("#-question-number").val(),
-        SelectedAnswersNumbers: []
+        SelectedAnswersNumbers: [],
+        QuizId: $("#-quiz-id").val(),
     };
 
     $("input[name=answer]:checked").each(function () {

@@ -10,10 +10,10 @@ namespace Quizzario.Models.QuizViewModels
     /// </summary>
     public class SolvingQuizAnswerViewModel
     {
-        public SolvingQuizAnswerViewModel()
+        public SolvingQuizAnswerViewModel(BusinessLogic.DTOs.AnswerDTO answer, int answerNumber)
         {
-            Number = 0;
-            Answer = "";
+            Number = answerNumber;
+            Answer = answer.Answer;
             Selected = false;
         }
 

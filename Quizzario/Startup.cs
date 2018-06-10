@@ -23,9 +23,6 @@ namespace Quizzario
 
         public IConfiguration Configuration { get; }
 
-      
-
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -60,17 +57,12 @@ namespace Quizzario
                 Data.Repositories.EFApplicationUserRepository>();
             services.AddScoped<Data.Abstracts.IJSONRepository,
                 Data.Repositories.JSONRepository>();
-            //services.AddScoped<Data.Abstracts.IAssignedRepository,
-                //Data.Repositories.EFAssignedRepository>();
-            
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IPagingInfoService, PagingInfoService>();
-            services.AddMvc();
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,7 +82,7 @@ namespace Quizzario
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

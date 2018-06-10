@@ -145,5 +145,28 @@ namespace Quizzario.BusinessLogic.Services
             }
             return attemps;
         }
+
+        public QuizDTO GetQuiz(string quizId)
+        {
+            return quizDTOMapper.Create(quizId);
+        }
+
+        public void AddResult(SolveDTO solvingDTO)
+        {
+            var quizId = solvingDTO.quizID;
+            var quiz = quizDTOMapper.Create(quizId);
+            var answers = solvingDTO.Answers;
+            foreach(var a in answers)
+            {
+                var ans = new ScoreDTO
+                {
+                    ApplicationUserId = solvingDTO.UserId,
+                    QuizId = quizId,
+                    Result = a.isCorrect ? 1 : 0
+                };
+                quiz.AddScore(ans);
+            }
+            
+        }
     }
 }
