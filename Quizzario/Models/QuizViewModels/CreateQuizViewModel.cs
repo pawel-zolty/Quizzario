@@ -15,13 +15,17 @@ namespace Quizzario.Models.QuizViewModels
             Title = "";
             Description = "";
         }
-        public string id { get; set; }
+        public string Id { get; set; }
         public string Title { get; set; }
+
         public string Description { get; set; }
+
+        public string Path { get; set; }
         [Display(Name = "Quiz type")]
         public QuizType QuizType { get; set; }
         [Display(Name = "Quiz visibility")]
         public QuizAccessLevel QuizAccessLevel { get; set; }
+
         public List<CreateQuestionViewModel> Questions { get; set; }
     }
     public class CreateQuestionViewModel
@@ -49,3 +53,4 @@ namespace Quizzario.Models.QuizViewModels
 
     }
 }
+

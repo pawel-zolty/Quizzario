@@ -40,11 +40,11 @@ $(function () {
             $('#-view-link').attr("href", viewLink);
         }
 
-        /* var editLink = $('#-edit-link').attr("href");
+         var editLink = $('#-edit-link').attr("href");
         if (editLink !== undefined) {
             editLink = editLink.replace(/(\/[0-9a-z\-]*|)$/, "/" + $(".-quizes-card-data", this).data('id'));
             $('#-edit-link').attr("href", editLink);
-        } */
+        } 
 
 
         $('#-quizes-right-panel-content').fadeIn(500);
@@ -111,6 +111,7 @@ function addQuiz() {
     })
 }
 
+
 function addQuestion() {
     var model = scrappModel();
     $.ajax({
@@ -143,11 +144,25 @@ function addAnswer(elem) {
         $("#quiz-question-" + questionIndex).html(res.responseText);
     });
 };
-
+function editQuiz() {
+    var model = scrappModel();
+    $.ajax({
+        type: "POST",
+        url: '/Quizes/Edit',
+        data: JSON.stringify(model),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8"
+    }).done(function (res) {
+        window.location.replace("/Quizes/MyQuizes");
+    }).fail(function (res) {
+    })
+}
 function scrappModel() {
     var model = {
         Title: $("#-quiz-title").val(),
         Description: $("#-quiz-description").val(),
+        Id: $("#-quiz-id").text(),
+        Path: $("#-quiz-path").text(),
         QuizAccessLevel: $("#QuizAccessLevel option:selected").text(),
         QuizType: $("#QuizType option:selected").text(),
         Questions: []

@@ -117,25 +117,35 @@ namespace Quizzario.Controllers
 
         public ViewResult Edit(string Id)
         {
-            QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
-            return View(quizDTO);
+            CreateQuizViewModel model = null;
+            if (TempData.Peek("QuizInCreation") != null)
+            {
+                string fromTemp = (string)TempData["QuizInCreation"];
+                model = JsonConvert.DeserializeObject<CreateQuizViewModel>(fromTemp);
+            }
+            else
+            {
+                model = new CreateQuizViewModel();
+                QuizDTO quizDTO = quizService.Quizes.FirstOrDefault(p => p.Id.Equals(Id));
+                model = quizDTOMapperFromViewModel.CreateQuizViewModelFromQuizDTO(quizDTO);
+            }
+
+            TempData["QuizInCreation"] = JsonConvert.SerializeObject(model);
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(CreateQuizViewModel quizViewModel)
+        public ActionResult Edit([FromBody]CreateQuizViewModel quizViewModel)
         {
+            TempData.Remove("QuizInCreation");
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);//
             var user = this.userMapper.CreateUserWithId(userId);
             QuizDTO quizDTO = this.quizDTOMapperFromViewModel.Map(quizViewModel, user);
             if (quizDTO.ApplicationUserId == null)//
                 quizDTO.ApplicationUserId = userId;//TE LINIE MOGA BYC DO WYWALENIA 
-            if (ModelState.IsValid)
-            {
-                quizService.SaveQuiz(quizDTO);
-                TempData["message"] = string.Format("Zapisano {0}", quizDTO.Title);
-                return RedirectToAction("MyQuizes");
-            }
-            return View(quizDTO);
+            quizDTO.FilePath = quizDTO.FilePath;
+            quizService.SaveQuiz(quizDTO);
+            return Json(new { status = "OK" });
         }
 
         public ViewResult EditQuiz()
