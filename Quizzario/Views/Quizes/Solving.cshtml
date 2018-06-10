@@ -33,7 +33,7 @@
                         <button class="btn btn-outline-primary -taking-quiz-button -go-to-question" data-number="@(i-1)" data-quizId="@Model.QuizId">@i</button>
                     }
                 </div>
-                <form action="/Quizes/Results" method="get" id="-taking-quiz-form-submit">
+                <form action="/Quizes/Results" method="POST" id="-taking-quiz-form-submit">
                     <button id="-taking-quiz-submit" class="btn btn-block btn-success mt-3">Submit</button>
                     <input type="hidden" name="quizId" value="@Model.QuizId" />
                 </form>
