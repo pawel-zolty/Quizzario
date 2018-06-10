@@ -45,7 +45,7 @@ namespace Quizzario.BusinessLogic.DTOs
         public virtual List<ApplicationUserDTO> FavouritesUsers { get; set; } = new List<ApplicationUserDTO>();
         public virtual List<ApplicationUserDTO> PrivateAssignedUsers { get; set; } = new List<ApplicationUserDTO>();
         //public virtual ICollection<ScoreDTO> UserScore { get; set; } 
-        public virtual ICollection<ScoreDTO> AllScore { get; set; } 
+        public virtual ICollection<ScoreDTO> AllScore { get; set; } = new List<ScoreDTO>();
         //public virtual QuizSettingsDTO QuizSettings { get; set; }
 
         public delegate void SaveQuizDelegate(QuizDTO quizDTo);
