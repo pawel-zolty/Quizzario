@@ -82,7 +82,8 @@ namespace Quizzario.BusinessLogic.Mappers
             var quiz = quizRepository.GetById(quizDTO.Id);
             if (quiz == null)
                 quiz = new Quiz();
-            quiz.Id = quizDTO.Id;
+            else 
+                quiz.Id = quizDTO.Id;
             quiz.ApplicationUserId = quizDTO.ApplicationUserId;
             quiz.FilePath = quizDTO.FilePath;
             quiz.Description = quizDTO.Description;
