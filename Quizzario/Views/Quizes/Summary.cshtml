@@ -30,20 +30,12 @@
                 <p class="font-italic d-inline ml-1 ml-md-3">by @Model.ApplicationUser.UserName</p>
 
                 <div class="float-md-right">
-                    @* TODO Button share
-                    <button class="btn btn-outline-primary my-1 mr-md-1">
-                        <i class="fas fa-fw fa-share"></i>
-                        <span class="ml-1">Share</span>
-                    </button>*@
+                    
                     <button data-id="@Model.Id" data-is-favourite="@isFavourite" data-target-add="/Quizes/AddToFavourite" data-target-remove="/Quizes/RemoveFromFavourite" class="-favourite-button btn @(isFavourite ? "btn-danger" : "btn-outline-danger") my-1 mr-md-3">
                         <i class="fas fa-fw fa-heart"></i>
                         <span class="ml-1">Favourite</span>
                     </button>
-                    @* TODO Button edit
-                    <button class="btn btn-success my-1 mr-md-1">
-                        <i class="fas fa-fw fa-edit"></i>
-                        <span class="ml-1">Edit</span>
-                    </button>*@
+                    
                     @* Button remove
                     <button class="btn btn-dark my-1 ">
                         <i class="fas fa-fw fa-trash"></i>
@@ -56,8 +48,7 @@
             <div class="col-12">
                 <div class="text-center float-md-left" id="-before-quiz-left-panel">
 
-                     @* TODO Current attempt number
-                    <span class="text-secondary font-weight-light font-italic mr-md-1">Attempt: 1</span> *@
+                     
                     <form method="POST" action="/Quizes/Solving">
                         <button class="btn btn-success my-1 btn-block" type="submit">
                             <i class="fas fa-fw fa-play"></i>
@@ -65,11 +56,7 @@
                         </button>
                         @Html.HiddenFor(model => model.Id)
                     </form>
-                    @* TODO Back button
-                    <button class="btn btn-outline-primary my-1 btn-block">
-                        <i class="fas fa-fw fa-arrow-left"></i>
-                        <span class="ml-1">Back</span>
-                    </button>*@
+                    
                 </div>
                 <div id="-before-quiz-right-panel">
                     <div class="row mb-1 mb-md-2">
@@ -82,11 +69,7 @@
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Attempts: </span>
                                 <span> @ViewBag.attemps</span>
                             </span>
-                            @* TODO Time limit 
-                            <span class="mr-3 mr-md-4">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Time limit: </span>
-                                <span></span>
-                            </span>*@
+                            
                         </div>
                     </div>
                     <div class="row mb-1 mb-md-2">
@@ -98,16 +81,8 @@
                         <div class="col-md-4 mb-2">
                             <h5>Attempt history</h5>
 
-                            @* TODO Total number of your previous attempts
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Previous attempts: </span>
-                                <span></span>
-                            </p>*@
-                            @* TODO Your last score
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Your last score: </span>
-                                <span></span>
-                            </p>*@
+                            
+                            
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Your best score: </span>
                                 <span>@((ViewBag.bestScore < 0)? "no data" : ViewBag.bestScore)</span>
@@ -119,50 +94,15 @@
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Date created: </span>
                                 <span>@creationDate</span>
                             </p>
-                            @* TODO Last edited
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Last edited: </span>
-                                <span></span>
-                            </p>*@
-                            @* TODO Total number of questions
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of questions: </span>
-                                <span></span>
-                            </p>*@
+                            
+                            
                             <p class="my-0">
                                 <span class="text-secondary font-weight-light font-italic mr-md-1">Total number of attempts: </span>
                                 <span>@Model.AllScore.Count()</span>
                             </p>
-                            @* TODO Added to favourite number
-                            <p class="my-0">
-                                <span class="text-secondary font-weight-light font-italic mr-md-1">Added to favourite: </span>
-                                <span></span>
-                            </p>*@
+                            
                         </div>
-                        @* TODO Assigned list
-                        <div class="col-md-4">
-                            <h5 class="d-inline">Assigned users</h5>
-                            <button class="btn btn-sm btn-link mb-1 d-inline" data-toggle="modal" data-target="#-assign-user-modal">
-                                <i class="fas fa-fw fa-plus"></i>
-                            </button>
-                            <div id="-before-quiz-assigned">
-                                <ul class="list-group">
-                                    @if (ViewBag.AssignedUsers.Count == 0)
-                                    {
-                                        <p>No users assigned</p>
-                                    }
-                                    @foreach (var u in ViewBag.AssignedUsers)
-                                    {
-                                        <li data-id ="@u.Id" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action py-1">
-                                            @u.UserName
-                                            <button class="btn btn-sm btn-outline-dark border-0"><i class="fas fa-fw fa-trash"></i></button>
-                                        </li>
-                                    }
-
-  
-                                </ul>
-                            </div>
-                        </div>*@
+                        
                     </div>
                 </div>
             </div>
@@ -170,29 +110,5 @@
     </div>
 </div>
 
-@* TODO Assigned list add modal
-<div class="modal fade" id="-assign-user-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Assign new user</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="Quizes/AddToPrivateAssigned">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="-assign-user-modal-user" class="col-form-label">E-mail:</label>
-                        <input type="text" class="form-control" id="-assign-user-modal-user">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-success" value="Add user" />
-                </div>
-            </form>
-        </div>
-    </div>
-</div>*@
+
 
